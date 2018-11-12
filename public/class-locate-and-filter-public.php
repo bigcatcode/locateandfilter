@@ -78,7 +78,7 @@ class Locate_And_Filter_Public {
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('jquery-ui-core');
 		wp_enqueue_script('jquery-ui-slider');
-		wp_enqueue_script ( $this->plugin_name . "-all", plugin_dir_url ( __FILE__ ) . 'js/locate-anything-public.js', array (
+		wp_enqueue_script ( $this->plugin_name . "-all", plugin_dir_url ( __FILE__ ) . 'js/locate-and-filter-public.js', array (
 				'jquery' 
 		), $this->version, false );
 		// Google API, localized according to general settings
