@@ -6,11 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       http://www.4goa.net/
+ * @link       http://monothemes.com/
  * @since      1.0.0
  *
- * @package    Locate_Anything
- * @subpackage Locate_Anything/includes
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/includes
  */
 
 /**
@@ -23,11 +23,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Locate_Anything
- * @subpackage Locate_Anything/includes
- * @author     4GOA <locateanything@4goa.net>
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/includes
+ * @author     AMonin <monothemes@gmail.com>
  */
-class Locate_Anything
+class Locate_And_Filter
 {
     
     /**
@@ -69,8 +69,8 @@ class Locate_Anything
      */
     public function __construct() {
         
-        $this->plugin_name = 'locate-anything';
-        $this->version = '1.1.99';
+        $this->plugin_name = 'locate-and-filter';
+        $this->version = '1.3.19';
         
         $this->load_dependencies();
         $this->set_locale();

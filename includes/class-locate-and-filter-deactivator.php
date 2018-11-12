@@ -3,11 +3,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Fired during plugin deactivation
  *
- * @link       http://www.4goa.net/
+ * @link       http://monothemes.com/
  * @since      1.0.0
  *
- * @package    Locate_Anything
- * @subpackage Locate_Anything/includes
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/includes
  */
 
 /**
@@ -16,11 +16,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Locate_Anything
- * @subpackage Locate_Anything/includes
- * @author     4GOA <locateanything@4goa.net>
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/includes
+ * @author     AMonin <monothemes@gmail.com>
  */
-class Locate_Anything_Deactivator {
+class Locate_And_Filter_Deactivator {
 
 	/**
 	 * Short Description. (use period)

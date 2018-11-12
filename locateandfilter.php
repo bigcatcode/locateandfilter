@@ -34,30 +34,30 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-locate-anything-activator.php
+ * This action is documented in includes/class-locate-and-filter-activator.php
  */
-function activate_locate_anything() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-locate-anything-activator.php';
-	Locate_Anything_Activator::activate();
+function activate_locate_and_filter() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter-activator.php';
+	Locate_And_Filter_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-locate-anything-deactivator.php
+ * This action is documented in includes/class-locate-and-filter-deactivator.php
  */
-function deactivate_locate_anything() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-locate-anything-deactivator.php';
-	Locate_Anything_Deactivator::deactivate();
+function deactivate_locate_and_filter() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter-deactivator.php';
+	Locate_And_Filter_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_locate_anything' );
-register_deactivation_hook( __FILE__, 'deactivate_locate_anything' );
+register_activation_hook( __FILE__, 'activate_locate_and_filter' );
+register_deactivation_hook( __FILE__, 'deactivate_locate_and_filter' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-locate-anything.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter.php';
 
 /**
  * Begins execution of the plugin.
@@ -68,10 +68,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-locate-anything.php';
  *
  * @since    1.0.0
  */
-function run_locate_anything() {
+function run_locate_and_filter() {
 
-	$plugin = new Locate_Anything();
+	$plugin = new Locate_And_Filter();
 	$plugin->run();
 
 }
-run_locate_anything();
+run_locate_and_filter();
