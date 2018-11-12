@@ -1,6 +1,6 @@
 <?php wp_nonce_field ('I961JpJQTj0crLKH0mGB', 'locate_anything_class_nonce' );
-if($post_type=="user") $post_params=Locate_Anything_Admin::getUserMetas($object->ID);
-else  $post_params=Locate_Anything_Admin::getPostMetas($object->ID);
+if($post_type=="user") $post_params=Locate_And_Filter_Admin::getUserMetas($object->ID);
+else  $post_params=Locate_And_Filter_Admin::getPostMetas($object->ID);
  ?>
 <div id="locate-anything-wrapper-post">
 <h2 class="nav-tab-wrapper">
@@ -63,7 +63,7 @@ else  $post_params=Locate_Anything_Admin::getPostMetas($object->ID);
            <tr>
            <td><b><?php _e("Tooltip Preset","locate-anything")?> </b>:</td>
            <td><select name="locate-anything-tooltip-preset" id="locate-anything-tooltip-preset"><?php 
-           $u=Locate_Anything_Admin::getDefaultTemplates();
+           $u=Locate_And_Filter_Admin::getDefaultTemplates();
 /* tooltip presets */
 $tooltip_presets=array((object)array("class"=>'default',"name"=>__('Default',"locate-anything"),"template"=>''),
        (object)array("class"=>'',"name"=>__('none',"locate-anything"),"template"=>''),
@@ -93,7 +93,7 @@ $tooltip_presets=array((object)array("class"=>'default',"name"=>__('Default',"lo
 			<div class="LA_additional_fields_notice">
 				<b><?php _e("Available fields","locate-anything")?></b>&nbsp;<input type="button" data-target="addifields" class="locate-anything-help">
 				<p><?php _e("Here is a list of the additional fields available for display in the template. To use them just copy/paste the corresponding tag in the template editor","locate-anything")?></p>
-				<?php Locate_Anything_Admin::displayAdditionalFieldNotice($post_type)?>
+				<?php Locate_And_Filter_Admin::displayAdditionalFieldNotice($post_type)?>
 			
 			</div>
            </td>
@@ -159,7 +159,7 @@ $tooltip_presets=array((object)array("class"=>'default',"name"=>__('Default',"lo
 <tr><td><h2><?php _e("Additional fields","locate-anything")?></h2></td></tr>  
 <tr><td>
 			<div id="locate-anything-additional_fields">			
-			<?php Locate_Anything_Admin::displayAdditionalFields($object);?>			  
+			<?php Locate_And_Filter_Admin::displayAdditionalFields($object);?>			  
 			</div>   
 			</td></tr>    
     </table>

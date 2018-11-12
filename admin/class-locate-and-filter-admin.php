@@ -2,11 +2,11 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       http://www.4goa.net/
+ * @link       http://monothemes.com/
  * @since      1.0.0
  *
- * @package    Locate_Anything
- * @subpackage Locate_Anything/admin
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/admin
  */
 /**
  * The admin-specific functionality of the plugin.
@@ -14,11 +14,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package Locate_Anything
- * @subpackage Locate_Anything/admin
- * @author 4GOA <locateanything@4goa.net>
+ * @package Locate_And_Filter
+ * @subpackage Locate_And_Filter/admin
+ * @author AMonin <monothemes@gmail.com>
  */
-class Locate_Anything_Admin
+class Locate_And_Filter_Admin
 {
 	/**
 	 * The ID of this plugin.
@@ -109,7 +109,7 @@ class Locate_Anything_Admin
 	 */
 	public static function getGmapsAPIKey() {
 		$key = unserialize (get_option("locate-anything-option-googlemaps-key"));
-		if($key===false || empty($key)) $key = Locate_Anything_Admin::$Gmaps_API_key;		
+		if($key===false || empty($key)) $key = Locate_And_Filter_Admin::$Gmaps_API_key;		
 		return $key;
 	}
 
@@ -120,7 +120,7 @@ class Locate_Anything_Admin
 	 */
 	public static function getBingAPIKey() {
 		$key = unserialize (get_option("locate-anything-option-bingmaps-key"));
-		if($key===false || empty($key)) $key = Locate_Anything_Admin::$Bing_API_key;
+		if($key===false || empty($key)) $key = Locate_And_Filter_Admin::$Bing_API_key;
 		return $key;
 	}
 
@@ -226,7 +226,7 @@ class Locate_Anything_Admin
 		foreach ($selected_post_types as $type) {
 			add_meta_box('locate-anything-class', // Unique ID
 			esc_html__('LocateAnything', 'locate-anything') , // Title
-			'Locate_Anything_Admin::post_class_meta_box', // Callback function
+			'Locate_And_Filter_Admin::post_class_meta_box', // Callback function
 			$type, // Admin page (or post type)
 			'normal', // Context
 			'high'); // Priority
@@ -270,10 +270,10 @@ class Locate_Anything_Admin
 	public function clear_hooks_for_preview() {	
 		if(isset($_GET["locateAnything_preview"])){	
 			// Lifter LMS	
-			Locate_Anything_Admin::remove_anonymous_object_action( 'wp_enqueue_scripts','LLMS_Frontend_Assets', 'enqueue_styles');
-			Locate_Anything_Admin::remove_anonymous_object_action( 'wp_enqueue_scripts','LLMS_Frontend_Assets', 'enqueue_scripts');
-			Locate_Anything_Admin::remove_anonymous_object_action( 'wp_loaded','LLMS_AJAX', 'register_script');
-			Locate_Anything_Admin::remove_anonymous_object_action( 'wp_footer','LLMS_Frontend_Assets', 'wp_footer' );	
+			Locate_And_Filter_Admin::remove_anonymous_object_action( 'wp_enqueue_scripts','LLMS_Frontend_Assets', 'enqueue_styles');
+			Locate_And_Filter_Admin::remove_anonymous_object_action( 'wp_enqueue_scripts','LLMS_Frontend_Assets', 'enqueue_scripts');
+			Locate_And_Filter_Admin::remove_anonymous_object_action( 'wp_loaded','LLMS_AJAX', 'register_script');
+			Locate_And_Filter_Admin::remove_anonymous_object_action( 'wp_footer','LLMS_Frontend_Assets', 'wp_footer' );	
 	}
 }
 
@@ -293,7 +293,7 @@ class Locate_Anything_Admin
 	public function add_admin_meta_boxes() {
 		add_meta_box('locate-anything-class', // Unique ID
 		esc_html__('LocateAnything - Wordpress Geo Plugin', 'locate-anything') , // Title
-		'Locate_Anything_Admin::admin_class_meta_box', // Callback function
+		'Locate_And_Filter_Admin::admin_class_meta_box', // Callback function
 		'locateanythingmap', // Admin page (or post type)
 		'normal', // Context
 		'high'); // Priority
@@ -355,7 +355,7 @@ class Locate_Anything_Admin
 		/* Check if the current user has permission to edit the post. */
 		if (!current_user_can($post_type->cap->edit_post, $post_id)) return $post_id;
 		foreach ($_POST as $meta_key => $new_meta_value) {
-			if (strpos($meta_key, "locate-anything") !== false) Locate_Anything_Admin::add_update_metas($post_id, $meta_key, $new_meta_value);
+			if (strpos($meta_key, "locate-anything") !== false) Locate_And_Filter_Admin::add_update_metas($post_id, $meta_key, $new_meta_value);
 		}
 
 		if (isset($_POST['locate-anything-filters'])){
@@ -429,7 +429,7 @@ class Locate_Anything_Admin
 	 * creates Admin Page in WP admin menu
 	 */
 	public function setup_admin_menu() {
-		add_submenu_page("edit.php?post_type=locateanythingmap", "Options", "Options", "edit_posts", "locate-anything-settings", "Locate_Anything_Admin::admin_settings_page");
+		add_submenu_page("edit.php?post_type=locateanythingmap", "Options", "Options", "edit_posts", "locate-anything-settings", "Locate_And_Filter_Admin::admin_settings_page");
 	}
 	/**
 	 * defines a custom types for the maps
@@ -716,7 +716,7 @@ class Locate_Anything_Admin
 		// url encode the address
 		$address = urlencode($address);
 		// google map geocode api url
-		$gmaps_key = Locate_Anything_Admin::getGmapsAPIKey();
+		$gmaps_key = Locate_And_Filter_Admin::getGmapsAPIKey();
 		$url = "https://maps.google.com/maps/api/geocode/json?key=$gmaps_key&sensor=false&address={$address}";
 		// get the json response
 		$resp_json = Locate_And_Filter_Tools::file_get_contents_curl($url);

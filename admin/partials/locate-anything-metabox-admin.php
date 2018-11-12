@@ -303,7 +303,7 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 <td><b><?php _e("Tooltip Preset","locate-anything")?> </b>:</td>
 <td><select name="locate-anything-tooltip-preset" id="locate-anything-tooltip-preset">
 <?php 
-$u=Locate_Anything_Admin::getDefaultTemplates();
+$u=Locate_And_Filter_Admin::getDefaultTemplates();
 /* tooltip presets */
 $tooltip_presets=array(
        (object)array("class"=>'',"name"=>__('none',"locate-anything"),"template"=>''),
@@ -323,7 +323,7 @@ $tooltip_presets=array(
 <td><b><?php _e("Navlist Preset","locate-anything")?> </b>:</td>
 <td><select name="locate-anything-navlist-preset" id="locate-anything-navlist-preset">
 <?php 
-$u=Locate_Anything_Admin::getDefaultTemplates();
+$u=Locate_And_Filter_Admin::getDefaultTemplates();
 /* navlist presets */
 $navlist_presets=array(
        (object)array("class"=>'',"name"=>__('none',"locate-anything"),"template"=>'')     
@@ -345,7 +345,7 @@ $navlist_presets=array(
 <td colspan="2" id="addifields"><div class="LA_additional_fields_notice">
 				<b><?php _e("Available fields","locate-anything")?> &nbsp;<input type="button" data-target="addifields" class="locate-anything-help"></b>	
 				<p></p>			
-				<?php Locate_Anything_Admin::displayAdditionalFieldNotice($selected_element)?>			
+				<?php Locate_And_Filter_Admin::displayAdditionalFieldNotice($selected_element)?>			
 			</div></td>
 </tr>
 <tr >		

@@ -82,7 +82,7 @@ class Locate_Anything_Public {
 				'jquery' 
 		), $this->version, false );
 		// Google API, localized according to general settings
-		$gmaps_key = Locate_Anything_Admin::getGmapsAPIKey();		
+		$gmaps_key = Locate_And_Filter_Admin::getGmapsAPIKey();		
 		
 		//load additional js if you want
 		$loadjs = unserialize (get_option ( 'locate-anything-option-loadjs' ));
@@ -164,7 +164,7 @@ class Locate_Anything_Public {
 		// disable check  if localhost
 		if(strpos(site_url(), 'localhost')!==false) return true;
 
-		$license = Locate_Anything_Admin::getLicence($type_license);			
+		$license = Locate_And_Filter_Admin::getLicence($type_license);			
 		$seed = $license["seed"];
 		if($type_license === "label") $license_key  =unserialize(get_option("locate-anything-option-license-key"));
 		else  $license_key  = $license['key'];
@@ -318,7 +318,7 @@ class Locate_Anything_Public {
 		/* create parameter array */
 		$params = array ();
 
-		$params["bing-key"] = Locate_Anything_Admin::getBingAPIKey();
+		$params["bing-key"] = Locate_And_Filter_Admin::getBingAPIKey();
 		$loadjs = unserialize (get_option ( 'locate-anything-option-loadjs' ));
 		if(!is_array($loadjs)) $loadjs = array ();
 		//google
@@ -666,7 +666,7 @@ class Locate_Anything_Public {
 		
 		/* decode the additional fields */
 		$additional_markup=array();
-		$additional_field_list = Locate_Anything_Admin::getAdditional_field_list ();
+		$additional_field_list = Locate_And_Filter_Admin::getAdditional_field_list ();
 		foreach ( $additional_field_list as $field ) {
 			//$subst ="'+eval(map_instance).decodeTemplateVar(\"" . $field ["field_name"] . "\")";
 			$subst = "'+(marker[\"" . $field ["field_name"] . "\"]?decode(marker[\"" . $field ["field_name"] . "\"]):'')+'";
@@ -744,7 +744,7 @@ public static function getTagsUsedInTemplate($posts,$post_type,$params,$basic_fi
 	$all_templates=$params["locate-anything-default-tooltip-template"];
 	$all_templates.=" ".$params["locate-anything-default-nav-template"];
 	foreach ( $posts as $post ) {
-		if(Locate_And_Filter_Tools::getPostType($post_type)!==false) $post_params=Locate_Anything_Admin::getPostMetas($post->ID);
+		if(Locate_And_Filter_Tools::getPostType($post_type)!==false) $post_params=Locate_And_Filter_Admin::getPostMetas($post->ID);
 		$post_params=apply_filters("locate_anything_marker_params",$post_params,$post->ID,false);
 		$all_templates.=" ".$post_params["locate-anything-marker-html-template"];
 	}
@@ -914,7 +914,7 @@ public static function defineDefaultMarker($params){
 			foreach ( $posts as $post ) {
 				$post_params=array();
 				if($post_type!=="user") {
-					$post_params=Locate_Anything_Admin::getPostMetas($post->ID);					
+					$post_params=Locate_And_Filter_Admin::getPostMetas($post->ID);					
 					$post_params["excerpt"]= $post->post_excerpt;
 					$post_params["post_link"]=get_permalink ($post->ID);
 				}
@@ -1034,7 +1034,7 @@ public static function defineDefaultMarker($params){
 				$add=apply_filters("locate_anything_marker_vars",$add,$map_id,$id,$post_type);
 
 				/* add additional fields for this post type */
-				$additional_field_list = Locate_Anything_Admin::getAdditional_field_list ( get_post_type ( $post ) );
+				$additional_field_list = Locate_And_Filter_Admin::getAdditional_field_list ( get_post_type ( $post ) );
 				foreach ( $additional_field_list as $field ) {
 					$add [$field ["field_name"]] = $post_params[$field ["field_name"]] ;
 					$tags_used[]=$field ["field_name"];

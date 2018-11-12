@@ -156,7 +156,7 @@ class Locate_And_Filter
         /**
          * The class responsible for defining all actions that occur in the admin area.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-locate-anything-admin.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-locate-and-filter-admin.php';
         
         /**
          * The class responsible for defining all actions that occur in the public-facing
@@ -208,7 +208,7 @@ class Locate_And_Filter
      */
     private function define_admin_hooks() {
         
-        $plugin_admin = new Locate_Anything_Admin($this->get_plugin_name(), $this->get_version());
+        $plugin_admin = new Locate_And_Filter_Admin($this->get_plugin_name(), $this->get_version());
         $plugin_public = new Locate_Anything_Public($this->get_plugin_name(), $this->get_version());
         
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');

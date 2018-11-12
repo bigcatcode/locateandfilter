@@ -91,7 +91,7 @@
 				<div id="locate-anything-additional_fields">				
 					 <?php 
 					 /* gets the additional fields*/
-					$additional_field_list= Locate_Anything_Admin::getAdditional_field_list();					
+					$additional_field_list= Locate_And_Filter_Admin::getAdditional_field_list();					
 
 					 /* Displays a custom field box for each  type, show only selected types*/
 					foreach ( $post_types as $post_type ) {?>
