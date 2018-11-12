@@ -292,7 +292,7 @@ class Locate_And_Filter_Admin
 	 */
 	public function add_admin_meta_boxes() {
 		add_meta_box('locate-and-filter-class', // Unique ID
-		esc_html__('LocateAnything - Wordpress Geo Plugin', 'locate-anything') , // Title
+		esc_html__('LocateAndFilter - Wordpress Plugin', 'locate-anything') , // Title
 		'Locate_And_Filter_Admin::admin_class_meta_box', // Callback function
 		'locateanythingmap', // Admin page (or post type)
 		'normal', // Context
@@ -317,7 +317,7 @@ class Locate_And_Filter_Admin
 	 *
 	 */
 	public static function admin_settings_page() {		
-		include (plugin_dir_path(__FILE__) . 'partials/locate-anything-settings-admin.php');
+		include (plugin_dir_path(__FILE__) . 'partials/locate-and-filter-settings-admin.php');
 	}
 	/**
 	 * Display the admin meta box.

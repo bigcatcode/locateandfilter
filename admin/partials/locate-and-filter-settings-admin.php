@@ -20,7 +20,7 @@
 <table>
 <tr style="display:none;">
 <td><?php _e("Purchase Code");?>:</td>	<td><input type="text" style="max-width:auto" size="55" name="locate-anything-option-license-key" value="<?php echo unserialize(get_option("locate-anything-option-license-key"));?>"><br>
-	<?php //_e(" &nbsp;<a  target='_blank' href='http://www.locate-anything.com/addons/license/license-key/'>Get a License Key for only $4.99!</a> (Removes the 'Powered by LocateAnything' label)","locate-anything")?>
+	<?php //_e(" &nbsp;<a  target='_blank' href='#'>Get a License Key for only $4.99!</a> (Removes the 'Powered by LocateAndFilter' label)","locate-anything")?>
 </td>
 </tr>
 	<tr>
