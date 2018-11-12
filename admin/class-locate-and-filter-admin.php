@@ -291,7 +291,7 @@ class Locate_And_Filter_Admin
 	 * Adds metaboxes to the post types selected in the options page
 	 */
 	public function add_admin_meta_boxes() {
-		add_meta_box('locate-anything-class', // Unique ID
+		add_meta_box('locate-and-filter-class', // Unique ID
 		esc_html__('LocateAnything - Wordpress Geo Plugin', 'locate-anything') , // Title
 		'Locate_And_Filter_Admin::admin_class_meta_box', // Callback function
 		'locateanythingmap', // Admin page (or post type)

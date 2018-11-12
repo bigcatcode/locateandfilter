@@ -257,7 +257,7 @@ function refresh_layout_code(){
 
 /* post datas to preview iframe */
 function refresh_preview(){
-  var data=jQuery('#locate-anything-class').find('input, select, textarea').serializeArray();     
+  var data=jQuery('#locate-and-filter-class').find('input, select, textarea').serializeArray();     
    // jQuery('#map-preview').append('<form action="'+ADMIN_URL+'?post_type=locateanythingmap&locateAnything_preview" method="post" target="map_preview" id="postToIframe"></form>');
     
    

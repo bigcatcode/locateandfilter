@@ -1,12 +1,12 @@
-#locate-anything-class {
+#locate-and-filter-class {
     width:100%;   
     position: none !important;
 }
-#locate-anything-class input[type="color"]{
+#locate-and-filter-class input[type="color"]{
     height: 2.5em;
 border: none;
 }
-#locate-anything-class input, #locate-anything-class select {
+#locate-and-filter-class input, #locate-and-filter-class select {
 margin-bottom: 3px ;
 margin-top: 3px;
 }
@@ -115,7 +115,7 @@ strong,b {font-weight:bold;}
 
 li.half_li {width:50%;float:left;}
 
-#locate-anything-class div.inside { }
+#locate-and-filter-class div.inside { }
 a.nav-tab {
   // padding: 4px 14px 6px !important;
 font-weight: normal;
