@@ -3,11 +3,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Register all actions and filters for the plugin
  *
- * @link       http://www.4goa.net/
+ * @link       http://monothemes.com/
  * @since      1.0.0
  *
- * @package    Locate_Anything
- * @subpackage Locate_Anything/includes
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/includes
  */
 
 /**
@@ -17,11 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Locate_Anything
- * @subpackage Locate_Anything/includes
- * @author     4GOA <locateanything@4goa.net>
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/includes
+ * @author     AMonin <monothemes@gmail.com>
  */
-class Locate_Anything_Loader {
+class Locate_And_Filter_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

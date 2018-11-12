@@ -36,7 +36,7 @@ class Locate_And_Filter
      *
      * @since    1.0.0
      * @access   protected
-     * @var      Locate_Anything_Loader    $loader    Maintains and registers all hooks for the plugin.
+     * @var      Locate_And_Filter_Loader    $loader    Maintains and registers all hooks for the plugin.
      */
     protected $loader;
     
@@ -125,10 +125,10 @@ class Locate_And_Filter
      *
      * Include the following files that make up the plugin:
      *
-     * - Locate_Anything_Loader. Orchestrates the hooks of the plugin.
-     * - Locate_Anything_i18n. Defines internationalization functionality.
-     * - Locate_Anything_Admin. Defines all hooks for the admin area.
-     * - Locate_Anything_Public. Defines all hooks for the public side of the site.
+     * - Locate_And_Filter_Loader. Orchestrates the hooks of the plugin.
+     * - Locate_And_Filter_i18n. Defines internationalization functionality.
+     * - Locate_And_Filter_Admin. Defines all hooks for the admin area.
+     * - Locate_And_Filter_Public. Defines all hooks for the public side of the site.
      *
      * Create an instance of the loader which will be used to register the hooks
      * with WordPress.
@@ -145,7 +145,7 @@ class Locate_And_Filter
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-anything-loader.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-loader.php';
         
         /**
          * The class responsible for defining internationalization functionality
@@ -179,7 +179,7 @@ class Locate_And_Filter
          */
         require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-anything-addon-helper.php';
            
-        $this->loader = new Locate_Anything_Loader();
+        $this->loader = new Locate_And_Filter_Loader();
     }
     
     /**
@@ -296,7 +296,7 @@ class Locate_And_Filter
      * The reference to the class that orchestrates the hooks with the plugin.
      *
      * @since     1.0.0
-     * @return    Locate_Anything_Loader    Orchestrates the hooks of the plugin.
+     * @return    Locate_And_Filter_Loader    Orchestrates the hooks of the plugin.
      */
     public function get_loader() {
         return $this->loader;
