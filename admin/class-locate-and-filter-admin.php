@@ -224,8 +224,8 @@ class Locate_And_Filter_Admin
 		);
 		
 		foreach ($selected_post_types as $type) {
-			add_meta_box('locate-anything-class', // Unique ID
-			esc_html__('LocateAnything', 'locate-anything') , // Title
+			add_meta_box('locate-and-filter-class', // Unique ID
+			esc_html__('LocateAndFilter', 'locate-anything') , // Title
 			'Locate_And_Filter_Admin::post_class_meta_box', // Callback function
 			$type, // Admin page (or post type)
 			'normal', // Context
@@ -436,7 +436,7 @@ class Locate_And_Filter_Admin
 	 */
 	public function createCustomType() {
 		$labels = array(
-			'name' => __('LocateAnything Maps', 'locate-anything') ,
+			'name' => __('LocateAndFilter', 'locate-anything') ,
 			'singular_name' => __('Map', 'locate-anything') ,
 			'add_new' => __('Add New', 'locate-anything') ,
 			'add_new_item' => __('Add New Map', 'locate-anything') ,
@@ -447,7 +447,7 @@ class Locate_And_Filter_Admin
 			'search_items' => __('Search Maps', 'locate-anything') ,
 			'not_found' => __('No map found', 'locate-anything') ,
 			'not_found_in_trash' => __('No map found in Trash', 'locate-anything') ,
-			'menu_name' => __('LocateAnything Maps', 'locate-anything')
+			'menu_name' => __('LocateAndFilter', 'locate-anything')
 		);
 		$supports = array(
 			'title'
@@ -526,7 +526,7 @@ class Locate_And_Filter_Admin
 		register_taxonomy('locateanythingmarkertag', 'locateanythingMarker', $args);
 
 		$labels = array(
-			'name' => __('LocateAnything Markers', 'locate-anything') ,
+			'name' => __('Markers', 'locate-anything') ,
 			'singular_name' => __('Marker', 'locate-anything') ,
 			'add_new' => __('Add New', 'locate-anything') ,
 			'add_new_item' => __('Add New Marker', 'locate-anything') ,
@@ -537,7 +537,7 @@ class Locate_And_Filter_Admin
 			'search_items' => __('Search Markers', 'locate-anything') ,
 			'not_found' => __('No Marker found', 'locate-anything') ,
 			'not_found_in_trash' => __('No Marker found in Trash', 'locate-anything') ,
-			'menu_name' => __('LocateAnything Markers', 'locate-anything')
+			'menu_name' => __('Markers', 'locate-anything')
 		);
 		$supports = array(
 			'title',
