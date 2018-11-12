@@ -38,7 +38,7 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 	<option value="<?php echo $overlay->id;?>" data-url="<?php echo $overlay->url;?>" data-attribution="<?php echo $overlay->attribution;?>" <?php if(get_post_meta($object->ID,'locate-anything-map-provider',true)==$overlay->id) echo "selected";?> ><?php echo $overlay->name?></option>
 <?php }?>
 
-</select><br><small><?php _e("<b>Important : </b> if you choose GoogleMaps you MUST enter a GoogleMaps API key in the <a href='".admin_url()."edit.php?post_type=locateanythingmap&page=locate-anything-settings'>options page</a>","locate-and-filter");?> </small>
+</select><br><small><?php _e("<b>Important : </b> if you choose GoogleMaps you MUST enter a GoogleMaps API key in the <a href='".admin_url()."edit.php?post_type=locateandfiltermap&page=locate-anything-settings'>options page</a>","locate-and-filter");?> </small>
 </td></tr>	
 
 <tr id='show-attr-label' >

@@ -133,7 +133,7 @@ class Locate_And_Filter_Admin
 		$screen = get_current_screen();
 		$allowed_post_types = unserialize (get_option ( 'locate-anything-option-sources' ));		
 		if(!is_array($allowed_post_types)) $allowed_post_types=array();
-		$allowed_post_types[]="locateanythingmap";
+		$allowed_post_types[]="locateandfiltermap";
 		$allowed_post_types[]="locateanythingmarker";
 		if(strpos($screen->base,'user')===false && !in_array($screen->post_type,$allowed_post_types)) return;
 
@@ -189,7 +189,7 @@ class Locate_And_Filter_Admin
 		$allowed_post_types = unserialize (get_option ( 'locate-anything-option-sources' ));		
 		if(!is_array($allowed_post_types)) $allowed_post_types=array();
 		
-		$allowed_post_types[]="locateanythingmap";
+		$allowed_post_types[]="locateandfiltermap";
 		$allowed_post_types[]="locateanythingmarker";
 		if(strpos($screen->base,'user')===false && !in_array($screen->post_type,$allowed_post_types)) return;
 		
@@ -294,7 +294,7 @@ class Locate_And_Filter_Admin
 		add_meta_box('locate-and-filter-class', // Unique ID
 		esc_html__('LocateAndFilter - Wordpress Plugin', 'locate-and-filter') , // Title
 		'Locate_And_Filter_Admin::admin_class_meta_box', // Callback function
-		'locateanythingmap', // Admin page (or post type)
+		'locateandfiltermap', // Admin page (or post type)
 		'normal', // Context
 		'high'); // Priority
 		
@@ -429,7 +429,7 @@ class Locate_And_Filter_Admin
 	 * creates Admin Page in WP admin menu
 	 */
 	public function setup_admin_menu() {
-		add_submenu_page("edit.php?post_type=locateanythingmap", "Options", "Options", "edit_posts", "locate-anything-settings", "Locate_And_Filter_Admin::admin_settings_page");
+		add_submenu_page("edit.php?post_type=locateandfiltermap", "Options", "Options", "edit_posts", "locate-anything-settings", "Locate_And_Filter_Admin::admin_settings_page");
 	}
 	/**
 	 * defines a custom types for the maps
@@ -452,7 +452,7 @@ class Locate_And_Filter_Admin
 		$supports = array(
 			'title'
 		);
-		$slug = "locateanythingMap";
+		$slug = "locateandfilterMap";
 		$args = array(
 			'labels' => $labels,
 			'public' => false,
@@ -470,7 +470,7 @@ class Locate_And_Filter_Admin
 			'menu_position' => null,
 			'supports' => $supports
 		);
-		register_post_type('locateanythingMap', $args);
+		register_post_type('locateandfilterMap', $args);
 		/* marker custom post type*/
 		
 		$labels = array(
