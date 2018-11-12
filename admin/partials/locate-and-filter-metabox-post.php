@@ -168,7 +168,7 @@ $tooltip_presets=array((object)array("class"=>'default',"name"=>__('Default',"lo
 <script type="text/javascript">
 jQuery(document).ready(function(){
 	/* help texts */
-	<?php include plugin_dir_path(__FILE__)."locate-anything-help.php";?>
+	<?php include plugin_dir_path(__FILE__)."locate-and-filter-help.php";?>
 			/* initializes marker selector */ 
 			initialize_marker_selector("locate-anything-custom-marker");		
 				/* initializes the media uploader*/

@@ -397,7 +397,7 @@ jQuery("#locate-anything-map-template").change(function(e){	refresh_layout_code(
 		refresh_preview();
 	});
 	/* help texts */
-	<?php include plugin_dir_path(__FILE__)."locate-anything-help.php";?>
+	<?php include plugin_dir_path(__FILE__)."locate-and-filter-help.php";?>
 		/* initializes taxonomies */
 			locate_anything_refresh_filters();			
 		/* Listener : on change of post type,refresh taxonomies */

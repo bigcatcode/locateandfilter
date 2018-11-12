@@ -5,11 +5,11 @@
  *
  * This file is used to markup the admin-facing aspects of the plugin.
  *
- * @link       http://www.4goa.net/
+ * @link       http://monothemes.com/
  * @since      1.0.0
  *
- * @package    Locate_Anything
- * @subpackage Locate_Anything/admin/partials
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/admin/partials
  */
 ?>
 
