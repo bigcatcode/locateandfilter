@@ -138,7 +138,7 @@ class Locate_And_Filter_Admin
 		if(strpos($screen->base,'user')===false && !in_array($screen->post_type,$allowed_post_types)) return;
 
 		wp_enqueue_media();
-		wp_enqueue_script($this->plugin_name . "-adminjs", plugin_dir_url(__FILE__) . 'js/locate-anything-admin.js');
+		wp_enqueue_script($this->plugin_name . "-adminjs", plugin_dir_url(__FILE__) . 'js/locate-and-filter-admin.js');
 		// leaflet JS
 		wp_enqueue_script($this->plugin_name . "-leaflet", 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js', array(
 			'jquery'
@@ -193,7 +193,7 @@ class Locate_And_Filter_Admin
 		$allowed_post_types[]="locateanythingmarker";
 		if(strpos($screen->base,'user')===false && !in_array($screen->post_type,$allowed_post_types)) return;
 		
-		wp_enqueue_style($this->plugin_name . "-admincss", plugin_dir_url(__FILE__) . 'css/locate-anything-admin.css', array() , $this->version, 'all');
+		wp_enqueue_style($this->plugin_name . "-admincss", plugin_dir_url(__FILE__) . 'css/locate-and-filter-admin.css', array() , $this->version, 'all');
 		wp_enqueue_style($this->plugin_name . "-annocss", plugin_dir_url(__FILE__) . 'js/anno/anno.css', array() , $this->version, 'all');
 		
 		wp_enqueue_style($this->plugin_name . "-select2css", "//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css", array() , $this->version, 'all');
