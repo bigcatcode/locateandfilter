@@ -1,27 +1,23 @@
-=== LocateAnything plus - Searchable map Plugin ===
-Contributors: locateanything plus
-Donate link: http://www.locate-anything.eu/
-Tags:   directory plugin,  geodirectory, google maps, , member directory, buddypress directory, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
+=== LocateAndFilter ===
+Contributors: LocateAndFilter
+Donate link: http://locateandfilter.monothemes.com/
+Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory plugin, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
 
 Requires at least: 4.0.0
-Tested up to: 4.7
-Stable tag: 1.1.73
+Tested up to: 5.1
+Stable tag: 1.3.19
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create Maps exactly the way you want using LocateAnything. 
+Create Maps exactly the way you want using LocateAndFilter. 
 
 == Description ==
-LocateAnything is a versatile and highly customizable Wordpress plugin aimed at creating nice looking searchable/filterable maps.  Easily let your users search your maps by tags, custom taxonomies,xprofile fields(with the BuddyPress addon) and much more... 
-
-LocateAnything is the ideal tool to create event map, festivals, geodirectories, community maps (user maps),store locators, social network map.
-
+LocateAndFilter is a versatile and highly customizable WordPress plugin aimed at creating nice looking searchable/filterable maps.
 
 **Some of the features :**
 
-* **Developer-friendly** : 
-LocateAnything has been built on the great library LeafletJs (http://leafletjs.com/) and has been coded with extensibility in mind : addons using LocateAnything
-in conjunction with another WP plugin  typically are less than 300 lines of code.  
+* **Friendly** : 
+LocateAndFilter has been built on the great library LeafletJs (http://leafletjs.com/) and coded with extensibility in mind : addons using LocateAndFilter in conjunction with another WP plugin. You no longer need Google API Key.  
 * **Use just any taxonomy as a filter** : Easily use any taxonomy (custom taxonomies or regular taxonomies) to filter your maps.
 * **Supports Custom Post Types** : Most of the WordPress plugins only support posts and pages. Not this one!Total support for any custom post type and their taxonomies!
 * **Fully customizable marker icons** : You can define a custom marker icon for each location or choose to use the same marker for the whole map. It’s up to you! Choose between the plugin’s predefined marker icons, create your own markers using Ionicon or just use any image from the media library. Total flexibility!
@@ -31,37 +27,37 @@ in conjunction with another WP plugin  typically are less than 300 lines of code
 * **Fully customizable marker list** : Customize the marker list as you please : HTML, audios, videos, images,post content…
 * **Ready to use** : Need a map NOW? choose a map Layout, click, you are done! Not exactly what you had in mind? No worries!Just edit the layout CSS directly in the
 admin!
-* **Robust** : LocateAnything has been tested with 10 000 markers containing images, videos and audio…and still ran smoothly
+* **Robust** : LocateAndFilter has been tested with 10 000 markers containing images, videos and audio…and still ran smoothly
 * **Responsive & Touch optimized** 
 
 And many other features :
 
-* Google Places searchbox
+* Additional control layers by Bing satellite and Yandex satellite
 * import and style KML files
 * Detection of user’s location
 * Rounded corners / Squared corners tooltips
-* Map Localization :Choose your map language (beta)
+* Map Localization :Choose your map language
 * Optional cache system : ready to handle thousands of markers
-* Marker Clustering
-* Addons for Buddypress, Advanced filters, new marker icons, new map layouts
+* Marker Clustering, setup Max Cluster Radius
+* Addons, Advanced filters, new marker icons, new map layouts
 
-[check the LocateAnything website](http://www.locate-anything.eu/)
+[check the LocateAndFilter website](http://locateandfilter.monothemes.com/)
 
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/locateanything` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/locateandfilter` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
-1. Use the Settings in LocateAnything > Options to configure the plugin
+1. Use the Settings in LocateAndFilter > Options to configure the plugin
 
-See our website for more informations on how to configure the plugin : http://www.locate-anything.eu/documentation
+See our website for more informations on how to configure the plugin : http://locateandfilter.monothemes.com/documentation
 
 
 == Screenshots ==
 
-1. Fully customizable tooltips : HTML,display video, audio, image
-2. Use case 1 : Real estate locator
-3. Use case 2 : searchable Community map (with User or Buddypress addon)
+1. -
+2. -
+3. -
 
 == Changelog ==
 
