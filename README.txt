@@ -93,3 +93,40 @@ See our website for more informations on how to configure the plugin : http://lo
 * setup a new branch plugin
 = 1.3.01 =
 * update readme
+= 1.3.02 =
+* add new map layout template
+= 1.3.03 =
+* add a marker using the map 
+= 1.3.04 =
+* add custom labels for tax filter 
+= 1.3.05 =
+* fix height for template popup 
+= 1.3.06 =
+* add icon option to tax term 
+= 1.3.07 =
+* fix bug update options for icon term 
+= 1.3.08 = 
+* add mime type svg 
+= 1.3.09 =
+* add icon to checkbox filter 
+= 1.3.10 =
+* change orderby for checkbox public filter 
+= 1.3.11 =
+* add new option checkbox status 
+= 1.3.12 =
+* add excerpt to tooltip template 
+= 1.3.13 =
+* add new tooltip tag - lat lon dms post_id 
+= 1.3.14 =
+* add new options Max Cluster Radius 
+= 1.3.15 =
+* fix bug load public js in admin
+= 1.3.16 =
+* added compatibility github updater 
+* add id to chekbox filter
+= 1.3.17 =
+* add control layers Bing and Yandex 
+= 1.3.18 =
+* fix editArea
+= 1.3.19 =
+* update readme
