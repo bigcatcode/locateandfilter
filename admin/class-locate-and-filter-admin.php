@@ -282,7 +282,7 @@ class Locate_And_Filter_Admin
 	 */
 	public function load_preview() {	
 		if(isset($_GET["locateAnything_preview"])){	
-			include(plugin_dir_path(dirname(__FILE__)).'/admin/partials/locate-anything-preview.php');	
+			include(plugin_dir_path(dirname(__FILE__)).'/admin/partials/locate-and-filter-preview.php');
 			die();
 		}	
 	}

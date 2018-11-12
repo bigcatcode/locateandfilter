@@ -261,7 +261,7 @@ function refresh_preview(){
    // jQuery('#map-preview').append('<form action="'+ADMIN_URL+'?post_type=locateanythingmap&locateAnything_preview" method="post" target="map_preview" id="postToIframe"></form>');
     
    
-    jQuery('#map-preview').append('<form action="'+PARTIAL_DIR+'locate-anything-preview.php" method="post" target="map_preview" id="postToIframe"></form>');
+    jQuery('#map-preview').append('<form action="'+PARTIAL_DIR+'locate-and-filter-preview.php" method="post" target="map_preview" id="postToIframe"></form>');
 
     jQuery.each(data,function(index,n){
       //if(n.value.search("'")>-1 || n.value.search('"')>-1)

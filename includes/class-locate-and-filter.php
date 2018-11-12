@@ -366,7 +366,7 @@ class Locate_And_Filter
                 <th scope="row" valign="top"><label>Image url</label></th>
                 <td>
                     <input type="text" name="extra[locateanything_term_image_url]" value="<?php echo esc_attr( get_term_meta( $term->term_id, 'locateanything_term_image_url', 1 ) ) ?>"><br />
-                    <span class="description">Image url for filter LocateAnything</span>
+                    <span class="description">Image url for filter LocateAndFilter</span>
                 </td>
             </tr>
         <?php
