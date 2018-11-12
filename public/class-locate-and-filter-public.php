@@ -858,7 +858,7 @@ public static function defineDefaultMarker($params){
 		$markers = array ();
 		$arrJSON = array ();
 		
-		if(!isset($params["locate-anything-source"],$params['locate-anything-googleplaces'], $params['locate-anything-marker-type'],$params['locate-anything-usergeolocation-zoom'])  ) die(_e("Preview not available yet.","locate-anything"));
+		if(!isset($params["locate-anything-source"],$params['locate-anything-googleplaces'], $params['locate-anything-marker-type'],$params['locate-anything-usergeolocation-zoom'])  ) die(_e("Preview not available yet.","locate-and-filter"));
 
 		// get chosen post_type
 		$post_type = $params["locate-anything-source"];
