@@ -6,11 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       http://www.4goa.net/
+ * @link       http://monothemes.com/
  * @since      1.0.0
  *
- * @package    Locate_Anything
- * @subpackage Locate_Anything/includes
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/includes
  */
 
 /**
@@ -20,11 +20,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Locate_Anything
- * @subpackage Locate_Anything/includes
- * @author     4GOA <locateanything@4goa.net>
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/includes
+ * @author     AMonin <monothemes@gmail.com>
  */
-class Locate_Anything_i18n {
+class Locate_And_Filter_i18n {
 
 	/**
 	 * The domain specified for this plugin.

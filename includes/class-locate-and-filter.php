@@ -151,7 +151,7 @@ class Locate_And_Filter
          * The class responsible for defining internationalization functionality
          * of the plugin.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-anything-i18n.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-i18n.php';
         
         /**
          * The class responsible for defining all actions that occur in the admin area.
@@ -185,7 +185,7 @@ class Locate_And_Filter
     /**
      * Define the locale for this plugin for internationalization.
      *
-     * Uses the Locate_Anything_i18n class in order to set the domain and to register the hook
+     * Uses the Locate_And_Filter_i18n class in order to set the domain and to register the hook
      * with WordPress.
      *
      * @since    1.0.0
@@ -193,7 +193,7 @@ class Locate_And_Filter
      */
     private function set_locale() {
         
-        $plugin_i18n = new Locate_Anything_i18n();
+        $plugin_i18n = new Locate_And_Filter_i18n();
         $plugin_i18n->set_domain($this->get_plugin_name());
         
         $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
