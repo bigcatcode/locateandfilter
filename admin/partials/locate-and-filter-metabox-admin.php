@@ -275,10 +275,10 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 <tr><td><h2><?php _e("Shortcodes")?></h2></td></tr>
 <tr><td>	
 <ul>
-<li><b><?php _e("Display the map with a predefined layout","locate-and-filter")?></b> : [LocateAnything map_id=<?php echo $object->ID?>]</li>
-<li><b><?php _e("Display the map separately","locate-and-filter")?></b> : [LocateAnything_map map_id=<?php echo $object->ID?>]</li>
-<li><b><?php _e("Display the filters separately","locate-and-filter")?></b> : [LocateAnything_filters map_id=<?php echo $object->ID?>]</li>
-<li><b><?php _e("Display the navigation list separately","locate-and-filter")?></b> : [LocateAnything_navlist map_id=<?php echo $object->ID?>]</li>
+<li><b><?php _e("Display the map with a predefined layout","locate-and-filter")?></b> : [LocateAndFilter map_id=<?php echo $object->ID?>]</li>
+<li><b><?php _e("Display the map separately","locate-and-filter")?></b> : [LocateAndFilter_map map_id=<?php echo $object->ID?>]</li>
+<li><b><?php _e("Display the filters separately","locate-and-filter")?></b> : [LocateAndFilter_filters map_id=<?php echo $object->ID?>]</li>
+<li><b><?php _e("Display the navigation list separately","locate-and-filter")?></b> : [LocateAndFilter_navlist map_id=<?php echo $object->ID?>]</li>
 </ul>
 </td></tr>
 

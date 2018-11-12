@@ -179,20 +179,20 @@ class Locate_And_Filter_Public {
 	 * Sets up the shortcodes
 	 */
 	public function setup_shortcodes() {
-		add_shortcode ( "LocateAnything", "Locate_And_Filter_Public::createMap" );
-		add_shortcode ( "LocateAnything_map", "Locate_And_Filter_Public::outputMapMarkup" );
-		add_shortcode ( "LocateAnything_navlist", "Locate_And_Filter_Public::outputNavlistMarkup" );
-		add_shortcode ( "LocateAnything_filters", "Locate_And_Filter_Public::outputFilters" );
+		add_shortcode ( "LocateAndFilter", "Locate_And_Filter_Public::createMap" );
+		add_shortcode ( "LocateAndFilter_map", "Locate_And_Filter_Public::outputMapMarkup" );
+		add_shortcode ( "LocateAndFilter_navlist", "Locate_And_Filter_Public::outputNavlistMarkup" );
+		add_shortcode ( "LocateAndFilter_filters", "Locate_And_Filter_Public::outputFilters" );
 	}
 
 	/**
 	 * Removes the shortcodes
 	 */
 	public function remove_shortcodes(){
-		remove_shortcode ( "LocateAnything" );
-		remove_shortcode ( "LocateAnything_map");
-		remove_shortcode ( "LocateAnything_navlist");
-		remove_shortcode ( "LocateAnything_filters" );
+		remove_shortcode ( "LocateAndFilter" );
+		remove_shortcode ( "LocateAndFilter_map");
+		remove_shortcode ( "LocateAndFilter_navlist");
+		remove_shortcode ( "LocateAndFilter_filters" );
 	}
 	
 	/**

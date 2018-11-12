@@ -26,11 +26,11 @@ var annotations=
 
 "map-width": new Anno({ 
   target : '#map-width',
-  content: '<?php _e("This setting will determine the width of the map if no predefined layout is used.<b>Please note</b> that this setting doesn\'t apply to maps generated using the [LocateAnything map_id=...] shortcode<br/><br/> Pixels and % supported.","locate-and-filter")?>'
+  content: '<?php _e("This setting will determine the width of the map if no predefined layout is used.<b>Please note</b> that this setting doesn\'t apply to maps generated using the [LocateAndFilter map_id=...] shortcode<br/><br/> Pixels and % supported.","locate-and-filter")?>'
 }),
 "map-height": new Anno({ 
   target : '#map-height',
-  content: '<?php _e("This setting will determine the height of the map if no predefined layout is used. <b>Please note</b> that this setting doesn\'t apply to maps generated using the [LocateAnything map_id=...] shortcode<br/><br/> Pixel is the only unit supported","locate-and-filter")?>'
+  content: '<?php _e("This setting will determine the height of the map if no predefined layout is used. <b>Please note</b> that this setting doesn\'t apply to maps generated using the [LocateAndFilter map_id=...] shortcode<br/><br/> Pixel is the only unit supported","locate-and-filter")?>'
 }),
 "startposition": new Anno({ 
   target : '#startposition',
@@ -74,7 +74,7 @@ var annotations=
 }),
 "maplayout": new Anno({ 
   target : '#maplayout',
-  content: '<?php _e("A predefined layout is only displayed  when the shortcode [LocateAnything map_id=...] is used. The layout determines the organization of the different elements : map, navlist and filters.<br/><br/> LocateAnything proposes several predefined layouts for your maps. You can use them as-is or modify them to fit your needs.","locate-and-filter")?>'
+  content: '<?php _e("A predefined layout is only displayed  when the shortcode [LocateAndFilter map_id=...] is used. The layout determines the organization of the different elements : map, navlist and filters.<br/><br/> LocateAnything proposes several predefined layouts for your maps. You can use them as-is or modify them to fit your needs.","locate-and-filter")?>'
 }),
 "nice-tooltips-settings": new Anno({ 
   target : '#nice-tooltips-settings',

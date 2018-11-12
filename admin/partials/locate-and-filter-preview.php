@@ -12,7 +12,7 @@ $_POST["map_id"]="preview";
 foreach ($_POST as $key => $value) if(is_string($value)) $_POST[$key]= urldecode($value);	
 $r=Locate_And_Filter_Public::generateJSON($_POST,false);
 
-echo do_shortcode("[LocateAnything_map map_id=preview]");
+echo do_shortcode("[LocateAndFilter_map map_id=preview]");
 ?>
 <style>
 html { margin-top:0 !important; }
