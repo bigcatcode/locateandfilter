@@ -172,7 +172,7 @@ class Locate_And_Filter
         /**
          * This class contains the Assets
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-anything-assets.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-assets.php';
         
         /**
          * This class contains the Addon helpers

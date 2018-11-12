@@ -110,7 +110,7 @@ $tooltip_presets=array((object)array("class"=>'default',"name"=>__('Default',"lo
 			<td>
 			<select style="width: 50% !important" name="locate-anything-custom-marker" id="locate-anything-custom-marker">
 				 <option value=""><?php _e("Use default marker","locate-anything")?></option>
-				 <?php foreach (Locate_Anything_Assets::getMarkers() as $marker){?>
+				 <?php foreach (Locate_And_Filter_Assets::getMarkers() as $marker){?>
 				 	<option value="<?php echo $marker->id?>" <?php if(esc_attr($post_params["locate-anything-custom-marker"])==$marker->id) echo "selected"?>><?php echo $marker->url?></option>	 		
 		<?php }?>  
 			</select>

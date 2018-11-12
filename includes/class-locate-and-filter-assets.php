@@ -4,11 +4,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Register all actions and filters for the plugin
  *
- * @link       http://www.4goa.net/
+ * @link       http://monothemes.com/
  * @since      1.0.0
  *
- * @package    Locate_Anything
- * @subpackage Locate_Anything/includes
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/includes
  */
 
 /**
@@ -18,11 +18,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Locate_Anything
- * @subpackage Locate_Anything/includes
- * @author     4GOA <locateanything@4goa.net>
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/includes
+ * @author     AMonin <monothemes@gmail.com>
  */
-class Locate_Anything_Assets {	
+class Locate_And_Filter_Assets {	
 
 	var $plugin_url,$plugin_path;
 
@@ -35,7 +35,7 @@ class Locate_Anything_Assets {
 	}
 
 	public static function getPath() {		
-		$file = dirname(__FILE__) . '/../locate-anything.php';
+		$file = dirname(__FILE__) . '/../locateandfilter.php';
 		$plugin_url = plugin_dir_url($file);
 		$plugin_path = plugin_dir_path($file);
 		return array("plugin_url"=>$plugin_url,"plugin_path"=>$plugin_path);

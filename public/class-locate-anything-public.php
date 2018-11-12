@@ -286,7 +286,7 @@ class Locate_Anything_Public {
 		$template=get_post_meta($map_id,"locate-anything-map-template-html-".$layout_id,true);
 	
 		if($template==false){	
-					$template=file_get_contents(Locate_Anything_Assets::getMapTemplates($layout_id)->url);
+					$template=file_get_contents(Locate_And_Filter_Assets::getMapTemplates($layout_id)->url);
 			} 
 
 		ob_start ();
@@ -373,7 +373,7 @@ class Locate_Anything_Public {
 					"minZoom"=>1,
 					"zoom"=>10);
 		} else {
-			$overlays = Locate_Anything_Assets::getMapOverlays ();			
+			$overlays = Locate_And_Filter_Assets::getMapOverlays ();			
 			$params ["overlay"] = $overlays [$params ["overlay"]];			
 		}
 		$maxZoom = $settings['locate-anything-max-zoom'];
@@ -765,7 +765,7 @@ public static function defineMarkerIcon($post_params){
 
 				if ($marker_type == "standard") {
 					if (! empty ( $custom_marker ))
-						$marker = Locate_Anything_Assets::getMarkers ( $custom_marker );
+						$marker = Locate_And_Filter_Assets::getMarkers ( $custom_marker );
 				}  elseif($marker_type == "medialibrary"){
 						if(!empty($customIconURL)) {
 						$custom_marker = sanitize_key($customIconURL) ;
@@ -802,7 +802,7 @@ public static function defineDefaultMarker($params){
 
 		if ($marker_type == "standard") {
 			$default_marker_id = $params['locate-anything-default-marker'];
-			$marker  =Locate_Anything_Assets::getMarkers($default_marker_id);
+			$marker  =Locate_And_Filter_Assets::getMarkers($default_marker_id);
 		} elseif($marker_type == "medialibrary"){
 			$default_marker_id = sanitize_key($customIconURL) ;
 			list($width, $height, $type, $attr) = @getimagesize($customIconURL);

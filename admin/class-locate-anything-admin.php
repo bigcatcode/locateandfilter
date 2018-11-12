@@ -767,7 +767,7 @@ class Locate_Anything_Admin
 	 */
 	public function getLayoutCode() {
 		$record = get_post_meta($_POST["map_id"], "locate-anything-map-template-html-" . $_POST["layout_id"], true);
-		if ($record == false) echo json_encode(file_get_contents(Locate_Anything_Assets::getMapTemplates($_POST["layout_id"])->url));
+		if ($record == false) echo json_encode(file_get_contents(Locate_And_Filter_Assets::getMapTemplates($_POST["layout_id"])->url));
 		else echo json_encode($record);
 		die();
 	}

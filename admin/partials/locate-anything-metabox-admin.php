@@ -34,7 +34,7 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 <td><?php _e("Map Overlay","locate-anything");?> &nbsp;<input type="button" data-target="map-provider" class="locate-anything-help"></td>
 <td nowrap><select name="locate-anything-map-provider" id="locate-anything-map-provider">
 
-<?php foreach (Locate_Anything_Assets::getMapOverlays() as $overlay){?>
+<?php foreach (Locate_And_Filter_Assets::getMapOverlays() as $overlay){?>
 	<option value="<?php echo $overlay->id;?>" data-url="<?php echo $overlay->url;?>" data-attribution="<?php echo $overlay->attribution;?>" <?php if(get_post_meta($object->ID,'locate-anything-map-provider',true)==$overlay->id) echo "selected";?> ><?php echo $overlay->name?></option>
 <?php }?>
 
@@ -200,7 +200,7 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 			   <!-- marker selector -->
 			   <div id="locate-anything-marker-selector">			
 			<select style='width:80px !important' name="locate-anything-default-marker" id="locate-anything-default-marker">				 
-				 <?php foreach (Locate_Anything_Assets::getMarkers() as $marker){?>
+				 <?php foreach (Locate_And_Filter_Assets::getMarkers() as $marker){?>
 				 	<option value="<?php echo $marker->id?>" <?php if(esc_attr(get_post_meta($object->ID,"locate-anything-default-marker",true))==$marker->id) echo "selected"?>><?php echo $marker->url?></option>	 		
 		<?php }?>  
 			</select>		
@@ -368,7 +368,7 @@ $navlist_presets=array(
 
 <tr id="maplayout">
 <td><?php _e("Map Layout","locate-anything")?> </td>
-<td><select name="locate-anything-map-template" id="locate-anything-map-template"><?php foreach (Locate_Anything_Assets::getMapTemplates() as $template){?>
+<td><select name="locate-anything-map-template" id="locate-anything-map-template"><?php foreach (Locate_And_Filter_Assets::getMapTemplates() as $template){?>
 			 	 	  <option data-url='<?php echo json_encode($template->url);?>' value="<?php echo $template->id;?>" <?php if(get_post_meta($object->ID,'locate-anything-map-template',true)==$template->id) echo "selected";?> ><?php echo $template->name?></option>
 			 	 	  		<?php }?></select></td></tr>
 <tr>				 	 	  		
