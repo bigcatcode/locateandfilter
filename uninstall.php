@@ -19,10 +19,10 @@
  * For more information, see the following discussion:
  * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
  *
- * @link       http://www.4goa.net/
+ * @link       http://monothemes.com/
  * @since      1.0.0
  *
- * @package    Locate_Anything
+ * @package    Locate_And_Filter
  */
 
 // If uninstall not called from WordPress, then exit.

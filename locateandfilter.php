@@ -8,23 +8,23 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://www.locate-anything.eu
+ * @link              http://locateandfilter.monothemes.com
  * @since             1.0.0
- * @package           Locate_Anything
+ * @package           Locate_And_Filter
  *
  * @wordpress-plugin
- * Plugin Name:       LocateAnything plus
- * Plugin URI:        http://www.locate-anything.eu
- * Description:       LocateAnything is a versatile and highly customizable Wordpress plugin aimed at creating nice searchable/filterable maps.  Easily let your users search your maps by tags, custom taxonomies,xprofile fields(with the BuddyPress addon) and much more...
- * Version:           1.3.18
- * Last Modified : 	  2018-08-21
+ * Plugin Name:       LocateAndFilter
+ * Plugin URI:        http://locateandfilter.monothemes.com
+ * Description:       LocateAndFilter is a versatile and highly customizable WordPress plugin aimed at creating nice looking searchable/filterable maps.
+ * Version:           1.3.19
+ * Last Modified : 	  2018-11-12
  * Author:            Andrii Monin
  * Author URI:        http://www.bigcatcode.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       locate-anything
  * Domain Path:       /languages
- * GitHub Plugin URI: https://github.com/dgamoni/LocateAnything
+ * GitHub Plugin URI: https://github.com/bigcatcode/LocateAndFilter
  */
 
 // If this file is called directly, abort.
