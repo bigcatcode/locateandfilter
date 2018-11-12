@@ -290,7 +290,7 @@ class Locate_And_Filter_Public {
 			} 
 
 		ob_start ();
-		include plugin_dir_path ( __FILE__ ) . 'partials/locate-anything-public-display.php';
+		include plugin_dir_path ( __FILE__ ) . 'partials/locate-and-filter-public-display.php';
 		$buffer = ob_get_contents ();
 		ob_end_clean ();
 		return $buffer;

@@ -5,11 +5,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * This file is used to markup the public-facing aspects of the plugin.
  *
- * @link       http://www.4goa.net/
+ * @link       http://monothemes.com/
  * @since      1.0.0
  *
- * @package    Locate_Anything
- * @subpackage Locate_Anything/public/partials
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/public/partials
  */
 ?>
 
