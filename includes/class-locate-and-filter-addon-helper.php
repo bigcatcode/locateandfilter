@@ -1,10 +1,10 @@
 <?php
 /**
- * @package Locate_Anything
- * @subpackage Locate_Anything/admin
- * @author 4GOA <locateanything@4goa.net> 
+ * @package Locate_And_Filter
+ * @subpackage Locate_And_Filter/admin
+ * @author AMonin <monothemes@gmail.com>
  */
-class Locate_Anything_Addon_Helper
+class Locate_And_Filter_Addon_Helper
 {
     /**
      * Registers filters in relation with the Option page
@@ -122,18 +122,18 @@ class Locate_Anything_Addon_Helper
      */   
      public static function define_filters($arr_filters,$scope,$getDataCallbackFn,$addon_name){ 
         // add filter refine options in BackOffice  
-        Locate_Anything_Addon_Helper::add_filter_refine_options($arr_filters,$scope);
+        Locate_And_Filter_Addon_Helper::add_filter_refine_options($arr_filters,$scope);
         // add filter html in FO
-        Locate_Anything_Addon_Helper::add_frontoffice_filters($arr_filters);
+        Locate_And_Filter_Addon_Helper::add_frontoffice_filters($arr_filters);
         // define filter vars
-        Locate_Anything_Addon_Helper::add_filter_vars($arr_filters,$scope,$getDataCallbackFn);    
+        Locate_And_Filter_Addon_Helper::add_filter_vars($arr_filters,$scope,$getDataCallbackFn);    
      }
 
     public static function define_custom_tags($arr_tags,$scope,$getDataCallbackFn,$addon_name){ 
         // add markup tags
-        Locate_Anything_Addon_Helper::add_markup(array_values($arr_tags),$scope);       
+        Locate_And_Filter_Addon_Helper::add_markup(array_values($arr_tags),$scope);       
         // define markers vars
-        Locate_Anything_Addon_Helper::add_markup_vars($arr_tags,$scope,$getDataCallbackFn);
+        Locate_And_Filter_Addon_Helper::add_markup_vars($arr_tags,$scope,$getDataCallbackFn);
     }
 
 
@@ -148,7 +148,7 @@ class Locate_Anything_Addon_Helper
         add_filter("locate_anything_add_filter_choice", function ($filter_html,$map_id,$post_type) use ($arr_filters,$scope) {        
             if($post_type==$scope || $scope=="all") {      
                 foreach ($arr_filters as $fname=>$filter) {
-                    $filter_html.=Locate_Anything_Addon_Helper::create_filter_choice($fname,$filter['name'],$map_id);
+                    $filter_html.=Locate_And_Filter_Addon_Helper::create_filter_choice($fname,$filter['name'],$map_id);
                 }
             }
             return $filter_html;  
@@ -223,7 +223,7 @@ class Locate_Anything_Addon_Helper
                 $index = in_array($filter_fieldname, array_keys($arr_filters));
                 if($index){       
 
-                    $filter_html.=Locate_Anything_Addon_Helper::create_filter($filter_fieldname,$arr_filters[$filter_fieldname]['name'],$map_id,$arr_filters[$filter_fieldname]['values']);         
+                    $filter_html.=Locate_And_Filter_Addon_Helper::create_filter($filter_fieldname,$arr_filters[$filter_fieldname]['name'],$map_id,$arr_filters[$filter_fieldname]['values']);         
                 }
             }
             return $filter_html;
