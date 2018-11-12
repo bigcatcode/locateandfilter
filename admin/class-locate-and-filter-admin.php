@@ -601,7 +601,7 @@ class Locate_And_Filter_Admin
 			  		
 			 foreach ( $post_types as $posttype =>$postTypeName ) {
 			 	if($postTypeName=="Users") $postTypeName = 'user';			 	
-			 	$markups = Locate_Anything_Public::getBasicMarkupList($postTypeName);
+			 	$markups = Locate_And_Filter_Public::getBasicMarkupList($postTypeName);
 			 	foreach ($markups as $tag => $nothing) {	
 			 			if(in_array($tag,$already_displayed_tags))	continue;
 			 			array_push($already_displayed_tags,$tag);

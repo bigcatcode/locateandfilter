@@ -3,14 +3,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       http://www.4goa.net/
+ * @link       http://monothemes.com/
  * @since      1.0.0
  *
- * @package    Locate_Anything
- * @subpackage Locate_Anything/public
- * @author     4GOA <locateanything@4goa.net>
+ * @package    Locate_And_Filter
+ * @subpackage Locate_And_Filter/public
+ * @author     AMonin <monothemes@gmail.com>
  */
-class Locate_Anything_Public {
+class Locate_And_Filter_Public {
 	
 	/**
 	 * The ID of this plugin.
@@ -179,10 +179,10 @@ class Locate_Anything_Public {
 	 * Sets up the shortcodes
 	 */
 	public function setup_shortcodes() {
-		add_shortcode ( "LocateAnything", "Locate_Anything_Public::createMap" );
-		add_shortcode ( "LocateAnything_map", "Locate_Anything_Public::outputMapMarkup" );
-		add_shortcode ( "LocateAnything_navlist", "Locate_Anything_Public::outputNavlistMarkup" );
-		add_shortcode ( "LocateAnything_filters", "Locate_Anything_Public::outputFilters" );
+		add_shortcode ( "LocateAnything", "Locate_And_Filter_Public::createMap" );
+		add_shortcode ( "LocateAnything_map", "Locate_And_Filter_Public::outputMapMarkup" );
+		add_shortcode ( "LocateAnything_navlist", "Locate_And_Filter_Public::outputNavlistMarkup" );
+		add_shortcode ( "LocateAnything_filters", "Locate_And_Filter_Public::outputFilters" );
 	}
 
 	/**
@@ -207,7 +207,7 @@ class Locate_Anything_Public {
 		if(!isset($atts["map_id"])) return;	
 		if(is_admin()) return;
 
-		$plugin_public = new Locate_Anything_Public(null, null);      
+		$plugin_public = new Locate_And_Filter_Public(null, null);      
     	$plugin_public->enqueue_scripts();
         $plugin_public->enqueue_styles();
         
@@ -227,7 +227,7 @@ class Locate_Anything_Public {
 							<!-- Progress bar-->	
 						<div id="progress-wrapper">					
 						<div class="progress"  style="background-color:transparent" id="progress-'.$atts ["map_id"].'"><div class="progress-bar" id="progress-bar-'.$atts ["map_id"].'"></div></div>
-						</div></div>' . Locate_Anything_Public::generateMapJS ( $atts ["map_id"], "map-container-".$atts ["map_id"] );
+						</div></div>' . Locate_And_Filter_Public::generateMapJS ( $atts ["map_id"], "map-container-".$atts ["map_id"] );
 		// apply filters on outputMapMarkup
 		$content = apply_filters("locate_anything_alter_outputMapMarkup",$content);
 		return $content;
@@ -260,7 +260,7 @@ class Locate_Anything_Public {
 	 * @return [void]
 	 */
 	public static function outputFilters($atts, $content) {
-		return $content .= '<div class="LA_filters">' . Locate_Anything_Public::generateFilterForm ( sanitize_key ( $atts ['map_id'] ) ) . '</div>';
+		return $content .= '<div class="LA_filters">' . Locate_And_Filter_Public::generateFilterForm ( sanitize_key ( $atts ['map_id'] ) ) . '</div>';
 	}
 	
 	/**
@@ -275,7 +275,7 @@ class Locate_Anything_Public {
 	public static function createMap($atts, $content) {
 		if(!isset($atts["map_id"])) return;	
 
-		$plugin_public = new Locate_Anything_Public(null,null);  
+		$plugin_public = new Locate_And_Filter_Public(null,null);  
         $plugin_public->enqueue_scripts();
         $plugin_public->enqueue_styles();
         
@@ -311,7 +311,7 @@ class Locate_Anything_Public {
 				$filters = 	$settings["locate-anything-show-filters"];	
 							
 		} else {
-			$settings=Locate_Anything_Public::getMapParameters($map_id);
+			$settings=Locate_And_Filter_Public::getMapParameters($map_id);
 			$filters = unserialize($settings["locate-anything-show-filters"]);
 		}
 		//var_dump($settings);
@@ -399,7 +399,7 @@ class Locate_Anything_Public {
 					jQuery(window).load(function(){ 
 						var map_id='<?php echo $map_id?>';
 						<?php
-							if (Locate_Anything_Public::check_license_key('label')===false) {?>
+							if (Locate_And_Filter_Public::check_license_key('label')===false) {?>
 								<!-- jQuery("#<?php echo $map_container?>").append("<div style='background:grey;opacity:0.6;width:100%;height:1.5em;z-index:1500;position:absolute;bottom:0;text-align:left;padding-left:10px'><a style='cursor:pointer;text-decoration:none;color:#fff;' href='http://www.locate-anything.com' target='_blank'>Powered by LocateAnything</div>"); -->
 						<?php	} ?>
 
@@ -449,7 +449,7 @@ class Locate_Anything_Public {
 					eval(map_instance).register_filters(custom_filters);
 					/* Override nav item template */	 	
 					eval(map_instance).template_nav_item = function(marker,LatLng) {	
-						var template='<?php echo Locate_Anything_Public::getNavTemplate($map_id)?>';
+						var template='<?php echo Locate_And_Filter_Public::getNavTemplate($map_id)?>';
 						return template;
 					};
 					/*  define callback function */
@@ -469,9 +469,9 @@ class Locate_Anything_Public {
 							setTimeout(function(marker){											
 									/* define Tooltip HTML*/	
 									<?php if($map_id=="preview") {?>
-										var default_tooltip_template='<?php echo Locate_Anything_Public::decode_template ($settings['locate-anything-default-tooltip-template'])?>';
+										var default_tooltip_template='<?php echo Locate_And_Filter_Public::decode_template ($settings['locate-anything-default-tooltip-template'])?>';
 										<?php } else {?>
-								var default_tooltip_template='<?php echo Locate_Anything_Public::getDefaultTooltipTemplate($map_id)?>';					
+								var default_tooltip_template='<?php echo Locate_And_Filter_Public::getDefaultTooltipTemplate($map_id)?>';					
 								<?php } ?>
 									// length must be superior to 2 because of the inclusion of 2 single quotes to delimitate the output
 								
@@ -579,7 +579,7 @@ class Locate_Anything_Public {
 		$div_tag .= "<div class=\"map-nav-item-wrapper\">";
 		$div_end = "</div></div>";
 		$nav_template = get_post_meta ( $map_id, "locate-anything-default-nav-template", true );
-		$nav_template = Locate_Anything_Public::decode_template ( $nav_template );
+		$nav_template = Locate_And_Filter_Public::decode_template ( $nav_template );
 		return $div_tag . $nav_template . $div_end;
 	}
 	
@@ -592,7 +592,7 @@ class Locate_Anything_Public {
 	 */
 	public static function getTooltipTemplate($marker_id) {
 		$nav_template = get_post_meta ( $marker_id, "locate-anything-default-nav-template", true );
-		$nav_template = Locate_Anything_Public::decode_template ( $nav_template );
+		$nav_template = Locate_And_Filter_Public::decode_template ( $nav_template );
 		return $nav_template;
 	}
 	
@@ -605,7 +605,7 @@ class Locate_Anything_Public {
 	 */
 	public static function getDefaultTooltipTemplate($map_id) {
 		$nav_template = get_post_meta ( $map_id, "locate-anything-default-tooltip-template", true );
-		$nav_template = Locate_Anything_Public::decode_template ( $nav_template );
+		$nav_template = Locate_And_Filter_Public::decode_template ( $nav_template );
 		return $nav_template;
 	}
 	
@@ -658,7 +658,7 @@ class Locate_Anything_Public {
 		// Replaces linefeeds by BR and escaping single quotes
 		$template = str_replace ( array ("\r\n","\r","\n","'" ,'"' ), array ("","",	"",	"\'" ,"\""), trim ( $template ) );
 		/* get basic markup tags and decode them */
-		$basic_markup_list = Locate_Anything_Public::getBasicMarkupList ();
+		$basic_markup_list = Locate_And_Filter_Public::getBasicMarkupList ();
 		foreach ( $basic_markup_list as $tag => $subst ) {
 			$subst = "'+decode(" . $subst . ")+'";
 			$template = str_replace ( $tag, $subst, $template );
@@ -706,7 +706,7 @@ class Locate_Anything_Public {
 		$isCacheEnabled = unserialize(get_option ( "locate-anything-option-enable-cache"));
 		if ($isCacheEnabled == 0 && $map_id!=="preview") {
 			/* cache disabled */
-			Locate_Anything_Public::refresh_cache ( $map_id, true );
+			Locate_And_Filter_Public::refresh_cache ( $map_id, true );
 		} else {
 			/* cache enabled */
 			$cache_timeout = unserialize(get_option ( "locate-anything-option-cache-timeout"));			
@@ -715,7 +715,7 @@ class Locate_Anything_Public {
 			$cache_life = 60 * $cache_timeout; // cache timeout, in seconds
 			$filemtime = @filemtime ( $cache_file ); // returns FALSE if file does not exist
 			if ($map_id!=="preview" && (! $filemtime || (time () - $filemtime >= $cache_life))) {
-				Locate_Anything_Public::refresh_cache ($map_id, true );
+				Locate_And_Filter_Public::refresh_cache ($map_id, true );
 			} else
 				echo file_get_contents ( $cache_file );
 		}
@@ -834,7 +834,7 @@ public static function defineDefaultMarker($params){
 
 	public function refresh_cache($map_id, $output = false) {
 			if (! $map_id)	$map_id = $_POST ["map_id"];		
-			Locate_Anything_Public::generateJSON(Locate_Anything_Public::getMapParameters($map_id),$output);
+			Locate_And_Filter_Public::generateJSON(Locate_And_Filter_Public::getMapParameters($map_id),$output);
 	}
 
 	/**
@@ -879,7 +879,7 @@ public static function defineDefaultMarker($params){
 
 		/* Define Default Marker icon */
 
-	$defaultmarker=Locate_Anything_Public::defineDefaultMarker($params);
+	$defaultmarker=Locate_And_Filter_Public::defineDefaultMarker($params);
 	$default_marker_id=$defaultmarker["id"];
 	$markers[$default_marker_id]=$defaultmarker["marker"];
 
@@ -908,7 +908,7 @@ public static function defineDefaultMarker($params){
 		/* get Tags actually used in the templates */
 		$basic_fields=array("id","title","tooltip_template","lat","lng","street","streetnum","city","country","state" ,"zip","custom_marker","css_class");
 
-		$tags_used=Locate_Anything_Public::getTagsUsedInTemplate($posts,$post_type,$params,$basic_fields);
+		$tags_used=Locate_And_Filter_Public::getTagsUsedInTemplate($posts,$post_type,$params,$basic_fields);
 		$tags_used=apply_filters("locate_anything_whitelist_params",$tags_used);
 		// Loop : Generate Markers	
 			foreach ( $posts as $post ) {
@@ -930,7 +930,7 @@ public static function defineDefaultMarker($params){
 				
 				$id = ( string ) $post->ID;
 				/* define Marker icon for this element */
-				$markerIcon=Locate_Anything_Public::defineMarkerIcon($post_params);	
+				$markerIcon=Locate_And_Filter_Public::defineMarkerIcon($post_params);	
 				$custom_marker_id=	$markerIcon["id"];
 				if(!empty($custom_marker_id)) {				
 				$markers[$custom_marker_id]=$markerIcon["marker"];
@@ -946,14 +946,14 @@ public static function defineDefaultMarker($params){
 				remove_filter( 'the_content', 'wpautop' );
 				
 				// Removes temporarily the LocateAnything shortcodes
-				Locate_Anything_Public::remove_shortcodes();
+				Locate_And_Filter_Public::remove_shortcodes();
 
 				$marker_content = apply_filters ( 'the_content', $post->post_content,7 );
 				$marker_content = preg_replace ( '/(<[^>]*) style=("[^"]+"|\'[^\']+\')([^>]*>)/i', '$1$3', $marker_content );
 				$marker_content = preg_replace ( '/<script\b[^>]*>(.*?)<\/script>/is', "", $marker_content );
 			
 				//Restores the shortcodes
-				Locate_Anything_Public::setup_shortcodes();
+				Locate_And_Filter_Public::setup_shortcodes();
 
 
 				#prepare stripped content
@@ -986,7 +986,7 @@ public static function defineDefaultMarker($params){
 				$add = array (
 						"id" => $id ,
 						"title" => $post->post_title,
-						"tooltip_template" => "'" . Locate_Anything_Public::decode_template ( $post_params["locate-anything-marker-html-template"] ) . "'",
+						"tooltip_template" => "'" . Locate_And_Filter_Public::decode_template ( $post_params["locate-anything-marker-html-template"] ) . "'",
 						"lat" => $lat,
 						"lng" => $lon,						
 						"street" =>  $post_params["locate-anything-street"] ,
@@ -1024,7 +1024,7 @@ public static function defineDefaultMarker($params){
 							$add["lon"] = '';
 						}
 						if ( $add["lat"] && $add["lon"]){
-							$add["dms"] =  Locate_Anything_Public::tag_addon_DECtoDMS( $add["lat"], $add["lon"] );
+							$add["dms"] =  Locate_And_Filter_Public::tag_addon_DECtoDMS( $add["lat"], $add["lon"] );
 						} else {
 							$add["dms"] = '';
 						}

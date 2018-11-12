@@ -10,7 +10,7 @@ wp_head();
 
 $_POST["map_id"]="preview";
 foreach ($_POST as $key => $value) if(is_string($value)) $_POST[$key]= urldecode($value);	
-$r=Locate_Anything_Public::generateJSON($_POST,false);
+$r=Locate_And_Filter_Public::generateJSON($_POST,false);
 
 echo do_shortcode("[LocateAnything_map map_id=preview]");
 ?>

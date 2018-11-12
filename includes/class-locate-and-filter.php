@@ -162,7 +162,7 @@ class Locate_And_Filter
          * The class responsible for defining all actions that occur in the public-facing
          * side of the site.
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-locate-anything-public.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-locate-and-filter-public.php';
         
         /**
          * This class holds utilitary functions
@@ -209,7 +209,7 @@ class Locate_And_Filter
     private function define_admin_hooks() {
         
         $plugin_admin = new Locate_And_Filter_Admin($this->get_plugin_name(), $this->get_version());
-        $plugin_public = new Locate_Anything_Public($this->get_plugin_name(), $this->get_version());
+        $plugin_public = new Locate_And_Filter_Public($this->get_plugin_name(), $this->get_version());
         
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
         $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
@@ -257,7 +257,7 @@ class Locate_And_Filter
      * @access   private
      */
     private function define_public_hooks() {        
-        $plugin_public = new Locate_Anything_Public($this->get_plugin_name(), $this->get_version());
+        $plugin_public = new Locate_And_Filter_Public($this->get_plugin_name(), $this->get_version());
         $plugin_public->setup_shortcodes();
        
        // loading of styles and scripts has been moved to shortcode methods in order to avoid loading the scripts when not necessary
