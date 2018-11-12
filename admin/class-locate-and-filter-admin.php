@@ -324,7 +324,7 @@ class Locate_And_Filter_Admin
 	 *
 	 */
 	public static function admin_class_meta_box($object, $box) {
-		include (plugin_dir_path(__FILE__) . 'partials/locate-anything-metabox-admin.php');
+		include (plugin_dir_path(__FILE__) . 'partials/locate-and-filter-metabox-admin.php');
 	}
 	/**
 	 * Display the post meta box.
