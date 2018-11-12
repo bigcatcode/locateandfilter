@@ -1,18 +1,15 @@
-# LocateAnything plus
+# LocateAndFilter
 
-This a new plugin branch https://wordpress.org/plugins/locateanything/
+Website URL: http://locateandfilter.monothemes.com/
 
-Website URL: http://www.locate-anything.eu/
+Software Version: WordPress 5.1.0, WordPress 4.6.1, WordPress 4.6, WordPress 4.5.x, WordPress 4.5.2, WordPress 4.5.1, WordPress 4.5, WordPress 4.4.2, WordPress 4.4.1, WordPress 4.4, WordPress 4.3.1, WordPress 4.3, WordPress 4.2, WordPress 4.1, WordPress 4.0
+Tags: custom map, filter map, LocateAndFilter, search map, leaflet
 
-Requires at least:WordPress 4.0.0
+LocateAndFilter is a versatile and highly customizable WordPress plugin aimed at creating nice looking searchable/filterable maps.
 
+**Friendly**
 
-LocateAnything is a versatile and highly customizable Wordpress plugin aimed at creating nice searchable/filterable maps.  Easily let your users search your maps by tags, custom taxonomies,xprofile fields(with the BuddyPress addon) and much more... 
-
-
-**Developer-friendly**
-
-LocateAnything has been built on the great library LeafletJs (http://leafletjs.com/) and coded with extensibility in mind : addons using LocateAnything in conjunction with another WP plugin  typically are less than 300 lines of code.  
+LocateAndFilter has been built on the great library LeafletJs (http://leafletjs.com/) and coded with extensibility in mind : addons using LocateAndFilter in conjunction with another WP plugin. You no longer need Google API Key
 
 **Use just any
 taxonomy as a filter**
@@ -88,7 +85,7 @@ admin!
 
 **Robust**
 
-LocateAnything has
+LocateAndFilter has
 been tested with 10 000 markers containing images, videos and
 audio…and still ran smoothly
 
@@ -98,8 +95,9 @@ Touch optimized**
 **And many other
 features…**
 
-Google Places
-searchbox
+Additional control layers 
+by Bing satellite 
+and Yandex satellite
 
 Detection of user’s
 location
@@ -108,15 +106,14 @@ Rounded corners /
 Squared corners tooltips
 
 Map Localization :
-Choose your map language (beta)
+Choose your map language
 
 Optional cache
 system : ready to handle thousands of markers
 
 Marker Clustering
+setup Max Cluster Radius
 
-Addons for
-Buddypress, Advanced filters, new marker icons, new map layouts
 
 And much much more!
 
@@ -189,3 +186,75 @@ setup a new branch plugin
 
 update readme
 
+= 1.3.02 =
+
+add new map layout template
+
+= 1.3.03 =
+
+add a marker using the map 
+
+= 1.3.04 =
+
+add custom labels for tax filter 
+
+= 1.3.05 =
+
+fix height for template popup 
+
+= 1.3.06 =
+
+add icon option to tax term 
+
+= 1.3.07 =
+
+fix bug update options for icon term 
+
+= 1.3.08 = 
+
+add mime type svg 
+
+= 1.3.09 =
+
+add icon to checkbox filter 
+
+= 1.3.10 =
+
+change orderby for checkbox public filter 
+
+= 1.3.11 =
+
+add new option checkbox status 
+
+= 1.3.12 =
+
+add excerpt to tooltip template 
+
+= 1.3.13 =
+
+add new tooltip tag - lat lon dms post_id 
+
+= 1.3.14 =
+
+add new options Max Cluster Radius 
+
+= 1.3.15 =
+
+fix bug load public js in admin
+
+= 1.3.16 =
+
+added compatibility github updater 
+add id to chekbox filter
+
+= 1.3.17 =
+
+add control layers Bing and Yandex 
+
+= 1.3.18 =
+
+fix editArea
+
+= 1.3.19 =
+
+update readme
