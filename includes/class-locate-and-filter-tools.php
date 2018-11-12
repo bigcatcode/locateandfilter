@@ -3,11 +3,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * Tools 
  * 
- * @package Locate_Anything
- * @subpackage Locate_Anything/admin
- * @author 4GOA <locateanything@4goa.net>
+ * @package Locate_And_Filter
+ * @subpackage Locate_And_Filter/admin
+ * @author AMonin <monothemes@gmail.com>
  */
-class Locate_Anything_Tools {
+class Locate_And_Filter_Tools {
 		public function __construct($plugin_name, $version) {}
 		
 

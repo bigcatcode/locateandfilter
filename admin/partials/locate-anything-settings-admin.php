@@ -34,7 +34,7 @@
 <tr>
 <td><?php _e("Map Language (for GoogleMaps and YandexMaps)","locate-anything");?>:</td>
 <td><select name="locate-anything-option-map-language">
-<?php foreach (Locate_Anything_Tools::getLocaleList() as $locale => $language) {?>
+<?php foreach (Locate_And_Filter_Tools::getLocaleList() as $locale => $language) {?>
 <option <?php if(unserialize(get_option('locate-anything-option-map-language'))==$locale) echo "selected";?> value="<?php echo  $locale;?>">
 <?php echo $language ?></option>	
 <?php }?>

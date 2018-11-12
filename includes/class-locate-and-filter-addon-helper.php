@@ -242,11 +242,11 @@ class Locate_And_Filter_Addon_Helper
        $filters=get_post_meta($map_id,"locate-anything-show-filters",true);
        if(!is_array($filters)) $filters= array();
         $f.= '<div class="hide-if-' . $filter_field . '">';
-        $f.= Locate_Anything_Tools::checkboxMultiple('locate-anything-show-filters[]', $title, '', $filter_field, array_combine($filters, $filters));
+        $f.= Locate_And_Filter_Tools::checkboxMultiple('locate-anything-show-filters[]', $title, '', $filter_field, array_combine($filters, $filters));
         
         $selected = get_post_meta($map_id, "locate-anything-display-filter-$filter_field", true);
         
-        $f.= Locate_Anything_Tools::Array2Select(array(            
+        $f.= Locate_And_Filter_Tools::Array2Select(array(            
             "radio"=> "Radio buttons",
             "checkbox" => "Checkboxes",
             "select" => "Dropdown",

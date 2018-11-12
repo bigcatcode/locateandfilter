@@ -719,7 +719,7 @@ class Locate_Anything_Admin
 		$gmaps_key = Locate_Anything_Admin::getGmapsAPIKey();
 		$url = "https://maps.google.com/maps/api/geocode/json?key=$gmaps_key&sensor=false&address={$address}";
 		// get the json response
-		$resp_json = Locate_Anything_Tools::file_get_contents_curl($url);
+		$resp_json = Locate_And_Filter_Tools::file_get_contents_curl($url);
 		// decode the json
 		$resp = json_decode($resp_json, true);		
 		// response status will be 'OK', if able to geocode given address

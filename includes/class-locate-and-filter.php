@@ -167,7 +167,7 @@ class Locate_And_Filter
         /**
          * This class holds utilitary functions
          */
-        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-anything-tools.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-locate-and-filter-tools.php';
         
         /**
          * This class contains the Assets

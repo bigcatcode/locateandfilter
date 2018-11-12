@@ -550,16 +550,16 @@ class Locate_Anything_Public {
 				}
 
 				if ($taxonomy && $selector == "tokenize") {
-					$r .= '<li class="filter-tokenize"><label>' . $customlabel . '</label>' . Locate_Anything_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", true,9999,$allowed ) . '</li>';
+					$r .= '<li class="filter-tokenize"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", true,9999,$allowed ) . '</li>';
 				} elseif ($taxonomy &&  $selector== "select") {
-					$r .= '<li class="filter-select"><label>' . $customlabel . '</label>' . Locate_Anything_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", false,9999,$allowed ) . '</li>';
+					$r .= '<li class="filter-select"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", false,9999,$allowed ) . '</li>';
 				} elseif ($selector== "range") {
 					$r .= '<li class="filter-range"><label>' . $customlabel . '</label>
 					<div id="rangedval-'.$filter.'-'.$map_id.'"><span id="rangeval-'.$filter.'-'.$map_id.'"></span></div>  
   					<div class="rangeslider" min="'.get_post_meta ( $map_id, "locate-anything-min-range-$filter", true ).'" max="'.get_post_meta ( $map_id, "locate-anything-max-range-$filter", true ).'" name="'.$filter.'-'.$map_id.'"  id="'.$filter.'-'.$map_id.'"></div></li>';
 				
 				} else {
-					$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_Anything_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon) . '</li>';
+					$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon) . '</li>';
 				}
 			}
 		$r=apply_filters("locate_anything_add_custom_filters",$r,$map_id,$filters);
@@ -744,7 +744,7 @@ public static function getTagsUsedInTemplate($posts,$post_type,$params,$basic_fi
 	$all_templates=$params["locate-anything-default-tooltip-template"];
 	$all_templates.=" ".$params["locate-anything-default-nav-template"];
 	foreach ( $posts as $post ) {
-		if(Locate_Anything_Tools::getPostType($post_type)!==false) $post_params=Locate_Anything_Admin::getPostMetas($post->ID);
+		if(Locate_And_Filter_Tools::getPostType($post_type)!==false) $post_params=Locate_Anything_Admin::getPostMetas($post->ID);
 		$post_params=apply_filters("locate_anything_marker_params",$post_params,$post->ID,false);
 		$all_templates.=" ".$post_params["locate-anything-marker-html-template"];
 	}
@@ -887,8 +887,8 @@ public static function defineDefaultMarker($params){
 
 
 		/* retrieve the markers */
-		if(Locate_Anything_Tools::getPostType($post_type)!==false) {
-			/* Prepare the query for Locate_Anything_Tools::findSomething based on the  filters settings */
+		if(Locate_And_Filter_Tools::getPostType($post_type)!==false) {
+			/* Prepare the query for Locate_And_Filter_Tools::findSomething based on the  filters settings */
 			$taxo_args=array();
 			$query_args=array();
 			$query_args =apply_filters("locate_anything_find_markers_query_args",$query_args ,$params);
@@ -896,7 +896,7 @@ public static function defineDefaultMarker($params){
 				$allowed=$params['locate-anything-allowed-filters-value-'.$taxonomy];
 				if(is_array($allowed))$taxo_args[$taxonomy]=$allowed;
 			}
-			$posts = Locate_Anything_Tools::findSomething ( $post_type, $taxonomies,$taxo_args,$query_args);	
+			$posts = Locate_And_Filter_Tools::findSomething ( $post_type, $taxonomies,$taxo_args,$query_args);	
 		}
 
 		$posts =apply_filters("locate_anything_find_markers",$posts ,$params);
