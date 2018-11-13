@@ -221,7 +221,7 @@ class Locate_And_Filter_Public {
 				 $content .= ".leaflet-popup-content-wrapper {border-radius: 0 !important;}\n";				
 				if(get_post_meta ( $atts ["map_id"], 'locate-anything-marker-size', true )) 
 				 $content .= '#map-container-'.$atts ["map_id"]." .awesome-marker i {font-size:".get_post_meta ( $atts ["map_id"], 'locate-anything-marker-size', true )."px !important;}\n";	
-				 $content .= '#map-container-'.$atts ["map_id"].'{width:'.$params ["map-width"].';height:'.$params ["map-height"].'}
+				 $content .= '#map-container-'.$atts ["map_id"].'{width:'.$params ["map-width"].';height:'.$params ["map-height"].' !important; }
 				</style>
 						<div id="map-container-'.$atts ["map_id"].'" >
 							<!-- Progress bar-->	

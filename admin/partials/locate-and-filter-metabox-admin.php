@@ -435,11 +435,12 @@ function locate_anything_refresh_filters(){
 			          	if(is_array($the_filters))foreach($the_filters as $filter){
 			          		 $r=get_post_meta( $object->ID,"locate-anything-display-filter-".$filter,true);
 			          		 if(!empty($r)) $jsObj.= "'$filter':'$r',";
+			          		 
 			          		 $r_label=get_post_meta( $object->ID,"locate-anything-filter-selector-label-".$filter,true);
-			          		 if(!empty(r_label)) $jsObj.= "'filter_label-$filter':'$r_label',";
+			          		 if(  !empty( get_post_meta( $object->ID,"locate-anything-filter-selector-label-".$filter,true) ) ) $jsObj.= "'filter_label-$filter':'$r_label',";
 
 			          		 $r_icon=get_post_meta( $object->ID,"locate-anything-filter-selector-icon-".$filter,true);
-			          		 if(!empty(r_icon)) $jsObj.= "'filter_icon-$filter':'$r_icon',";
+			          		 if(!empty( get_post_meta( $object->ID,"locate-anything-filter-selector-icon-".$filter,true) )) $jsObj.= "'filter_icon-$filter':'$r_icon',";
 
 			          		 $m=get_post_meta( $object->ID,"locate-anything-min-range-".$filter,true) ;	
 			          		 $M=get_post_meta( $object->ID,"locate-anything-max-range-".$filter,true);	
