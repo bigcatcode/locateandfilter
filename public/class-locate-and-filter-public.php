@@ -394,6 +394,11 @@ class Locate_And_Filter_Public {
 			$params ["max_nav_item_per_page"] = 10;
 		$params ["style-hue"] = $settings['locate-anything-googlemaps-hue'];
 		?>
+		<style>
+			#locate-anything-template-wrapper {
+				height: <?php echo $settings['locate-anything-map-height']; ?>;
+			}
+		</style>
 		<script type="text/javascript">
 		var current_map;
 					jQuery(window).load(function(){ 

@@ -88,7 +88,7 @@ class Locate_And_Filter
     public function load_default_assets() {
         
         /* Load default layouts */
-        $layouts = array((object)array("url" => plugin_dir_path(dirname(__FILE__)) . '/assets/mapTemplates/template2.php', "name" => 'Default Layout left'), (object)array("url" => plugin_dir_path(dirname(__FILE__)) . '/assets/mapTemplates/template4.php', "name" => 'Default Layout right'), (object)array("url" => plugin_dir_path(dirname(__FILE__)) . '/assets/mapTemplates/template9.php', "name" => 'Default Layout popup'),);
+        $layouts = array((object)array("url" => plugin_dir_path(dirname(__FILE__)) . '/assets/mapTemplates/template-left.php', "name" => 'Default Layout left'), (object)array("url" => plugin_dir_path(dirname(__FILE__)) . '/assets/mapTemplates/template-right.php', "name" => 'Default Layout right'), (object)array("url" => plugin_dir_path(dirname(__FILE__)) . '/assets/mapTemplates/template-popup.php', "name" => 'Default Layout popup'),);
         Locate_And_Filter_Addon_Helper::add_map_layouts("basic", $layouts);
         
         /* Load default marker icons */

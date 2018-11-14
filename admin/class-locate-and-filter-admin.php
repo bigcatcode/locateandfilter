@@ -661,10 +661,14 @@ class Locate_And_Filter_Admin
 		return array(
 			"tooltip" => "|small_thumbnail|
 <p>|content_stripped|</p>",
-			"navlist" => "<b>|title|</b>
-<span> |city|, |country|</span>
-<div>|content_stripped|</div>
-|small_thumbnail|"
+			"navlist" => '<div class="navlist-title"><b>|title|</b></div>
+<div class="navlist-content">
+    <div class="navlist-thumbnail">|small_thumbnail|</div>
+    <div class="navlist-stripp-content">
+       |content_stripped|
+       <a class="navlist-link" href="|post_link|">read more</a>
+   </div>
+</div>'
 		);
 	}
 	/**
