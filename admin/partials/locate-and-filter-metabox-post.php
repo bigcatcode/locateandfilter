@@ -66,8 +66,8 @@ else  $post_params=Locate_And_Filter_Admin::getPostMetas($object->ID);
            $u=Locate_And_Filter_Admin::getDefaultTemplates();
 /* tooltip presets */
 $tooltip_presets=array((object)array("class"=>'default',"name"=>__('Default',"locate-and-filter"),"template"=>''),
-       (object)array("class"=>'',"name"=>__('none',"locate-and-filter"),"template"=>''),
-       (object)array("class"=>'nice-tooltips',"name"=>'Nice Tooltips',"template"=>$u["tooltip"])
+       (object)array("class"=>'',"name"=>__('none',"locate-and-filter"),"template"=>$u["tooltip"]),
+       (object)array("class"=>'nice-tooltips',"name"=>'Nice Tooltips',"template"=>$u["nice-tooltip"])
        );                       
  $tooltip_presets=apply_filters("locate_anything_tooltip_presets",$tooltip_presets);
  $selectedPreset=$post_params["locate-anything-tooltip-preset"];

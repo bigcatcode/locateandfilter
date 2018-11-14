@@ -134,11 +134,9 @@
 
 /* Mask for list img */
 .map-nav-item-wrapper div#mask {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    margin-left: 10px;
-    float: right;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
 }
 
 .map-nav-item-wrapper div#mask img{
@@ -173,4 +171,35 @@ div.Tokenize {
     overflow: hidden;
     width: 100%;  
 }
+
+/*tooltip*/
+.tooltip-wrap {
+    display: flex;
+}
+.tooltip-content {
+   padding-left: 10px;
+}
+.leaflet-container a.tooltip-link {
+    text-align: center;
+    display: block;
+    border: 1px solid;
+    padding: 5px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #0078A8;
+    color: white;
+    text-transform: uppercase;
+}
+
+/*nice-tooltips*/
+.nice-tooltips .tooltip-wrap {
+    flex-direction: column;
+}
+.nice-tooltips .tooltip-content {
+   padding: 10px;
+}
+.leaflet-container .nice-tooltips a.tooltip-link {
+   margin: 10px;
+}
+
 </style>

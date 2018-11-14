@@ -306,8 +306,8 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 $u=Locate_And_Filter_Admin::getDefaultTemplates();
 /* tooltip presets */
 $tooltip_presets=array(
-       (object)array("class"=>'',"name"=>__('none',"locate-and-filter"),"template"=>''),
-       (object)array("class"=>'nice-tooltips',"name"=>'Nice Tooltips',"template"=>$u["tooltip"])
+       (object)array("class"=>'',"name"=>__('none',"locate-and-filter"),"template"=>$u["tooltip"]),
+       (object)array("class"=>'nice-tooltips',"name"=>'Nice Tooltips',"template"=>$u["nice-tooltip"])
        );                       
  $tooltip_presets=apply_filters("locate_anything_tooltip_presets",$tooltip_presets);
  $selectedPreset=get_post_meta($object->ID,"locate-anything-tooltip-preset",true);
@@ -338,7 +338,7 @@ $navlist_presets=array(
 </td>
 </tr>
 <tr id="nice-tooltips-settings">
-<td><?php _e("Nice Tooltips settings","locate-and-filter")?> : &nbsp;<input type="button" data-target="nice-tooltips-settings" class="locate-anything-help"></td><td><?php _e("Main image max-height","locate-and-filter")?> : <input type="text" value="<?php echo get_post_meta($object->ID,"locate-anything-nice-tooltips-img-height",true)?get_post_meta($object->ID,"locate-anything-nice-tooltips-img-height",true):"200px"?>" name="locate-anything-nice-tooltips-img-height">
+<td><?php _e("Nice Tooltips settings","locate-and-filter")?> : &nbsp;<input type="button" data-target="nice-tooltips-settings" class="locate-anything-help"></td><td><?php _e("Main image max-height","locate-and-filter")?> : <input type="text" value="<?php echo get_post_meta($object->ID,"locate-anything-nice-tooltips-img-height",true)?get_post_meta($object->ID,"locate-anything-nice-tooltips-img-height",true):"150px"?>" name="locate-anything-nice-tooltips-img-height">
 </td></tr>
 <tr><td><h2><?php _e("Templates","locate-and-filter")?></h2></td></tr> 
 <tr>

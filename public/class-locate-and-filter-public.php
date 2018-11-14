@@ -978,7 +978,11 @@ public static function defineDefaultMarker($params){
 				$maxheight2=$post_params["locate-anything-nice-tooltips-img-height"];
 				if(strlen($maxheight2)>2) $css_maxheight=$maxheight2;else $css_maxheight=$maxheight;
 				$small_thumbnail="<div id='mask' style='max-height:".$css_maxheight."'>".get_the_post_thumbnail ( $id, 'thumbnail' )."</div>";
-				} else $small_thumbnail=get_the_post_thumbnail ( $id, 'thumbnail' );
+				$medium_thumbnail="<div id='mask' style='max-height:".$css_maxheight."'>".get_the_post_thumbnail ( $id, 'medium' )."</div>";
+				} else {
+					$small_thumbnail=get_the_post_thumbnail ( $id, 'thumbnail' );
+					$medium_thumbnail=get_the_post_thumbnail ( $id, 'medium' );
+				}
 				
 				
 
@@ -1015,7 +1019,7 @@ public static function defineDefaultMarker($params){
 						$add["post_excerpt"]= sanitize_text_field ( $post_params["post_excerpt"] );
 						$add["excerpt"]= sanitize_text_field ( $post_params["excerpt"] );
 						$add["small_thumbnail"]=$small_thumbnail;
-						$add["medium_thumbnail"]= get_the_post_thumbnail ( $id, 'post-thumbnail' );
+						$add["medium_thumbnail"]= $medium_thumbnail;
 						$add["full_thumbnail"] =get_the_post_thumbnail ( $id, 'full' );
 						$add["post_id"] = $id;
 						if( get_post_meta( $id, 'locate-anything-lat')[0] ) {
