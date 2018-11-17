@@ -98,6 +98,10 @@ var annotations=
   target : '#show-attr-label',
   content: '<?php _e("The attribution label is displayed on the bottom right side of the map. It states the source of the overlay you are using, for example OpenStreetMap","locate-and-filter")?>'
 }),
+"display_load-pretty-checkbox": new Anno({ 
+  target : '#display_load-pretty-checkbox',
+  content: '<?php _e("A pure CSS library to beautify checkbox and radio buttons","locate-and-filter")?>'
+}),
 }
 
 var target=jQuery(e.target).attr("data-target");

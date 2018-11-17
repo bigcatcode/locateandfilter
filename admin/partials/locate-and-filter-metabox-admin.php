@@ -137,6 +137,14 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 </td>
 </tr>
 
+<tr id="display_load-pretty-checkbox">
+<td><?php _e("Load Pretty checkbox","locate-and-filter")?> &nbsp;<input type="button" data-target="display_load-pretty-checkbox" class="locate-anything-help"></td>
+<td>
+		  <input type="radio" name="locate-anything-load-pretty-checkbox" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-load-pretty-checkbox', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			  <input type="radio" name="locate-anything-load-pretty-checkbox" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-load-pretty-checkbox', true )=="0" || get_post_meta( $object->ID, 'locate-anything-load-pretty-checkbox', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+</td>
+</tr>
+
 
 <!-- <tr id="">
 <td><?php _e("Remove the 'Powered by LocateAndFilter' label","locate-and-filter")?></td>

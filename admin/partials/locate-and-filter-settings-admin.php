@@ -128,6 +128,13 @@
 </ul>
 </div>
 
+<h2><?php _e("Load Chosen","locate-anything")?></h2>
+<ul id="display_load-chosen">
+
+<li> <input type="radio" name="locate-anything-option-load-chosen" value="1" <?php if (unserialize(get_option("locate-anything-option-load-chosen"))==1) echo "checked";?> > <?php _e("yes","locate-anything")?> <input type="radio" <?php if (unserialize(get_option("locate-anything-option-load-chosen"))==0) echo "checked";?> name="locate-anything-option-load-chosen" value="0" > <?php _e("no","locate-anything")?>  </li>
+<label><?php _e("Chosen is a jQuery plugin that makes long, unwieldy select boxes much more user-friendly","locate-anything")?></label>
+</ul>
+
 <?php echo apply_filters("locate_anything_add_option_pane","")?>
 <div style="text-align: right"><input type="submit" class='button-admin' style=""></div>
 </form>

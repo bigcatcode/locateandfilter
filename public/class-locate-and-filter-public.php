@@ -60,6 +60,13 @@ class Locate_And_Filter_Public {
 		wp_enqueue_style ( $this->plugin_name . "-leaflet-marker-cluster", plugin_dir_url ( __FILE__ ) . 'js/leaflet.markercluster/MarkerCluster.css', array (), $this->version, 'all' );
 		// Tokenize CSS
 		wp_enqueue_style ( $this->plugin_name . "-tokenize", plugin_dir_url ( __FILE__ ) . 'js/Tokenize-2.2.1/jquery.tokenize.css', array (), $this->version, 'all' );
+		// Chosen CSS
+		$load_chosen = unserialize (get_option ( 'locate-anything-option-load-chosen' ));
+		if($load_chosen) {
+			wp_enqueue_style ( $this->plugin_name . "-chosen", plugin_dir_url ( __FILE__ ) . 'js/chosen_v1.8.7/chosen.css', array (), $this->version, 'all' );
+		}
+		// Pretty-checkbox
+		wp_enqueue_style ( $this->plugin_name . "-pretty-checkbox", plugin_dir_url ( __FILE__ ) . 'js/pretty-checkbox/pretty-checkbox.min.css', array (), $this->version, 'all' );
 		// leaflet Google automplete CSS
 		wp_enqueue_style ( $this->plugin_name . "-googleauto", plugin_dir_url ( __FILE__ ) . 'js/leaflet-google-autocomplete/css/leaflet-google-autocomplete.css', array (), $this->version, 'all' );
 		// Ionicons
@@ -134,6 +141,14 @@ class Locate_And_Filter_Public {
 		wp_enqueue_script ( $this->plugin_name . "-tokenize", plugin_dir_url ( __FILE__ ) . 'js/Tokenize-2.2.1/jquery.tokenize.js', array (
 				'jquery' 
 		), $this->version, false );
+		
+		// Chosen JS
+		$load_chosen = unserialize (get_option ( 'locate-anything-option-load-chosen' ));
+		if($load_chosen) {
+			wp_enqueue_script ( $this->plugin_name . "-chosen", plugin_dir_url ( __FILE__ ) . 'js/chosen_v1.8.7/chosen.jquery.min.js', array (
+					'jquery' 
+			), $this->version, false );
+		}
 		// jQuery Array JS
 		wp_enqueue_script ( $this->plugin_name . "-arrayUtilities", plugin_dir_url ( __FILE__ ) . 'js/jquery.arrayUtilities.min.js', array (
 				'jquery' 
@@ -522,7 +537,13 @@ class Locate_And_Filter_Public {
 						
 					} 
 					<?php if($settings['locate-anything-show-attribution-label']==0)  echo "/* Hide attribution */
-					jQuery('.leaflet-control-attribution').hide();"; ?>					
+					jQuery('.leaflet-control-attribution').hide();"; ?>	
+					<?php $load_chosen = unserialize (get_option ( 'locate-anything-option-load-chosen' ));
+					if($load_chosen) {
+						echo "/* Hide attribution */
+						jQuery('.filter-select select').chosen({width:'250px',allow_single_deselect:'true'});
+						";	
+					}?>				
 			});
 			</script>
 <?php
@@ -564,7 +585,8 @@ class Locate_And_Filter_Public {
   					<div class="rangeslider" min="'.get_post_meta ( $map_id, "locate-anything-min-range-$filter", true ).'" max="'.get_post_meta ( $map_id, "locate-anything-max-range-$filter", true ).'" name="'.$filter.'-'.$map_id.'"  id="'.$filter.'-'.$map_id.'"></div></li>';
 				
 				} else {
-					$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon) . '</li>';
+					$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );
+					$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty ) . '</li>';
 				}
 			}
 		$r=apply_filters("locate_anything_add_custom_filters",$r,$map_id,$filters);

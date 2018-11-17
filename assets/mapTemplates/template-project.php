@@ -170,7 +170,7 @@
 
 div.Tokenize {
     width: 90%;
-    max-width:15em;
+    max-width:250px;
 }
 
 #locate-anything-template-wrapper {
@@ -206,6 +206,25 @@ div.Tokenize {
 }
 .leaflet-container .nice-tooltips a.tooltip-link {
    margin: 10px;
+}
+
+/*rangeslider*/
+.rangeslider {
+    max-width: 212px;
+    margin-left: 10px;
+}
+
+/*pretty checkbox*/
+.LA_filters_checkbox.pretty {
+    display: flex;
+    line-height: 1.3;
+}
+.LA_filters_checkbox.pretty .state label:after,
+.LA_filters_checkbox.pretty .state label:before {
+    top: calc((41% - (100% - 1em)) - 8%);
+}
+.filter-select select {
+    max-width: 250px;
 }
 
 </style>
