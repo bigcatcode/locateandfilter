@@ -1,6 +1,7 @@
 <!-- HTML template layout for projects -->
 <div id="locate-anything-template-wrapper">
 <div id="bloc1">
+<h3 class="search_filter_title">Project zoeken:</h3>
 [filters]
 </div>
 <div id="bloc2">
@@ -225,6 +226,13 @@ div.Tokenize {
 }
 .filter-select select {
     max-width: 250px;
+}
+
+
+h3.search_filter_title {
+    font-size: 21px;
+    display: flex;
+    align-items: center;
 }
 
 </style>

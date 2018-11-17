@@ -44,7 +44,7 @@ else  $post_params=Locate_And_Filter_Admin::getPostMetas($object->ID);
 				<input class="button-admin" type="button" onclick="GetLocation()" value="Geolocate this address" />
 				<br><br><?php _e("Latitude","locate-and-filter")?> <input type="text" name="locate-anything-lat" value="<?php echo   $post_params['locate-anything-lat'];?>">
 				<?php _e("Longitude","locate-and-filter")?> <input type="text" name="locate-anything-lon" value="<?php echo    $post_params['locate-anything-lon'];?>">
-				
+				<input class="append-markers button-admin" type="button" value="View Latitude,Longitude on map">
 				<!-- add a marker using the map -->
 					<div id="map-marker" data-mode="" style="height:300px;margin: 15px 0;">
 					    <input type="hidden" data-map-markers="" value="" name="map-geojson-data" />
@@ -197,8 +197,9 @@ function locate_anything_select_preset(e){
 
 
 	  // initialize the map on the "map" div with a given center and zoom
-	  var map = L.map('map-marker').setView([49.68185, 30.57495], 5).addLayer(osm);
-
+	  var map = L.map('map-marker').setView([44.510275, 10.767032], 1).addLayer(osm);
+	  var markersLayer = new L.LayerGroup(); // NOTE: Layer is created here!
+	  markersLayer.addTo(map);
 	  
 	  //console.log($("input[name='locate-anything-lat']").val() );
 	  //console.log($("input[name='locate-anything-lon']").val());
@@ -207,6 +208,14 @@ function locate_anything_select_preset(e){
 	  if( $("input[name='locate-anything-lat']").val() || $("input[name='locate-anything-lon']").val() ) {
 	  	initMarker();
 	  }
+
+	  $('.append-markers').click(function(event) {
+	  		//if( $('#acf-field_5b854a3d60cd8').val() || $('#acf-field_5b854a8760cd9').val() ) {
+	  		if( $("input[name='locate-anything-lat']").val() || $("input[name='locate-anything-lon']").val() ) {
+	  			markersLayer.clearLayers();
+	  			initMarker();
+	  		}
+	  });
 
 	  // attaching function on map click
 	  map.on('click', onMapClick);
@@ -241,6 +250,7 @@ function locate_anything_select_preset(e){
 			              }).bindPopup("<input type='button' value='Delete this marker' class='marker-delete-button'/>");
 
 			              marker.on("popupopen", onPopupOpen);
+			              markersLayer.addLayer(marker);
 			         
 			              return marker;
 			          }

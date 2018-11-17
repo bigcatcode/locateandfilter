@@ -79,7 +79,7 @@ public static function getSelectForType($type,$name,$tokenize=true,$maxElement=9
 }
 public static function getCheckboxesForTaxonomy($taxonomy,$name,$allowed,$icon,$pretty) {	
 	$terms=get_terms($taxonomy , array(
- 	'orderby'    => 'count',
+ 	'orderby'    => 'name',
  	'order'      => 'DESC',
  	'hide_empty' => 0, 	
  	'include'=>$allowed
@@ -115,7 +115,7 @@ public static function getSelectForTaxonomy($taxonomy,$name,$tokenize=true,$maxE
 	if($tokenize) if($maxElement>1)	$class="tokenize"; else $class="tokenize-1";else $class="";
 
 	$terms=get_terms($taxonomy , array(
- 	'orderby'    => 'slug',
+ 	'orderby'    => 'name',
  	'hide_empty' => 0,
  	'include'=>$allowed) );		
 	

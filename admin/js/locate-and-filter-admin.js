@@ -113,6 +113,7 @@ function LA_removeRow(field_id){
                     var longitude = results[0].geometry.location.lng();
                     jQuery("input[name='locate-anything-lat']").val(latitude);
                     jQuery("input[name='locate-anything-lon']").val(longitude);
+                    $('.append-markers').trigger('click');
                 } else {
                     alert("Request failed. Please check the address.");
                 }
