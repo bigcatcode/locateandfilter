@@ -123,7 +123,7 @@
 <h2><?php _e("Global map settings","locate-anything")?></h2>
 <ul>
 <li><?php _e("Max Cluster Radius","locate-anything")?> <input type="text" name="locate-anything-option-maxclusterradius" value="<?php echo unserialize(get_option("locate-anything-option-maxclusterradius"));?>">
-<label><?php _e("A cluster will cover at most this many pixels from its center, default 80","locate-anything")?></label>
+<label><?php _e("A cluster will cover at most this many pixels from its center, default 1. Set -1 for disable","locate-anything")?></label>
 </li>
 </ul>
 </div>
