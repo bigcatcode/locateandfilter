@@ -247,7 +247,7 @@ class Locate_And_Filter_Addon_Helper
         $selected = get_post_meta($map_id, "locate-anything-display-filter-$filter_field", true);
         
         $f.= Locate_And_Filter_Tools::Array2Select(array(            
-            "radio"=> "Radio buttons",
+            //"radio"=> "Radio buttons",
             "checkbox" => "Checkboxes",
             "select" => "Dropdown",
             "selectmultiple" => "Select Multiple",

@@ -18,7 +18,6 @@
     font-family: Verdana;
     font-style: 16px;
     padding:0;
-    border:1px solid #eaeaea;
     height: inherit;
 }
 
@@ -38,29 +37,30 @@
 /** FILTERS */
 
 /* checkboxes */
-.LA_filters_checkbox {
-    font-size: 14px;
-    float: left;
-    margin-right:5px;
+.LA_filters {
+   
 }
 
+#bloc1  {
+    height: calc(100% - 53px); 
+}
+
+.LA_filters_checkbox {
+
+}
+.filter_term_name {
+    padding-left: 5px;
+}
 /* Main filter wrapper*/
 .category-filters-container {
-    margin: 0;
-    padding: 15px;
-    float: left;
-    width: 100%;
-    color: #eee;
+
 }
 
 /* filter container */
 .category-filters-container li {
     padding-bottom: 1em;
-    float: left;
-    width: 38%;
-    padding: 10px;
+    width: 50%;
     min-width: 150px;
-    margin: 0 1em;
 }
 
 /* filter title*/
