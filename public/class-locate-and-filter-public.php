@@ -394,18 +394,18 @@ class Locate_And_Filter_Public {
 			$params ["max_nav_item_per_page"] = 10;
 		$params ["style-hue"] = $settings['locate-anything-googlemaps-hue'];
 		?>
-		<style>
+<!-- 		<style>
 			#locate-anything-template-wrapper {
 				height: <?php echo $settings['locate-anything-map-height']; ?>;
 			}
-		</style>
+		</style> -->
 		<script type="text/javascript">
 		var current_map;
 					jQuery(window).load(function(){ 
 						var map_id='<?php echo $map_id?>';
 						<?php
 							if (Locate_And_Filter_Public::check_license_key('label')===false) {?>
-								<!-- jQuery("#<?php echo $map_container?>").append("<div style='background:grey;opacity:0.6;width:100%;height:1.5em;z-index:1500;position:absolute;bottom:0;text-align:left;padding-left:10px'><a style='cursor:pointer;text-decoration:none;color:#fff;' href='http://www.locate-anything.com' target='_blank'>Powered by LocateAnything</div>"); -->
+								<!-- jQuery("#<?php echo $map_container?>").append("<div style='background:grey;opacity:0.6;width:100%;height:1.5em;z-index:1500;position:absolute;bottom:0;text-align:left;padding-left:10px'><a style='cursor:pointer;text-decoration:none;color:#fff;' href='#' target='_blank'>Powered by LocateAndFilter</div>"); -->
 						<?php	} ?>
 
 							
