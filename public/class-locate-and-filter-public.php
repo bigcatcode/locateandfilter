@@ -260,7 +260,7 @@ class Locate_And_Filter_Public {
 	public static function outputNavlistMarkup($atts, $content) {
 		return $content .= '<!-- Map Nav -->
 				<div class="map-nav-wrapper" id="map-nav-wrapper-'.$atts["map_id"].'">
-				<div id="map-nav-'.$atts["map_id"].'"></div>				
+				<div id="map-nav-'.$atts["map_id"].'" class="map-nav-lists"></div>				
 				</div>
 				<div class="map-nav-pagination" id="map-nav-pagination-'.$atts["map_id"].'"></div>';
 	}
@@ -1102,7 +1102,7 @@ public static function defineDefaultMarker($params){
 						foreach ( $terms as $term ) {
 							if(!$allowed || (is_array($allowed) && array_search($term->term_id,$allowed)!==false)){
 							$arr_terms [] = $term->term_id;
-							$in [$taxonomy] [$term->term_id] = $term->name;
+							$in [$taxonomy] [$term->term_id] = '<span>'.$term->name.'</span>';
 						}
 						}
 						$add [$taxonomy] = implode ( ",", $arr_terms );

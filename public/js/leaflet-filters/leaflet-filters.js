@@ -542,7 +542,8 @@ var leaflet_filters_class= function (params){
 				var term=term_id[i];
 				if(this.indexTaxonomyTerms[taxonomy][term]) t.push(this.indexTaxonomyTerms[taxonomy][term]);
 			}		
-			return t.join(", ");
+			//return t.join(", ");
+			return t.join("");
 		} else {		 
 			try {			
 				 return this.indexTaxonomyTerms[taxonomy][term_id[0]];			

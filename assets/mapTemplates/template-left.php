@@ -59,7 +59,7 @@
 /* filter container */
 .category-filters-container li {
     padding-bottom: 1em;
-    width: 50%;
+    /*width: 50%;*/
     min-width: 150px;
 }
 
