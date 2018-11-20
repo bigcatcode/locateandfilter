@@ -280,11 +280,13 @@ var leaflet_filters_class= function (params){
 			}
 
 			if ( this.params["load-bing"] && this.params["load-yandex"] ){
-	        	this.map.addControl(new L.Control.Layers({'OSM - main map':TileProvider, "Bing - satellite":bing, "Yandex - satellite(without markers)":yndx, "Traffic":ytraffic }, {}));
+	        	//this.map.addControl(new L.Control.Layers({'OSM - main map':TileProvider, "Bing - satellite":bing, "Yandex - satellite(without markers)":yndx, "Traffic":ytraffic }, {}));
+	        	this.map.addControl(new L.Control.Layers({'OSM - main map':TileProvider, "Bing - satellite":bing, "Yandex - satellite(without markers)":yndx }, {}));
         	} else if ( this.params["load-bing"] && !this.params["load-yandex"] ){
         		this.map.addControl(new L.Control.Layers({'OSM - main map':TileProvider, "Bing - satellite":bing }, {}));
         	} else if ( !this.params["load-bing"] && this.params["load-yandex"] ){
-        		this.map.addControl(new L.Control.Layers({'OSM - main map':TileProvider, "Yandex - satellite(without markers)":yndx, "Traffic":ytraffic }, {}));
+        		//this.map.addControl(new L.Control.Layers({'OSM - main map':TileProvider, "Yandex - satellite(without markers)":yndx, "Traffic":ytraffic }, {}));
+        		this.map.addControl(new L.Control.Layers({'OSM - main map':TileProvider, "Yandex - satellite(without markers)":yndx}, {}));
         	} 
 
         //end control layers
