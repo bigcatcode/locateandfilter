@@ -259,3 +259,12 @@ fix editArea
 = 1.3.19 =
 
 update readme
+
+= 1.3.5 =
+
+fix js error in admin
+update templates nav-list
+added nice-tooltip style
+added pretty js and choosen css for filter
+added neww button on admin map - view from latlng
+added new map template - project

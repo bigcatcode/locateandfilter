@@ -5,7 +5,7 @@ Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory pl
 
 Requires at least: 4.0.0
 Tested up to: 5.1
-Stable tag: 1.3.19
+Stable tag: 1.3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,11 +46,11 @@ And many other features :
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/locateandfilter` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/LocateAndFilter` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 1. Use the Settings in LocateAndFilter > Options to configure the plugin
 
-See our website for more informations on how to configure the plugin : http://locateandfilter.monothemes.com/documentation
+See our website for more informations on how to configure the plugin : http://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/
 
 
 == Screenshots ==
@@ -130,3 +130,10 @@ See our website for more informations on how to configure the plugin : http://lo
 * fix editArea
 = 1.3.19 =
 * update readme
+= 1.3.5 =
+* fix js error in admin
+* update templates nav-list
+* added nice-tooltip style
+* added pretty js and choosen css for filter
+* added neww button on admin map - view from latlng
+* added new map template - project
