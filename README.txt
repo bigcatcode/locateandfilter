@@ -1,11 +1,11 @@
 === LocateAndFilter ===
-Contributors: LocateAndFilter
+Contributors: dgamoni
 Donate link: http://locateandfilter.monothemes.com/
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory plugin, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
-
 Requires at least: 4.0.0
 Tested up to: 5.1
-Stable tag: 1.3.5
+Stable tag: 1.3.51
+Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,12 +52,20 @@ And many other features :
 
 See our website for more informations on how to configure the plugin : http://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/
 
+== Upgrade Notice ==
 
 == Screenshots ==
 
-1. -
-2. -
-3. -
+1. screen_1_front.png
+2. screen_2_admin_global_settings.png
+3. screen_3_map_settings.png
+4. screen_4_filter_settings.png
+5. screen_5_markers_settings.png
+6. screen_6_tooltip_settings.png
+7. screen_7_layaut_settings.png
+8. screen_8_shortcodes-settings.png
+9. screen_9_marker_page.png
+
 
 == Changelog ==
 
@@ -137,3 +145,11 @@ See our website for more informations on how to configure the plugin : http://lo
 * added pretty js and choosen css for filter
 * added neww button on admin map - view from latlng
 * added new map template - project
+= 1.3.51 =
+* update readme
+
+== Frequently Asked Questions ==
+
+If you have any question and need help, please ask me monothemes@gmail.com
+
+== Donations ==
