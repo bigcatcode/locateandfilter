@@ -727,7 +727,7 @@ class Locate_And_Filter_Public {
 		if (! isset ( $_REQUEST ["map_id"] ))
 			return;
 		else
-			$map_id = $_REQUEST ["map_id"];
+			$map_id = sanitize_text_field($_REQUEST ["map_id"]);
 		
 		/* When in preview mode always disable cache */
 		$isCacheEnabled = unserialize(get_option ( "locate-anything-option-enable-cache"));
@@ -860,8 +860,8 @@ public static function defineDefaultMarker($params){
  */
 
 	public function refresh_cache($map_id, $output = false) {
-			if (! $map_id)	$map_id = $_POST ["map_id"];		
-			Locate_And_Filter_Public::generateJSON(Locate_And_Filter_Public::getMapParameters($map_id),$output);
+			if (! $map_id)	$map_id = sanitize_text_field( $_POST["map_id"] );
+			Locate_And_Filter_Public::generateJSON(Locate_And_Filter_Public::getMapParameters( intval($map_id) ), $output);
 	}
 
 	/**

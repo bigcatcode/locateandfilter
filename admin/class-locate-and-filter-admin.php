@@ -765,7 +765,7 @@ class Locate_And_Filter_Admin
 	 */
 	/* get Taxonomy terms associated with type passed in request */
 	public function LA_getTaxonomyTerms() {
-		$selected = get_post_meta($_REQUEST['map_id'], "locate-anything-allowed-filters-value-" . $_REQUEST['type'], true);
+		$selected = get_post_meta( sanitize_text_field($_REQUEST['map_id']), "locate-anything-allowed-filters-value-" . sanitize_text_field($_REQUEST['type']), true);
 		$terms = get_terms(sanitize_text_field($_REQUEST['type']));
 		if ($terms) foreach ($terms as $in => $term) {
 			if (is_array($selected) && array_search($term->term_id, $selected) !== false) $terms[$in]->selected = 1;
@@ -779,8 +779,8 @@ class Locate_And_Filter_Admin
 	 * AJAX function : returns JSON encoded html code for layout
 	 */
 	public function getLayoutCode() {
-		$record = get_post_meta($_POST["map_id"], "locate-anything-map-template-html-" . $_POST["layout_id"], true);
-		if ($record == false) echo json_encode(file_get_contents(Locate_And_Filter_Assets::getMapTemplates($_POST["layout_id"])->url));
+		$record = get_post_meta( sanitize_text_field($_POST["map_id"]), "locate-anything-map-template-html-" . sanitize_text_field($_POST["layout_id"]), true);
+		if ($record == false) echo json_encode(file_get_contents(Locate_And_Filter_Assets::getMapTemplates( sanitize_text_field($_POST["layout_id"]) )->url));
 		else echo json_encode($record);
 		die();
 	}
@@ -788,7 +788,7 @@ class Locate_And_Filter_Admin
 	 * AJAX function : returns HTML of current filters
 	 */
 	public function getFilters() {
-		echo apply_filters("locate_anything_add_filter_choice", '', $_POST["map_id"], $_POST["type"]);
+		echo apply_filters("locate_anything_add_filter_choice", '', sanitize_text_field($_POST["map_id"]), sanitize_text_field($_POST["type"]) );
 		die();
 	}
 	/**
