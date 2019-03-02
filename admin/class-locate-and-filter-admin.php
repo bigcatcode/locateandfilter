@@ -405,6 +405,7 @@ class Locate_And_Filter_Admin
 	public static function save_options() {
 		foreach ($_POST as $k => $v) {
 			if (strpos($k, "locate-anything-option-") !== false) {
+				$v = self::locate_anything_sanitaze_option($k,$v);
 				update_option($k, serialize($v) , '', 'yes');
 			}
 		}
@@ -789,6 +790,17 @@ class Locate_And_Filter_Admin
 	public function getFilters() {
 		echo apply_filters("locate_anything_add_filter_choice", '', $_POST["map_id"], $_POST["type"]);
 		die();
+	}
+	/**
+	 *  function : sanitaze options value
+	 */
+	private function locate_anything_sanitaze_option($key, $var){
+		if ( is_array( $var ) ) {
+			return array_map( 'esc_attr', $var );
+		} else {
+			return sanitize_text_field( $var );
+		}
+
 	}
 
 }
