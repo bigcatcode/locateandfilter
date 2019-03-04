@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+
 <div class='navlist-project-wrap'>
      <article class='navlist-wrap'>
           <a class='navlist-link' href='|post_link|'>

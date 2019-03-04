@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 <?php wp_nonce_field ('I961JpJQTj0crLKH0mGB', 'locate_anything_class_nonce' ); ?>
 
 <h2 class="nav-tab-wrapper">

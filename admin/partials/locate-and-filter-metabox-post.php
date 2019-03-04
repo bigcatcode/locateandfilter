@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 <?php wp_nonce_field ('I961JpJQTj0crLKH0mGB', 'locate_anything_class_nonce' );
 if($post_type=="user") $post_params=Locate_And_Filter_Admin::getUserMetas($object->ID);
 else  $post_params=Locate_And_Filter_Admin::getPostMetas($object->ID);

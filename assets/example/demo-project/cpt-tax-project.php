@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 function cptui_register_my_cpts() {
 
 	/**
@@ -179,7 +181,7 @@ function cptui_register_my_taxes() {
 		"label" => __( "Project date finish", "wp-bootstrap-starter" ),
 		"labels" => $labels,
 		"public" => true,
-		"publicly_queryable => true,
+		"publicly_queryable" => true,
 		"hierarchical" => true,
 		"show_ui" => true,
 		"show_in_menu" => true,

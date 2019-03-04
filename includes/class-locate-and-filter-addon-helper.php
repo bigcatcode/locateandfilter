@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /**
  * @package Locate_And_Filter
  * @subpackage Locate_And_Filter/admin

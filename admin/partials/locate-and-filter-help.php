@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 jQuery(".locate-anything-help").click(function(e){
 
 var annotations=

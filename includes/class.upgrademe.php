@@ -1,4 +1,5 @@
-<?php 
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 /*
 Plugin Name: upgrademe
 Description: Allows auto-upgrade for plugins outside of official WordPress repository
