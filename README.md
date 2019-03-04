@@ -268,3 +268,20 @@ added nice-tooltip style
 added pretty js and choosen css for filter
 added neww button on admin map - view from latlng
 added new map template - project
+
+= 1.3.51 =
+
+update readme
+
+= 1.3.52 =
+
+update readme
+
+= 1.3.53 =
+
+sanitaze options value
+sanitaze post and request map_id
+update getLayoutCode
+security fix
+delete Including a zip file
+remove jquery ui
