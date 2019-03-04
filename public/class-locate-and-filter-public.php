@@ -83,7 +83,7 @@ class Locate_And_Filter_Public {
 	 */
 	public function enqueue_scripts() {
 		wp_enqueue_script('jquery');
-		wp_enqueue_script('jquery-ui-core');
+		//wp_enqueue_script('jquery-ui-core');
 		wp_enqueue_script('jquery-ui-slider');
 		wp_enqueue_script ( $this->plugin_name . "-all", plugin_dir_url ( __FILE__ ) . 'js/locate-and-filter-public.js', array (
 				'jquery' 
