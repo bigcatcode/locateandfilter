@@ -1138,10 +1138,24 @@ public static function defineDefaultMarker($params){
 		fwrite ( $cf, '}' );
 		fclose ( $cf );
 		if ($output) {
-			echo file_get_contents ( $cache_file );
+			//echo file_get_contents ( $cache_file );
+			echo self::get_local_file_contents( $cache_file );
 			die ();
 		}
 		
+	}
+
+	/**
+	 * alternative file_get_contents() for wp
+	 * @param  $file_path
+	 * @return file contents
+	 */
+	public function get_local_file_contents( $file_path ) {
+	    ob_start();
+	    include $file_path;
+	    $contents = ob_get_clean();
+
+	    return $contents;
 	}
 
 	/**
