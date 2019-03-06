@@ -1034,7 +1034,7 @@ public static function defineDefaultMarker($params){
 				/* Type related marker infos */
 				if($post_type!=="user") {
 						$add["post_link"]=$post_params["post_link"];
-						$add["author_name"]= get_author_name($post->post_author);
+						$add["author_name"]= get_the_author_meta( 'display_name', $post->post_author );
 						$add["author_avatar"]= get_avatar($post->post_author);	
 						$add["content"] =$marker_content;
 						$add["content_stripped"]=  $stripped_content;
