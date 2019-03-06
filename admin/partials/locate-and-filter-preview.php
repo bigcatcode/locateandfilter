@@ -1,6 +1,4 @@
 <?php
-//wp_head();
-//include "../../wp-load.php";
 
 
 $path = file_get_contents(__DIR__ ."/../../cache/path2root");

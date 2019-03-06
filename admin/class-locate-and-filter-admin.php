@@ -799,7 +799,7 @@ class Locate_And_Filter_Admin
 	 */
 	private function locate_anything_sanitaze_option($key, $var){
 		if ( is_array( $var ) ) {
-			return array_map( 'esc_attr', $var );
+			return array_map( 'sanitize_text_field', $var );
 		} else {
 			return sanitize_text_field( $var );
 		}
