@@ -141,7 +141,7 @@ class Locate_And_Filter_Admin
 		wp_enqueue_media();
 		wp_enqueue_script($this->plugin_name . "-adminjs", plugin_dir_url(__FILE__) . 'js/locate-and-filter-admin.js');
 		// leaflet JS
-		wp_enqueue_script($this->plugin_name . "-leaflet", 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js', array(
+		wp_enqueue_script($this->plugin_name . "-leaflet", plugin_dir_url(__FILE__) . '../public/js/leaflet-0.7.3/leaflet.js', array (
 			'jquery'
 		) , $this->version, false);
 		// leaflet-filters JS
@@ -151,7 +151,7 @@ class Locate_And_Filter_Admin
 		wp_enqueue_script($this->plugin_name . "-googleAPI", "https://maps.googleapis.com/maps/api/js?key=".$this->getGmapsAPIKey()."&v=3.exp&libraries=places&language=en" . unserialize(get_option("locate-anything-option-map-language")) , array(
 			$this->plugin_name . "-leaflet-filters"
 		) , $this->version, false);
-		wp_enqueue_script($this->plugin_name . "-select2", '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js');
+		wp_enqueue_script($this->plugin_name . "-select2", plugin_dir_url(__FILE__) . 'js/select2_4.0.6-rc.1/js/select2.min.js');
 		// Awesome markers
 		wp_enqueue_script($this->plugin_name . "-awesomemarkers", plugin_dir_url(__FILE__) . '../public/js/leaflet.awesome-markers-2.0/leaflet.awesome-markers.js', array(
 			$this->plugin_name . "-leaflet"
@@ -197,7 +197,7 @@ class Locate_And_Filter_Admin
 		wp_enqueue_style($this->plugin_name . "-admincss", plugin_dir_url(__FILE__) . 'css/locate-and-filter-admin.css', array() , $this->version, 'all');
 		wp_enqueue_style($this->plugin_name . "-annocss", plugin_dir_url(__FILE__) . 'js/anno/anno.css', array() , $this->version, 'all');
 		
-		wp_enqueue_style($this->plugin_name . "-select2css", "//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css", array() , $this->version, 'all');
+		wp_enqueue_style($this->plugin_name . "-select2css", plugin_dir_url(__FILE__) . "js/select2_4.0.6-rc.1/css/select2.min.css", array() , $this->version, 'all');
 		// Ionicons
 		wp_enqueue_style($this->plugin_name . "-ioniconscss", 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css', array() , $this->version, 'all');
 		// Awesome markers

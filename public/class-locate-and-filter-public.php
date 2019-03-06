@@ -126,7 +126,7 @@ class Locate_And_Filter_Public {
 		endif;
 
 		// leaflet JS
-		wp_enqueue_script ( $this->plugin_name . "-leaflet", 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js', array (
+		wp_enqueue_script ( $this->plugin_name . "-leaflet", plugin_dir_url ( __FILE__ ) . 'js/leaflet-0.7.3/leaflet.js', array (
 				'jquery' 
 		), $this->version, false );
 		// leaflet-filters JS
