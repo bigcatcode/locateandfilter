@@ -785,7 +785,7 @@ class Locate_And_Filter_Admin
 		$record = get_post_meta( intval($map_id) , "locate-anything-map-template-html-" . $layout_id, true);
 			if ($record == false) {
 				//echo json_encode(file_get_contents(Locate_And_Filter_Assets::getMapTemplates( $layout_id )->url));
-				echo json_encode(Locate_And_Filter_Public::get_local_file_contents(Locate_And_Filter_Assets::getMapTemplates( $layout_id )->url));
+				echo json_encode(Locate_And_Filter_Tools::get_local_file_contents(Locate_And_Filter_Assets::getMapTemplates( $layout_id )->url));
 			} else {
 				echo json_encode($record);
 			}

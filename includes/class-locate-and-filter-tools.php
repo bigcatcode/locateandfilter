@@ -28,7 +28,20 @@ class Locate_And_Filter_Tools {
 		  curl_close( $ch );
 		  return $data;
 		}
-		
+
+		/**
+		 * Helper function : get local file content , alternative file_get_contents()
+		 * @param  [string] $file_path
+		 * @return [mixed]  file data
+		 */
+		public function get_local_file_contents( $file_path ) {
+		    ob_start();
+		    include $file_path;
+		    $contents = ob_get_clean();
+
+		    return $contents;
+		}
+
 public static function getPostType($post_type_name){
 $post_types = get_post_types( '', 'names' ); 
 if(array_search($post_type_name,$post_types)===false) return false; else return true;

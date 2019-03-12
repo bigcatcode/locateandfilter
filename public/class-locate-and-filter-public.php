@@ -302,7 +302,7 @@ class Locate_And_Filter_Public {
 	
 		if($template==false){	
 					//$template=file_get_contents(Locate_And_Filter_Assets::getMapTemplates($layout_id)->url);
-					$template = self::get_local_file_contents(Locate_And_Filter_Assets::getMapTemplates($layout_id)->url);
+					$template = Locate_And_Filter_Tools::get_local_file_contents(Locate_And_Filter_Assets::getMapTemplates($layout_id)->url);
 			} 
 
 		ob_start ();
@@ -745,8 +745,7 @@ class Locate_And_Filter_Public {
 			if ($map_id!=="preview" && (! $filemtime || (time () - $filemtime >= $cache_life))) {
 				Locate_And_Filter_Public::refresh_cache ($map_id, true );
 			} else {
-				//echo file_get_contents ( $cache_file );
-				echo self::get_local_file_contents( $cache_file );
+				echo Locate_And_Filter_Tools::get_local_file_contents( $cache_file );
 			}
 		}
 		//ob_end_flush( 'ob_gzhandler');
@@ -1141,24 +1140,10 @@ public static function defineDefaultMarker($params){
 		fwrite ( $cf, '}' );
 		fclose ( $cf );
 		if ($output) {
-			//echo file_get_contents ( $cache_file );
-			echo self::get_local_file_contents( $cache_file );
+			echo Locate_And_Filter_Tools::get_local_file_contents( $cache_file );
 			die ();
 		}
 		
-	}
-
-	/**
-	 * alternative file_get_contents() for wp
-	 * @param  $file_path
-	 * @return file contents
-	 */
-	public function get_local_file_contents( $file_path ) {
-	    ob_start();
-	    include $file_path;
-	    $contents = ob_get_clean();
-
-	    return $contents;
 	}
 
 	/**
