@@ -285,3 +285,10 @@ update getLayoutCode
 security fix
 delete Including a zip file
 remove jquery ui
+
+= 1.3.54 =
+
+security fix
+remove deprecated functions
+remove cdn script
+add alternative funct file_get_contents

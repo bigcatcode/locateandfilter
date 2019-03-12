@@ -16,8 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Plugin Name:       LocateAndFilter
  * Plugin URI:        http://locateandfilter.monothemes.com
  * Description:       LocateAndFilter is a versatile and highly customizable WordPress plugin aimed at creating nice looking searchable/filterable maps.
- * Version:           1.3.5
- * Last Modified : 	  2018-11-20
+ * Version:           1.3.54
+ * Last Modified : 	  2019-03-12
  * Author:            Andrii Monin
  * Author URI:        http://www.bigcatcode.com
  * License:           GPL-2.0+
