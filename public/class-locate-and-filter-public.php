@@ -744,8 +744,10 @@ class Locate_And_Filter_Public {
 			$filemtime = @filemtime ( $cache_file ); // returns FALSE if file does not exist
 			if ($map_id!=="preview" && (! $filemtime || (time () - $filemtime >= $cache_life))) {
 				Locate_And_Filter_Public::refresh_cache ($map_id, true );
-			} else
-				echo file_get_contents ( $cache_file );
+			} else {
+				//echo file_get_contents ( $cache_file );
+				echo self::get_local_file_contents( $cache_file );
+			}
 		}
 		//ob_end_flush( 'ob_gzhandler');
 		die ();
