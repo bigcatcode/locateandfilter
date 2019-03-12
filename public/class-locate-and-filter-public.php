@@ -301,7 +301,8 @@ class Locate_And_Filter_Public {
 		$template=get_post_meta($map_id,"locate-anything-map-template-html-".$layout_id,true);
 	
 		if($template==false){	
-					$template=file_get_contents(Locate_And_Filter_Assets::getMapTemplates($layout_id)->url);
+					//$template=file_get_contents(Locate_And_Filter_Assets::getMapTemplates($layout_id)->url);
+					$template = self::get_local_file_contents(Locate_And_Filter_Assets::getMapTemplates($layout_id)->url);
 			} 
 
 		ob_start ();
