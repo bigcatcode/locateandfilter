@@ -59,15 +59,15 @@ See our website for more informations on how to configure the plugin : http://lo
 
 == Screenshots ==
 
-1. screen_1_front.png
-2. screen_2_admin_global_settings.png
-3. screen_3_map_settings.png
-4. screen_4_filter_settings.png
-5. screen_5_markers_settings.png
-6. screen_6_tooltip_settings.png
-7. screen_7_layaut_settings.png
-8. screen_8_shortcodes-settings.png
-9. screen_9_marker_page.png
+1. front view
+2. admin global settings
+3. map settings
+4. filter settings
+5. markers settings
+6. tooltip settings
+7. layaut settings
+8. shortcodes settings
+9. marker page
 
 
 == Changelog ==
