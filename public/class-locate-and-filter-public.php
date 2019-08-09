@@ -175,7 +175,7 @@ class Locate_And_Filter_Public {
 	/**
 	 * Checks the license key
 	 */
-	public function check_license_key($type_license) {
+	public static function check_license_key($type_license) {
 		// disable check  if localhost
 		if(strpos(site_url(), 'localhost')!==false) return true;
 
@@ -193,7 +193,7 @@ class Locate_And_Filter_Public {
 	/**
 	 * Sets up the shortcodes
 	 */
-	public function setup_shortcodes() {
+	public static function setup_shortcodes() {
 		add_shortcode ( "LocateAndFilter", "Locate_And_Filter_Public::createMap" );
 		add_shortcode ( "LocateAndFilter_map", "Locate_And_Filter_Public::outputMapMarkup" );
 		add_shortcode ( "LocateAndFilter_navlist", "Locate_And_Filter_Public::outputNavlistMarkup" );
@@ -203,7 +203,7 @@ class Locate_And_Filter_Public {
 	/**
 	 * Removes the shortcodes
 	 */
-	public function remove_shortcodes(){
+	public static function remove_shortcodes(){
 		remove_shortcode ( "LocateAndFilter" );
 		remove_shortcode ( "LocateAndFilter_map");
 		remove_shortcode ( "LocateAndFilter_navlist");
@@ -946,6 +946,7 @@ public static function defineDefaultMarker($params){
 					$post_params=Locate_And_Filter_Admin::getPostMetas($post->ID);					
 					$post_params["excerpt"]= $post->post_excerpt;
 					$post_params["post_link"]=get_permalink ($post->ID);
+					$post_params["post_excerpt"] = $post_params["post_excerpt"] ?? '';
 				}
 				$post_params["post_type"]=$post_type;
 				$post_params = apply_filters("locate_anything_marker_params",$post_params,$post->ID,$map_id);
@@ -1094,7 +1095,7 @@ public static function defineDefaultMarker($params){
 				}
 				if (is_array ( $filter_taxonomies )) {
 					foreach ( $filter_taxonomies as $taxonomy ) {
-						if(empty($taxonomy) || !is_taxonomy($taxonomy)) continue;
+						if(empty($taxonomy) || !taxonomy_exists($taxonomy)) continue;
 						$arr_terms = array ();
 						if($taxonomies===false || array_search($taxonomy,$taxonomies)===false) $allowed=false; else $allowed=$params['locate-anything-allowed-filters-value-'.$taxonomy];
 											
@@ -1153,7 +1154,7 @@ public static function defineDefaultMarker($params){
 	 * @param  $latitude, $longitude
 	 * @return 50° 6.578 N 29° 29.539 E
 	 */
-	public function tag_addon_DECtoDMS($latitude, $longitude) {
+	public static function tag_addon_DECtoDMS($latitude, $longitude) {
 	    $latitudeDirection = $latitude < 0 ? 'S': 'N';
 	    $longitudeDirection = $longitude < 0 ? 'W': 'E';
 
