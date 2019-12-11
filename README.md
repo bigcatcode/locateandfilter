@@ -296,3 +296,7 @@ add alternative funct file_get_contents
 = 1.3.55 =
 
 remove deprecated functions
+
+= 1.3.56 =
+
+fix js error in admin

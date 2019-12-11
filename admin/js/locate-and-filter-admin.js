@@ -27,8 +27,11 @@ jQuery(document).ready(function(){
 
   setTimeout(function() { 
         // start editAreas
-        initialize_editArea('locate-anything-default-tooltip-template','refresh_textarea','html'); 
-        initialize_editArea('locate-anything-default-nav-template','','html'); 
+        var loadeditArea = jQuery('#locate-and-filter-class').find('#locate-anything-default-tooltip-template');
+        if (loadeditArea.length > 0) {
+          initialize_editArea('locate-anything-default-tooltip-template','refresh_textarea','html');
+          initialize_editArea('locate-anything-default-nav-template','','html');
+        }
        },2000);
 });
 

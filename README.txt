@@ -166,6 +166,8 @@ See our website for more informations on how to configure the plugin : http://lo
 * add alternative funct file_get_contents
 = 1.3.55 =
 * remove deprecated functions
+= 1.3.56 =
+* fix js error in admin
 
 == Frequently Asked Questions ==
 
