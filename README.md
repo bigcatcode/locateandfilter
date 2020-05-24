@@ -300,3 +300,7 @@ remove deprecated functions
 = 1.3.56 =
 
 fix js error in admin
+
+= 1.3.57 =
+
+fix HTTPS support

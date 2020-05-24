@@ -116,7 +116,7 @@ class Locate_And_Filter
         Locate_And_Filter_Addon_Helper::add_marker_icons("basic", $markers);
         
         /* Load default map overlays */
-        $overlays = array((object)array("name" => 'OpenStreetMap', "url" => 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', "attribution" => 'OpenStreetMap', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps TERRAIN', "url" => 'TERRAIN', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps ROADMAP', "url" => 'ROADMAP', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps SATELLITE', "url" => 'SATELLITE', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2));
+        $overlays = array((object)array("name" => 'OpenStreetMap', "url" => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', "attribution" => 'OpenStreetMap', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps TERRAIN', "url" => 'TERRAIN', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps ROADMAP', "url" => 'ROADMAP', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps SATELLITE', "url" => 'SATELLITE', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2));
         Locate_And_Filter_Addon_Helper::add_overlays("basic", $overlays);
     }
     
