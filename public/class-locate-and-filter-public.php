@@ -198,6 +198,7 @@ class Locate_And_Filter_Public {
 		add_shortcode ( "LocateAndFilter_map", "Locate_And_Filter_Public::outputMapMarkup" );
 		add_shortcode ( "LocateAndFilter_navlist", "Locate_And_Filter_Public::outputNavlistMarkup" );
 		add_shortcode ( "LocateAndFilter_filters", "Locate_And_Filter_Public::outputFilters" );
+		add_shortcode ( "LocateAndFilter_map_single", "Locate_And_Filter_Public::outputMapMarkup_single" );
 	}
 
 	/**
@@ -410,11 +411,7 @@ class Locate_And_Filter_Public {
 			$params ["max_nav_item_per_page"] = 10;
 		$params ["style-hue"] = $settings['locate-anything-googlemaps-hue'];
 		?>
-<!-- 		<style>
-			#locate-anything-template-wrapper {
-				height: <?php echo $settings['locate-anything-map-height']; ?>;
-			}
-		</style> -->
+
 		<script type="text/javascript">
 		var current_map;
 					jQuery(window).load(function(){ 
@@ -547,9 +544,9 @@ class Locate_And_Filter_Public {
 					}?>				
 			});
 			</script>
-<?php
-	
-}
+	<?php
+		
+	}
 	
 	/**
 	 * returns the filters HTML code
@@ -1183,4 +1180,280 @@ public static function defineDefaultMarker($params){
 	    );
 
 	}
+
+	/**
+	 * Outputs the map markup and JS
+	 * 
+	 * @param [array] $atts
+	 *        	shortcode arguments
+	 * @param [string] $content	post content
+	 * @return [void]
+	 */
+	public static function outputMapMarkup_single($atts, $content) {
+		if(!isset($atts["map_id"])) return;	
+		if(is_admin()) return;
+
+		$plugin_public = new Locate_And_Filter_Public(null, null);      
+    	$plugin_public->enqueue_scripts();
+        $plugin_public->enqueue_styles();
+        
+
+		$params ["map-width"]=get_post_meta ( $atts ["map_id"], 'locate-anything-map-width', true ) ;
+		$params ["map-height"]=get_post_meta ($atts ["map_id"] , 'locate-anything-map-height', true );		
+
+		$content .= "<!-- Map container -->	
+				<style>\n";
+				if(get_post_meta ( $atts ["map_id"], 'locate-anything-tooltip-style', true )=="squared") 
+				 $content .= ".leaflet-popup-content-wrapper {border-radius: 0 !important;}\n";				
+				if(get_post_meta ( $atts ["map_id"], 'locate-anything-marker-size', true )) 
+				 $content .= '#map-container-'.$atts ["map_id"]." .awesome-marker i {font-size:".get_post_meta ( $atts ["map_id"], 'locate-anything-marker-size', true )."px !important;}\n";	
+				 $content .= '#map-container-'.$atts ["map_id"].'{width:'.$params ["map-width"].';height:'.$params ["map-height"].' !important; }
+				</style>
+						<div id="map-container-'.$atts ["map_id"].'" >
+							<!-- Progress bar-->	
+						<div id="progress-wrapper">					
+						<div class="progress"  style="background-color:transparent" id="progress-'.$atts ["map_id"].'"><div class="progress-bar" id="progress-bar-'.$atts ["map_id"].'"></div></div>
+						</div></div>' . Locate_And_Filter_Public::generateMapJS_single ( $atts ["map_id"], "map-container-".$atts ["map_id"] );
+		// apply filters on outputMapMarkup
+		$content = apply_filters("locate_anything_alter_outputMapMarkup",$content);
+		return $content;
+	}
+
+	/**
+	 * Outputs the JS required to setup and display the map, used in the template called by createMap()
+	 * 
+	 * @param [int] $map_id        	
+	 * @param [string] $map_container
+	 *        	: HTML id of the map container
+	 * @return void
+	 */
+	public static function generateMapJS_single($map_id, $map_container) {
+		/* in preview mode the parameters are transmitted via $_POST directly*/
+		if($map_id=="preview"){											
+				$settings = $_POST;	
+				$filters = 	$settings["locate-anything-show-filters"];	
+							
+		} else {
+			$settings=Locate_And_Filter_Public::getMapParameters($map_id);
+			$filters = unserialize($settings["locate-anything-show-filters"]);
+		}
+		//var_dump($settings);
+		/* create parameter array */
+		$params = array ();
+
+		$params["bing-key"] = Locate_And_Filter_Admin::getBingAPIKey();
+		$loadjs = unserialize (get_option ( 'locate-anything-option-loadjs' ));
+		if(!is_array($loadjs)) $loadjs = array ();
+		//google
+		if (array_search ( 'google', $loadjs ) !== false){
+			$params["load-google"] = true;
+		} else {
+			$params["load-google"] = false;
+		}
+		//bing
+		if (array_search ( 'bing', $loadjs ) !== false){
+			$params["load-bing"] = true;
+		} else {
+			$params["load-bing"] = false;
+		}
+		//yandex
+		if (array_search ( 'yandex', $loadjs ) !== false){
+			$params["load-yandex"] = true;
+		} else {
+			$params["load-yandex"] = false;
+		}
+
+		/* width & height*/
+		$params ["map-width"]=$settings['locate-anything-map-width'] ;
+		$params ["map-height"]=$settings['locate-anything-map-height'] ;
+		/* hide splashscreen*/
+		$params["hide-splashscreen"] = $settings["locate-anything-hide-splashscreen"] ;
+		/* refresh navlist as you go*/
+		$params ["display_only_inbound"]=$settings['locate-anything-display_only_inbound'] ;
+		/* autogeocode */
+		$params ["autogeocode"] = trim($settings['locate-anything-usergeolocation-zoom']);
+		/* mousewheel*/
+		$params ["scrollWheelZoom"] = trim($settings['locate-anything-scrollWheelZoom']);
+		/* navlist_event*/
+		$params ["navlist_event"] = trim($settings['locate-anything-navlist-event']);	
+			/* Start position */
+		$params ["start_position"] = $settings['locate-anything-start-position'];
+		if (empty ( $params ["start_position"] ))
+			$params ["start_position"] = "51.505, -0.09";
+		$tmp = explode ( ",", $params ["start_position"] );
+		$params ["initial-lat"] = trim ( $tmp [0] );
+		$params ["initial-lon"] = trim ( $tmp [1] );
+		/* Overlay */
+		$params ["overlay"] = $settings['locate-anything-map-provider'];
+		
+		/* custom map provider*/		
+		if($params ["overlay"]=="custom-0"){
+			$params ["overlay"] = (object)array("id"=>1,
+					"name"=> 'Custom',
+					"url"=>$settings["locate-anything-custom-map-provider"],
+					"attribution"=> '',
+					"maxZoom"=>20,
+					"minZoom"=>1,
+					"zoom"=>10);
+		} else {
+			$overlays = Locate_And_Filter_Assets::getMapOverlays ();			
+			$params ["overlay"] = $overlays [$params ["overlay"]];			
+		}
+		$maxZoom = $settings['locate-anything-max-zoom'];
+		if (! $maxZoom)
+			$maxZoom = $params ["overlay"]->maxZoom;
+		$minZoom = $settings['locate-anything-min-zoom'];
+		if (! $minZoom)
+			$minZoom = $params ["overlay"]->minZoom;
+		$params ["overlay"] = '{url:"' . $params ["overlay"]->url . '",attribution:"' . sanitize_text_field ( $params ["overlay"]->attribution ) . '" ,maxZoom:' . $maxZoom . ' ,minZoom:' . $minZoom . '}';
+		$params ["initial-zoom"] = $settings['locate-anything-start-zoom'];
+		if (empty ( $params ["initial-zoom"] ))
+			$params ["initial-zoom"] = 1;
+		$params ["googleplaces"] = $settings["locate-anything-googleplaces"];
+		$params ["map-id"] = $map_id;
+		$params ["map-container"] = $map_container;
+		$params ["max_nav_item_per_page"] = $settings['locate-anything-nav-number'];
+		if (empty ( $params ["max_nav_item_per_page"] ))
+			$params ["max_nav_item_per_page"] = 10;
+		$params ["style-hue"] = $settings['locate-anything-googlemaps-hue'];
+		?>
+
+		<script type="text/javascript">
+		var current_map;
+					jQuery(window).load(function(){ 
+						var map_id='<?php echo $map_id?>';
+						<?php
+							if (Locate_And_Filter_Public::check_license_key('label')===false) {?>
+								<!-- jQuery("#<?php echo $map_container?>").append("<div style='background:grey;opacity:0.6;width:100%;height:1.5em;z-index:1500;position:absolute;bottom:0;text-align:left;padding-left:10px'><a style='cursor:pointer;text-decoration:none;color:#fff;' href='#' target='_blank'>Powered by LocateAndFilter</div>"); -->
+						<?php	} ?>
+
+							
+						/* setting up the map */ 
+					var params = {
+						"instance_id":"locate_anything_map_<?php echo $map_id?>",
+						"map-id": "<?php echo $map_id?>",
+						"map-container":'<?php echo $map_container?>',
+						"initial-lat": <?php echo $params["initial-lat"]?>,
+						"initial-lon": <?php echo $params["initial-lon"]?>,
+						"initial-zoom": <?php echo $params["initial-zoom"]?>,
+						"autogeocode" :'<?php echo $params["autogeocode"]?>',
+						"display_only_inbound" : '<?php echo $params["display_only_inbound"]?>',
+						"overlay" : <?php echo $params["overlay"]?>,
+						"googleplaces" : <?php echo $params["googleplaces"]?>,
+						"max_nav_item_per_page" : <?php echo $params["max_nav_item_per_page"]?>,
+						<?php if($params["style-hue"]) echo '"style-hue":"'.$params["style-hue"].'",'?>
+						"scrollWheelZoom" : <?php echo $params["scrollWheelZoom"]?>,
+						"navlist_event" : '<?php echo  $params["navlist_event"]?>',
+						"hide-splashscreen" : '<?php echo $params["hide-splashscreen"]?>',
+						"kml_file" :  '<?php echo $settings["locate-anything-kml-file"]?>',
+						"kml_fillColor" :  '<?php echo $settings["locate-anything-kml_fillColor"]?>',
+						"kml_weight" :  '<?php echo $settings["locate-anything-kml_weight"]?>',
+						"kml_opacity" :  '<?php echo $settings["locate-anything-kml_opacity"]?>',
+						"kml_color" :  '<?php echo $settings["locate-anything-kml_color"]?>',
+						"kml_dashArray" :  '<?php echo $settings["locate-anything-kml_dashArray"]?>',
+						"kml_fillOpacity" :  '<?php echo $settings["locate-anything-kml_fillOpacity"]?>',
+						"bing-key"  :	'<?php echo $params["bing-key"]?>',
+						"load-google"	:	'<?php echo $params["load-google"]?>',
+						"load-bing"	:	'<?php echo $params["load-bing"]?>',
+						"load-yandex"	:	'<?php echo $params["load-yandex"]?>'
+					};
+
+						/* define instance name*/
+						var map_instance="locate_anything_map_"+map_id;
+						
+						/* instanciate filter class */
+					eval("var "+map_instance+"=new leaflet_filters_class(params);");				 
+						/* loading ... */						
+					 eval(map_instance).showLoader(true);
+					 <?php if (has_filter("locate_anything_beforeCreateMap")) echo apply_filters("locate_anything_beforeCreateMap",$map_id);?>
+					 	/* Initialize Map  */	
+					eval(map_instance).createMap();
+					/*   Register filters, property_name is the name of the property as shown in the JSON datas  */
+					var custom_filters= [<?php if(is_array($filters)) foreach ($filters as $filter) echo '{"property_name":"'.$filter.'","html_id" : "#'.$filter.'-'.$map_id.'"},';?>];
+					eval(map_instance).register_filters(custom_filters);
+					/* Override nav item template */	 	
+					eval(map_instance).template_nav_item = function(marker,LatLng) {	
+						var template='<?php echo Locate_And_Filter_Public::getNavTemplate($map_id)?>';
+						return template;
+					};
+					/*  define callback function */
+					var createEverything_<?php echo $map_id?> = function(result){	
+						var cpt=0;	
+									 	
+						for(var i in result["data"]){	
+							var marker={};	
+								/*  The JSON containing the markers data is indexed to save space and generation time 
+								*	Rebuilds the object with original field names
+								*/			
+		 					var indexed_marker=result["data"][i];
+		 					for(var k in indexed_marker) {
+		 						marker[result["index"]["fieldnames"][k]]=indexed_marker[k]; 						
+		 					}
+								/* Marker creation : set timeout is used to allow the progressbar to update */
+							setTimeout(function(marker){											
+									/* define Tooltip HTML*/	
+									<?php if($map_id=="preview") {?>
+										var default_tooltip_template='<?php echo Locate_And_Filter_Public::decode_template ($settings['locate-anything-default-tooltip-template'])?>';
+										<?php } else {?>
+								var default_tooltip_template='<?php echo Locate_And_Filter_Public::getDefaultTooltipTemplate($map_id)?>';					
+								<?php } ?>
+									// length must be superior to 2 because of the inclusion of 2 single quotes to delimitate the output
+								
+								if(marker.tooltip_template.length>2) {									
+									var html = eval(marker.tooltip_template);
+									
+								}
+								else var html=default_tooltip_template;
+									/* define icon*/
+								var customIcon=null;
+								if(marker.custom_marker){									
+								 customIcon= eval(map_instance).getMarkerIcon(marker.custom_marker);		
+								} else customIcon=false;					
+									/* No custom icon, use default icon for this map */
+								if(!customIcon) customIcon= eval(map_instance).getMarkerIcon(result["defaults"][0].default_marker);	
+								
+								/* updates progress bar */
+								eval(map_instance).updateProgressBar(cpt++, result["data"].length, 1000);
+								/* creates the marker */
+								eval(map_instance).createMarker(marker.lat,marker.lng,html,marker,customIcon);
+							},1,marker);							
+						}	
+
+						setTimeout(function(){						
+							/* Render Map */							
+							eval(map_instance).render_map(eval(map_instance).markers);						
+							/*	Creation Nav */			
+							eval(map_instance).updateNav(0);
+							/* hide loader */
+							eval(map_instance).showLoader(false);	
+							/* stores the map in Jquery for easier access*/	
+							current_map=eval(map_instance)	;
+							<?php if (has_filter("locate_anything_afterGenerateJS")) echo apply_filters("locate_anything_afterGenerateJS",$map_id)?>
+							},250);
+					}
+
+					/*   JSON : Retrieve markers data */
+					eval(map_instance).getData("<?php echo admin_url( 'admin-ajax.php'); ?>?action=getMarkers&map_id=<?php echo $map_id?>",createEverything_<?php echo $map_id?>)
+					/* call Tokenize for nice selects */
+					if(jQuery.tokenize){
+					var token1=jQuery('#map-filters-'+map_id+' .tokenize-1').tokenize({maxElements:"1",onRemoveToken:function(e,f){eval(map_instance).update_markers();},onAddToken:function(e,f){eval(map_instance).update_markers();}});
+					var token=jQuery('#map-filters-'+map_id+' .tokenize').tokenize({maxElements:"9999",onRemoveToken:function(e,f){eval(map_instance).update_markers();},onAddToken:function(e,f){eval(map_instance).update_markers();}});
+						
+					} 
+					<?php if($settings['locate-anything-show-attribution-label']==0)  echo "/* Hide attribution */
+					jQuery('.leaflet-control-attribution').hide();"; ?>	
+					<?php $load_chosen = unserialize (get_option ( 'locate-anything-option-load-chosen' ));
+					if($load_chosen) {
+						echo "/* Hide attribution */
+						jQuery('.filter-select select').chosen({width:'250px',allow_single_deselect:'true'});
+						";	
+					}?>				
+			});
+			</script>
+	<?php
+		
+	}
+
+
+
 }
