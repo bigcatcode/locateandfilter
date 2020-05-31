@@ -304,3 +304,7 @@ fix js error in admin
 = 1.3.57 =
 
 fix HTTPS support
+
+= 1.3.6 =
+add new shortcode for single page
+add atribute to shortcode categoryfilter

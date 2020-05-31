@@ -4,7 +4,7 @@ Donate link: http://locateandfilter.monothemes.com/
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory plugin, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
 Requires at least: 4.0.0
 Tested up to: 5.4.1
-Stable tag: 1.3.572
+Stable tag: 1.3.6
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Create Maps exactly the way you want using LocateAndFilter. 
 
 == Description ==
-LocateAndFilter is a versatile and highly customizable WordPress plugin aimed at creating nice looking searchable/filterable maps.
+LocateAndFilter is a versatile and highly customizable WordPress plugin aimed at creating searchable/filterable maps.
 
 **Some of the features :**
 
@@ -33,16 +33,19 @@ admin!
 And many other features :
 
 * Additional control layers by Bing satellite and Yandex satellite
-* import and style KML files
 * Detection of user’s location
 * Rounded corners / Squared corners tooltips
 * Map Localization :Choose your map language
 * Optional cache system : ready to handle thousands of markers
 * Marker Clustering, setup Max Cluster Radius
 * Addons, Advanced filters, new marker icons, new map layouts
+* Custom tags for map layouts
+* Supports any shortcode in custom tag
+* Availability shortcode for single page
+* Available shortcode attribute for current category
 
 Online Demo :
-[A beautiful example for projects](http://locateandfilter.monothemes.com/demo-map-default-right-down-layout/)
+[example for projects](http://locateandfilter.monothemes.com/demo-map-default-right-down-layout/)
 
 Documentation :
 [See our website for more informations on how to configure the plugin](http://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/)
@@ -170,6 +173,9 @@ See our website for more informations on how to configure the plugin : http://lo
 * fix js error in admin
 = 1.3.57 =
 * fix HTTPS support
+= 1.3.6 =
+* add new shortcode for single page
+* add atribute to shortcode categoryfilter
 
 == Frequently Asked Questions ==
 
