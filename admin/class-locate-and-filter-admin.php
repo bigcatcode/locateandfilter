@@ -764,6 +764,29 @@ class Locate_And_Filter_Admin
 	/**
 	 * AJAX function : returns JSON encoded array of taxonomies tied to a post type
 	 */
+	/* get Taxonomies associated with type passed in request */
+	public function LA_getTaxonomies_plus() {
+		$tax = get_object_taxonomies(sanitize_text_field($_REQUEST['type']));
+		array_push($tax, $_REQUEST['type']);
+		echo json_encode($tax);
+		die();
+	}	
+	/**
+	 * AJAX function : returns JSON encoded array of taxonomies tied to a post type
+	 */
+	/* get Taxonomies associated with type passed in request */
+	public function LA_getPOST_id() {
+		$all_post_ids = get_posts(array(
+		    'fields'          => 'ids',
+		    'posts_per_page'  => -1,
+		    'post_type' => $_REQUEST['type']
+		));
+		echo json_encode( $all_post_ids );
+		die();
+	}	
+	/**
+	 * AJAX function : returns JSON encoded array of taxonomies tied to a post type
+	 */
 	/* get Taxonomy terms associated with type passed in request */
 	public function LA_getTaxonomyTerms() {
 		$selected = get_post_meta( sanitize_text_field($_REQUEST['map_id']), "locate-anything-allowed-filters-value-" . sanitize_text_field($_REQUEST['type']), true);

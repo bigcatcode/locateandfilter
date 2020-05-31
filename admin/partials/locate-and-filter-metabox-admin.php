@@ -424,15 +424,20 @@ function locate_anything_refresh_filters(){
 	jQuery("#filters").html('');
 	jQuery("#show-filters").html('');
 	if(jQuery('#locate-anything-source').val()!=='user'){
+
+	
+				var posttype = jQuery('#locate-anything-source').val();
+
 		/* Post filters */
 		      jQuery.ajax({
 			          type: 'POST',
 			          url: AJAX_URL,
 			          data: {
-			          	"action": "LAgetTaxonomies",
+			          	"action": "LAgetTaxonomies_plus",
 			          	"type":jQuery('#locate-anything-source').val()
 			      },
 			          success: function(data){
+			          	console.log(data);
 			          	var selected='|<?php 
 			          		$the_filters=get_post_meta( $object->ID, 'locate-anything-filters',true);
 			          		if(is_array($the_filters)) echo implode("|",$the_filters)?>|';
@@ -464,6 +469,7 @@ function locate_anything_refresh_filters(){
                            
 			          	
 			          	data=JSON.parse(data);
+			          	console.log(data);
 
 			          		for(var i=0;i<data.length;i++) {
 			          			var item=data[i];
@@ -516,7 +522,33 @@ function locate_anything_refresh_filters(){
 
 			          			
 
-			          			locate_anything_refresh_taxonomy_terms(item);
+			          			if ( posttype == item ) {
+
+								    jQuery.ajax({
+										type: 'POST',
+										url: AJAX_URL,
+										data: {
+											"action": "LAgetPOST_id",
+											"type": posttype
+						      		},
+										success: function(data){
+											console.log(data);
+							                  jQuery("#locate-anything-allowed-filters-"+posttype).val(data);
+							                  var items=JSON.parse(data);
+							                  for(var i in items){
+							                    if(items[i].selected) var sel="selected";else var sel='';
+							                    jQuery("#locate-anything-allowed-filters-value-"+posttype).append("<option "+sel+"  value='"+items[i]+"'>"+items[i]+"</option>");
+							                  }
+							                  /* refreshes preview*/
+							              refresh_preview(); 
+
+										}
+									});
+
+			          			} else {
+			          				locate_anything_refresh_taxonomy_terms(item);
+			          			}
+			          			
 			          			/* if something changes refresh preview */
 								jQuery("input, select, textarea").change(function(){
 									refresh_preview();

@@ -217,7 +217,15 @@ class Locate_And_Filter
         /* additional hooks*/
         $this->loader->add_action('wp_ajax_LAgetTaxonomies', $plugin_admin, 'LA_getTaxonomies', 10, 0);
         $this->loader->add_action('wp_ajax_nopriv_LAgetTaxonomies', $plugin_admin, 'LA_getTaxonomies', 10, 0);
-        
+
+        /* additional hooks*/
+        $this->loader->add_action('wp_ajax_LAgetTaxonomies_plus', $plugin_admin, 'LA_getTaxonomies_plus', 10, 0);
+        $this->loader->add_action('wp_ajax_nopriv_LAgetTaxonomies_plus', $plugin_admin, 'LA_getTaxonomies_plus', 10, 0);
+
+        /* additional hooks*/
+        $this->loader->add_action('wp_ajax_LAgetPOST_id', $plugin_admin, 'LA_getPOST_id', 10, 0);
+        $this->loader->add_action('wp_ajax_nopriv_LAgetPOST_id', $plugin_admin, 'LA_getPOST_id', 10, 0);
+
         $this->loader->add_action('wp_ajax_LAgetTaxonomyTerms', $plugin_admin, 'LA_getTaxonomyTerms', 10, 0);
         $this->loader->add_action('wp_ajax_nopriv_LAgetTaxonomyTerms', $plugin_admin, 'LA_getTaxonomyTerms', 10, 0);
         

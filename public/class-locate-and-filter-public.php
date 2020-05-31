@@ -331,7 +331,7 @@ class Locate_And_Filter_Public {
 			$settings=Locate_And_Filter_Public::getMapParameters($map_id);
 			$filters = unserialize($settings["locate-anything-show-filters"]);
 		}
-		//var_dump($settings);
+		echo "<pre>", var_dump($settings), "</pre>";//var_dump($settings);
 		/* create parameter array */
 		$params = array ();
 
@@ -563,28 +563,41 @@ class Locate_And_Filter_Public {
 			foreach ( $filters as $filter ) {
 				$allowed= get_post_meta($map_id,'locate-anything-allowed-filters-value-'.$filter,true);
 				$taxonomy = get_taxonomy ( $filter );
-				if(!$taxonomy) continue;
-				$selector= get_post_meta ( $map_id, 'locate-anything-display-filter-' . $filter, true );
-				$filter_selector_label = get_post_meta ( $map_id, 'locate-anything-filter-selector-label-' . $filter, true );
-				$filter_selector_icon = get_post_meta ( $map_id, 'locate-anything-filter-selector-icon-' . $filter, true );
-				if($filter_selector_label){
-					$customlabel = $filter_selector_label;
-				} else {
-					$customlabel = $taxonomy->labels->name;
-				}
+				if ($type == $filter) { $post_type_filter = true; } else { $post_type_filter = false; } 
+				if (!$post_type_filter) {
+					if(!$taxonomy) continue;
+					$selector= get_post_meta ( $map_id, 'locate-anything-display-filter-' . $filter, true );
+					$filter_selector_label = get_post_meta ( $map_id, 'locate-anything-filter-selector-label-' . $filter, true );
+					$filter_selector_icon = get_post_meta ( $map_id, 'locate-anything-filter-selector-icon-' . $filter, true );
+					if($filter_selector_label){
+						$customlabel = $filter_selector_label;
+					} else {
+						$customlabel = $taxonomy->labels->name;
+					}
 
-				if ($taxonomy && $selector == "tokenize") {
-					$r .= '<li class="filter-tokenize"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", true,9999,$allowed ) . '</li>';
-				} elseif ($taxonomy &&  $selector== "select") {
-					$r .= '<li class="filter-select"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", false,9999,$allowed ) . '</li>';
-				} elseif ($selector== "range") {
-					$r .= '<li class="filter-range"><label>' . $customlabel . '</label>
-					<div id="rangedval-'.$filter.'-'.$map_id.'"><span id="rangeval-'.$filter.'-'.$map_id.'"></span></div>  
-  					<div class="rangeslider" min="'.get_post_meta ( $map_id, "locate-anything-min-range-$filter", true ).'" max="'.get_post_meta ( $map_id, "locate-anything-max-range-$filter", true ).'" name="'.$filter.'-'.$map_id.'"  id="'.$filter.'-'.$map_id.'"></div></li>';
-				
+					if ($taxonomy && $selector == "tokenize") {
+						$r .= '<li class="filter-tokenize"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", true,9999,$allowed ) . '</li>';
+					} elseif ($taxonomy &&  $selector== "select") {
+						$r .= '<li class="filter-select"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", false,9999,$allowed ) . '</li>';
+					} elseif ($selector== "range") {
+						$r .= '<li class="filter-range"><label>' . $customlabel . '</label>
+						<div id="rangedval-'.$filter.'-'.$map_id.'"><span id="rangeval-'.$filter.'-'.$map_id.'"></span></div>  
+	  					<div class="rangeslider" min="'.get_post_meta ( $map_id, "locate-anything-min-range-$filter", true ).'" max="'.get_post_meta ( $map_id, "locate-anything-max-range-$filter", true ).'" name="'.$filter.'-'.$map_id.'"  id="'.$filter.'-'.$map_id.'"></div></li>';
+					
+					} else {
+						$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );
+						$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty ) . '</li>';
+					}
 				} else {
-					$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );
-					$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty ) . '</li>';
+						$filter_selector_label = get_post_meta ( $map_id, 'locate-anything-filter-selector-label-' . $filter, true );
+						$filter_selector_icon = get_post_meta ( $map_id, 'locate-anything-filter-selector-icon-' . $filter, true );
+						if($filter_selector_label){
+							$customlabel = $filter_selector_label;
+						} else {
+							$customlabel = $type;
+						}
+						$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );
+						$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForPostType ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty ) . '</li>';					
 				}
 			}
 		$r=apply_filters("locate_anything_add_custom_filters",$r,$map_id,$filters);
@@ -1092,21 +1105,32 @@ public static function defineDefaultMarker($params){
 				}
 				if (is_array ( $filter_taxonomies )) {
 					foreach ( $filter_taxonomies as $taxonomy ) {
-						if(empty($taxonomy) || !taxonomy_exists($taxonomy)) continue;
-						$arr_terms = array ();
-						if($taxonomies===false || array_search($taxonomy,$taxonomies)===false) $allowed=false; else $allowed=$params['locate-anything-allowed-filters-value-'.$taxonomy];
-											
-						$terms = wp_get_post_terms ( $post->ID, $taxonomy,array ('fields' => 'all') );
-						if (! is_array ( $terms ))
-							$terms = array ();
-						foreach ( $terms as $term ) {
-							if(!$allowed || (is_array($allowed) && array_search($term->term_id,$allowed)!==false)){
-							$arr_terms [] = $term->term_id;
-							$in [$taxonomy] [$term->term_id] = '<span>'.$term->name.'</span>';
+						if ( $taxonomy != $post_type ) {
+							if(empty($taxonomy) || !taxonomy_exists($taxonomy)) continue;
+							$arr_terms = array ();
+							if($taxonomies===false || array_search($taxonomy,$taxonomies)===false) $allowed=false; else $allowed=$params['locate-anything-allowed-filters-value-'.$taxonomy];
+												
+							$terms = wp_get_post_terms ( $post->ID, $taxonomy,array ('fields' => 'all') );
+							if (! is_array ( $terms ))
+								$terms = array ();
+							foreach ( $terms as $term ) {
+								if(!$allowed || (is_array($allowed) && array_search($term->term_id,$allowed)!==false)){
+								$arr_terms [] = $term->term_id;
+								$in [$taxonomy] [$term->term_id] = '<span>'.$term->name.'</span>';
+							}
+							}
+							$add [$taxonomy] = implode ( ",", $arr_terms );
+							$index [$taxonomy] = $in [$taxonomy];
+						} else {
+							$allowed=$params['locate-anything-allowed-filters-value-'.$taxonomy];
+							foreach ($allowed as $key => $allowed_value) {
+								$arr_terms [] = $allowed_value;
+								$in [$taxonomy] [$allowed_value] = '<span>'.get_post_field( 'post_name', $allowed_value ).'</span>';
+								$add [$taxonomy] = strval($post->ID);
+							}
+							// $add [$taxonomy] = implode ( ",", $arr_terms );
+							$index [$taxonomy] = $in [$taxonomy];
 						}
-						}
-						$add [$taxonomy] = implode ( ",", $arr_terms );
-						$index [$taxonomy] = $in [$taxonomy];
 					}
 				}
 				
@@ -1237,7 +1261,7 @@ public static function defineDefaultMarker($params){
 			$settings=Locate_And_Filter_Public::getMapParameters($map_id);
 			$filters = unserialize($settings["locate-anything-show-filters"]);
 		}
-		//var_dump($settings);
+		//echo "<pre>", var_dump($settings), "</pre>";
 		/* create parameter array */
 		$params = array ();
 
@@ -1370,6 +1394,7 @@ public static function defineDefaultMarker($params){
 					eval(map_instance).createMap();
 					/*   Register filters, property_name is the name of the property as shown in the JSON datas  */
 					var custom_filters= [<?php if(is_array($filters)) foreach ($filters as $filter) echo '{"property_name":"'.$filter.'","html_id" : "#'.$filter.'-'.$map_id.'"},';?>];
+					
 					eval(map_instance).register_filters(custom_filters);
 					/* Override nav item template */	 	
 					eval(map_instance).template_nav_item = function(marker,LatLng) {	
@@ -1389,6 +1414,7 @@ public static function defineDefaultMarker($params){
 		 					for(var k in indexed_marker) {
 		 						marker[result["index"]["fieldnames"][k]]=indexed_marker[k]; 						
 		 					}
+		 					console.log(marker);
 								/* Marker creation : set timeout is used to allow the progressbar to update */
 							setTimeout(function(marker){											
 									/* define Tooltip HTML*/	

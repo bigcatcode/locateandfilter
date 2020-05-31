@@ -123,6 +123,42 @@ public static function getCheckboxesForTaxonomy($taxonomy,$name,$allowed,$icon,$
 	}
 }
 
+public static function getCheckboxesForPostType($post_type,$name,$allowed,$icon,$pretty) {	
+	$terms = get_posts(array(
+		'posts_per_page'  => -1,
+		'post_type' => $post_type,
+	 	'orderby'    => 'name',
+	 	'order'      => 'DESC',
+	 	'hide_empty' => 0, 	
+	 	'include'=>$allowed	
+	));			
+	if($terms){		
+		$li=array();
+		foreach($terms as $k=>$term){
+			//var_dump($term);
+			if ( $icon == "true"){
+				$term_image_url = get_term_meta( $term->ID , 'locateanything_term_image_url', true );
+				$term_image = '<div class="slug-'.$term->post_name.' filter_term_image" style="background-image: url('.$term_image_url.')"></div>';
+				$term_image_class = 'filters_image';
+			} else {
+				$term_image = '';
+				$term_image_class = '';
+			}
+			$locateanything_checkbox_status = get_term_meta( $term->ID , 'locateanything_checkbox_status', true );
+			if (get_the_ID() != $term->ID) { $status = ''; } else { $status = 'checked'; }
+			if($pretty) {
+				$str='<div id="la-filter-'.$term->ID.'" class="LA_filters_checkbox '.$term_image_class.' pretty p-default"><input class="filter_term_checkbox" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->ID.'" '.$status.'>'.$term_image.'<div class="state p-primary"><label for="'.$name.'"></label></div><span class="filter_term_name">'.$term->post_name.'</span></div>';
+			}else {
+				$str='<div id="la-filter-'.$term->ID.'" class="LA_filters_checkbox '.$term_image_class.' "><input class="filter_term_checkbox" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->ID.'" '.$status.'>'.$term_image.'<span class="filter_term_name">'.$term->post_name.'</span></div>';
+			}
+			
+			$li[]=$str;
+		}
+		//var_dump(get_the_ID());
+		if(count($li)) return implode("",$li);
+		else return false;
+	}
+}
 
 public static function getSelectForTaxonomy($taxonomy,$name,$tokenize=true,$maxElement=99999,$allowed=false) {
 	if($tokenize) if($maxElement>1)	$class="tokenize"; else $class="tokenize-1";else $class="";
