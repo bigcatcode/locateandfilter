@@ -1428,6 +1428,8 @@ public static function defineDefaultMarker($params){
 		$params ["single-zoom"] = $settings['locate-anything-single-zoom']; 
 		if (empty ( $params ["initial-zoom"] ))
 			$params ["initial-zoom"] = 1;
+		if (empty ( $params ["single-zoom"] ))
+			$params ["single-zoom"] = 9;
 		$params ["googleplaces"] = $settings["locate-anything-googleplaces"];
 		$params ["map-id"] = $map_id;
 		$params ["map-container"] = $map_container;
