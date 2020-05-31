@@ -90,7 +90,7 @@ public static function getSelectForType($type,$name,$tokenize=true,$maxElement=9
 		
 	}
 }
-public static function getCheckboxesForTaxonomy($taxonomy,$name,$allowed,$icon,$pretty,$categoryfilter) {	
+public static function getCheckboxesForTaxonomy($taxonomy,$name,$allowed,$icon,$pretty,$categoryfilter='') {	
 	$terms=get_terms($taxonomy , array(
  	'orderby'    => 'name',
  	'order'      => 'DESC',
