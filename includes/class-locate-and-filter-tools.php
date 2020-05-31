@@ -90,7 +90,7 @@ public static function getSelectForType($type,$name,$tokenize=true,$maxElement=9
 		
 	}
 }
-public static function getCheckboxesForTaxonomy($taxonomy,$name,$allowed,$icon,$pretty) {	
+public static function getCheckboxesForTaxonomy($taxonomy,$name,$allowed,$icon,$pretty,$categoryfilter) {	
 	$terms=get_terms($taxonomy , array(
  	'orderby'    => 'name',
  	'order'      => 'DESC',
@@ -110,6 +110,7 @@ public static function getCheckboxesForTaxonomy($taxonomy,$name,$allowed,$icon,$
 			}
 			$locateanything_checkbox_status = get_term_meta( $term->term_id , 'locateanything_checkbox_status', true );
 			if ($locateanything_checkbox_status == 'unchecked' ) { $status = ''; } else { $status = 'checked'; }
+			if ($categoryfilter != $term->term_id){ $status = ''; } else { $status = 'checked'; }
 			if($pretty) {
 				$str='<div id="la-filter-'.$term->term_id.'" class="LA_filters_checkbox '.$term_image_class.' pretty p-default"><input class="filter_term_checkbox" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<div class="state p-primary"><label for="'.$name.'"></label></div><span class="filter_term_name">'.$term->name.'</span></div>';
 			}else {
@@ -160,7 +161,7 @@ public static function getCheckboxesForPostType($post_type,$name,$allowed,$icon,
 	}
 }
 
-public static function getSelectForTaxonomy($taxonomy,$name,$tokenize=true,$maxElement=99999,$allowed=false) {
+public static function getSelectForTaxonomy($taxonomy,$name,$tokenize=true,$maxElement=99999,$allowed=false, $categoryfilter='') {
 	if($tokenize) if($maxElement>1)	$class="tokenize"; else $class="tokenize-1";else $class="";
 
 	$terms=get_terms($taxonomy , array(
@@ -172,7 +173,8 @@ public static function getSelectForTaxonomy($taxonomy,$name,$tokenize=true,$maxE
 
 		$li=array('<option value=""></option>');
 		foreach($terms as $k=>$term){
-			$str='<option value="'.$term->term_id.'">'.$term->name;
+			if ( $categoryfilter == $term->term_id) { $status = 'selected="selected"';} else { $status ='';}
+			$str='<option value="'.$term->term_id.'" '.$status.' >'.$term->name;
 			$li[]=$str;
 		}
 		if(count($li)) return '<select class="'.$class.'" name="'.$name.'" id="'.$name.'">'.implode("",$li).'</select>';

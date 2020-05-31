@@ -212,6 +212,10 @@ class Locate_And_Filter_Public {
 		remove_shortcode ( "LocateAndFilter_map");
 		remove_shortcode ( "LocateAndFilter_navlist");
 		remove_shortcode ( "LocateAndFilter_filters" );
+
+		remove_shortcode ( "LocateAndFilter_single" );
+		remove_shortcode ( "LocateAndFilter_map_single" );
+		remove_shortcode ( "LocateAndFilter_filters_single" );
 	}
 	
 	/**
@@ -279,7 +283,7 @@ class Locate_And_Filter_Public {
 	 * @return [void]
 	 */
 	public static function outputFilters($atts, $content) {
-		return $content .= '<div class="LA_filters">' . Locate_And_Filter_Public::generateFilterForm ( sanitize_key ( $atts ['map_id'] ) ) . '</div>';
+		return $content .= '<div class="LA_filters">' . Locate_And_Filter_Public::generateFilterForm ( sanitize_key ( $atts ['map_id'] ),  sanitize_key ( $atts ['categoryfilter'] )  ) . '</div>';
 	}
 
 	/**
@@ -605,7 +609,8 @@ class Locate_And_Filter_Public {
 	 * @param array $filters        	
 	 * @return html filter form HTML
 	 */
-	public static function generateFilterForm($map_id) {
+	public static function generateFilterForm($map_id, $categoryfilter='') {
+		//var_dump($categoryfilter);
 		$filters = get_post_meta ( $map_id, "locate-anything-show-filters", true );	
 		$type = get_post_meta ( $map_id, "locate-anything-source", true );				
 		$r = '<form id="map-filters-'.$map_id.'" method="post" action="#"><ul id="category-filters-container1" class="category-filters-container">';
@@ -624,9 +629,9 @@ class Locate_And_Filter_Public {
 				}
 
 				if ($taxonomy && $selector == "tokenize") {
-					$r .= '<li class="filter-tokenize"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", true,9999,$allowed ) . '</li>';
+					$r .= '<li class="filter-tokenize"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", true,9999,$allowed, $categoryfilter ) . '</li>';
 				} elseif ($taxonomy &&  $selector== "select") {
-					$r .= '<li class="filter-select"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", false,9999,$allowed ) . '</li>';
+					$r .= '<li class="filter-select"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", false,9999,$allowed, $categoryfilter ) . '</li>';
 				} elseif ($selector== "range") {
 					$r .= '<li class="filter-range"><label>' . $customlabel . '</label>
 					<div id="rangedval-'.$filter.'-'.$map_id.'"><span id="rangeval-'.$filter.'-'.$map_id.'"></span></div>  
@@ -634,7 +639,7 @@ class Locate_And_Filter_Public {
 				
 				} else {
 					$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );
-					$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty ) . '</li>';
+					$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty, $categoryfilter ) . '</li>';
 				}
 			}
 		$r=apply_filters("locate_anything_add_custom_filters",$r,$map_id,$filters);
