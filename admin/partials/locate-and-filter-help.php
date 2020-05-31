@@ -49,6 +49,10 @@ var annotations=
   target : '#startzoom',
   content: '<?php _e("This setting will determine the initial zoom for this map. <br/><br/> You can set it manually or just zoom the preview map to the desired zoom level","locate-and-filter")?>'
 }),
+"singlezoom": new Anno({ 
+  target : '#singlezoom',
+  content: '<?php _e("This setting will determine the initial zoom for map on single page.","locate-and-filter")?>'
+}),
 "autogeocode": new Anno({ 
   target : '#autogeocode',
   content: '<?php _e("If this parameter is set to \"yes\" the plugin will try to locate the user and center the map on his current location","locate-and-filter")?>'
