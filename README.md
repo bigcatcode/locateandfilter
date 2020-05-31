@@ -305,6 +305,9 @@ fix js error in admin
 
 fix HTTPS support
 
-= 1.3.6 =
+= 1.3.573 =
 add new shortcode for single page
 add atribute to shortcode categoryfilter
+
+= 1.3.574 = 
+fix bug
