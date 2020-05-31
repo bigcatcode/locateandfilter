@@ -364,6 +364,22 @@ var leaflet_filters_class= function (params){
 		this.getInboundMarkers();
 	};
 
+	/**
+	 * Clear the map and render the list of markers passed in argument
+	 * @param  {array} markerList : array of marker Objects
+	 * @return {void}            
+	 */
+	this.render_map_single=function(markerList,current_marker){
+		this.markerCluster.clearLayers();	
+		this.markerCluster.addLayers(markerList);
+		this.map.addLayer(this.markerCluster);	
+		this.getInboundMarkers();
+		
+		//this.map.setZoom(this.params["single-zoom"]);
+		//this.map.panTo(L.latLng(current_marker));
+		this.map.setView(current_marker, this.params["single-zoom"]);
+		//console.log( this.params["single-zoom"] );
+	};
 
 	/**
 	 * Apply the declared filters * 

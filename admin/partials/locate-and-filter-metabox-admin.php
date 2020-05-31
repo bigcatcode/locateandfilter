@@ -92,6 +92,13 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 </td>
 </tr>
 
+<tr id="singlezoom">
+<td><?php _e("Single zoom","locate-and-filter")?> &nbsp;<input type="button" data-target="singlezoom" class="locate-anything-help"> </td>
+<td>
+<input name="locate-anything-single-zoom" id="locate-anything-single-zoom" type ="range" min ="1" max="18" step ="1" value ="<?php $v= esc_attr( get_post_meta( $object->ID, 'locate-anything-single-zoom', true ) );echo $v?$v:5?>"/>
+</td>
+</tr>
+
 <tr >
 <td><?php _e("Zoom using mousewheel","locate-and-filter")?> &nbsp; </td>
 <td>	 
@@ -256,7 +263,7 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 </table>
 
 <table id="locate-anything-map-settings-page-5" class="locate-anything-map-settings-list-ul locate-anything-map-option-pane" style='display:none' >	
-<tr><td><h2><?php _e("Load a KML file (beta)")?></h2></td></tr>
+<!-- <tr><td><h2><?php _e("Load a KML file (beta)")?></h2></td></tr>
 <tr>
 <td id="kml"><b><?php _e("KML Style Options","locate-and-filter")?></b></td>
 <td>
@@ -277,7 +284,7 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 </div>
 
 </td>
-</tr>
+</tr> -->
 
 
 
@@ -288,6 +295,7 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 <li><b><?php _e("Display the map separately","locate-and-filter")?></b> : [LocateAndFilter_map map_id=<?php echo $object->ID?>]</li>
 <li><b><?php _e("Display the filters separately","locate-and-filter")?></b> : [LocateAndFilter_filters map_id=<?php echo $object->ID?>]</li>
 <li><b><?php _e("Display the navigation list separately","locate-and-filter")?></b> : [LocateAndFilter_navlist map_id=<?php echo $object->ID?>]</li>
+<li><b><?php _e("Display the map for single Post type","locate-and-filter")?></b> : [LocateAndFilter_single map_id=<?php echo $object->ID?>]</li>
 </ul>
 </td></tr>
 
@@ -536,7 +544,7 @@ function locate_anything_refresh_filters(){
 							                  jQuery("#locate-anything-allowed-filters-"+posttype).val(data);
 							                  var items=JSON.parse(data);
 							                  for(var i in items){
-							                    if(items[i].selected) var sel="selected";else var sel='';
+							                    if(items[i].selected) var sel="selected";else var sel='selected';
 							                    jQuery("#locate-anything-allowed-filters-value-"+posttype).append("<option "+sel+"  value='"+items[i]+"'>"+items[i]+"</option>");
 							                  }
 							                  /* refreshes preview*/

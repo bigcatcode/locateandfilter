@@ -198,7 +198,10 @@ class Locate_And_Filter_Public {
 		add_shortcode ( "LocateAndFilter_map", "Locate_And_Filter_Public::outputMapMarkup" );
 		add_shortcode ( "LocateAndFilter_navlist", "Locate_And_Filter_Public::outputNavlistMarkup" );
 		add_shortcode ( "LocateAndFilter_filters", "Locate_And_Filter_Public::outputFilters" );
+
+		add_shortcode ( "LocateAndFilter_single", "Locate_And_Filter_Public::createMap_single" );
 		add_shortcode ( "LocateAndFilter_map_single", "Locate_And_Filter_Public::outputMapMarkup_single" );
+		add_shortcode ( "LocateAndFilter_filters_single", "Locate_And_Filter_Public::outputFilters_single" );
 	}
 
 	/**
@@ -278,7 +281,20 @@ class Locate_And_Filter_Public {
 	public static function outputFilters($atts, $content) {
 		return $content .= '<div class="LA_filters">' . Locate_And_Filter_Public::generateFilterForm ( sanitize_key ( $atts ['map_id'] ) ) . '</div>';
 	}
-	
+
+	/**
+	 * Outputs the filters markup
+	 * 
+	 * @param [array] $atts
+	 *        	shortcode arguments
+	 * @param [type] $content
+	 *        	post content
+	 * @return [void]
+	 */
+	public static function outputFilters_single($atts, $content) {
+		return $content .= '<div class="LA_filters">' . Locate_And_Filter_Public::generateFilterForm_single ( sanitize_key ( $atts ['map_id'] ) ) . '</div>';
+	}
+
 	/**
 	 * Outputs a map
 	 * 
@@ -312,7 +328,41 @@ class Locate_And_Filter_Public {
 		ob_end_clean ();
 		return $buffer;
 	}
+
+	/**
+	 * Outputs a map
+	 * 
+	 * @param [type] $atts
+	 *        	shortcode arguments
+	 * @param [type] $content
+	 *        	post content
+	 * @return [void]
+	 */
+	public static function createMap_single($atts, $content) {
+		if(!isset($atts["map_id"])) return;	
+
+		$plugin_public = new Locate_And_Filter_Public(null,null);  
+        $plugin_public->enqueue_scripts();
+        $plugin_public->enqueue_styles();
+        
+		extract ( $atts );
+		//$filters = get_post_meta ( $map_id, "locate-anything-filters", true );
+		$layout_id=		get_post_meta ( $map_id, "locate-anything-map-template", true );
+		
+		$template=get_post_meta($map_id,"locate-anything-map-template-html-".$layout_id,true);
 	
+		if($template==false){	
+					//$template=file_get_contents(Locate_And_Filter_Assets::getMapTemplates($layout_id)->url);
+					$template = Locate_And_Filter_Tools::get_local_file_contents(Locate_And_Filter_Assets::getMapTemplates($layout_id)->url);
+			} 
+
+		ob_start ();
+		include plugin_dir_path ( __FILE__ ) . 'partials/locate-and-filter-public-display_single.php';
+		$buffer = ob_get_contents ();
+		ob_end_clean ();
+		return $buffer;
+	}
+
 	/**
 	 * Outputs the JS required to setup and display the map, used in the template called by createMap()
 	 * 
@@ -331,7 +381,7 @@ class Locate_And_Filter_Public {
 			$settings=Locate_And_Filter_Public::getMapParameters($map_id);
 			$filters = unserialize($settings["locate-anything-show-filters"]);
 		}
-		echo "<pre>", var_dump($settings), "</pre>";//var_dump($settings);
+		//echo "<pre>", var_dump($settings), "</pre>";//var_dump($settings);
 		/* create parameter array */
 		$params = array ();
 
@@ -547,7 +597,7 @@ class Locate_And_Filter_Public {
 	<?php
 		
 	}
-	
+
 	/**
 	 * returns the filters HTML code
 	 * 
@@ -556,6 +606,50 @@ class Locate_And_Filter_Public {
 	 * @return html filter form HTML
 	 */
 	public static function generateFilterForm($map_id) {
+		$filters = get_post_meta ( $map_id, "locate-anything-show-filters", true );	
+		$type = get_post_meta ( $map_id, "locate-anything-source", true );				
+		$r = '<form id="map-filters-'.$map_id.'" method="post" action="#"><ul id="category-filters-container1" class="category-filters-container">';
+		if (is_array ( $filters ) && $type!=="user")
+			foreach ( $filters as $filter ) {
+				$allowed= get_post_meta($map_id,'locate-anything-allowed-filters-value-'.$filter,true);
+				$taxonomy = get_taxonomy ( $filter );
+				if(!$taxonomy) continue;
+				$selector= get_post_meta ( $map_id, 'locate-anything-display-filter-' . $filter, true );
+				$filter_selector_label = get_post_meta ( $map_id, 'locate-anything-filter-selector-label-' . $filter, true );
+				$filter_selector_icon = get_post_meta ( $map_id, 'locate-anything-filter-selector-icon-' . $filter, true );
+				if($filter_selector_label){
+					$customlabel = $filter_selector_label;
+				} else {
+					$customlabel = $taxonomy->labels->name;
+				}
+
+				if ($taxonomy && $selector == "tokenize") {
+					$r .= '<li class="filter-tokenize"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", true,9999,$allowed ) . '</li>';
+				} elseif ($taxonomy &&  $selector== "select") {
+					$r .= '<li class="filter-select"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", false,9999,$allowed ) . '</li>';
+				} elseif ($selector== "range") {
+					$r .= '<li class="filter-range"><label>' . $customlabel . '</label>
+					<div id="rangedval-'.$filter.'-'.$map_id.'"><span id="rangeval-'.$filter.'-'.$map_id.'"></span></div>  
+  					<div class="rangeslider" min="'.get_post_meta ( $map_id, "locate-anything-min-range-$filter", true ).'" max="'.get_post_meta ( $map_id, "locate-anything-max-range-$filter", true ).'" name="'.$filter.'-'.$map_id.'"  id="'.$filter.'-'.$map_id.'"></div></li>';
+				
+				} else {
+					$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );
+					$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty ) . '</li>';
+				}
+			}
+		$r=apply_filters("locate_anything_add_custom_filters",$r,$map_id,$filters);
+		$r .= '</ul></form>';
+		return $r;
+	}
+
+	/**
+	 * returns the filters HTML code
+	 * 
+	 * @param int $map_id        	
+	 * @param array $filters        	
+	 * @return html filter form HTML
+	 */
+	public static function generateFilterForm_single($map_id) {
 		$filters = get_post_meta ( $map_id, "locate-anything-show-filters", true );	
 		$type = get_post_meta ( $map_id, "locate-anything-source", true );				
 		$r = '<form id="map-filters-'.$map_id.'" method="post" action="#"><ul id="category-filters-container1" class="category-filters-container">';
@@ -597,7 +691,7 @@ class Locate_And_Filter_Public {
 							$customlabel = $type;
 						}
 						$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );
-						$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForPostType ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty ) . '</li>';					
+						$r .= '<li class="post-type-filter post-type-filter-'.$filter.' filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForPostType ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty ) . '</li>';					
 				}
 			}
 		$r=apply_filters("locate_anything_add_custom_filters",$r,$map_id,$filters);
@@ -1331,6 +1425,7 @@ public static function defineDefaultMarker($params){
 			$minZoom = $params ["overlay"]->minZoom;
 		$params ["overlay"] = '{url:"' . $params ["overlay"]->url . '",attribution:"' . sanitize_text_field ( $params ["overlay"]->attribution ) . '" ,maxZoom:' . $maxZoom . ' ,minZoom:' . $minZoom . '}';
 		$params ["initial-zoom"] = $settings['locate-anything-start-zoom'];
+		$params ["single-zoom"] = $settings['locate-anything-single-zoom']; 
 		if (empty ( $params ["initial-zoom"] ))
 			$params ["initial-zoom"] = 1;
 		$params ["googleplaces"] = $settings["locate-anything-googleplaces"];
@@ -1340,6 +1435,7 @@ public static function defineDefaultMarker($params){
 		if (empty ( $params ["max_nav_item_per_page"] ))
 			$params ["max_nav_item_per_page"] = 10;
 		$params ["style-hue"] = $settings['locate-anything-googlemaps-hue'];
+		//var_dump($params);
 		?>
 
 		<script type="text/javascript">
@@ -1360,6 +1456,7 @@ public static function defineDefaultMarker($params){
 						"initial-lat": <?php echo $params["initial-lat"]?>,
 						"initial-lon": <?php echo $params["initial-lon"]?>,
 						"initial-zoom": <?php echo $params["initial-zoom"]?>,
+						"single-zoom": <?php echo $params["single-zoom"]?>,
 						"autogeocode" :'<?php echo $params["autogeocode"]?>',
 						"display_only_inbound" : '<?php echo $params["display_only_inbound"]?>',
 						"overlay" : <?php echo $params["overlay"]?>,
@@ -1403,7 +1500,9 @@ public static function defineDefaultMarker($params){
 					};
 					/*  define callback function */
 					var createEverything_<?php echo $map_id?> = function(result){	
-						var cpt=0;	
+						var cpt=0;
+						var current_marker = {};	
+						var current_marker_;
 									 	
 						for(var i in result["data"]){	
 							var marker={};	
@@ -1411,10 +1510,11 @@ public static function defineDefaultMarker($params){
 								*	Rebuilds the object with original field names
 								*/			
 		 					var indexed_marker=result["data"][i];
+
 		 					for(var k in indexed_marker) {
 		 						marker[result["index"]["fieldnames"][k]]=indexed_marker[k]; 						
 		 					}
-		 					console.log(marker);
+		 					//console.log(marker);
 								/* Marker creation : set timeout is used to allow the progressbar to update */
 							setTimeout(function(marker){											
 									/* define Tooltip HTML*/	
@@ -1442,12 +1542,19 @@ public static function defineDefaultMarker($params){
 								eval(map_instance).updateProgressBar(cpt++, result["data"].length, 1000);
 								/* creates the marker */
 								eval(map_instance).createMarker(marker.lat,marker.lng,html,marker,customIcon);
+								if ( marker.id == <?php echo get_the_ID(); ?>) {
+									current_marker['lat'] = marker.lat;
+									current_marker['lng'] = marker.lng;
+									current_marker_ = marker.lat +','+ marker.lng;
+								}
+								//console.log(current_marker);
 							},1,marker);							
 						}	
 
 						setTimeout(function(){						
-							/* Render Map */							
-							eval(map_instance).render_map(eval(map_instance).markers);						
+							/* Render Map */
+							//console.log(current_marker);
+							eval(map_instance).render_map_single(eval(map_instance).markers,current_marker);						
 							/*	Creation Nav */			
 							eval(map_instance).updateNav(0);
 							/* hide loader */
@@ -1460,6 +1567,7 @@ public static function defineDefaultMarker($params){
 
 					/*   JSON : Retrieve markers data */
 					eval(map_instance).getData("<?php echo admin_url( 'admin-ajax.php'); ?>?action=getMarkers&map_id=<?php echo $map_id?>",createEverything_<?php echo $map_id?>)
+					//console.log(map_instance);
 					/* call Tokenize for nice selects */
 					if(jQuery.tokenize){
 					var token1=jQuery('#map-filters-'+map_id+' .tokenize-1').tokenize({maxElements:"1",onRemoveToken:function(e,f){eval(map_instance).update_markers();},onAddToken:function(e,f){eval(map_instance).update_markers();}});
