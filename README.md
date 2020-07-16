@@ -311,3 +311,6 @@ add atribute to shortcode categoryfilter
 
 = 1.3.574 = 
 fix bug
+
+= 1.3.575 = 
+sorting filters

@@ -4,7 +4,7 @@ Donate link: http://locateandfilter.monothemes.com/
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory plugin, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
 Requires at least: 4.0.0
 Tested up to: 5.4.1
-Stable tag: 1.3.574
+Stable tag: 1.3.575
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -177,10 +177,12 @@ See our website for more informations on how to configure the plugin : http://lo
 * add new shortcode for single page
 * add atribute to shortcode categoryfilter
 = 1.3.574 =
-fix bug
+* fix bug
+= 1.3.575 = 
+* sorting filters
 
 == Frequently Asked Questions ==
 
-If you have any question and need help, please ask me monothemes@gmail.com
+If you have any question and need help, please create topic on https://wordpress.org/support/plugin/locateandfilter/
 
 == Donations ==
