@@ -61,7 +61,9 @@ strong,b {font-weight:bold;}
 .locate-anything-map-settings-list-ul td input[type="text"]{   
     max-width:230px;
 }
-
+.locate-anything-map-settings-list-ul td input[type="number"]{   
+    max-width:75px;
+}
 .locate-anything-map-settings-list-ul td select{
    min-height: 32px
     }

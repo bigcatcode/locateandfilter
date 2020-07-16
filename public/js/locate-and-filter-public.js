@@ -1,8 +1,17 @@
 jQuery(document).ready(function(){   
-   
+   sort_filter_by_attr();
     setup_range_sliders();
+    
+
 });
 
+function sort_filter_by_attr(){
+    jQuery("ul.category-filters-container").each(function(){
+        jQuery(this).html(jQuery(this).children('li').sort(function(a, b){
+            return (jQuery(b).data('sort')) < (jQuery(a).data('sort')) ? 1 : -1;
+        }));
+    });
+}
 
 function setup_range_sliders(){ 
     /*Range slider events */

@@ -461,6 +461,9 @@ function locate_anything_refresh_filters(){
 			          		 $r_label=get_post_meta( $object->ID,"locate-anything-filter-selector-label-".$filter,true);
 			          		 if(  !empty( get_post_meta( $object->ID,"locate-anything-filter-selector-label-".$filter,true) ) ) $jsObj.= "'filter_label-$filter':'$r_label',";
 
+							 $r_sort=get_post_meta( $object->ID,"locate-anything-filter-selector-sort-".$filter,true);
+			          		 if(  !empty( get_post_meta( $object->ID,"locate-anything-filter-selector-sort-".$filter,true) ) ) $jsObj.= "'filter_sort-$filter':'$r_sort',";
+
 			          		 $r_icon=get_post_meta( $object->ID,"locate-anything-filter-selector-icon-".$filter,true);
 			          		 if(!empty( get_post_meta( $object->ID,"locate-anything-filter-selector-icon-".$filter,true) )) $jsObj.= "'filter_icon-$filter':'$r_icon',";
 
@@ -499,6 +502,12 @@ function locate_anything_refresh_filters(){
 			          				var filter_label = '';
 			          			}
 
+			          			if(display_filters["filter_sort-"+item]) {
+			          				var filter_sort = display_filters["filter_sort-"+item];
+			          			} else {
+			          				var filter_sort = '9999';
+			          			}
+
 			          			if(display_filters["filter_icon-"+item]) {
 			          				var filter_icon = display_filters["filter_icon-"+item];
 			          			} else {
@@ -521,6 +530,7 @@ function locate_anything_refresh_filters(){
 			          			jQuery("#show-filters").append('<span '+rangeOptionsVisible+' id="range-options-'+item+'"> Min : <input type="text" size="4" id="locate-anything-min-range-'+item+'" name="locate-anything-min-range-'+item+'" value="'+(display_filters['locate-anything-min-range-'+item]|| "")+'"> Max : <input value="'+(display_filters['locate-anything-max-range-'+item] || "")+'" type="text" size="4" id="locate-anything-max-range-'+item+'" name="locate-anything-max-range-'+item+'"></span>');
 			          			
 			          			/* custom label and icon*/
+			          			jQuery("#show-filters").append('<div style="'+displaynone+'" class="hide-if-'+item+' filter-selector-sort-'+item+'"><b> Sort </b> : <input type="number" size="2" id="locate-anything-filter-selector-sort-'+item+'" name="locate-anything-filter-selector-sort-'+item+'" value="'+filter_sort+'"></div>');
 			          			jQuery("#show-filters").append('<div style="'+displaynone+'" class="hide-if-'+item+' filter-selector-label-'+item+'"><b> Custom label </b> : <input type="text" size="20" id="locate-anything-filter-selector-label-'+item+'" name="locate-anything-filter-selector-label-'+item+'" value="'+filter_label+'"></div>');
 			          			jQuery("#show-filters").append('<div style="'+displaynone+'" class="hide-if-'+item+' filter-selector-icon-'+item+'"><b> Enable icon </b> : <label for="locate-anything-filter-selector-icon-'+item+'-2">yes </label><input type="radio" size="20" id="locate-anything-filter-selector-icon-'+item+'-2" name="locate-anything-filter-selector-icon-'+item+'" value="true" '+filter_icon_check+' ><label for="locate-anything-filter-selector-icon-'+item+'-1">no </label><input type="radio" size="20" id="locate-anything-filter-selector-icon-'+item+'-1" name="locate-anything-filter-selector-icon-'+item+'" value="false" '+filter_icon_check_+' ></div>');
 			          			

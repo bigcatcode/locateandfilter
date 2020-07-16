@@ -224,10 +224,12 @@ function locate_anything_manage_selector(itemT){
       var  str;
       jQuery(".filter-selector-"+itemT).fadeOut();
       jQuery(".filter-selector-label-"+itemT).fadeOut();
+      jQuery(".filter-selector-sort-"+itemT).fadeOut();
       jQuery(".filter-selector-icon-"+itemT).fadeOut();
       jQuery("#show-filters input[type=checkbox]:checked").each(function(index,item){       
         jQuery(".filter-selector-"+item.value).fadeIn();
-        jQuery(".filter-selector-label-"+item.value).fadeIn();  
+        jQuery(".filter-selector-label-"+item.value).fadeIn();
+        jQuery(".filter-selector-sort-"+item.value).fadeIn();   
         jQuery(".filter-selector-icon-"+item.value).fadeIn();       
       });
         
