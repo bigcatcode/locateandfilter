@@ -1,4 +1,6 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
+<?php if (!defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly?>
 
 <a class='nice_link' href='|post_link|'>	
 <div class="infowin">

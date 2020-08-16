@@ -1,7 +1,10 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+if (!defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 /**
- * The plugin bootstrap file
+ * The plugin bootstrap file.
  *
  * This file is read by WordPress to generate the plugin information in the plugin
  * admin area. This file also includes all of the dependencies used by the plugin,
@@ -10,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  *
  * @link              http://locateandfilter.monothemes.com
  * @since             1.0.0
- * @package           Locate_And_Filter
  *
  * @wordpress-plugin
  * Plugin Name:       LocateAndFilter
@@ -27,36 +29,38 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
+if (!defined('WPINC')) {
+    exit;
 }
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-locate-and-filter-activator.php
+ * This action is documented in includes/class-locate-and-filter-activator.php.
  */
-function activate_locate_and_filter() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter-activator.php';
-	Locate_And_Filter_Activator::activate();
+function activate_locate_and_filter()
+{
+    require_once plugin_dir_path(__FILE__).'includes/class-locate-and-filter-activator.php';
+    Locate_And_Filter_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-locate-and-filter-deactivator.php
+ * This action is documented in includes/class-locate-and-filter-deactivator.php.
  */
-function deactivate_locate_and_filter() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter-deactivator.php';
-	Locate_And_Filter_Deactivator::deactivate();
+function deactivate_locate_and_filter()
+{
+    require_once plugin_dir_path(__FILE__).'includes/class-locate-and-filter-deactivator.php';
+    Locate_And_Filter_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_locate_and_filter' );
-register_deactivation_hook( __FILE__, 'deactivate_locate_and_filter' );
+register_activation_hook(__FILE__, 'activate_locate_and_filter');
+register_deactivation_hook(__FILE__, 'deactivate_locate_and_filter');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter.php';
+require plugin_dir_path(__FILE__).'includes/class-locate-and-filter.php';
 
 /**
  * Begins execution of the plugin.
@@ -67,10 +71,9 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter.php';
  *
  * @since    1.0.0
  */
-function run_locate_and_filter() {
-
-	$plugin = new Locate_And_Filter();
-	$plugin->run();
-
+function run_locate_and_filter()
+{
+    $plugin = new Locate_And_Filter();
+    $plugin->run();
 }
 run_locate_and_filter();
