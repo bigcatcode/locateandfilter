@@ -1,8 +1,9 @@
 # LocateAndFilter WordPress plugin
 
 Website URL: http://locateandfilter.monothemes.com/
+Plugin URL: https://wordpress.org/plugins/locateandfilter/
 
-Software Version: WordPress 5.2.2, WordPress 5.2.0, WordPress 5.1.0, WordPress 4.6.1, WordPress 4.6, WordPress 4.5.x, WordPress 4.5.2, WordPress 4.5.1, WordPress 4.5, WordPress 4.4.2, WordPress 4.4.1, WordPress 4.4, WordPress 4.3.1, WordPress 4.3, WordPress 4.2, WordPress 4.1, WordPress 4.0
+Software Version: WordPress 5.5, WordPress 5.x, WordPress 4.x, WordPress 4.0
 
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet
 
