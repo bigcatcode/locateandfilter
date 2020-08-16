@@ -3,8 +3,8 @@ Contributors: dgamoni
 Donate link: http://locateandfilter.monothemes.com/
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory plugin, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
 Requires at least: 4.0.0
-Tested up to: 5.4.1
-Stable tag: 1.3.575
+Tested up to: 5.5
+Stable tag: 1.3.576
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -180,9 +180,43 @@ See our website for more informations on how to configure the plugin : http://lo
 * fix bug
 = 1.3.575 = 
 * sorting filters
+= 1.3.576 = 
+* fix range filter
 
 == Frequently Asked Questions ==
 
 If you have any question and need help, please create topic on https://wordpress.org/support/plugin/locateandfilter/
+
+**I installed the plugin, but I get this error. Error : Please add write permissions on the following directory**
+
+you did not complete the installation
+You need to create a folder ‘cache’ and add write permissions
+on the plugin directory ‘/wp-content/plugins/locateandfilter/cache’
+http://prntscr.com/t03ga1
+see doc https://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/install-plugin/
+
+**after update plugin, map does not work**
+
+Error : Please add write permissions on the following directory : /home1/llcigrou/public_html/wp-content/plugins/locateandfilter/cache
+—-
+After updating, make sure that you created the folder again
+You need to create a folder ‘cache’ and add write permissions
+on the following directory ‘locateandfilter.monothemes.com/wp-content/plugins/locateandfilter/cache’
+see doc https://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/install-plugin/update-plugin/
+
+**I am install plugin and setup folder cahce, but map does not work**
+
+You need create new topic https://wordpress.org/support/plugin/locateandfilter/
+and send a detailed bug report
+see How to write a good bug report?
+https://locateandfilter.monothemes.com/support/how-to-write-a-good-bug-report/
+
+**map does not work, js error**
+
+Uncaught SyntaxError: Unexpected end of JSON input
+—–
+You need to create a folder ‘cache’ and add write permissions
+on the following directory ‘locateandfilter.monothemes.com/wp-content/plugins/locateandfilter/cache’
+see doc https://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/install-plugin/update-plugin/
 
 == Donations ==

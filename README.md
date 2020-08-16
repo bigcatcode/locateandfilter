@@ -314,3 +314,6 @@ fix bug
 
 = 1.3.575 = 
 sorting filters
+
+= 1.3.576 = 
+fix range filter

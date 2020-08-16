@@ -444,6 +444,7 @@ var leaflet_filters_class= function (params){
 							if(jQuery(filter_id).hasClass("rangeslider")){								
 								//if(m[property_name]<filter_value[0] || m[property_name]>filter_value[1]) return false;
 								var tax_val = self.indexTaxonomyTerms[ property_name ][m[property_name]];
+								tax_val = jQuery(tax_val).text();
 								if( parseInt(tax_val)<filter_value[0] || parseInt(tax_val)>filter_value[1]) return false; //fix ranges	
 							} else if(jQuery.isArray(filter_value) && filter_value.length>0) {		
 								/* value is an array*/
