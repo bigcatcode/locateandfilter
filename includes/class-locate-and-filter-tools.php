@@ -90,16 +90,17 @@ public static function getSelectForType($type,$name,$tokenize=true,$maxElement=9
 		
 	}
 }
-public static function getCheckboxesForTaxonomy($taxonomy,$name,$allowed,$icon,$pretty,$categoryfilter='') {	
-	$terms=get_terms($taxonomy , array(
- 	'orderby'    => 'name',
- 	'order'      => 'DESC',
- 	'hide_empty' => 0, 	
- 	'include'=>$allowed
- ) );			
-	if($terms){		
-		$li=array();
-		foreach($terms as $k=>$term){
+public static function getCheckboxesForTaxonomy( $taxonomy, $name, $allowed, $icon, $pretty, $categoryfilter ='' ) {	
+	$terms = get_terms(	array(
+				'taxonomy'	 => $taxonomy,
+			 	'orderby'    => 'name',
+			 	'order'      => 'DESC',
+			 	'hide_empty' => 0, 	
+			 	'include'	 => $allowed
+			) );			
+	if( $terms ) {		
+		$li = array();
+		foreach( $terms as $k => $term ) {
 			if ( $icon == "true"){
 				$term_image_url = get_term_meta( $term->term_id , 'locateanything_term_image_url', true );
 				$term_image = '<div class="slug-'.$term->slug.' filter_term_image" style="background-image: url('.$term_image_url.')"></div>';
@@ -109,17 +110,20 @@ public static function getCheckboxesForTaxonomy($taxonomy,$name,$allowed,$icon,$
 				$term_image_class = '';
 			}
 			$locateanything_checkbox_status = get_term_meta( $term->term_id , 'locateanything_checkbox_status', true );
-			if ($locateanything_checkbox_status == 'unchecked' ) { $status = ''; } else { $status = 'checked'; }
-			if ($categoryfilter != $term->term_id){ $status = ''; } else { $status = 'checked'; }
-			if($pretty) {
-				$str='<div id="la-filter-'.$term->term_id.'" class="LA_filters_checkbox '.$term_image_class.' pretty p-default"><input class="filter_term_checkbox" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<div class="state p-primary"><label for="'.$name.'"></label></div><span class="filter_term_name">'.$term->name.'</span></div>';
-			}else {
-				$str='<div id="la-filter-'.$term->term_id.'" class="LA_filters_checkbox '.$term_image_class.' "><input class="filter_term_checkbox" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<span class="filter_term_name">'.$term->name.'</span></div>';
+			if ( $locateanything_checkbox_status == 'unchecked' ) { $status = ''; } else { $status = 'checked'; }
+			if ( $categoryfilter ) {
+				if ( $categoryfilter != $term->term_id ){ $status = ''; } else { $status = 'checked'; }
 			}
 			
-			$li[]=$str;
+			if( $pretty ) {
+				$str = '<div id="la-filter-'.$term->term_id.'" class="LA_filters_checkbox '.$term_image_class.' pretty p-default"><input class="filter_term_checkbox" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<div class="state p-primary"><label for="'.$name.'"></label></div><span class="filter_term_name">'.$term->name.'</span></div>';
+			} else {
+				$str = '<div id="la-filter-'.$term->term_id.'" class="LA_filters_checkbox '.$term_image_class.' "><input class="filter_term_checkbox" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<span class="filter_term_name">'.$term->name.'</span></div>';
+			}
+			
+			$li[] = $str;
 		}
-		if(count($li)) return implode("",$li);
+		if ( count($li) ) return implode( "", $li );
 		else return false;
 	}
 }

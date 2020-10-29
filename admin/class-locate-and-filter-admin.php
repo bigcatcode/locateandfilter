@@ -790,7 +790,11 @@ class Locate_And_Filter_Admin
 	/* get Taxonomy terms associated with type passed in request */
 	public function LA_getTaxonomyTerms() {
 		$selected = get_post_meta( sanitize_text_field($_REQUEST['map_id']), "locate-anything-allowed-filters-value-" . sanitize_text_field($_REQUEST['type']), true);
-		$terms = get_terms(sanitize_text_field($_REQUEST['type']));
+		//$terms = get_terms(sanitize_text_field($_REQUEST['type']));
+		$terms = get_terms([
+			'taxonomy' => sanitize_text_field($_REQUEST['type']),
+			'hide_empty' => false,
+		]);
 		if ($terms) foreach ($terms as $in => $term) {
 			if (is_array($selected) && array_search($term->term_id, $selected) !== false) $terms[$in]->selected = 1;
 			else $terms[$in]->selected = 0;
