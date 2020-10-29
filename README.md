@@ -3,7 +3,7 @@
 Website URL: http://locateandfilter.monothemes.com/
 Plugin URL: https://wordpress.org/plugins/locateandfilter/
 
-Software Version: WordPress 5.5, WordPress 5.x, WordPress 4.x, WordPress 4.0
+Software Version: WordPress 5.5, WordPress 5.x, WordPress 4.5
 
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet
 
@@ -318,3 +318,6 @@ sorting filters
 
 = 1.3.576 = 
 fix range filter
+
+= 1.3.577 = 
+update get_terms and enable hide_emty
