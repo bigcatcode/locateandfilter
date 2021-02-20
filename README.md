@@ -321,3 +321,6 @@ fix range filter
 
 = 1.3.577 = 
 update get_terms and enable hide_emty
+
+= 1.3.578 = 
+fix bug js sort

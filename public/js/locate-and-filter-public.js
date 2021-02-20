@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){   
-   sort_filter_by_attr();
+    // sort_filter_by_attr();
     setup_range_sliders();
     
 
