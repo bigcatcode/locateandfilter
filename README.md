@@ -333,3 +333,6 @@ update ver
 
 = 1.3.59 = 
 add short pagination style
+
+= 1.4.0 =
+update ver
