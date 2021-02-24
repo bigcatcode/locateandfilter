@@ -336,3 +336,6 @@ add short pagination style
 
 = 1.4.0 =
 update ver
+
+= 1.4.1 =
+fix bug separately shortcodes + pagination

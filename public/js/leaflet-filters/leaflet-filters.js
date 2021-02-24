@@ -93,7 +93,7 @@ var leaflet_filters_class= function (params){
 			// });
 
 			/* SHORT STYLE Create navigation pagination */
-			if ( this.params["map-id"] != 'preview' && this.inBounds.length > this.max_nav_item_per_page ) {
+			if ( this.params["map-id"] != 'preview' && this.inBounds.length > this.max_nav_item_per_page && jQuery('#map-nav-pagination-'+this.params["map-id"]).length > 0  ) {
 			   window['map_nav_pagination-'+this.params["map-id"]] = new tui.Pagination(document.getElementById('map-nav-pagination-'+this.params["map-id"]), {
 			        totalItems: this.inBounds.length,
 			        itemsPerPage: this.max_nav_item_per_page,
@@ -119,7 +119,7 @@ var leaflet_filters_class= function (params){
 			}
 
 			/* SHORT STYLE Sets click event on Nav pagination */
-			if ( this.params["map-id"] != 'preview' && this.inBounds.length > this.max_nav_item_per_page) {
+			if ( this.params["map-id"] != 'preview' && this.inBounds.length > this.max_nav_item_per_page && jQuery('#map-nav-pagination-'+this.params["map-id"]).length > 0 ) {
 			    window['map_nav_pagination-'+this.params["map-id"]].on('beforeMove', function(e) {
 					var page = e.page;
 					if(page) {
