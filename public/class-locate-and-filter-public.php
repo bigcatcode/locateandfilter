@@ -74,6 +74,8 @@ class Locate_And_Filter_Public {
 		// Awesome markers
 		wp_enqueue_style ( $this->plugin_name . "-awesomemarkers", plugin_dir_url ( __FILE__ ) . 'js/leaflet.awesome-markers-2.0/leaflet.awesome-markers.css', array (), $this->version, 'all' );
 		wp_enqueue_style('jquery-ui-css',plugin_dir_url ( __FILE__ ) ."js/jquery-theme/jquery-ui.css", array (), $this->version, 'all');
+		// tui-pagination
+		wp_enqueue_style ( $this->plugin_name . "-tui-pagination", plugin_dir_url ( __FILE__ ) . 'js/tui-pagination/tui-pagination.min.css', array (), $this->version, 'all' );
 	}
 	
 	/**
@@ -169,6 +171,10 @@ class Locate_And_Filter_Public {
 			'maxClusterRadius' =>  unserialize(get_option("locate-anything-option-maxclusterradius")),
 			//,'a_value' => '10'
 		));
+		// tui-pagination JS
+		wp_enqueue_script ( $this->plugin_name . "-tui-pagination", plugin_dir_url ( __FILE__ ) . 'js/tui-pagination/tui-pagination.min.js', array (
+				'jquery'
+		), $this->version, false );		
 	}
 	
 
@@ -270,7 +276,7 @@ class Locate_And_Filter_Public {
 				<div class="map-nav-wrapper" id="map-nav-wrapper-'.$atts["map_id"].'">
 				<div id="map-nav-'.$atts["map_id"].'" class="map-nav-lists"></div>				
 				</div>
-				<div class="map-nav-pagination" id="map-nav-pagination-'.$atts["map_id"].'"></div>';
+				<div class="map-nav-pagination tui-pagination" id="map-nav-pagination-'.$atts["map_id"].'"></div>';
 	}
 	
 	/**

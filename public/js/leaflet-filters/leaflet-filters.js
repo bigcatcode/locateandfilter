@@ -83,17 +83,54 @@ var leaflet_filters_class= function (params){
 			var nb_pages=Math.ceil(this.inBounds.length/this.max_nav_item_per_page);			
 			jQuery(html_id_pagination).html('');
 			/* Create navigation pagination */			
-			if(nb_pages>1)for(j=0;j<nb_pages;j++) jQuery(html_id_pagination).append("<div class='locate-anything-page-nav locate-anything-page-nav-"+this.params["map-id"]+"' data-page='"+j+"'>"+(j+1)+"</div>");
+			//if(nb_pages>1)for(j=0;j<nb_pages;j++) jQuery(html_id_pagination).append("<div class='locate-anything-page-nav locate-anything-page-nav-"+this.params["map-id"]+"' data-page='"+j+"'>"+(j+1)+"</div>");
 			
 			/* Sets click event on Nav pagination */
-			var self=this;
-			jQuery(".locate-anything-page-nav-"+this.params["map-id"]).click(function(e) {				
-					var page=jQuery(e.target).attr("data-page");
-					if(page) self.updateNav(parseInt(page));			
-			});
+			// var self=this;
+			// jQuery(".locate-anything-page-nav-"+this.params["map-id"]).click(function(e) {				
+			// 		var page=jQuery(e.target).attr("data-page");
+			// 		if(page) self.updateNav(parseInt(page));			
+			// });
+
+			/* SHORT STYLE Create navigation pagination */
+			if ( this.params["map-id"] != 'preview' && this.inBounds.length > this.max_nav_item_per_page ) {
+			   window['map_nav_pagination-'+this.params["map-id"]] = new tui.Pagination(document.getElementById('map-nav-pagination-'+this.params["map-id"]), {
+			        totalItems: this.inBounds.length,
+			        itemsPerPage: this.max_nav_item_per_page,
+			        visiblePages: 5,
+			        centerAlign: true,
+					template: {
+					    page: '<a href="#" class="tui-page-btn locate-anything-page-nav-'+this.params["map-id"]+'" data-page="{{page}}">{{page}}</a>',
+					    currentPage: '<strong class="tui-page-btn tui-is-selected locate-anything-page-nav-'+this.params["map-id"]+'" data-page="{{page}}">{{page}}</strong>',
+					    moveButton:
+					        '<a href="#" class="tui-page-btn tui-{{type}} custom-class-{{type}}">' +
+					            '<span class="tui-ico-{{type}}">{{type}}</span>' +
+					        '</a>',
+					    disabledMoveButton:
+					        '<span class="tui-page-btn tui-is-disabled tui-{{type}} custom-class-{{type}}">' +
+					            '<span class="tui-ico-{{type}}">{{type}}</span>' +
+					        '</span>',
+					    moreButton:
+					        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip custom-class-{{type}}">' +
+					            '<span class="tui-ico-ellip">...</span>' +
+					        '</a>'
+					}			        
+			    });
+			}
+
+			/* SHORT STYLE Sets click event on Nav pagination */
+			if ( this.params["map-id"] != 'preview' && this.inBounds.length > this.max_nav_item_per_page) {
+			    window['map_nav_pagination-'+this.params["map-id"]].on('beforeMove', function(e) {
+					var page = e.page;
+					if(page) {
+						return self.updateNav(parseInt(page-1));	
+					}		
+			    });
+			}
+
 			/* fills the navlist */	
 			var selectedmarkers=this.inBounds.slice();	
-			selectedmarkers=selectedmarkers.splice(showPage*this.max_nav_item_per_page,this.max_nav_item_per_page);				
+			selectedmarkers=selectedmarkers.splice(showPage*this.max_nav_item_per_page,this.max_nav_item_per_page);
 			for (i in selectedmarkers) jQuery(html_id).append(this.template_list(selectedmarkers[i]));			
 			jQuery(html_id).fadeIn();	
 
