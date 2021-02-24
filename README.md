@@ -324,3 +324,12 @@ update get_terms and enable hide_emty
 
 = 1.3.578 = 
 fix bug js sort
+
+= 1.3.579 = 
+update ver
+
+= 1.3.58 = 
+update ver
+
+= 1.3.59 = 
+add short pagination style
