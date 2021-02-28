@@ -620,6 +620,12 @@ var leaflet_filters_class= function (params){
 		for(i in this.indexTaxonomyTerms["markers"]) {	
 				if(this.indexTaxonomyTerms["markers"][i].id==marker_icon_id) {					
 					var selected_icon=this.indexTaxonomyTerms["markers"][i];
+					// fix popup position
+					if ( selected_icon.width < 48 ) {
+						var popupAnchor_positins = 0-selected_icon.width/2;
+					} else {
+						var popupAnchor_positins = 0;
+					}					
 					/* ionicons */
 					if(marker_icon_id.indexOf("ion")==0){						
 							 return L.AwesomeMarkers.icon({prefix:"ion", icon:selected_icon["symbol"] ,iconColor:selected_icon["symbol-color"], markerColor: selected_icon["marker-color"] });
@@ -631,7 +637,7 @@ var leaflet_filters_class= function (params){
 					    iconRetinaUrl: '',
 					    iconSize: [selected_icon.width, selected_icon.height],
 					    iconAnchor: [selected_icon.width/2,selected_icon.height],
-					    popupAnchor: [0, 0-selected_icon.height-5],
+					    popupAnchor: [popupAnchor_positins, 0-selected_icon.height-5],
 					    shadowUrl: selected_icon.shadowUrl,
 					    shadowRetinaUrl: '',
 					    shadowSize: [selected_icon.shadowWidth,selected_icon.shadowHeight],

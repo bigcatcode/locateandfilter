@@ -339,3 +339,6 @@ update ver
 
 = 1.4.1 =
 fix bug separately shortcodes + pagination
+
+= 1.4.2 =
+fix popup position, fix single shorcode
