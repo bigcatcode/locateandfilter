@@ -174,7 +174,11 @@ class Locate_And_Filter_Public {
 		// tui-pagination JS
 		wp_enqueue_script ( $this->plugin_name . "-tui-pagination", plugin_dir_url ( __FILE__ ) . 'js/tui-pagination/tui-pagination.min.js', array (
 				'jquery'
-		), $this->version, false );		
+		), $this->version, false );
+		// providers
+		wp_enqueue_script ( $this->plugin_name . "-leaflet-providers", plugin_dir_url ( __FILE__ ) . 'js/leaflet-providers/leaflet-providers.js', array (
+				'jquery' 
+		), $this->version, false );					
 	}
 	
 
@@ -449,9 +453,27 @@ class Locate_And_Filter_Public {
 					"maxZoom"=>20,
 					"minZoom"=>1,
 					"zoom"=>10);
+		} else if ( $params ["overlay"] == "addon-0" ) {
+				$params ["overlay"] = (object)array(
+					"attribution"=> 'overlay-addon',
+				);
+			$params ["overlay-addon"] = unserialize(get_option ("locate-anything-option-map-provider-addon"));
+			$params ["overlay-addon-accessToken-jawg"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-jawg"));
+			$params ["overlay-addon-accessToken-thunderforest"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-thunderforest"));
+			$params ["overlay-addon-accessToken-mapbox"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-mapbox"));
+			$params ["overlay-addon-accessToken-maptiler"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-maptiler"));
+			$params ["overlay-addon-accessToken-openweathermap"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-openweathermap"));
+			$params ["overlay-addon-accessToken-here"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-here"));			
 		} else {
 			$overlays = Locate_And_Filter_Assets::getMapOverlays ();			
-			$params ["overlay"] = $overlays [$params ["overlay"]];			
+			$params ["overlay"] = $overlays [$params ["overlay"]];
+			$params ["overlay-addon"] = '';
+			$params ["overlay-addon-accessToken-jawg"] = '';
+			$params ["overlay-addon-accessToken-thunderforest"] = '';
+			$params ["overlay-addon-accessToken-mapbox"] = '';
+			$params ["overlay-addon-accessToken-maptiler"] = '';
+			$params ["overlay-addon-accessToken-openweathermap"] = '';
+			$params ["overlay-addon-accessToken-here"] = '';						
 		}
 		$maxZoom = $settings['locate-anything-max-zoom'];
 		if (! $maxZoom)
@@ -509,7 +531,14 @@ class Locate_And_Filter_Public {
 						"bing-key"  :	'<?php echo $params["bing-key"]?>',
 						"load-google"	:	'<?php echo $params["load-google"]?>',
 						"load-bing"	:	'<?php echo $params["load-bing"]?>',
-						"load-yandex"	:	'<?php echo $params["load-yandex"]?>'
+						"load-yandex"	:	'<?php echo $params["load-yandex"]?>',
+						"overlay-addon"	:	'<?php echo $params ["overlay-addon"]?>',
+						"overlay-addon-accessToken-jawg"	:	'<?php echo $params ["overlay-addon-accessToken-jawg"]?>',
+						"overlay-addon-accessToken-thunderforest"	:	'<?php echo $params ["overlay-addon-accessToken-thunderforest"]?>',
+						"overlay-addon-accessToken-mapbox"	:	'<?php echo $params ["overlay-addon-accessToken-mapbox"]?>',
+						"overlay-addon-accessToken-maptiler"	:	'<?php echo $params ["overlay-addon-accessToken-maptiler"]?>',
+						"overlay-addon-accessToken-openweathermap"	:	'<?php echo $params ["overlay-addon-accessToken-openweathermap"]?>',
+						"overlay-addon-accessToken-here"	:	'<?php echo $params ["overlay-addon-accessToken-here"]?>'			
 					};
 
 						/* define instance name*/

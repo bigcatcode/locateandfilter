@@ -174,7 +174,10 @@ class Locate_And_Filter_Admin
 			$this->plugin_name . "-googleAPI") , $this->version, false);
 		// Edit Area js
 		wp_enqueue_script($this->plugin_name . "-editArea", plugin_dir_url(__FILE__) . '../admin/js/edit_area/edit_area_full.js' , array('jquery') , $this->version, false);
-
+		// providers
+		wp_enqueue_script ( $this->plugin_name . "-leaflet-providers", plugin_dir_url ( __FILE__ ) . '../public/js/leaflet-providers/leaflet-providers.js', array (
+				'jquery' 
+		), $this->version, false );	
 		
 		
 

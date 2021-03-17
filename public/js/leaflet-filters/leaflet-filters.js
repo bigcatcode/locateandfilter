@@ -93,7 +93,7 @@ var leaflet_filters_class= function (params){
 			// });
 
 			/* SHORT STYLE Create navigation pagination */
-			if ( this.params["map-id"] != 'preview' && this.inBounds.length > this.max_nav_item_per_page && jQuery('#map-nav-pagination-'+this.params["map-id"]).length > 0  ) {
+			if ( this.params["map-id"] != 'preview' && this.inBounds.length > this.max_nav_item_per_page && jQuery('#map-nav-pagination-'+this.params["map-id"]).length > 0 ) {
 			   window['map_nav_pagination-'+this.params["map-id"]] = new tui.Pagination(document.getElementById('map-nav-pagination-'+this.params["map-id"]), {
 			        totalItems: this.inBounds.length,
 			        itemsPerPage: this.max_nav_item_per_page,
@@ -299,6 +299,35 @@ var leaflet_filters_class= function (params){
 			var styles = [{'featureType': 'all','stylers': stylers}];
 			var ggl = new L.Google(this.params["overlay"].url, {mapOptions: {styles: styles}});
 			this.map.addLayer(ggl);
+
+		} else if( this.params["overlay"].attribution == "overlay-addon" ) {
+			var parts = this.params["overlay-addon"].split('.');
+			var providerName = parts[0];
+			var variantName = parts[1];
+			if ( providerName == 'Jawg' ) {
+				var accessToken =  this.params["overlay-addon-accessToken-jawg"];
+			} else if ( providerName == 'Thunderforest' ) {
+				var accessToken =  this.params["overlay-addon-accessToken-thunderforest"];
+			} else if ( providerName == 'MapBox' ) {
+				var accessToken =  this.params["overlay-addon-accessToken-mapbox"];		
+			} else if ( providerName == 'MapTiler' ) {
+				var accessToken =  this.params["overlay-addon-accessToken-maptiler"];
+			} else if ( providerName == 'OpenWeatherMap' ) {
+				var accessToken =  this.params["overlay-addon-accessToken-openweathermap"];
+			} else if ( providerName == 'HEREv3' ) {
+				var accessToken =  this.params["overlay-addon-accessToken-here"];										
+			} else {
+				var accessToken =  '';
+			}
+
+			var TileProvider = L.tileLayer.provider( this.params["overlay-addon"], {
+			    accessToken:  accessToken,
+			    apikey:  accessToken,
+			    key: accessToken,
+			    apiKey: accessToken,
+			});
+			TileProvider.addTo(this.map);
+
 		} else {
 		var TileProvider=L.tileLayer(this.params["overlay"].url,{attribution : this.params["overlay"].attribution});
 		TileProvider.addTo(this.map);

@@ -3,7 +3,7 @@
 Website URL: http://locateandfilter.monothemes.com/
 Plugin URL: https://wordpress.org/plugins/locateandfilter/
 
-Software Version: WordPress 5.5, WordPress 5.x, WordPress 4.5
+Software Version: WordPress 5.7, WordPress 5.x, WordPress 4.5
 
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet
 
@@ -342,3 +342,6 @@ fix bug separately shortcodes + pagination
 
 = 1.4.2 =
 fix popup position, fix single shorcode
+
+= 1.4.3 =
+add support additional overlays
