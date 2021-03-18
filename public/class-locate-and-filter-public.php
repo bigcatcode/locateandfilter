@@ -1454,9 +1454,27 @@ public static function defineDefaultMarker($params){
 					"maxZoom"=>20,
 					"minZoom"=>1,
 					"zoom"=>10);
+		} else if ( $params ["overlay"] == "addon-0" ) {
+				$params ["overlay"] = (object)array(
+					"attribution"=> 'overlay-addon',
+				);
+			$params ["overlay-addon"] = unserialize(get_option ("locate-anything-option-map-provider-addon"));
+			$params ["overlay-addon-accessToken-jawg"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-jawg"));
+			$params ["overlay-addon-accessToken-thunderforest"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-thunderforest"));
+			$params ["overlay-addon-accessToken-mapbox"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-mapbox"));
+			$params ["overlay-addon-accessToken-maptiler"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-maptiler"));
+			$params ["overlay-addon-accessToken-openweathermap"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-openweathermap"));
+			$params ["overlay-addon-accessToken-here"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-here"));			
 		} else {
 			$overlays = Locate_And_Filter_Assets::getMapOverlays ();			
-			$params ["overlay"] = $overlays [$params ["overlay"]];			
+			$params ["overlay"] = $overlays [$params ["overlay"]];
+			$params ["overlay-addon"] = '';
+			$params ["overlay-addon-accessToken-jawg"] = '';
+			$params ["overlay-addon-accessToken-thunderforest"] = '';
+			$params ["overlay-addon-accessToken-mapbox"] = '';
+			$params ["overlay-addon-accessToken-maptiler"] = '';
+			$params ["overlay-addon-accessToken-openweathermap"] = '';
+			$params ["overlay-addon-accessToken-here"] = '';						
 		}
 		$maxZoom = $settings['locate-anything-max-zoom'];
 		if (! $maxZoom)
@@ -1519,7 +1537,14 @@ public static function defineDefaultMarker($params){
 						"bing-key"  :	'<?php echo $params["bing-key"]?>',
 						"load-google"	:	'<?php echo $params["load-google"]?>',
 						"load-bing"	:	'<?php echo $params["load-bing"]?>',
-						"load-yandex"	:	'<?php echo $params["load-yandex"]?>'
+						"load-yandex"	:	'<?php echo $params["load-yandex"]?>',
+						"overlay-addon"	:	'<?php echo $params ["overlay-addon"]?>',
+						"overlay-addon-accessToken-jawg"	:	'<?php echo $params ["overlay-addon-accessToken-jawg"]?>',
+						"overlay-addon-accessToken-thunderforest"	:	'<?php echo $params ["overlay-addon-accessToken-thunderforest"]?>',
+						"overlay-addon-accessToken-mapbox"	:	'<?php echo $params ["overlay-addon-accessToken-mapbox"]?>',
+						"overlay-addon-accessToken-maptiler"	:	'<?php echo $params ["overlay-addon-accessToken-maptiler"]?>',
+						"overlay-addon-accessToken-openweathermap"	:	'<?php echo $params ["overlay-addon-accessToken-openweathermap"]?>',
+						"overlay-addon-accessToken-here"	:	'<?php echo $params ["overlay-addon-accessToken-here"]?>'						
 					};
 
 						/* define instance name*/

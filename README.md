@@ -345,3 +345,6 @@ fix popup position, fix single shorcode
 
 = 1.4.3 =
 add support additional overlays
+
+= 1.4.4 =
+* fix single shortcode
