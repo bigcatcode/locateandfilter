@@ -496,7 +496,7 @@ class Locate_And_Filter_Public {
 
 		<script type="text/javascript">
 		var current_map;
-					jQuery(window).load(function(){ 
+					jQuery(window).on('load', function () {
 						var map_id='<?php echo $map_id?>';
 						<?php
 							if (Locate_And_Filter_Public::check_license_key('label')===false) {?>
@@ -1503,7 +1503,7 @@ public static function defineDefaultMarker($params){
 
 		<script type="text/javascript">
 		var current_map;
-					jQuery(window).load(function(){ 
+					jQuery(window).on('load', function () { 
 						var map_id='<?php echo $map_id?>';
 						<?php
 							if (Locate_And_Filter_Public::check_license_key('label')===false) {?>

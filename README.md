@@ -351,3 +351,6 @@ add support additional overlays
 
 = 1.4.5 =
 * add order filters
+
+= 1.4.6 =
+* fix deprecated fn
