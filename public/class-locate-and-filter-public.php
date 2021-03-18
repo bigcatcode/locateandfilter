@@ -647,10 +647,11 @@ class Locate_And_Filter_Public {
 	public static function generateFilterForm($map_id, $categoryfilter='') {
 		//var_dump($categoryfilter);
 		$filters = get_post_meta ( $map_id, "locate-anything-show-filters", true );	
-		$type = get_post_meta ( $map_id, "locate-anything-source", true );				
+		$type = get_post_meta ( $map_id, "locate-anything-source", true );
+		$filters_ = Locate_And_Filter_Tools::Order_Filters( $filters, $type, $map_id );			
 		$r = '<form id="map-filters-'.$map_id.'" method="post" action="#"><ul id="category-filters-container1" class="category-filters-container">';
-		if (is_array ( $filters ) && $type!=="user")
-			foreach ( $filters as $filter ) {
+		if (is_array ( $filters_ ) && $type!=="user") {
+			foreach ( $filters_ as $filter => $val ) {
 				$allowed= get_post_meta($map_id,'locate-anything-allowed-filters-value-'.$filter,true);
 				$taxonomy = get_taxonomy ( $filter );
 				if(!$taxonomy) continue;
@@ -678,6 +679,7 @@ class Locate_And_Filter_Public {
 					$r .= '<li class="filter-checkbox" data-sort="'.$filter_selector_sort.'"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty, $categoryfilter ) . '</li>';
 				}
 			}
+		}
 		$r=apply_filters("locate_anything_add_custom_filters",$r,$map_id,$filters);
 		$r .= '</ul></form>';
 		return $r;

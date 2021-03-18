@@ -348,3 +348,6 @@ add support additional overlays
 
 = 1.4.4 =
 * fix single shortcode
+
+= 1.4.5 =
+* add order filters
