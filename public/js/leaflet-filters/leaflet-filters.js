@@ -651,7 +651,7 @@ var leaflet_filters_class= function (params){
 					var selected_icon=this.indexTaxonomyTerms["markers"][i];
 					// fix popup position
 					if ( selected_icon.width < 48 ) {
-						var popupAnchor_positins = 0-selected_icon.width/2;
+						var popupAnchor_positins = 0; //var popupAnchor_positins = 0-selected_icon.width/2;
 					} else {
 						var popupAnchor_positins = 0;
 					}					

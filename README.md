@@ -354,3 +354,6 @@ add support additional overlays
 
 = 1.4.6 =
 * fix deprecated fn
+
+= 1.4.7 =
+* fix popup position
