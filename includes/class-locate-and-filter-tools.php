@@ -34,7 +34,7 @@ class Locate_And_Filter_Tools {
 	 * @param  [string] $file_path
 	 * @return [mixed]  file data
 	 */
-	public function get_local_file_contents( $file_path ) {
+	public static function get_local_file_contents( $file_path ) {
 	    ob_start();
 	    include $file_path;
 	    $contents = ob_get_clean();
@@ -214,7 +214,7 @@ class Locate_And_Filter_Tools {
 		
 	}
 
-	public function getLocaleList(){
+	public static function getLocaleList(){
 			return array(
 		"af"=>"Afrikaans",
 		"ak"=>"Akan",

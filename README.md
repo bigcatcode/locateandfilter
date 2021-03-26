@@ -357,3 +357,6 @@ add support additional overlays
 
 = 1.4.7 =
 * fix popup position
+
+= 1.4.8 =
+* fix deprecated php fn
