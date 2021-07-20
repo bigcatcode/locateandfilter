@@ -360,3 +360,6 @@ add support additional overlays
 
 = 1.4.8 =
 * fix deprecated php fn
+
+= 1.4.9 =
+* added support custom style map

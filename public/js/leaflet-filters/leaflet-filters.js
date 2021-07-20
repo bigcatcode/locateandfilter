@@ -304,8 +304,13 @@ var leaflet_filters_class= function (params){
 			var parts = this.params["overlay-addon"].split('.');
 			var providerName = parts[0];
 			var variantName = parts[1];
+			var custom_style = '';
 			if ( providerName == 'Jawg' ) {
 				var accessToken =  this.params["overlay-addon-accessToken-jawg"];
+				if (variantName == 'Custom') {
+					this.params["overlay-addon"] = providerName;
+					custom_style = this.params["overlay-addon-customstyle-jawg"];
+				} 				
 			} else if ( providerName == 'Thunderforest' ) {
 				var accessToken =  this.params["overlay-addon-accessToken-thunderforest"];
 			} else if ( providerName == 'MapBox' ) {
@@ -320,12 +325,19 @@ var leaflet_filters_class= function (params){
 				var accessToken =  '';
 			}
 
-			var TileProvider = L.tileLayer.provider( this.params["overlay-addon"], {
-			    accessToken:  accessToken,
-			    apikey:  accessToken,
-			    key: accessToken,
-			    apiKey: accessToken,
-			});
+			if ( providerName == 'Jawg' && variantName == 'Custom' ) {
+				var TileProvider = L.tileLayer.provider( this.params["overlay-addon"], {
+				    accessToken:  accessToken,
+				    variant: custom_style
+				});
+			} else {
+				var TileProvider = L.tileLayer.provider( this.params["overlay-addon"], {
+				    accessToken:  accessToken,
+				    apikey:  accessToken,
+				    key: accessToken,
+				    apiKey: accessToken
+				});				
+			}			
 			TileProvider.addTo(this.map);
 
 		} else {

@@ -459,6 +459,7 @@ class Locate_And_Filter_Public {
 				);
 			$params ["overlay-addon"] = unserialize(get_option ("locate-anything-option-map-provider-addon"));
 			$params ["overlay-addon-accessToken-jawg"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-jawg"));
+			$params ["overlay-addon-customstyle-jawg"] = unserialize(get_option ("locate-anything-option-map-provider-addon-customstyle-jawg"));
 			$params ["overlay-addon-accessToken-thunderforest"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-thunderforest"));
 			$params ["overlay-addon-accessToken-mapbox"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-mapbox"));
 			$params ["overlay-addon-accessToken-maptiler"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-maptiler"));
@@ -469,6 +470,7 @@ class Locate_And_Filter_Public {
 			$params ["overlay"] = $overlays [$params ["overlay"]];
 			$params ["overlay-addon"] = '';
 			$params ["overlay-addon-accessToken-jawg"] = '';
+			$params ["overlay-addon-customstyle-jawg"] = '';
 			$params ["overlay-addon-accessToken-thunderforest"] = '';
 			$params ["overlay-addon-accessToken-mapbox"] = '';
 			$params ["overlay-addon-accessToken-maptiler"] = '';
@@ -534,6 +536,7 @@ class Locate_And_Filter_Public {
 						"load-yandex"	:	'<?php echo $params["load-yandex"]?>',
 						"overlay-addon"	:	'<?php echo $params ["overlay-addon"]?>',
 						"overlay-addon-accessToken-jawg"	:	'<?php echo $params ["overlay-addon-accessToken-jawg"]?>',
+						"overlay-addon-customstyle-jawg"	:	'<?php echo $params ["overlay-addon-customstyle-jawg"]?>',
 						"overlay-addon-accessToken-thunderforest"	:	'<?php echo $params ["overlay-addon-accessToken-thunderforest"]?>',
 						"overlay-addon-accessToken-mapbox"	:	'<?php echo $params ["overlay-addon-accessToken-mapbox"]?>',
 						"overlay-addon-accessToken-maptiler"	:	'<?php echo $params ["overlay-addon-accessToken-maptiler"]?>',
@@ -1462,6 +1465,7 @@ public static function defineDefaultMarker($params){
 				);
 			$params ["overlay-addon"] = unserialize(get_option ("locate-anything-option-map-provider-addon"));
 			$params ["overlay-addon-accessToken-jawg"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-jawg"));
+			$params ["overlay-addon-customstyle-jawg"] = unserialize(get_option ("locate-anything-option-map-provider-addon-customstyle-jawg"));
 			$params ["overlay-addon-accessToken-thunderforest"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-thunderforest"));
 			$params ["overlay-addon-accessToken-mapbox"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-mapbox"));
 			$params ["overlay-addon-accessToken-maptiler"] = unserialize(get_option ("locate-anything-option-map-provider-addon-accessToken-maptiler"));
@@ -1472,6 +1476,7 @@ public static function defineDefaultMarker($params){
 			$params ["overlay"] = $overlays [$params ["overlay"]];
 			$params ["overlay-addon"] = '';
 			$params ["overlay-addon-accessToken-jawg"] = '';
+			$params ["overlay-addon-customstyle-jawg"] = '';
 			$params ["overlay-addon-accessToken-thunderforest"] = '';
 			$params ["overlay-addon-accessToken-mapbox"] = '';
 			$params ["overlay-addon-accessToken-maptiler"] = '';
@@ -1542,6 +1547,7 @@ public static function defineDefaultMarker($params){
 						"load-yandex"	:	'<?php echo $params["load-yandex"]?>',
 						"overlay-addon"	:	'<?php echo $params ["overlay-addon"]?>',
 						"overlay-addon-accessToken-jawg"	:	'<?php echo $params ["overlay-addon-accessToken-jawg"]?>',
+						"overlay-addon-customstyle-jawg"	:	'<?php echo $params ["overlay-addon-customstyle-jawg"]?>',
 						"overlay-addon-accessToken-thunderforest"	:	'<?php echo $params ["overlay-addon-accessToken-thunderforest"]?>',
 						"overlay-addon-accessToken-mapbox"	:	'<?php echo $params ["overlay-addon-accessToken-mapbox"]?>',
 						"overlay-addon-accessToken-maptiler"	:	'<?php echo $params ["overlay-addon-accessToken-maptiler"]?>',
