@@ -497,8 +497,15 @@ class Locate_And_Filter_Public {
 		?>
 
 		<script type="text/javascript">
-		var current_map;
-					jQuery(window).on('load', function () {
+			(async() => {
+			    console.log("waiting for jQuery");
+
+			    while(!window.hasOwnProperty("jQuery")) {
+			        await new Promise(resolve => setTimeout(resolve, 100));
+			    }
+
+				var current_map;
+				jQuery(window).on('load', function () {
 						var map_id='<?php echo $map_id?>';
 						<?php
 							if (Locate_And_Filter_Public::check_license_key('label')===false) {?>
@@ -634,8 +641,10 @@ class Locate_And_Filter_Public {
 						jQuery('.filter-select select').chosen({width:'250px',allow_single_deselect:'true'});
 						";	
 					}?>				
-			});
-			</script>
+				});
+    			console.log("jQuery is loaded.");
+			})();				
+		</script>
 	<?php
 		
 	}
@@ -1507,8 +1516,15 @@ public static function defineDefaultMarker($params){
 		?>
 
 		<script type="text/javascript">
-		var current_map;
-					jQuery(window).on('load', function () { 
+			(async() => {
+			    console.log("waiting for jQuery");
+
+			    while(!window.hasOwnProperty("jQuery")) {
+			        await new Promise(resolve => setTimeout(resolve, 100));
+			    }
+
+				var current_map;
+				jQuery(window).on('load', function () { 
 						var map_id='<?php echo $map_id?>';
 						<?php
 							if (Locate_And_Filter_Public::check_license_key('label')===false) {?>
@@ -1658,8 +1674,10 @@ public static function defineDefaultMarker($params){
 						jQuery('.filter-select select').chosen({width:'250px',allow_single_deselect:'true'});
 						";	
 					}?>				
-			});
-			</script>
+				});
+    			console.log("jQuery is loaded.");
+			})();				
+		</script>
 	<?php
 		
 	}
