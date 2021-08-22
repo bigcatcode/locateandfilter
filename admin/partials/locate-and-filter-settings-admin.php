@@ -137,5 +137,5 @@
 </ul>
 
 <?php echo apply_filters("locate_anything_add_option_pane","")?>
-<div style="text-align: right"><input type="submit" class='button-admin' style=""></div>
+<div style="text-align: right"><input type="submit" class='button-admin' value="<?php _e("Save","locate-anything");?>"></div>
 </form>

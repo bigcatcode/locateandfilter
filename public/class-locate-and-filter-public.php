@@ -40,8 +40,8 @@ class Locate_And_Filter_Public {
 	 *        	The version of this plugin.
 	 */
 	public function __construct($plugin_name, $version) {
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+        $this->plugin_name = 'locate-and-filter';
+        $this->version = '1.4.11';
 	}
 	
 	/**
@@ -498,7 +498,7 @@ class Locate_And_Filter_Public {
 
 		<script type="text/javascript">
 			(async() => {
-			    console.log("waiting for jQuery");
+			    //console.log("waiting for jQuery");
 
 			    while(!window.hasOwnProperty("jQuery")) {
 			        await new Promise(resolve => setTimeout(resolve, 100));
@@ -642,7 +642,7 @@ class Locate_And_Filter_Public {
 						";	
 					}?>				
 				});
-    			console.log("jQuery is loaded.");
+    			//console.log("jQuery is loaded.");
 			})();				
 		</script>
 	<?php
@@ -1517,7 +1517,7 @@ public static function defineDefaultMarker($params){
 
 		<script type="text/javascript">
 			(async() => {
-			    console.log("waiting for jQuery");
+			    //console.log("waiting for jQuery");
 
 			    while(!window.hasOwnProperty("jQuery")) {
 			        await new Promise(resolve => setTimeout(resolve, 100));
@@ -1675,7 +1675,7 @@ public static function defineDefaultMarker($params){
 						";	
 					}?>				
 				});
-    			console.log("jQuery is loaded.");
+    			//console.log("jQuery is loaded.");
 			})();				
 		</script>
 	<?php

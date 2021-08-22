@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Plugin Name:       LocateAndFilter
  * Plugin URI:        http://locateandfilter.monothemes.com
  * Description:       LocateAndFilter is a versatile and highly customizable WordPress plugin aimed at creating nice looking searchable/filterable maps.
- * Version:           1.4.10
+ * Version:           1.4.11
  * Last Modified : 	  2021-02-20
  * Author:            Andrii Monin
  * Author URI:        http://www.bigcatcode.com
@@ -69,8 +69,32 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter.php';
  */
 function run_locate_and_filter() {
 
-	$plugin = new Locate_And_Filter();
-	$plugin->run();
+    if ( !function_exists( 'is_plugin_active' ) ) {
+        include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+    }
+
+    if ( !is_plugin_active( 'locateandfilter_pro/locateandfilter.php' ) ) {
+
+        $plugin = new Locate_And_Filter();
+        $plugin->run();
+
+    } else {
+
+        function locate_and_filter_notice() {
+
+            ?>
+                <div class="error"><p>
+                    <?php printf(__('Please de-activate and remove the PRO version of LocateAndFilter before activating the free version.', 'locate-anything'));
+                    ?>
+                </p></div>
+            <?php
+
+        }
+
+        add_action('admin_notices', 'locate_and_filter_notice');
+        deactivate_plugins( 'locateandfilter/locateandfilter.php' );
+
+    }
 
 }
 run_locate_and_filter();

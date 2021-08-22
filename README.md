@@ -367,3 +367,7 @@ add support additional overlays
 
 = 1.4.10 =
 * fix jQuery loaded error
+
+= 1.4.11 =
+* fix loading js
+
