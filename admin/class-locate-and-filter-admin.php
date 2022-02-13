@@ -71,23 +71,34 @@ class Locate_And_Filter_Admin
 	 * @access   private
 	 */
 
-	public static function saveRootPath(){	
-		$f = fopen(plugin_dir_path(dirname(__FILE__)).'/cache/path2root',"w");
-		$fpath = realpath(get_home_path())."/wp"."-load.php";
-		if(is_file($fpath)) fwrite($f, $fpath);
-		else {
-			// some plugin change the normal path, tries some prefixes
-			$try_those_prefixes = array("admin","private");
-			foreach ($try_those_prefixes as $prefix) {
-				$fpath = realpath(get_home_path())."/$prefix/wp"."-load.php";
-				if(is_file($fpath)) {
-					fwrite($f, $fpath);
-					break;
-				}	
-			}
-			
+	public static function saveRootPath(){
+
+			$path = plugin_dir_path(dirname(__FILE__)) ."cache";
+
+		if ( !is_writable($path) ) {
+			if ( !@chmod($path, 0777) ) {
+				return;
+			} 
+		} else {
+
+				$f = fopen(plugin_dir_path(dirname(__FILE__)).'/cache/path2root',"w");
+				$fpath = realpath(get_home_path())."/wp"."-load.php";
+				if(is_file($fpath)) fwrite($f, $fpath);
+				else {
+					// some plugin change the normal path, tries some prefixes
+					$try_those_prefixes = array("admin","private");
+					foreach ($try_those_prefixes as $prefix) {
+						$fpath = realpath(get_home_path())."/$prefix/wp"."-load.php";
+						if(is_file($fpath)) {
+							fwrite($f, $fpath);
+							break;
+						}	
+					}
+					
+				}
+				fclose($f);
+
 		}
-		fclose($f);	
 	}
 
 	/**
@@ -311,7 +322,7 @@ class Locate_And_Filter_Admin
 	public static function check_cache_permissions() {
 		$path=plugin_dir_path(dirname(__FILE__)) ."cache";
 		if(!is_writable($path)){if(!@chmod($path, 0777)) {
-			echo '<div class="update-nag"><p>'.__("<b>Error<b> : Please add write permissions on the following directory : $path","locate-and-filter").'</p></div>';
+			echo '<div class="notice notice-error"><p>'.__("<b>Error</b> : Please add write permissions on the following directory : $path","locate-and-filter").'</p></div>';
 			}
 		}
 	}
@@ -831,7 +842,7 @@ class Locate_And_Filter_Admin
 	/**
 	 *  function : sanitaze options value
 	 */
-	private function locate_anything_sanitaze_option($key, $var){
+	private static function locate_anything_sanitaze_option($key, $var){
 		if ( is_array( $var ) ) {
 			return array_map( 'sanitize_text_field', $var );
 		} else {
