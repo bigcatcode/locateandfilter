@@ -16,11 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 <?php 
 /* Outputs layout */
-if ($categoryfilter) { 
-	$template=str_replace(array("[map]","[navlist]","[filters]"),array("[LocateAndFilter_map map_id=".$map_id."]","[LocateAndFilter_navlist map_id=".$map_id."]","[LocateAndFilter_filters map_id=".$map_id." categoryfilter=".$categoryfilter." ]"),$template);
-} else {
-	$template=str_replace(array("[map]","[navlist]","[filters]"),array("[LocateAndFilter_map map_id=".$map_id."]","[LocateAndFilter_navlist map_id=".$map_id."]","[LocateAndFilter_filters map_id=".$map_id."]"),$template);
-}
+	$template = str_replace( array("[map]","[navlist]","[filters]"), array("[LocateAndFilter_map map_id=".$map_id."]", "[LocateAndFilter_navlist map_id=".$map_id."]", "[LocateAndFilter_filters map_id=".$map_id."]"), $template );
 remove_filter( 'the_content', 'wpautop'); 
 
 /*** COMPATIBILITY WITH OTHER PLUGINS */

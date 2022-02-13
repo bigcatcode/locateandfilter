@@ -107,6 +107,18 @@ var annotations=
   target : '#display_load-pretty-checkbox',
   content: '<?php _e("A pure CSS library to beautify checkbox and radio buttons","locate-and-filter")?>'
 }),
+"enable_fitBounds": new Anno({ 
+  target : '#enable_fitBounds',
+  content: '<?php _e("Sets a map view that contains the given Filters bounds with the maximum zoom level possible.","locate-and-filter")?>'
+}),
+"enable_zoom_to_marker": new Anno({ 
+  target : '#enable_zoom_to_marker',
+  content: '<?php _e("Sets zoom map from single zoom options, on popup event.","locate-and-filter")?>'
+}),
+"filter_terms_orderby": new Anno({ 
+  target : '#filter_terms_orderby',
+  content: '<?php _e(" No - Orderby=name . Yes - Orderby=description . You can use term description for custom sort.","locate-and-filter")?>'
+}),
 }
 
 var target=jQuery(e.target).attr("data-target");

@@ -59,7 +59,7 @@ class Locate_And_Filter_Admin
 	 */
 	public function __construct($plugin_name, $version) {
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;		
+		$this->version = '1.4.128';		
 	}
 
 
@@ -71,9 +71,9 @@ class Locate_And_Filter_Admin
 	 * @access   private
 	 */
 
-	public static function saveRootPath(){
+	public static function saveRootPath() {
 
-			$path = plugin_dir_path(dirname(__FILE__)) ."cache";
+		$path = plugin_dir_path(dirname(__FILE__)) ."cache";
 
 		if ( !is_writable($path) ) {
 			if ( !@chmod($path, 0777) ) {
@@ -81,24 +81,24 @@ class Locate_And_Filter_Admin
 			} 
 		} else {
 
-				$f = fopen(plugin_dir_path(dirname(__FILE__)).'/cache/path2root',"w");
-				$fpath = realpath(get_home_path())."/wp"."-load.php";
-				if(is_file($fpath)) fwrite($f, $fpath);
-				else {
-					// some plugin change the normal path, tries some prefixes
-					$try_those_prefixes = array("admin","private");
-					foreach ($try_those_prefixes as $prefix) {
-						$fpath = realpath(get_home_path())."/$prefix/wp"."-load.php";
-						if(is_file($fpath)) {
-							fwrite($f, $fpath);
-							break;
-						}	
-					}
-					
+			$f = fopen(plugin_dir_path(dirname(__FILE__)).'/cache/path2root',"w");
+			$fpath = realpath(get_home_path())."/wp"."-load.php";
+			if(is_file($fpath)) fwrite($f, $fpath);
+			else {
+				// some plugin change the normal path, tries some prefixes
+				$try_those_prefixes = array("admin","private");
+				foreach ($try_those_prefixes as $prefix) {
+					$fpath = realpath(get_home_path())."/$prefix/wp"."-load.php";
+					if(is_file($fpath)) {
+						fwrite($f, $fpath);
+						break;
+					}	
 				}
-				fclose($f);
-
+				
+			}
+			fclose($f);
 		}
+
 	}
 
 	/**
@@ -150,7 +150,9 @@ class Locate_And_Filter_Admin
 		if(strpos($screen->base,'user')===false && !in_array($screen->post_type,$allowed_post_types)) return;
 
 		wp_enqueue_media();
-		wp_enqueue_script($this->plugin_name . "-adminjs", plugin_dir_url(__FILE__) . 'js/locate-and-filter-admin.js');
+		wp_enqueue_script($this->plugin_name . "-adminjs", plugin_dir_url(__FILE__) . 'js/locate-and-filter-admin.js', array (
+			'jquery'
+		) , $this->version, false);
 		// leaflet JS
 		wp_enqueue_script($this->plugin_name . "-leaflet", plugin_dir_url(__FILE__) . '../public/js/leaflet-0.7.3/leaflet.js', array (
 			'jquery'
@@ -589,7 +591,11 @@ class Locate_And_Filter_Admin
 	 */
 	public static function getAdditional_field_list($post_type = false) {
 		$additional_field_list_json = stripslashes(unserialize(get_option('locate-anything-option-additional-field-list', '')));
-		if ($additional_field_list_json) $additional_field_list = json_decode($additional_field_list_json, true);
+		if ($additional_field_list_json) {
+			$additional_field_list = json_decode($additional_field_list_json, true);
+		} else {
+			$additional_field_list = array();
+		}
 		if (!is_array($additional_field_list)) $additional_field_list = array();
 		
 		if ($post_type !== false) {

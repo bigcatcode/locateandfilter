@@ -100,9 +100,52 @@ function LA_removeRow(field_id){
 	jQuery("#locate-anything-option-additional-field-list").val(LA_serializeAdditionalFieldList());
 }
 
-    
+   /* Geocoding function by nominatim */      
+function chooseAddr(lat1, lng1) {
+  jQuery("input[name='locate-anything-lat']").val(lat1);
+  jQuery("input[name='locate-anything-lon']").val(lng1);
+  jQuery('.append-markers').trigger('click');
+}
 
-   /* Geocoding function */    
+function add_result(arr) {
+    var out = "<br />";
+    var i;
+
+    if(arr.length > 0) {
+      for(i = 0; i < arr.length; i++) {
+        out += "<div class='address' title='Show Location and Coordinates' onclick='chooseAddr(" + arr[i].lat + ", " + arr[i].lon + ");return false;'>" + arr[i].display_name + "</div>";
+      }
+
+      document.getElementById('results').innerHTML = out;
+    } else {
+      document.getElementById('results').innerHTML = "Sorry, no results...";
+    }
+
+}    
+
+function addr_search() {
+   //var inp = document.getElementById("addr");
+    var addr_elements=new Array('locate-anything-streetnumber','locate-anything-street','locate-anything-zip','locate-anything-city','locate-anything-state','locate-anything-country');
+    var address=new Array();
+    for(var i=0;i<addr_elements.length;i++) {
+      address.push(jQuery("input[name='"+addr_elements[i]+"']").val());
+    }   
+   var xmlhttp = new XMLHttpRequest();
+   var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + address.join(",");
+   xmlhttp.onreadystatechange = function()
+   {
+     if (this.readyState == 4 && this.status == 200)
+     {
+      var myArr = JSON.parse(this.responseText);
+      add_result(myArr);
+      //console.log(myArr);
+     }
+   };
+   xmlhttp.open("GET", url, true);
+   xmlhttp.send();
+}
+
+   /* Geocoding function by Google */    
  function GetLocation() {
             var geocoder = new google.maps.Geocoder();
             var addr_elements=new Array('locate-anything-streetnumber','locate-anything-street','locate-anything-zip','locate-anything-city','locate-anything-state','locate-anything-country');

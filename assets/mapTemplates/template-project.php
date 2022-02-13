@@ -3,6 +3,9 @@
 <div id="bloc1">
 <h3 class="search_filter_title">Project zoeken:</h3>
 [filters]
+<div class="reset">
+<button id="reset-filters" type="button" class="btn btn-primary">Reset</button>
+</div>
 </div>
 <div id="bloc2">
 [map]
@@ -218,12 +221,15 @@ div.Tokenize {
 }
 
 /*pretty checkbox*/
-.LA_filters_checkbox.pretty {
+.LA_filters_checkbox.pretty,
+.LA_filters_radio.pretty {
     display: flex;
     line-height: 1.3;
 }
 .LA_filters_checkbox.pretty .state label:after,
-.LA_filters_checkbox.pretty .state label:before {
+.LA_filters_checkbox.pretty .state label:before,
+.LA_filters_radio.pretty .state label:after, 
+.LA_filters_radio.pretty .state label:before  {
     top: calc((41% - (100% - 1em)) - 8%);
 }
 .filter-select select {

@@ -1,6 +1,8 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly ?>
 <?php wp_nonce_field ('I961JpJQTj0crLKH0mGB', 'locate_anything_class_nonce' ); ?>
 
+<h1><?php echo esc_html__('LocateAndFilter - Options', 'locate-and-filter'); ?></h1>
+
 <h2 class="nav-tab-wrapper">
     <?php
       $tabs=array(__("Default settings","locate-anything"));
@@ -28,12 +30,12 @@
 <td><?php _e("GoogleMaps Key (only if you use GoogleMaps)","locate-anything");?>:</td>	<td><input type="text" name="locate-anything-option-googlemaps-key" value="<?php echo unserialize(get_option("locate-anything-option-googlemaps-key"));?>"></td>
 </tr>
 
-<tr>
+<tr class="deprecated">
 	<td><?php _e("BingMaps Key (only if you use BingMaps)","locate-anything");?>:</td>	<td><input type="text" name="locate-anything-option-bingmaps-key" value="<?php echo unserialize(get_option("locate-anything-option-bingmaps-key"));?>"></td>
 </tr>
 
 <tr>
-<td><?php _e("Map Language (for GoogleMaps and YandexMaps)","locate-anything");?>:</td>
+<td><?php _e("Map Language","locate-anything");?>:</td>
 <td><select name="locate-anything-option-map-language">
 <?php foreach (Locate_And_Filter_Tools::getLocaleList() as $locale => $language) {?>
 <option <?php if(unserialize(get_option('locate-anything-option-map-language'))==$locale) echo "selected";?> value="<?php echo  $locale;?>">
@@ -50,7 +52,7 @@
 <select multiple="multiple"	name="locate-anything-option-loadjs[]"	id="locate-anything-option-loadjs">
 <?php
 
-			$loadjs = array('google', 'bing', 'yandex', 'none');
+			$loadjs = array('google', 'none');
 
 			$selected_items = unserialize (get_option ( 'locate-anything-option-loadjs' ));
 			if(!is_array($selected_items)) $selected_items = array ();
@@ -121,13 +123,14 @@
 
 </ul>
 
-<h2><?php _e("Global map settings","locate-anything")?></h2>
+<h2><?php _e("Max Cluster Radius","locate-anything")?></h2>
+<a href='https://locateandfilter.monothemes.com/locateandfilter-pro-version/' class='proversion' target='_blank'>available only for PRO version</a>
 <ul>
-<li><?php _e("Max Cluster Radius","locate-anything")?> <input type="text" name="locate-anything-option-maxclusterradius" value="<?php echo unserialize(get_option("locate-anything-option-maxclusterradius"));?>">
-<label><?php _e("A cluster will cover at most this many pixels from its center, default 1. Set -1 for disable","locate-anything")?></label>
+<li>
+<input type="text" name="locate-anything-option-maxclusterradius" value="<?php echo unserialize(get_option("locate-anything-option-maxclusterradius"));?>">
+<label><?php _e("A cluster will cover at most this many pixels from its center, default 80. Set 0 for disable","locate-anything")?></label>
 </li>
 </ul>
-</div>
 
 <h2><?php _e("Load Chosen","locate-anything")?></h2>
 <ul id="display_load-chosen">
@@ -135,6 +138,15 @@
 <li> <input type="radio" name="locate-anything-option-load-chosen" value="1" <?php if (unserialize(get_option("locate-anything-option-load-chosen"))==1) echo "checked";?> > <?php _e("yes","locate-anything")?> <input type="radio" <?php if (unserialize(get_option("locate-anything-option-load-chosen"))==0) echo "checked";?> name="locate-anything-option-load-chosen" value="0" > <?php _e("no","locate-anything")?>  </li>
 <label><?php _e("Chosen is a jQuery plugin that makes long, unwieldy select boxes much more user-friendly","locate-anything")?></label>
 </ul>
+
+<h2><?php _e("Enable fullscreen Control","locate-anything")?></h2>
+<a href='https://locateandfilter.monothemes.com/locateandfilter-pro-version/' class='proversion' target='_blank'>available only for PRO version</a>
+<ul id="enable_fullscreenControl" class="">
+<li> <input type="radio" name="locate-anything-option-enable_fullscreenControl" value="1" <?php if (unserialize(get_option("locate-anything-option-enable_fullscreenControl"))==1) echo "checked";?> > <?php _e("yes","locate-anything")?> <input type="radio" <?php if (unserialize(get_option("locate-anything-option-enable_fullscreenControl"))==0) echo "checked";?> name="locate-anything-option-enable_fullscreenControl" value="0" > <?php _e("no","locate-anything")?>  </li>
+<label><?php _e("Add button for toggling fullscreen on and off","locate-anything")?></label>
+</ul>
+
+</div>
 
 <?php echo apply_filters("locate_anything_add_option_pane","")?>
 <div style="text-align: right"><input type="submit" class='button-admin' value="<?php _e("Save","locate-anything");?>"></div>

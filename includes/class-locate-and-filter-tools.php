@@ -91,11 +91,15 @@ class Locate_And_Filter_Tools {
 		}
 	}
 
-	public static function getCheckboxesForTaxonomy( $taxonomy, $name, $allowed, $icon, $pretty, $categoryfilter ='' ) {	
+	public static function getCheckboxesForTaxonomy( $taxonomy, $name, $allowed, $icon, $pretty, $categoryfilter ='', $selector, $filter_terms_orderby ) {
+
+			$orderby = 'name';
+			$order = 'ASC';
+	
 		$terms = get_terms(	array(
 					'taxonomy'	 => $taxonomy,
-				 	'orderby'    => 'name',
-				 	'order'      => 'DESC',
+				 	'orderby'    => $orderby,
+				 	'order'      => $order,
 				 	'hide_empty' => 0, 	
 				 	'include'	 => $allowed
 				) );			
@@ -117,9 +121,9 @@ class Locate_And_Filter_Tools {
 				}
 				
 				if( $pretty ) {
-					$str = '<div id="la-filter-'.$term->term_id.'" class="LA_filters_checkbox '.$term_image_class.' pretty p-default"><input class="filter_term_checkbox" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<div class="state p-primary"><label for="'.$name.'"></label></div><span class="filter_term_name">'.$term->name.'</span></div>';
+					$str = '<div id="la-filter-'.$term->term_id.'" class="LA_filters_'.$selector.' '.$term_image_class.' pretty p-default"><input class="filter_term_'.$selector.'" type="'.$selector.'"  id="'.$name.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<div class="state p-primary"><label for="'.$name.'"></label></div><span class="filter_term_name">'.$term->name.'</span></div>';
 				} else {
-					$str = '<div id="la-filter-'.$term->term_id.'" class="LA_filters_checkbox '.$term_image_class.' "><input class="filter_term_checkbox" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<span class="filter_term_name">'.$term->name.'</span></div>';
+					$str = '<div id="la-filter-'.$term->term_id.'" class="LA_filters_'.$selector.' '.$term_image_class.' "><input class="filter_term_'.$selector.'" type="'.$selector.'"  id="'.$name.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<span class="filter_term_name">'.$term->name.'</span></div>';
 				}
 				
 				$li[] = $str;

@@ -41,7 +41,7 @@ class Locate_And_Filter_Public {
 	 */
 	public function __construct($plugin_name, $version) {
         $this->plugin_name = 'locate-and-filter';
-        $this->version = '1.4.11';
+        $this->version = '1.4.128';
 	}
 	
 	/**
@@ -52,12 +52,21 @@ class Locate_And_Filter_Public {
 	public function enqueue_styles() {
 		wp_enqueue_style ( $this->plugin_name . "-all", plugin_dir_url ( __FILE__ ) . 'css/locate-and-filter-public.css', array (), $this->version, 'all' );
 		// leaflet css
-		wp_enqueue_style ( $this->plugin_name . "-leaflet", plugin_dir_url ( __FILE__ ) . 'js/leaflet-0.7.3/leaflet.css', array (), $this->version, 'all' );
+		//wp_enqueue_style ( $this->plugin_name . "-leaflet", plugin_dir_url ( __FILE__ ) . 'js/leaflet-0.7.3/leaflet.css', array (), $this->version, 'all' );
+		wp_enqueue_style ( $this->plugin_name . "-leaflet", plugin_dir_url ( __FILE__ ) . 'js/leaflet-1.7.1/leaflet.css', array (), $this->version, 'all' );
+		// Pretty-checkbox
+		wp_enqueue_style ( $this->plugin_name . "-pretty-checkbox", plugin_dir_url ( __FILE__ ) . 'js/pretty-checkbox/pretty-checkbox.min.css', array (), $this->version, 'all' );
 		// leaflet-filters css
-		wp_enqueue_style ( $this->plugin_name . "-leaflet-filters", plugin_dir_url ( __FILE__ ) . 'js/leaflet-filters/leaflet-filters.css', array (), $this->version, 'all' );
+		wp_enqueue_style ( $this->plugin_name . "-leaflet-filters", plugin_dir_url ( __FILE__ ) . 'js/leaflet-filters/leaflet-filters.css', array ($this->plugin_name . "-pretty-checkbox"), $this->version, 'all' );
+		
 		// leaflet markerCluster css
-		wp_enqueue_style ( $this->plugin_name . "-leaflet-marker-cluster-default", plugin_dir_url ( __FILE__ ) . 'js/leaflet.markercluster/MarkerCluster.Default.css', array (), $this->version, 'all' );
-		wp_enqueue_style ( $this->plugin_name . "-leaflet-marker-cluster", plugin_dir_url ( __FILE__ ) . 'js/leaflet.markercluster/MarkerCluster.css', array (), $this->version, 'all' );
+		//wp_enqueue_style ( $this->plugin_name . "-leaflet-marker-cluster-default", plugin_dir_url ( __FILE__ ) . 'js/leaflet.markercluster/MarkerCluster.Default.css', array (), $this->version, 'all' );
+		//wp_enqueue_style ( $this->plugin_name . "-leaflet-marker-cluster", plugin_dir_url ( __FILE__ ) . 'js/leaflet.markercluster/MarkerCluster.css', array (), $this->version, 'all' );
+
+		// leaflet markerCluster css
+		wp_enqueue_style ( $this->plugin_name . "-leaflet-marker-cluster-default", plugin_dir_url ( __FILE__ ) . 'js/Leaflet.markercluster-1.4.1/MarkerCluster.Default.css', array (), $this->version, 'all' );
+		wp_enqueue_style ( $this->plugin_name . "-leaflet-marker-cluster", plugin_dir_url ( __FILE__ ) . 'js/Leaflet.markercluster-1.4.1/MarkerCluster.css', array (), $this->version, 'all' );
+
 		// Tokenize CSS
 		wp_enqueue_style ( $this->plugin_name . "-tokenize", plugin_dir_url ( __FILE__ ) . 'js/Tokenize-2.2.1/jquery.tokenize.css', array (), $this->version, 'all' );
 		// Chosen CSS
@@ -65,8 +74,7 @@ class Locate_And_Filter_Public {
 		if($load_chosen) {
 			wp_enqueue_style ( $this->plugin_name . "-chosen", plugin_dir_url ( __FILE__ ) . 'js/chosen_v1.8.7/chosen.css', array (), $this->version, 'all' );
 		}
-		// Pretty-checkbox
-		wp_enqueue_style ( $this->plugin_name . "-pretty-checkbox", plugin_dir_url ( __FILE__ ) . 'js/pretty-checkbox/pretty-checkbox.min.css', array (), $this->version, 'all' );
+
 		// leaflet Google automplete CSS
 		wp_enqueue_style ( $this->plugin_name . "-googleauto", plugin_dir_url ( __FILE__ ) . 'js/leaflet-google-autocomplete/css/leaflet-google-autocomplete.css', array (), $this->version, 'all' );
 		// Ionicons
@@ -76,6 +84,11 @@ class Locate_And_Filter_Public {
 		wp_enqueue_style('jquery-ui-css',plugin_dir_url ( __FILE__ ) ."js/jquery-theme/jquery-ui.css", array (), $this->version, 'all');
 		// tui-pagination
 		wp_enqueue_style ( $this->plugin_name . "-tui-pagination", plugin_dir_url ( __FILE__ ) . 'js/tui-pagination/tui-pagination.min.css', array (), $this->version, 'all' );
+		// leaflet fullscreen
+		$enable_fullscreenControl = unserialize (get_option ( 'locate-anything-option-enable_fullscreenControl' ));
+		if($enable_fullscreenControl) {
+			wp_enqueue_style ( $this->plugin_name . "-leaflet-fullscreen", plugin_dir_url ( __FILE__ ) . 'js/leaflet.fullscreen-2.0.0/Control.FullScreen.css', array (), $this->version, 'all' );
+		}		
 	}
 	
 	/**
@@ -128,17 +141,39 @@ class Locate_And_Filter_Public {
 		endif;
 
 		// leaflet JS
-		wp_enqueue_script ( $this->plugin_name . "-leaflet", plugin_dir_url ( __FILE__ ) . 'js/leaflet-0.7.3/leaflet.js', array (
+		// wp_enqueue_script ( $this->plugin_name . "-leaflet", plugin_dir_url ( __FILE__ ) . 'js/leaflet-0.7.3/leaflet.js', array (
+		// 		'jquery' 
+		// ), $this->version, false );
+
+		// new leaflet JS
+		wp_enqueue_script ( $this->plugin_name . "-leaflet", plugin_dir_url ( __FILE__ ) . 'js/leaflet-1.7.1/leaflet-src.js', array (
 				'jquery' 
 		), $this->version, false );
+
+		// tui-pagination JS
+		wp_enqueue_script ( $this->plugin_name . "-tui-pagination", plugin_dir_url ( __FILE__ ) . 'js/tui-pagination/tui-pagination.min.js', array (
+				'jquery'
+		), $this->version, false );
+
+		// leaflet-canvas-markers JS
+
+
 		// leaflet-filters JS
 		wp_enqueue_script ( $this->plugin_name . "-leaflet-filters", plugin_dir_url ( __FILE__ ) . 'js/leaflet-filters/leaflet-filters.js', array (
-				$this->plugin_name . "-leaflet" 
+				$this->plugin_name . "-leaflet",
+				$this->plugin_name . "-tui-pagination",
 		), $this->version, false );
+
 		// leaflet markerCluster JS
-		wp_enqueue_script ( $this->plugin_name . "-leaflet-marker-cluster", plugin_dir_url ( __FILE__ ) . 'js/leaflet.markercluster/leaflet.markercluster-src-min.js', array (
+		// wp_enqueue_script ( $this->plugin_name . "-leaflet-marker-cluster", plugin_dir_url ( __FILE__ ) . 'js/leaflet.markercluster/leaflet.markercluster-src-min.js', array (
+		// 		'jquery' 
+		// ), $this->version, false );
+
+		// leaflet new markerCluster JS
+		wp_enqueue_script ( $this->plugin_name . "-leaflet-marker-cluster", plugin_dir_url ( __FILE__ ) . 'js/Leaflet.markercluster-1.4.1/leaflet.markercluster-src.js', array (
 				'jquery' 
 		), $this->version, false );
+
 		// Tokenize JS
 		wp_enqueue_script ( $this->plugin_name . "-tokenize", plugin_dir_url ( __FILE__ ) . 'js/Tokenize-2.2.1/jquery.tokenize.js', array (
 				'jquery' 
@@ -167,18 +202,16 @@ class Locate_And_Filter_Public {
 		wp_enqueue_script ( $this->plugin_name . "-omnivorejs", plugin_dir_url ( __FILE__ ) . 'js/leaflet-omnivore/leaflet-omnivore.min.js', array (
 				$this->plugin_name . "-leaflet-filters" 
 		), $this->version, false );
+
+		// maxClusterRadius
 		wp_localize_script( $this->plugin_name . "-leaflet-marker-cluster", 'ClusterOptions', array(
-			'maxClusterRadius' =>  unserialize(get_option("locate-anything-option-maxclusterradius")),
-			//,'a_value' => '10'
+			'maxClusterRadius' =>  80,
 		));
-		// tui-pagination JS
-		wp_enqueue_script ( $this->plugin_name . "-tui-pagination", plugin_dir_url ( __FILE__ ) . 'js/tui-pagination/tui-pagination.min.js', array (
-				'jquery'
-		), $this->version, false );
+
 		// providers
-		wp_enqueue_script ( $this->plugin_name . "-leaflet-providers", plugin_dir_url ( __FILE__ ) . 'js/leaflet-providers/leaflet-providers.js', array (
-				'jquery' 
-		), $this->version, false );					
+
+		// fullscreen
+						
 	}
 	
 
@@ -260,7 +293,7 @@ class Locate_And_Filter_Public {
 							<!-- Progress bar-->	
 						<div id="progress-wrapper">					
 						<div class="progress"  style="background-color:transparent" id="progress-'.$atts ["map_id"].'"><div class="progress-bar" id="progress-bar-'.$atts ["map_id"].'"></div></div>
-						</div></div>' . Locate_And_Filter_Public::generateMapJS ( $atts ["map_id"], "map-container-".$atts ["map_id"] );
+						</div></div>' . Locate_And_Filter_Public::generateMapJS ( $atts ["map_id"], "map-container-".$atts ["map_id"], $atts );
 		// apply filters on outputMapMarkup
 		$content = apply_filters("locate_anything_alter_outputMapMarkup",$content);
 		return $content;
@@ -293,7 +326,8 @@ class Locate_And_Filter_Public {
 	 * @return [void]
 	 */
 	public static function outputFilters($atts, $content) {
-		return $content .= '<div class="LA_filters">' . Locate_And_Filter_Public::generateFilterForm ( sanitize_key ( $atts ['map_id'] ),  sanitize_key ( $atts ['categoryfilter'] )  ) . '</div>';
+		if ( !isset($atts['categoryfilter'])) { $atts['categoryfilter'] = ''; }
+		return $content .= '<div class="LA_filters">' . Locate_And_Filter_Public::generateFilterForm( sanitize_key( $atts['map_id'] ),  sanitize_key( $atts['categoryfilter'] )) . '</div>';
 	}
 
 	/**
@@ -385,14 +419,14 @@ class Locate_And_Filter_Public {
 	 *        	: HTML id of the map container
 	 * @return void
 	 */
-	public static function generateMapJS($map_id, $map_container) {
+	public static function generateMapJS( $map_id, $map_container, $atts ) {
 		/* in preview mode the parameters are transmitted via $_POST directly*/
-		if($map_id=="preview"){											
+		if ( $map_id == "preview" ) {								
 				$settings = $_POST;	
 				$filters = 	$settings["locate-anything-show-filters"];	
 							
 		} else {
-			$settings=Locate_And_Filter_Public::getMapParameters($map_id);
+			$settings = Locate_And_Filter_Public::getMapParameters($map_id);
 			$filters = unserialize($settings["locate-anything-show-filters"]);
 		}
 		//echo "<pre>", var_dump($settings), "</pre>";//var_dump($settings);
@@ -485,8 +519,11 @@ class Locate_And_Filter_Public {
 			$minZoom = $params ["overlay"]->minZoom;
 		$params ["overlay"] = '{url:"' . $params ["overlay"]->url . '",attribution:"' . sanitize_text_field ( $params ["overlay"]->attribution ) . '" ,maxZoom:' . $maxZoom . ' ,minZoom:' . $minZoom . '}';
 		$params ["initial-zoom"] = $settings['locate-anything-start-zoom'];
+		$params ["single-zoom"] = $settings['locate-anything-single-zoom'];
 		if (empty ( $params ["initial-zoom"] ))
 			$params ["initial-zoom"] = 1;
+		if (empty ( $params ["single-zoom"] ))
+			$params ["single-zoom"] = 9;		
 		$params ["googleplaces"] = $settings["locate-anything-googleplaces"];
 		$params ["map-id"] = $map_id;
 		$params ["map-container"] = $map_container;
@@ -494,6 +531,9 @@ class Locate_And_Filter_Public {
 		if (empty ( $params ["max_nav_item_per_page"] ))
 			$params ["max_nav_item_per_page"] = 10;
 		$params ["style-hue"] = $settings['locate-anything-googlemaps-hue'];
+		/* enable_fitBounds */
+		$params ["enable_fitBounds"]=$settings['locate-anything-enable_fitBounds'];
+		$params ["enable_zoom_to_marker"]=$settings['locate-anything-enable_zoom_to_marker'];
 		?>
 
 		<script type="text/javascript">
@@ -521,6 +561,7 @@ class Locate_And_Filter_Public {
 						"initial-lat": <?php echo $params["initial-lat"]?>,
 						"initial-lon": <?php echo $params["initial-lon"]?>,
 						"initial-zoom": <?php echo $params["initial-zoom"]?>,
+						"single-zoom": <?php echo $params["single-zoom"]?>,
 						"autogeocode" :'<?php echo $params["autogeocode"]?>',
 						"display_only_inbound" : '<?php echo $params["display_only_inbound"]?>',
 						"overlay" : <?php echo $params["overlay"]?>,
@@ -548,7 +589,9 @@ class Locate_And_Filter_Public {
 						"overlay-addon-accessToken-mapbox"	:	'<?php echo $params ["overlay-addon-accessToken-mapbox"]?>',
 						"overlay-addon-accessToken-maptiler"	:	'<?php echo $params ["overlay-addon-accessToken-maptiler"]?>',
 						"overlay-addon-accessToken-openweathermap"	:	'<?php echo $params ["overlay-addon-accessToken-openweathermap"]?>',
-						"overlay-addon-accessToken-here"	:	'<?php echo $params ["overlay-addon-accessToken-here"]?>'			
+						"overlay-addon-accessToken-here"	:	'<?php echo $params ["overlay-addon-accessToken-here"]?>',
+						"enable_fitBounds"	:	'<?php echo $params ["enable_fitBounds"]?>',
+						"enable_zoom_to_marker"	:	'<?php echo $params ["enable_zoom_to_marker"]?>'			
 					};
 
 						/* define instance name*/
@@ -612,7 +655,7 @@ class Locate_And_Filter_Public {
 							},1,marker);							
 						}	
 
-						setTimeout(function(){						
+						setTimeout(function() {						
 							/* Render Map */							
 							eval(map_instance).render_map(eval(map_instance).markers);						
 							/*	Creation Nav */			
@@ -620,8 +663,11 @@ class Locate_And_Filter_Public {
 							/* hide loader */
 							eval(map_instance).showLoader(false);	
 							/* stores the map in Jquery for easier access*/	
-							current_map=eval(map_instance)	;
-							<?php if (has_filter("locate_anything_afterGenerateJS")) echo apply_filters("locate_anything_afterGenerateJS",$map_id)?>
+							current_map=eval(map_instance);
+							<?php if ( has_filter("locate_anything_afterGenerateJS")) echo apply_filters("locate_anything_afterGenerateJS",$map_id); ?>
+							<?php if ( isset($atts["categoryfilter"]) ) { ?>
+								eval(map_instance).update_markers();
+							<?php } ?>						
 							},250);
 					}
 
@@ -660,6 +706,7 @@ class Locate_And_Filter_Public {
 		//var_dump($categoryfilter);
 		$filters = get_post_meta ( $map_id, "locate-anything-show-filters", true );	
 		$type = get_post_meta ( $map_id, "locate-anything-source", true );
+		$filter_terms_orderby = get_post_meta ( $map_id, "locate-anything-filter_terms_orderby", true );
 		$filters_ = Locate_And_Filter_Tools::Order_Filters( $filters, $type, $map_id );			
 		$r = '<form id="map-filters-'.$map_id.'" method="post" action="#"><ul id="category-filters-container1" class="category-filters-container">';
 		if (is_array ( $filters_ ) && $type!=="user") {
@@ -679,20 +726,20 @@ class Locate_And_Filter_Public {
 
 				if ($taxonomy && $selector == "tokenize") {
 					$r .= '<li class="filter-tokenize" data-sort="'.$filter_selector_sort.'"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", true,9999,$allowed, $categoryfilter ) . '</li>';
-				} elseif ($taxonomy &&  $selector== "select") {
+				} elseif ( $taxonomy &&  $selector == "select" ) {
 					$r .= '<li class="filter-select" data-sort="'.$filter_selector_sort.'"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", false,9999,$allowed, $categoryfilter ) . '</li>';
-				} elseif ($selector== "range") {
+				} elseif ( $selector == "range" ) {
 					$r .= '<li class="filter-range" data-sort="'.$filter_selector_sort.'"><label>' . $customlabel . '</label>
 					<div id="rangedval-'.$filter.'-'.$map_id.'"><span id="rangeval-'.$filter.'-'.$map_id.'"></span></div>  
   					<div class="rangeslider" min="'.get_post_meta ( $map_id, "locate-anything-min-range-$filter", true ).'" max="'.get_post_meta ( $map_id, "locate-anything-max-range-$filter", true ).'" name="'.$filter.'-'.$map_id.'"  id="'.$filter.'-'.$map_id.'"></div></li>';
 				
 				} else {
 					$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );
-					$r .= '<li class="filter-checkbox" data-sort="'.$filter_selector_sort.'"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty, $categoryfilter ) . '</li>';
+					$r .= '<li class="filter-'.$selector.'" data-sort="'.$filter_selector_sort.'"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty, $categoryfilter, $selector, $filter_terms_orderby ) . '</li>';
 				}
 			}
 		}
-		$r=apply_filters("locate_anything_add_custom_filters",$r,$map_id,$filters);
+		$r = apply_filters( "locate_anything_add_custom_filters", $r, $map_id, $filters );
 		$r .= '</ul></form>';
 		return $r;
 	}
@@ -705,51 +752,53 @@ class Locate_And_Filter_Public {
 	 * @return html filter form HTML
 	 */
 	public static function generateFilterForm_single($map_id) {
-		$filters = get_post_meta ( $map_id, "locate-anything-show-filters", true );	
-		$type = get_post_meta ( $map_id, "locate-anything-source", true );				
+		$filters = get_post_meta( $map_id, "locate-anything-show-filters", true );	
+		$type = get_post_meta( $map_id, "locate-anything-source", true );
+		$filter_terms_orderby = get_post_meta( $map_id, "locate-anything-filter_terms_orderby", true );			
 		$r = '<form id="map-filters-'.$map_id.'" method="post" action="#"><ul id="category-filters-container1" class="category-filters-container">';
-		if (is_array ( $filters ) && $type!=="user")
-			foreach ( $filters as $filter ) {
-				$allowed= get_post_meta($map_id,'locate-anything-allowed-filters-value-'.$filter,true);
-				$taxonomy = get_taxonomy ( $filter );
-				if ($type == $filter) { $post_type_filter = true; } else { $post_type_filter = false; } 
-				if (!$post_type_filter) {
-					if(!$taxonomy) continue;
-					$selector= get_post_meta ( $map_id, 'locate-anything-display-filter-' . $filter, true );
-					$filter_selector_label = get_post_meta ( $map_id, 'locate-anything-filter-selector-label-' . $filter, true );
-					$filter_selector_icon = get_post_meta ( $map_id, 'locate-anything-filter-selector-icon-' . $filter, true );
-					if($filter_selector_label){
-						$customlabel = $filter_selector_label;
-					} else {
-						$customlabel = $taxonomy->labels->name;
-					}
-
-					if ($taxonomy && $selector == "tokenize") {
-						$r .= '<li class="filter-tokenize"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", true,9999,$allowed ) . '</li>';
-					} elseif ($taxonomy &&  $selector== "select") {
-						$r .= '<li class="filter-select"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", false,9999,$allowed ) . '</li>';
-					} elseif ($selector== "range") {
-						$r .= '<li class="filter-range"><label>' . $customlabel . '</label>
-						<div id="rangedval-'.$filter.'-'.$map_id.'"><span id="rangeval-'.$filter.'-'.$map_id.'"></span></div>  
-	  					<div class="rangeslider" min="'.get_post_meta ( $map_id, "locate-anything-min-range-$filter", true ).'" max="'.get_post_meta ( $map_id, "locate-anything-max-range-$filter", true ).'" name="'.$filter.'-'.$map_id.'"  id="'.$filter.'-'.$map_id.'"></div></li>';
-					
-					} else {
-						$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );
-						$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty ) . '</li>';
-					}
-				} else {
-						$filter_selector_label = get_post_meta ( $map_id, 'locate-anything-filter-selector-label-' . $filter, true );
-						$filter_selector_icon = get_post_meta ( $map_id, 'locate-anything-filter-selector-icon-' . $filter, true );
+			if ( is_array( $filters ) && $type !== "user" ) {
+				foreach ( $filters as $filter ) {
+					$allowed = get_post_meta( $map_id, 'locate-anything-allowed-filters-value-'.$filter, true );
+					$taxonomy = get_taxonomy( $filter );
+					if ($type == $filter) { $post_type_filter = true; } else { $post_type_filter = false; } 
+					if (!$post_type_filter) {
+						if(!$taxonomy) continue;
+						$selector= get_post_meta( $map_id, 'locate-anything-display-filter-' . $filter, true );
+						$filter_selector_label = get_post_meta( $map_id, 'locate-anything-filter-selector-label-' . $filter, true );
+						$filter_selector_icon = get_post_meta( $map_id, 'locate-anything-filter-selector-icon-' . $filter, true );
 						if($filter_selector_label){
 							$customlabel = $filter_selector_label;
 						} else {
-							$customlabel = $type;
+							$customlabel = $taxonomy->labels->name;
 						}
-						$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );
-						$r .= '<li class="post-type-filter post-type-filter-'.$filter.' filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForPostType ( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty ) . '</li>';					
+
+						if ($taxonomy && $selector == "tokenize") {
+							$r .= '<li class="filter-tokenize"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy( $filter, $filter."-$map_id", true, 9999, $allowed ) . '</li>';
+						} elseif ($taxonomy &&  $selector== "select") {
+							$r .= '<li class="filter-select"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy( $filter, $filter."-$map_id", false, 9999, $allowed ) . '</li>';
+						} elseif ($selector == "range") {
+							$r .= '<li class="filter-range"><label>' . $customlabel . '</label>
+							<div id="rangedval-'.$filter.'-'.$map_id.'"><span id="rangeval-'.$filter.'-'.$map_id.'"></span></div>  
+		  					<div class="rangeslider" min="'.get_post_meta ( $map_id, "locate-anything-min-range-$filter", true ).'" max="'.get_post_meta( $map_id, "locate-anything-max-range-$filter", true ).'" name="'.$filter.'-'.$map_id.'"  id="'.$filter.'-'.$map_id.'"></div></li>';
+						
+						} else {
+							$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );
+							$r .= '<li class="filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForTaxonomy( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty, '', $selector, $filter_terms_orderby ) . '</li>';
+						}
+					} else {
+							$filter_selector_label = get_post_meta( $map_id, 'locate-anything-filter-selector-label-' . $filter, true );
+							$filter_selector_icon = get_post_meta( $map_id, 'locate-anything-filter-selector-icon-' . $filter, true );
+							if($filter_selector_label){
+								$customlabel = $filter_selector_label;
+							} else {
+								$customlabel = $type;
+							}
+							$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );
+							$r .= '<li class="post-type-filter post-type-filter-'.$filter.' filter-checkbox"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getCheckboxesForPostType( $filter, $filter."-$map_id" ,$allowed, $filter_selector_icon, $pretty ) . '</li>';					
+					}
 				}
 			}
-		$r=apply_filters("locate_anything_add_custom_filters",$r,$map_id,$filters);
+		$r = apply_filters( "locate_anything_add_custom_filters", $r, $map_id, $filters );
 		$r .= '</ul></form>';
 		return $r;
 	}
@@ -954,18 +1003,9 @@ public static function defineMarkerIcon($post_params){
 				if ($marker_type == "standard") {
 					if (! empty ( $custom_marker ))
 						$marker = Locate_And_Filter_Assets::getMarkers ( $custom_marker );
-				}  elseif($marker_type == "medialibrary"){
-						if(!empty($customIconURL)) {
-						$custom_marker = sanitize_key($customIconURL) ;
-						list($width, $height, $type, $attr) = getimagesize($customIconURL);
-						$marker =(object)array(
-									"id"=>$custom_marker,					
-									"url"=>$customIconURL,
-									"width"=>$width,									
-									"height"=> $height						
-							);		
-						}	
-				}else {
+				} elseif ($marker_type == "medialibrary"){
+	
+				} else {
 					if (! empty ( $awesome_marker )) {
 						/* Awesome marker icon */
 						$custom_marker = $awesome_marker . '-' . $markercolor . '-' . $symbolcolor;
@@ -991,15 +1031,8 @@ public static function defineDefaultMarker($params){
 		if ($marker_type == "standard") {
 			$default_marker_id = $params['locate-anything-default-marker'];
 			$marker  =Locate_And_Filter_Assets::getMarkers($default_marker_id);
-		} elseif($marker_type == "medialibrary"){
-			$default_marker_id = sanitize_key($customIconURL) ;
-			list($width, $height, $type, $attr) = @getimagesize($customIconURL);
-			$marker  =(object)array(
-						"id"=>$default_marker_id,					
-						"url"=>$customIconURL,
-						"width"=>$width,
-						"height"=> $height						
-				);
+		} elseif ($marker_type == "medialibrary"){
+
 		} else {
 			$default_marker_id = $params['locate-anything-marker-symbol'];
 			$default_marker_id = $default_marker_id . '-' . $markercolor . '-' . $symbolcolor;
@@ -1646,7 +1679,8 @@ public static function defineDefaultMarker($params){
 						setTimeout(function(){						
 							/* Render Map */
 							//console.log(current_marker);
-							eval(map_instance).render_map_single(eval(map_instance).markers,current_marker);						
+							eval(map_instance).render_map_single(eval(map_instance).markers,current_marker);
+							eval(map_instance).update_markers();						
 							/*	Creation Nav */			
 							eval(map_instance).updateNav(0);
 							/* hide loader */

@@ -15,9 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @wordpress-plugin
  * Plugin Name:       LocateAndFilter
  * Plugin URI:        http://locateandfilter.monothemes.com
- * Description:       LocateAndFilter is a versatile and highly customizable WordPress plugin aimed at creating nice looking searchable/filterable maps.
- * Version:           1.4.11
- * Last Modified : 	  2021-02-20
+ * Description:       LocateAndFilter is a versatile and highly customizable WordPress plugin aimed at creating searchable/filterable maps based on Leaflet. Support for any custom post type and their taxonomies.
+ * Version:           1.4.12
+ * Last Modified : 	  2022-02-13
  * Author:            Andrii Monin
  * Author URI:        http://www.bigcatcode.com
  * License:           GPL-2.0+
@@ -36,8 +36,8 @@ if ( ! defined( 'WPINC' ) ) {
  * This action is documented in includes/class-locate-and-filter-activator.php
  */
 function activate_locate_and_filter() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter-activator.php';
-	Locate_And_Filter_Activator::activate();
+    require_once plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter-activator.php';
+    Locate_And_Filter_Activator::activate();
 }
 
 /**
@@ -45,8 +45,8 @@ function activate_locate_and_filter() {
  * This action is documented in includes/class-locate-and-filter-deactivator.php
  */
 function deactivate_locate_and_filter() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter-deactivator.php';
-	Locate_And_Filter_Deactivator::deactivate();
+    require_once plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter-deactivator.php';
+    Locate_And_Filter_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_locate_and_filter' );
@@ -57,6 +57,11 @@ register_deactivation_hook( __FILE__, 'deactivate_locate_and_filter' );
  * admin-specific hooks, and public-facing site hooks.
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-locate-and-filter.php';
+
+/**
+ * The addon plugin class 
+ */
+require plugin_dir_path( __FILE__ ) . 'addons/class-locate-and-filter-addons.php';
 
 /**
  * Begins execution of the plugin.
@@ -77,6 +82,10 @@ function run_locate_and_filter() {
 
         $plugin = new Locate_And_Filter();
         $plugin->run();
+
+        if ( !is_plugin_active( 'locateandfilter_addon-overlays/locateandfilter_addon-overlays.php' ) ) {
+            $addons = new Locate_And_Filter_Addons();
+        }
 
     } else {
 

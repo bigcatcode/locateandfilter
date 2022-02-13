@@ -153,6 +153,33 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 </td>
 </tr>
 
+<tr>
+<td><a href='https://locateandfilter.monothemes.com/locateandfilter-pro-version/' class='proversion2' target='_blank'>available only for PRO version</a></td>
+</tr>
+
+<tr id="enable_fitBounds" class="only_pro">
+<td><?php _e("Enable fitBounds","locate-and-filter")?> &nbsp;<input type="button" data-target="enable_fitBounds" class="locate-anything-help"></td>
+<td>
+		  <input type="radio" name="locate-anything-enable_fitBounds" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-enable_fitBounds', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			  <input type="radio" name="locate-anything-enable_fitBounds" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-enable_fitBounds', true )=="0" || get_post_meta( $object->ID, 'locate-anything-enable_fitBounds', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+</td>
+</tr>
+
+<tr id="enable_zoom_to_marker" class="only_pro">
+<td><?php _e("Enable Zoom to marker","locate-and-filter")?> &nbsp;<input type="button" data-target="enable_zoom_to_marker" class="locate-anything-help"></td>
+<td>
+		  <input type="radio" name="locate-anything-enable_zoom_to_marker" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-enable_zoom_to_marker', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			  <input type="radio" name="locate-anything-enable_zoom_to_marker" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-enable_zoom_to_marker', true )=="0" || get_post_meta( $object->ID, 'locate-anything-enable_zoom_to_marker', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+</td>
+</tr>
+
+<tr id="filter_terms_orderby" class="only_pro">
+<td><?php _e("Sorting method for filter elements","locate-and-filter")?> &nbsp;<input type="button" data-target="filter_terms_orderby" class="locate-anything-help"></td>
+<td>
+		  <input type="radio" name="locate-anything-filter_terms_orderby" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-filter_terms_orderby', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			  <input type="radio" name="locate-anything-filter_terms_orderby" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-filter_terms_orderby', true )=="0" || get_post_meta( $object->ID, 'locate-anything-filter_terms_orderby', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+</td>
+</tr>
 
 <!-- <tr id="">
 <td><?php _e("Remove the 'Powered by LocateAndFilter' label","locate-and-filter")?></td>
@@ -222,16 +249,8 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 			</select>		
 </div></td>
 </tr>
-<tr><td colspan="2">&nbsp;</td></tr>
-<tr>
-<td id="medialibrary"><input type="radio" <?php if (get_post_meta($object->ID,"locate-anything-marker-type",true)=="medialibrary") echo 'checked' ?> name="locate-anything-marker-type" value="medialibrary"> <b><?php _e("Add an icon from the media library","locate-and-filter")?></b>&nbsp;<input type="button" data-target="medialibrary" class="locate-anything-help"></td>
-<td><img id="default-marker-media">
-	<div class="uploader">
-	<input id="locate-anything-marker-type" name="locate-anything-default-marker-media" type="hidden" value="<?php  echo esc_attr(get_post_meta($object->ID,"locate-anything-default-marker-media",true))?>" /> <input id="locate-anything-marker-type_button" class="button-admin"  name="locate-anything-marker-type_button" type="text" value="<?php _e("Add","locate-and-filter")?>" />
-</div>
 
-</td>
-</tr>
+
 
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr>
@@ -258,33 +277,50 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 					</div>
 </td>
 </tr>
-<tr><td colspan="2"><h2><?php _e("Choose the global icon size for AwesomeMarkers","locate-and-filter")?></h2></td></tr>  
-<tr><td><b><?php _e("Icon size","locate-and-filter")?></b></td><td><input name="locate-anything-marker-size" type="range" min="10" max="20" step="1" value="<?php echo get_post_meta($object->ID,"locate-anything-marker-size",true)?>"></td></tr>
+
+<tr><td><b><?php _e("Icon size for AwesomeMarkers","locate-and-filter")?></b></td><td><input name="locate-anything-marker-size" type="range" min="10" max="20" step="1" value="<?php echo get_post_meta($object->ID,"locate-anything-marker-size",true)?>"></td></tr>
+
+
+	<!-- medialibrary -->
+	<tr>
+		<td colspan="2">&nbsp;</td></tr>
+	<tr>
+		<td><a href='https://locateandfilter.monothemes.com/locateandfilter-pro-version/' class='proversion2' target='_blank'>available only for PRO version</a></td>
+	</tr>
+	<tr>
+		<td id="medialibrary" class="only_pro"><input type="radio" <?php if (get_post_meta($object->ID,"locate-anything-marker-type",true)=="medialibrary") echo 'checked' ?> name="locate-anything-marker-type" value="medialibrary"> <b><?php _e("Add an icon from the media library","locate-and-filter")?></b>&nbsp;<input type="button" data-target="medialibrary" class="locate-anything-help"></td>
+		<td>
+			<img id="default-marker-media">
+			<div class="uploader">
+				<input id="locate-anything-marker-type" name="locate-anything-default-marker-media" type="hidden" value="<?php  echo esc_attr(get_post_meta($object->ID,"locate-anything-default-marker-media",true))?>" /> <input id="locate-anything-marker-type_button" class="button-admin"  name="locate-anything-marker-type_button" type="text" value="<?php _e("Add","locate-and-filter")?>" />
+			</div>
+		</td>
+	</tr><!-- /medialibrary -->
+
 </table>
 
 <table id="locate-anything-map-settings-page-5" class="locate-anything-map-settings-list-ul locate-anything-map-option-pane" style='display:none' >	
-<!-- <tr><td><h2><?php _e("Load a KML file (beta)")?></h2></td></tr>
-<tr>
-<td id="kml"><b><?php _e("KML Style Options","locate-and-filter")?></b></td>
-<td>
-<ul>
-<li>Fill Color : <?php makeInput("color","locate-anything-kml_fillColor",$object->ID,'#cbbdfb') ?></li>
-<li>Opacity : <?php makeInput("text","locate-anything-kml_opacity",$object->ID,'1') ?></li>
-<li>Line width : <?php makeInput("number","locate-anything-kml_weight",$object->ID,'2') ?></li>
-<li>Color :  <?php makeInput("color","locate-anything-kml_color",$object->ID,'#000') ?></li>
-<li>Fill Opacity :  <?php makeInput("text","locate-anything-kml_fillOpacity",$object->ID,'0.5') ?></li>
-<li>Dash array :  <?php makeInput("number","locate-anything-kml_dashArray",$object->ID,'2') ?></li>
-</ul>
 
-
-
-
-	<div class="uploader">
-	<input id="locate-anything-kml-file" name="locate-anything-kml-file" type="text" value="<?php  echo esc_attr(get_post_meta($object->ID,"locate-anything-kml-file",true))?>" /> <input id="locate-anything-kml-file_button" class="button-admin"  name="locate-anything-kml-file_button" type="text" value="<?php _e("Select file","locate-and-filter")?>" />
-</div>
-
-</td>
-</tr> -->
+<!-- deprecated  -->
+<tr class="deprecated">
+	<td><h2><?php _e("Load a KML file (beta)")?></h2></td>
+</tr>
+<tr class="deprecated">
+	<td id="kml"><b><?php _e("KML Style Options","locate-and-filter")?></b></td>
+	<td>
+		<ul>
+			<li>Fill Color : <?php makeInput("color","locate-anything-kml_fillColor",$object->ID,'#cbbdfb') ?></li>
+			<li>Opacity : <?php makeInput("text","locate-anything-kml_opacity",$object->ID,'1') ?></li>
+			<li>Line width : <?php makeInput("number","locate-anything-kml_weight",$object->ID,'2') ?></li>
+			<li>Color :  <?php makeInput("color","locate-anything-kml_color",$object->ID,'#000') ?></li>
+			<li>Fill Opacity :  <?php makeInput("text","locate-anything-kml_fillOpacity",$object->ID,'0.5') ?></li>
+			<li>Dash array :  <?php makeInput("number","locate-anything-kml_dashArray",$object->ID,'2') ?></li>
+		</ul>
+		<div class="uploader">
+			<input id="locate-anything-kml-file" name="locate-anything-kml-file" type="text" value="<?php  echo esc_attr(get_post_meta($object->ID,"locate-anything-kml-file",true))?>" /> <input id="locate-anything-kml-file_button" class="button-admin"  name="locate-anything-kml-file_button" type="text" value="<?php _e("Select file","locate-and-filter")?>" />
+	  </div>
+  </td>
+</tr>
 
 
 
@@ -295,7 +331,9 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 <li><b><?php _e("Display the map separately","locate-and-filter")?></b> : [LocateAndFilter_map map_id=<?php echo $object->ID?>]</li>
 <li><b><?php _e("Display the filters separately","locate-and-filter")?></b> : [LocateAndFilter_filters map_id=<?php echo $object->ID?>]</li>
 <li><b><?php _e("Display the navigation list separately","locate-and-filter")?></b> : [LocateAndFilter_navlist map_id=<?php echo $object->ID?>]</li>
-<li><b><?php _e("Display the map for single Post type","locate-and-filter")?></b> : [LocateAndFilter_single map_id=<?php echo $object->ID?>]</li>
+<a href='https://locateandfilter.monothemes.com/locateandfilter-pro-version/' class='proversion2' target='_blank'>available only for PRO version</a>
+<li class="only_pro"><b><?php _e("Display the map for single Post type","locate-and-filter")?></b> : [LocateAndFilter_single map_id=<?php echo $object->ID?>]</li>
+<li class="only_pro"><b><?php _e("Display the map for current category","locate-and-filter")?></b> : [LocateAndFilter map_id=<?php echo $object->ID?> categoryfilter="51"]</li>
 </ul>
 </td></tr>
 
@@ -521,8 +559,8 @@ function locate_anything_refresh_filters(){
 			          				var filter_icon_check = '';
 			          				var filter_icon_check_ = 'checked';
 			          			}			          			
-			          			/*jQuery("#show-filters").append('<div style="'+displaynone+'" class="hide-if-'+item+' filter-selector-'+item+'"><b> Selector </b> : <select class="locate-anything-display-filter-" id="locate-anything-display-filter-'+item+'" item="'+item+'" name="locate-anything-display-filter-'+item+'"><option '+isRadio+' value="radio">Radio buttons</option><option '+isCheckbox+' value="checkbox">Checkboxes</option><option '+isSelect+' value="select">Dropdown</option><option '+isSelectM+' value="selectmultiple">Select Multiple</option><option '+isTokenize+' value="tokenize">Tokenize</option><option '+isRange+' value="range">Range</option></select></div>');*/
-			          			jQuery("#show-filters").append('<div style="'+displaynone+'" class="hide-if-'+item+' filter-selector-'+item+'"><b> Selector </b> : <select class="locate-anything-display-filter-" id="locate-anything-display-filter-'+item+'" item="'+item+'" name="locate-anything-display-filter-'+item+'"><option '+isCheckbox+' value="checkbox">Checkboxes</option><option '+isSelect+' value="select">Dropdown</option><option '+isSelectM+' value="selectmultiple">Select Multiple</option><option '+isTokenize+' value="tokenize">Tokenize</option><option '+isRange+' value="range">Range</option></select></div>');
+			          			jQuery("#show-filters").append('<div style="'+displaynone+'" class="hide-if-'+item+' filter-selector-'+item+'"><b> Selector </b> : <select class="locate-anything-display-filter-" id="locate-anything-display-filter-'+item+'" item="'+item+'" name="locate-anything-display-filter-'+item+'"><option '+isRadio+' value="radio">Radio buttons</option><option '+isCheckbox+' value="checkbox">Checkboxes</option><option '+isSelect+' value="select">Dropdown</option><option '+isSelectM+' value="selectmultiple">Select Multiple</option><option '+isTokenize+' value="tokenize">Tokenize</option><option '+isRange+' value="range">Range</option></select></div>');
+			          			/*jQuery("#show-filters").append('<div style="'+displaynone+'" class="hide-if-'+item+' filter-selector-'+item+'"><b> Selector </b> : <select class="locate-anything-display-filter-" id="locate-anything-display-filter-'+item+'" item="'+item+'" name="locate-anything-display-filter-'+item+'"><option '+isCheckbox+' value="checkbox">Checkboxes</option><option '+isSelect+' value="select">Dropdown</option><option '+isSelectM+' value="selectmultiple">Select Multiple</option><option '+isTokenize+' value="tokenize">Tokenize</option><option '+isRange+' value="range">Range</option></select></div>');*/
 			          			
 			          			/* adding range options */
 			          			var rangeOptionsVisible;

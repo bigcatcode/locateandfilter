@@ -3,8 +3,8 @@ Contributors: dgamoni
 Donate link: http://locateandfilter.monothemes.com/
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory plugin, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
 Requires at least: 4.5.0
-Tested up to: 5.8
-Stable tag: 1.4.11
+Tested up to: 5.9
+Stable tag: 1.4.11.16
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -221,6 +221,38 @@ See our website for more informations on how to configure the plugin : http://lo
 * fix jQuery loaded error
 = 1.4.11 =
 * fix loading js
+
+PRO
+= 1.4.11.1 =
+* added Pro class
+= 1.4.11.3 =
+* added Addon overlays
+= 1.4.11.4 =
+* added fullscreen control
+= 1.4.11.5 =
+* added fitBounds option
+= 1.4.11.6 =
+* added reset fn and zoom to marker
+= 1.4.11.7 =
+* added fullscreen option to admin
+= 1.4.11.8 =
+* update nav list by soom
+= 1.4.11.9 =
+* fix loading js and css
+= 1.4.11.10 =
+* migrate to new ver leaflet-1.7.1
+= 1.4.11.11 =
+* add plugin canvas-markers for faster load many markers
+= 1.4.11.12 =
+* add radio type and orderby options
+= 1.4.11.13 =
+* update project html template and fix js errors
+= 1.4.11.14 =
+* bug fix, add new geolocate
+= 1.4.11.15 =
+* bug fix, category filter
+= 1.4.11.16 =
+* bug fix, single shortcode
 
 == Frequently Asked Questions ==
 

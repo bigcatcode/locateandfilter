@@ -154,7 +154,11 @@ var leaflet_filters_class= function (params){
 					var marker=openThisMarker[0];
 
 					if(!marker) return;
-					
+
+						if(this.params["enable_zoom_to_marker"]=='1') {
+							
+						}
+
 						self.markerCluster.zoomToShowLayer(marker, function () {											
 							marker.openPopup();				
 							//self.map.panTo(marker.getLatLng());							
@@ -244,7 +248,7 @@ var leaflet_filters_class= function (params){
 		/* Stores the marker in markers array */
 		this.markers.push(marker);	
 		this.filtered_markers.push(marker);
-		this.update_markers(); // dgamoni applay status filter
+		//this.update_markers(); // dgamoni applay checkbox status filter if checked  - not used on pro ver - very slowly
 		return marker;
 	};
 
@@ -259,7 +263,8 @@ var leaflet_filters_class= function (params){
 			"maxZoom":this.params["overlay"]["maxZoom"],
 			"minZoom":this.params["overlay"]["minZoom"],
 			"scrollWheelZoom":this.params["scrollWheelZoom"],
-			"worldCopyJump"	: true		
+			"worldCopyJump"	: true,
+			"fullscreenControl": true,					
 			};	
 
 		this.map=L.map(this.params["map-container"],options);	
@@ -269,7 +274,10 @@ var leaflet_filters_class= function (params){
 			   	self.getInboundMarkers();
 			    self.updateNav();
 			});
-
+		this.map.on('zoomend', function() {	
+			   	self.getInboundMarkers();
+			    self.updateNav();
+			});
 
 		this.map.on('popupopen', function(e) {
 		    var px = self.map.project(e.popup._latlng); // find the pixel location on the map where the popup anchor is
@@ -301,44 +309,7 @@ var leaflet_filters_class= function (params){
 			this.map.addLayer(ggl);
 
 		} else if( this.params["overlay"].attribution == "overlay-addon" ) {
-			var parts = this.params["overlay-addon"].split('.');
-			var providerName = parts[0];
-			var variantName = parts[1];
-			var custom_style = '';
-			if ( providerName == 'Jawg' ) {
-				var accessToken =  this.params["overlay-addon-accessToken-jawg"];
-				if (variantName == 'Custom') {
-					this.params["overlay-addon"] = providerName;
-					custom_style = this.params["overlay-addon-customstyle-jawg"];
-				} 				
-			} else if ( providerName == 'Thunderforest' ) {
-				var accessToken =  this.params["overlay-addon-accessToken-thunderforest"];
-			} else if ( providerName == 'MapBox' ) {
-				var accessToken =  this.params["overlay-addon-accessToken-mapbox"];		
-			} else if ( providerName == 'MapTiler' ) {
-				var accessToken =  this.params["overlay-addon-accessToken-maptiler"];
-			} else if ( providerName == 'OpenWeatherMap' ) {
-				var accessToken =  this.params["overlay-addon-accessToken-openweathermap"];
-			} else if ( providerName == 'HEREv3' ) {
-				var accessToken =  this.params["overlay-addon-accessToken-here"];										
-			} else {
-				var accessToken =  '';
-			}
 
-			if ( providerName == 'Jawg' && variantName == 'Custom' ) {
-				var TileProvider = L.tileLayer.provider( this.params["overlay-addon"], {
-				    accessToken:  accessToken,
-				    variant: custom_style
-				});
-			} else {
-				var TileProvider = L.tileLayer.provider( this.params["overlay-addon"], {
-				    accessToken:  accessToken,
-				    apikey:  accessToken,
-				    key: accessToken,
-				    apiKey: accessToken
-				});				
-			}			
-			TileProvider.addTo(this.map);
 
 		} else {
 		var TileProvider=L.tileLayer(this.params["overlay"].url,{attribution : this.params["overlay"].attribution});
@@ -440,6 +411,7 @@ var leaflet_filters_class= function (params){
 		this.markerCluster.addLayers(markerList);
 		this.map.addLayer(this.markerCluster);	
 		this.getInboundMarkers();
+
 	};
 
 	/**
@@ -453,10 +425,7 @@ var leaflet_filters_class= function (params){
 		this.map.addLayer(this.markerCluster);	
 		this.getInboundMarkers();
 		
-		//this.map.setZoom(this.params["single-zoom"]);
-		//this.map.panTo(L.latLng(current_marker));
-		this.map.setView(current_marker, this.params["single-zoom"]);
-		//console.log( this.params["single-zoom"] );
+
 	};
 
 	/**
@@ -484,7 +453,30 @@ var leaflet_filters_class= function (params){
 		return this.filtered_markers;	
 	};
 
+	/**
+	 * Apply the cleared filters * 
+	 * @return {void} 
+	 */	
+	 this.apply_cleare_filters=function() {		
+		var self=this;
+		var top=new Array();
+		var bottom=new Array();
+		//the slice() operation clones the array and returns the reference to the new array.
+		this.filtered_markers=this.markers.slice();
 
+		jQuery('.filter-checkbox input').prop('checked',false);
+		jQuery('.filter-radio input').prop('checked',false);
+
+		jQuery('.filter-select select option:selected').removeAttr('selected');
+
+		jQuery('.filter-select select').trigger('chosen:updated');
+
+		var tokens = jQuery(".TokensContainer .Close");
+		tokens.each(function () { jQuery(this).trigger("click"); });
+
+		return this.filtered_markers;	
+	};
+	
 	/**
 	 * Filtering function : will determine which markers doesn't fit the conditions for the filter passed in argument and eliminate them from this.filtered_markers
 	 * @param  {[type]} filter_id     : HTML id of the filter element
@@ -566,6 +558,7 @@ var leaflet_filters_class= function (params){
 				jQuery("input[name='"+filter_name+"']").click(function(){self.update_markers();});
 			}
 		}
+		jQuery("#reset-filters").click(function(){self.reset_markers();});
 	};
 
 	/**
@@ -595,6 +588,21 @@ var leaflet_filters_class= function (params){
 				var self=this;
 				setTimeout(function(){					
 					var visible_markers=self.apply_filters();
+					self.render_map(visible_markers);
+					self.updateNav();
+					self.showLoader(false);
+				},400);		
+	};
+
+	/**
+	 * This routine is called each time a buton reset clicked.
+	 * @return {void}
+	 */
+	this.reset_markers=function(){		
+				this.showLoader(true);
+				var self=this;
+				setTimeout(function(){					
+					var visible_markers=self.apply_cleare_filters();
 					self.render_map(visible_markers);
 					self.updateNav();
 					self.showLoader(false);

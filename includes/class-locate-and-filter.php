@@ -70,7 +70,7 @@ class Locate_And_Filter
     public function __construct() {
         
         $this->plugin_name = 'locate-and-filter';
-        $this->version = '1.3.19';
+        $this->version = '1.4.12';
         
         $this->load_dependencies();
         $this->set_locale();
