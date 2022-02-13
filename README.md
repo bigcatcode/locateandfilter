@@ -371,6 +371,9 @@ add support additional overlays
 = 1.4.11 =
 * fix loading js
 
+= 1.4.12 =
+* bug fix, php8 support, add many fetaures from pro version
+
 PRO
 = 1.4.11.1 =
 * added Pro class
