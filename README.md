@@ -374,6 +374,12 @@ add support additional overlays
 = 1.4.12 =
 * bug fix, php8 support, add many fetaures from pro version
 
+= 1.5.00 =
+* migrate to new ver leaflet-1.7.1, new type filter radio button, new geolocate from nominatim, reset for filters, tested last WP ver 5.9 
+
+= 1.5.01 =
+* rangeslider filter fixed
+
 PRO
 = 1.4.11.1 =
 * added Pro class
@@ -420,6 +426,7 @@ PRO
 = 1.4.11.16 =
 * bug fix, single shortcode
 
-
+= 1.5.17 =
+* rangeslider filter fixed
 
 
