@@ -32,17 +32,17 @@ admin!
 
 And many other features :
 
-* Additional control layers by Bing satellite and Yandex satellite
 * Detection of user’s location
 * Rounded corners / Squared corners tooltips
-* Map Localization :Choose your map language
+* Map Localization : Choose your map language
 * Optional cache system : ready to handle thousands of markers
-* Marker Clustering, setup Max Cluster Radius
 * Addons, Advanced filters, new marker icons, new map layouts
 * Custom tags for map layouts
 * Supports any shortcode in custom tag
 * Availability shortcode for single page
-* Available shortcode attribute for current category
+* Geolocate address from nominatim
+* Reset filters function
+* Customizable select and Pretty checkbox
 
 Online Demo :
 [example for projects](http://locateandfilter.monothemes.com/demo-map-default-right-down-layout/)
@@ -50,8 +50,19 @@ Online Demo :
 Documentation :
 [See our website for more informations on how to configure the plugin](http://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/)
 
-Addons:
-[Load additional overlays](https://locateandfilter.monothemes.com/locateandfilter-addon-overlays/)
+Pro version:
+[LocateAndFilter PRO version](https://locateandfilter.monothemes.com/locateandfilter-addon-overlays/)
+
+* Addon overlays
+* Fullscreen control
+* FitBounds option
+* Zoom to marker option
+* Canvas Markers - faster load more then 10000 markers
+* Custom marker icon from media library   
+* Sorting for filters
+* Additional control layers by Bing satellite and Yandex satellite
+* Marker Clustering, setup Max Cluster Radius
+* Available shortcode attribute for current category
 
 == Installation ==
 

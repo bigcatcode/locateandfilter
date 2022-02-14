@@ -4,7 +4,7 @@ Website URL: http://locateandfilter.monothemes.com/
 Plugin URL: https://wordpress.org/plugins/locateandfilter/
 Addons URL: https://locateandfilter.monothemes.com/locateandfilter-addon-overlays/
 
-Software Version: WordPress 5.8, WordPress 5.x, WordPress 4.5
+Software Version: WordPress 5.9, WordPress 5.x, WordPress 4.5
 
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet
 
