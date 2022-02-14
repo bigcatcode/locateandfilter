@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @author     AMonin <monothemes@gmail.com>
  */
 
-class Locate_And_Filter_Addons
+class Locate_And_Filter_Addons_Demo
 {
     
     /**

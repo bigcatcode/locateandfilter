@@ -84,7 +84,7 @@ function run_locate_and_filter() {
         $plugin->run();
 
         if ( !is_plugin_active( 'locateandfilter_addon-overlays/locateandfilter_addon-overlays.php' ) ) {
-            $addons = new Locate_And_Filter_Addons();
+            $addons = new Locate_And_Filter_Addons_Demo();
         }
 
     } else {

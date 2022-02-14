@@ -1004,7 +1004,8 @@ public static function defineMarkerIcon($post_params){
 					if (! empty ( $custom_marker ))
 						$marker = Locate_And_Filter_Assets::getMarkers ( $custom_marker );
 				} elseif ($marker_type == "medialibrary"){
-	
+					$default_marker_id = 'basic-0';
+					$marker  =Locate_And_Filter_Assets::getMarkers($default_marker_id);
 				} else {
 					if (! empty ( $awesome_marker )) {
 						/* Awesome marker icon */
@@ -1032,7 +1033,8 @@ public static function defineDefaultMarker($params){
 			$default_marker_id = $params['locate-anything-default-marker'];
 			$marker  =Locate_And_Filter_Assets::getMarkers($default_marker_id);
 		} elseif ($marker_type == "medialibrary"){
-
+			$default_marker_id = 'basic-0';
+			$marker  =Locate_And_Filter_Assets::getMarkers($default_marker_id);
 		} else {
 			$default_marker_id = $params['locate-anything-marker-symbol'];
 			$default_marker_id = $default_marker_id . '-' . $markercolor . '-' . $symbolcolor;
