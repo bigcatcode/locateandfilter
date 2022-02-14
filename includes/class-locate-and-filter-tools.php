@@ -115,7 +115,7 @@ class Locate_And_Filter_Tools {
 					$term_image_class = '';
 				}
 				$locateanything_checkbox_status = get_term_meta( $term->term_id , 'locateanything_checkbox_status', true );
-				if ( $locateanything_checkbox_status == 'unchecked' ) { $status = ''; } else { $status = 'checked'; }
+				if ( $locateanything_checkbox_status == 'unchecked' ) { $status = ''; } else { $status = ''; } // disable for Free version
 				if ( $categoryfilter ) {
 					if ( $categoryfilter != $term->term_id ){ $status = ''; } else { $status = 'checked'; }
 				}
