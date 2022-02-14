@@ -1,7 +1,8 @@
-jQuery(document).ready(function(){   
+
+
+jQuery(document).ready(function() {   
+
     // sort_filter_by_attr();
-    setup_range_sliders();
-    
 
 });
 
@@ -13,40 +14,6 @@ function sort_filter_by_attr(){
     });
 }
 
-function setup_range_sliders(){ 
-    /*Range slider events */
-if( jQuery('.rangeslider'))
-  jQuery('.rangeslider').each(function(i,slider){
-    var mini,maxi,the_slider;
-     mini= parseInt(jQuery('#'+jQuery(slider).attr("id")).attr("min"));
-     maxi= parseInt(jQuery('#'+jQuery(slider).attr("id")).attr("max"));
-     the_slider=slider;
-
-  jQuery('#'+jQuery(slider).attr("id")).slider({    
-    range: true,
-    min: mini,
-    max:maxi,
-    values: [jQuery('#'+jQuery(the_slider).attr("id")).attr("min"), jQuery('#'+jQuery(the_slider).attr("id")).attr("max") ],
-    create   : function( event, ui ) {  
-        var values=jQuery(this).slider("values");                
-           jQuery(this).find('.ui-slider-handle').first().html("<b>"+values[0]+"</b>");
-           jQuery(this).find('.ui-slider-handle').last().html("<b>"+values[1]+"</b>"); 
-              
-    }  ,
-    slide: function( event, ui ) {                
-           jQuery(this).find('.ui-slider-handle').first().html("<b>"+ui.values[0]+"</b>");
-           jQuery(this).find('.ui-slider-handle').last().html("<b>"+ui.values[1]+"</b>");
-      current_map.update_markers();
-    }
-  });
-
-  
-
-
-
-
-});
-}
     
  function centerMap(map) {
             var geocoder = new google.maps.Geocoder();

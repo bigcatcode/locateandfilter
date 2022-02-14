@@ -41,7 +41,7 @@ class Locate_And_Filter_Public {
 	 */
 	public function __construct($plugin_name, $version) {
         $this->plugin_name = 'locate-and-filter';
-        $this->version = '1.4.128';
+        $this->version = '1.5.001';
 	}
 	
 	/**
@@ -162,6 +162,7 @@ class Locate_And_Filter_Public {
 		wp_enqueue_script ( $this->plugin_name . "-leaflet-filters", plugin_dir_url ( __FILE__ ) . 'js/leaflet-filters/leaflet-filters.js', array (
 				$this->plugin_name . "-leaflet",
 				$this->plugin_name . "-tui-pagination",
+				"jquery",
 		), $this->version, false );
 
 		// leaflet markerCluster JS
@@ -667,7 +668,8 @@ class Locate_And_Filter_Public {
 							<?php if ( has_filter("locate_anything_afterGenerateJS")) echo apply_filters("locate_anything_afterGenerateJS",$map_id); ?>
 							<?php if ( isset($atts["categoryfilter"]) ) { ?>
 								eval(map_instance).update_markers();
-							<?php } ?>						
+							<?php } ?>
+							eval(map_instance).setup_range_sliders();					
 							},250);
 					}
 

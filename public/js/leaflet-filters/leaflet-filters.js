@@ -610,6 +610,40 @@ var leaflet_filters_class= function (params){
 	};
 
 	/**
+	 * Setup rangeslider for filter. 
+	 * @return {void}
+	 */
+	this.setup_range_sliders=function() {
+		var self=this;	
+		if( jQuery('.rangeslider')) {
+			jQuery('.rangeslider').each(function(i,slider) {
+					var mini,maxi,the_slider;
+					mini= parseInt(jQuery('#'+jQuery(slider).attr("id")).attr("min"));
+					maxi= parseInt(jQuery('#'+jQuery(slider).attr("id")).attr("max"));
+					the_slider=slider;
+
+					jQuery('#'+jQuery(slider).attr("id")).slider({    
+						range: true,
+						min: mini,
+						max:maxi,
+						values: [jQuery('#'+jQuery(the_slider).attr("id")).attr("min"), jQuery('#'+jQuery(the_slider).attr("id")).attr("max") ],
+						create   : function( event, ui ) {  
+						    var values=jQuery(this).slider("values");                
+						       jQuery(this).find('.ui-slider-handle').first().html("<b>"+values[0]+"</b>");
+						       jQuery(this).find('.ui-slider-handle').last().html("<b>"+values[1]+"</b>"); 
+						          
+						}  ,
+						slide: function( event, ui ) {                
+						       jQuery(this).find('.ui-slider-handle').first().html("<b>"+ui.values[0]+"</b>");
+						       jQuery(this).find('.ui-slider-handle').last().html("<b>"+ui.values[1]+"</b>");
+						  	   self.update_markers();
+						}
+					});
+			});
+		}
+	};
+	
+	/**
 	 * updates the progress bar
 	 * @param  {int} processed   number of "chunks" processed
 	 * @param  {int} total       number of "chunks" total
