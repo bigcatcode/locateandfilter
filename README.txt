@@ -51,7 +51,7 @@ Documentation :
 [See our website for more informations on how to configure the plugin](http://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/)
 
 Pro version:
-[LocateAndFilter PRO version](https://locateandfilter.monothemes.com/locateandfilter-addon-overlays/)
+[LocateAndFilter PRO version](https://locateandfilter.monothemes.com/locateandfilter-pro-version/)
 
 * Addon overlays
 * Fullscreen control
