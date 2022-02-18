@@ -305,9 +305,14 @@ var leaflet_filters_class= function (params){
 		if(this.params["overlay"].attribution=="GoogleMaps")  {
 			if(this.params["style-hue"]!="#000000") stylers.push({hue:this.params["style-hue"]});
 			var styles = [{'featureType': 'all','stylers': stylers}];
-			var ggl = new L.Google(this.params["overlay"].url, {mapOptions: {styles: styles}});
-			this.map.addLayer(ggl);
-
+			// var ggl = new L.Google(this.params["overlay"].url, {mapOptions: {styles: styles}});
+			// this.map.addLayer(ggl);
+			var ggl = L.gridLayer
+				.googleMutant({
+					type: this.params["overlay"].url.toLowerCase(), // valid values are 'roadmap', 'satellite', 'terrain' and 'hybrid'
+					styles: styles
+				});
+			ggl.addTo(this.map);
 		} else if( this.params["overlay"].attribution == "overlay-addon" ) {
 
 

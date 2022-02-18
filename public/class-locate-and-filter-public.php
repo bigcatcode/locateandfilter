@@ -116,9 +116,14 @@ class Locate_And_Filter_Public {
 			wp_enqueue_script ( $this->plugin_name . "-googleAPI", "https://maps.googleapis.com/maps/api/js?v=3.exp&key=".$gmaps_key."&libraries=places&language=" . unserialize ( get_option ( "locate-anything-option-map-language" ) ), array (
 					$this->plugin_name . "-leaflet-filters" 
 			), $this->version, false );
-			// Google Tiles
-			wp_enqueue_script ( $this->plugin_name . "-googleTiles", plugin_dir_url ( __FILE__ ) . 'js/leaflet-plugins-master/layer/tile/Google.js', array (
-					$this->plugin_name . "-leaflet-filters" 
+			
+			// Google Tiles - derecated
+			// wp_enqueue_script ( $this->plugin_name . "-googleTiles", plugin_dir_url ( __FILE__ ) . 'js/leaflet-plugins-master/layer/tile/Google.js', array (
+			// 		$this->plugin_name . "-leaflet-filters" 
+			// ), $this->version, false );
+
+			// Google Mutant
+			wp_enqueue_script ( $this->plugin_name . "-GoogleMutant", plugin_dir_url ( __FILE__ ) . 'js/Leaflet.GridLayer.GoogleMutant/Leaflet.GoogleMutant.js', array (
 			), $this->version, false );
 
 		endif;
@@ -162,6 +167,7 @@ class Locate_And_Filter_Public {
 		wp_enqueue_script ( $this->plugin_name . "-leaflet-filters", plugin_dir_url ( __FILE__ ) . 'js/leaflet-filters/leaflet-filters.js', array (
 				$this->plugin_name . "-leaflet",
 				$this->plugin_name . "-tui-pagination",
+				$this->plugin_name . "-GoogleMutant",
 				"jquery",
 		), $this->version, false );
 
