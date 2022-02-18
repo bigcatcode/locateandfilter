@@ -380,6 +380,9 @@ add support additional overlays
 = 1.5.01 =
 * rangeslider filter fixed
 
+= 1.5.02 =
+* replace google layer by GoogleMutant js, added 'hybrid' style
+
 PRO
 = 1.4.11.1 =
 * added Pro class
@@ -428,5 +431,9 @@ PRO
 
 = 1.5.17 =
 * rangeslider filter fixed
+
+= 1.5.18 =
+* replace google layer by GoogleMutant js, added 'hybrid' style
+
 
 

@@ -4,7 +4,7 @@ Donate link: http://locateandfilter.monothemes.com/
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory plugin, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
 Requires at least: 4.5.0
 Tested up to: 5.9
-Stable tag: 1.5.01
+Stable tag: 1.5.02
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -238,6 +238,8 @@ See our website for more informations on how to configure the plugin : http://lo
 * migrate to new ver leaflet-1.7.1, new type filter radio button, new geolocate from nominatim, reset for filters, tested last WP ver 5.9 
 = 1.5.01 =
 * rangeslider filter fixed
+= 1.5.02 =
+* replace google layer by GoogleMutant js, added 'hybrid' style
 
 PRO
 = 1.4.11.1 =
@@ -272,6 +274,8 @@ PRO
 * bug fix, single shortcode
 = 1.5.17 =
 * rangeslider filter fix
+= 1.5.18 =
+* replace google layer by GoogleMutant js, added 'hybrid' style
 
 == Frequently Asked Questions ==
 
