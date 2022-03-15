@@ -164,13 +164,21 @@ class Locate_And_Filter_Public {
 
 
 		// leaflet-filters JS
-		wp_enqueue_script ( $this->plugin_name . "-leaflet-filters", plugin_dir_url ( __FILE__ ) . 'js/leaflet-filters/leaflet-filters.js', array (
-				$this->plugin_name . "-leaflet",
-				$this->plugin_name . "-tui-pagination",
-				$this->plugin_name . "-GoogleMutant",
-				"jquery",
-		), $this->version, false );
-
+		if (array_search ( 'google', $loadjs ) !== false):
+			wp_enqueue_script ( $this->plugin_name . "-leaflet-filters", plugin_dir_url ( __FILE__ ) . 'js/leaflet-filters/leaflet-filters.js', array (
+					$this->plugin_name . "-leaflet",
+					$this->plugin_name . "-tui-pagination",
+					$this->plugin_name . "-GoogleMutant",
+					"jquery",
+			), $this->version, false );
+		else:
+			wp_enqueue_script ( $this->plugin_name . "-leaflet-filters", plugin_dir_url ( __FILE__ ) . 'js/leaflet-filters/leaflet-filters.js', array (
+					$this->plugin_name . "-leaflet",
+					$this->plugin_name . "-tui-pagination",
+					"jquery",
+			), $this->version, false );
+		endif;
+		
 		// leaflet markerCluster JS
 		// wp_enqueue_script ( $this->plugin_name . "-leaflet-marker-cluster", plugin_dir_url ( __FILE__ ) . 'js/leaflet.markercluster/leaflet.markercluster-src-min.js', array (
 		// 		'jquery' 

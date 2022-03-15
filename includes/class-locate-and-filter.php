@@ -114,9 +114,17 @@ class Locate_And_Filter
         (object)array(
         "url" => plugin_dir_url(dirname(__FILE__)) . "assets/markers/48x48-marker-5.png", "description" => "", "width" => "48", "height" => "48", "shadowUrl" => plugin_dir_url(dirname(__FILE__)) . 'assets/markers/marker-shadow48.png', "shadowWidth" => '48', "shadowHeight" => "48"),);
         Locate_And_Filter_Addon_Helper::add_marker_icons("basic", $markers);
-        
+
+        //load additional js if you want
+        $loadjs = unserialize (get_option ( 'locate-anything-option-loadjs' ));
+        if(!is_array($loadjs)) $loadjs = array ();
+                
         /* Load default map overlays */
-        $overlays = array((object)array("name" => 'OpenStreetMap', "url" => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', "attribution" => 'OpenStreetMap', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps TERRAIN', "url" => 'TERRAIN', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps ROADMAP', "url" => 'ROADMAP', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps SATELLITE', "url" => 'SATELLITE', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps HYBRID', "url" => 'HYBRID', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2));
+        if (array_search ( 'google', $loadjs ) !== false):
+            $overlays = array((object)array("name" => 'OpenStreetMap', "url" => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', "attribution" => 'OpenStreetMap', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps TERRAIN', "url" => 'TERRAIN', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps ROADMAP', "url" => 'ROADMAP', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps SATELLITE', "url" => 'SATELLITE', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2), (object)array("name" => 'GoogleMaps HYBRID', "url" => 'HYBRID', "attribution" => 'GoogleMaps', "maxZoom" => 18, "minZoom" => 2));
+        else:
+            $overlays = array((object)array("name" => 'OpenStreetMap', "url" => 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', "attribution" => 'OpenStreetMap', "maxZoom" => 18, "minZoom" => 2));
+        endif;
         Locate_And_Filter_Addon_Helper::add_overlays("basic", $overlays);
     }
     

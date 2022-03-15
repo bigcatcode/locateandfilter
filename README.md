@@ -383,6 +383,9 @@ add support additional overlays
 = 1.5.02 =
 * replace google layer by GoogleMutant js, added 'hybrid' style
 
+= 1.5.03 =
+fix load google js
+
 PRO
 = 1.4.11.1 =
 * added Pro class
