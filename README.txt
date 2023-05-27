@@ -1,13 +1,13 @@
 === LocateAndFilter ===
 Contributors: dgamoni
-Donate link: http://locateandfilter.monothemes.com/
+Donate link: https://locateandfilter.com/
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory plugin, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
 Requires at least: 4.5.0
-Tested up to: 5.9
-Stable tag: 1.5.03
+Tested up to: 6.2.2
+Stable tag: 1.5.04
 Requires PHP: 5.2.4
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Create Maps exactly the way you want using LocateAndFilter. 
 
@@ -17,7 +17,7 @@ LocateAndFilter is a versatile and highly customizable WordPress plugin aimed at
 **Some of the features :**
 
 * **Friendly** : 
-LocateAndFilter has been built on the great library LeafletJs (http://leafletjs.com/) and coded with extensibility in mind : addons using LocateAndFilter in conjunction with another WP plugin. You no longer need Google API Key.  
+LocateAndFilter has been built on the great library LeafletJs (https://leafletjs.com/) and coded with extensibility in mind : addons using LocateAndFilter in conjunction with another WP plugin. You no longer need Google API Key.  
 * **Use just any taxonomy as a filter** : Easily use any taxonomy (custom taxonomies or regular taxonomies) to filter your maps.
 * **Supports Custom Post Types** : Most of the WordPress plugins only support posts and pages. Not this one!Total support for any custom post type and their taxonomies!
 * **Fully customizable marker icons** : You can define a custom marker icon for each location or choose to use the same marker for the whole map. It’s up to you! Choose between the plugin’s predefined marker icons, create your own markers using Ionicon or just use any image from the media library. Total flexibility!
@@ -45,13 +45,13 @@ And many other features :
 * Customizable select and Pretty checkbox
 
 Online Demo :
-[example for projects](http://locateandfilter.monothemes.com/demo-map-default-right-down-layout/)
+[example for projects](https://locateandfilter.com/demo-map-default-right-down-layout/)
 
 Documentation :
-[See our website for more informations on how to configure the plugin](http://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/)
+[See our website for more informations on how to configure the plugin](https://locateandfilter.com/docs/locateandfilter-wp-plugin/)
 
 Pro version:
-[LocateAndFilter PRO version](https://locateandfilter.monothemes.com/locateandfilter-pro-version/)
+[LocateAndFilter PRO version](https://locateandfilter.com/locateandfilter-pro-version/)
 
 * Addon overlays
 * Fullscreen control
@@ -63,6 +63,8 @@ Pro version:
 * Additional control layers by Bing satellite and Yandex satellite
 * Marker Clustering, setup Max Cluster Radius
 * Available shortcode attribute for current category
+* Search markers by location
+* Animation of marker bouncing
 
 == Installation ==
 
@@ -70,7 +72,7 @@ Pro version:
 1. Activate the plugin through the 'Plugins' screen in WordPress
 1. Use the Settings in LocateAndFilter > Options to configure the plugin
 
-See our website for more informations on how to configure the plugin : http://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/
+See our website for more informations on how to configure the plugin : https://locateandfilter.com/docs/locateandfilter-wp-plugin/
 
 == Upgrade Notice ==
 
@@ -241,7 +243,9 @@ See our website for more informations on how to configure the plugin : http://lo
 = 1.5.02 =
 * replace google layer by GoogleMutant js, added 'hybrid' style
 = 1.5.03 =
-fix load google js
+* fix load google js
+= 1.5.04 =
+* minor updates 
 
 PRO
 = 1.4.11.1 =
@@ -278,6 +282,22 @@ PRO
 * rangeslider filter fix
 = 1.5.18 =
 * replace google layer by GoogleMutant js, added 'hybrid' style
+= 1.5.19 =
+* fix load google js
+= 1.5.20 =
+* add new map template top, fix php notice
+= 1.5.21 =
+* add custom style for mapbox
+= 1.5.30 =
+* update leaflet v1.8.0 
+* update select2
+= 1.5.40 =
+* add location search options
+* update google autocomplete
+= 1.5.41 =
+* add new shortcode for location searchbox
+= 1.5.42 =
+* Add new options - animation of marker bouncing
 
 == Frequently Asked Questions ==
 
@@ -289,32 +309,32 @@ you did not complete the installation
 You need to create a folder ‘cache’ and add write permissions
 on the plugin directory ‘/wp-content/plugins/locateandfilter/cache’
 http://prntscr.com/t03ga1
-see doc https://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/install-plugin/
+see doc https://locateandfilter.com/docs/locateandfilter-wp-plugin/install-plugin/
 
 **after update plugin, map does not work**
 
-Error : Please add write permissions on the following directory : /home1/llcigrou/public_html/wp-content/plugins/locateandfilter/cache
+Error : Please add write permissions on the following directory : /home1/---/public_html/wp-content/plugins/locateandfilter/cache
 —-
 After updating, make sure that you created the folder again
 You need to create a folder ‘cache’ and add write permissions
 on the following directory ‘locateandfilter.monothemes.com/wp-content/plugins/locateandfilter/cache’
-see doc https://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/install-plugin/update-plugin/
+see doc https://locateandfilter.com/docs/locateandfilter-wp-plugin/install-plugin/update-plugin/
 
-**I am install plugin and setup folder cahce, but map does not work**
+**I am install plugin and setup folder cache, but map does not work**
 
 You need create new topic https://wordpress.org/support/plugin/locateandfilter/
 and send a detailed bug report
 see How to write a good bug report?
-https://locateandfilter.monothemes.com/support/how-to-write-a-good-bug-report/
+https://locateandfilter.com/support/how-to-write-a-good-bug-report/
 
 **map does not work, js error**
 
 Uncaught SyntaxError: Unexpected end of JSON input
 —–
 You need to create a folder ‘cache’ and add write permissions
-on the following directory ‘locateandfilter.monothemes.com/wp-content/plugins/locateandfilter/cache’
-see doc https://locateandfilter.monothemes.com/docs/locateandfilter-wp-plugin/install-plugin/update-plugin/
+on the following directory ‘locateandfilter.com/wp-content/plugins/locateandfilter/cache’
+see doc https://locateandfilter.com/docs/locateandfilter-wp-plugin/install-plugin/update-plugin/
 
 == Donations ==
 
-[Paid Support](https://locateandfilter.monothemes.com/paid-support/)
+[Paid Support](https://locateandfilter.com/paid-support/)

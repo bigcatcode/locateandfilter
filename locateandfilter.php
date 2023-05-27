@@ -8,20 +8,20 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://locateandfilter.monothemes.com
+ * @link              https://locateandfilter.com
  * @since             1.0.0
  * @package           Locate_And_Filter
  *
  * @wordpress-plugin
  * Plugin Name:       LocateAndFilter
- * Plugin URI:        http://locateandfilter.monothemes.com
+ * Plugin URI:        https://locateandfilter.com
  * Description:       LocateAndFilter is a versatile and highly customizable WordPress plugin aimed at creating searchable/filterable maps based on Leaflet. Support for any custom post type and their taxonomies.
- * Version:           1.5.03
- * Last Modified : 	  2022-03-15
+ * Version:           1.5.04
+ * Last Modified : 	  2023-05-27
  * Author:            Andrii Monin
- * Author URI:        http://www.bigcatcode.com
+ * Author URI:        https://www.monothemes.com
  * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       locate-anything
  * Domain Path:       /languages
  */
