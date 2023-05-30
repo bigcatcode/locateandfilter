@@ -76,7 +76,9 @@ class Locate_And_Filter_Public {
 		}
 
 		// leaflet Google automplete CSS
-		wp_enqueue_style ( $this->plugin_name . "-googleauto", plugin_dir_url ( __FILE__ ) . 'js/leaflet-google-autocomplete/css/leaflet-google-autocomplete.css', array (), $this->version, 'all' );
+		// wp_enqueue_style ( $this->plugin_name . "-googleauto", plugin_dir_url ( __FILE__ ) . 'js/leaflet-google-autocomplete/css/leaflet-google-autocomplete.css', array (), $this->version, 'all' );
+		wp_enqueue_style ( $this->plugin_name . "-google_autocomplete", plugin_dir_url ( __FILE__ ) . 'js/leaflet-google-places-autocomplete/css/leaflet-gplaces-autocomplete.css', array (), $this->version, 'all' );
+
 		// Ionicons
 		wp_enqueue_style ( $this->plugin_name . "-ionicons", 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css', array (), $this->version, 'all' );
 		// Awesome markers
@@ -205,10 +207,15 @@ class Locate_And_Filter_Public {
 		wp_enqueue_script ( $this->plugin_name . "-arrayUtilities", plugin_dir_url ( __FILE__ ) . 'js/jquery.arrayUtilities.min.js', array (
 				'jquery' 
 		), $this->version, false );
+		
 		// leaflet Google automplete JS
-		wp_enqueue_script ( $this->plugin_name . "-googleautojs", plugin_dir_url ( __FILE__ ) . 'js/leaflet-google-autocomplete/js/leaflet-google-autocomplete.js', array (
+		// wp_enqueue_script ( $this->plugin_name . "-googleautojs", plugin_dir_url ( __FILE__ ) . 'js/leaflet-google-autocomplete/js/leaflet-google-autocomplete.js', array (
+		// 		$this->plugin_name . "-leaflet-filters" 
+		// ), $this->version, false );
+		wp_enqueue_script ( $this->plugin_name . "-google_autocomplete_js", plugin_dir_url ( __FILE__ ) . 'js/leaflet-google-places-autocomplete/js/leaflet-gplaces-autocomplete.js', array (
 				$this->plugin_name . "-leaflet-filters" 
 		), $this->version, false );
+
 		// Awesome markers
 		wp_enqueue_script ( $this->plugin_name . "-awesomemarkersjs", plugin_dir_url ( __FILE__ ) . 'js/leaflet.awesome-markers-2.0/leaflet.awesome-markers.min.js', array (
 				$this->plugin_name . "-leaflet-filters" 
@@ -226,6 +233,8 @@ class Locate_And_Filter_Public {
 		// providers
 
 		// fullscreen
+
+		// leaflet markerBouncing
 						
 	}
 	
@@ -696,7 +705,7 @@ class Locate_And_Filter_Public {
 						
 					} 
 					<?php if($settings['locate-anything-show-attribution-label']==0)  echo "/* Hide attribution */
-					jQuery('.leaflet-control-attribution').hide();"; ?>	
+					jQuery('.leaflet-control-attribution').hide();"; ?>
 					<?php $load_chosen = unserialize (get_option ( 'locate-anything-option-load-chosen' ));
 					if($load_chosen) {
 						echo "/* Hide attribution */
@@ -1719,7 +1728,7 @@ public static function defineDefaultMarker($params){
 						
 					} 
 					<?php if($settings['locate-anything-show-attribution-label']==0)  echo "/* Hide attribution */
-					jQuery('.leaflet-control-attribution').hide();"; ?>	
+					jQuery('.leaflet-control-attribution').hide();"; ?>
 					<?php $load_chosen = unserialize (get_option ( 'locate-anything-option-load-chosen' ));
 					if($load_chosen) {
 						echo "/* Hide attribution */

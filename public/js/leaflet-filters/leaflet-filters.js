@@ -393,7 +393,22 @@ var leaflet_filters_class= function (params){
 	 * return : {void}
 	 */
 	this.addGooglePlaces=function(){
-		new L.Control.GoogleAutocomplete().addTo(this.map);
+		var self=this;
+		//new L.Control.GoogleAutocomplete().addTo(this.map);
+		new L.Control.GPlaceAutocomplete({
+			callback: function(place){
+				var loc = place.geometry.location;
+				//console.log(loc);
+				var chooseAddr = self.search_by_location_chooseAddr(loc.lat(),loc.lng(), self.params);
+				if (!chooseAddr) {
+				    jQuery('.LA_search_location_result_error').html('no locations found try increasing the search radius');
+				} else {
+					jQuery('.LA_search_location_result_error').html('');
+				}
+				var out = "<div class='LA_search_location_address active pretty p-default' data-lat='" + loc.lat() + "' data-lon='" + loc.lng() + "'><input type='checkbox' /><div class='state'><label>" + place.formatted_address + "</label></div><span class='nofound'></span></div>";
+			    jQuery('.LA_search_location_result').html(out);
+			}
+		}).addTo(this.map);		
 	};
 
 	/**
@@ -419,6 +434,21 @@ var leaflet_filters_class= function (params){
 
 	};
 
+
+	/**
+	 * Clear the map and render the list of markers passed in argument
+	 * @param  {array} markerList : array of marker Objects
+	 * @return {void}            
+	 */
+	this.render_map_location=function(markerList){
+		this.markerCluster.clearLayers();	
+		this.markerCluster.addLayers(markerList);
+		this.map.addLayer(this.markerCluster);	
+		this.getInboundMarkers();
+	 	
+	};
+
+	
 	/**
 	 * Clear the map and render the list of markers passed in argument
 	 * @param  {array} markerList : array of marker Objects
@@ -736,4 +766,132 @@ var leaflet_filters_class= function (params){
 
 				return false;			
 	};
+
+
+	/**
+	 *
+	 * @param  
+	 * @return 
+	 */
+
+	this.rad = function(x) {
+		return x*Math.PI/180;
+	};
+
+	this.search_by_location_chooseAddr = function(lat, lng, params) {
+		var self=this;
+		var search_radius = 25;
+
+		var unit_val = 'km';
+
+		var places = this.filtered_markers;
+
+	    var R = 6371; // radius of earth in km
+	    var distances = [];
+	    var closest = -1;
+	    // var data = {};
+	    var quotations = [];
+	    var quotations2 = [];
+	    for( i=0; i<places.length; i++ ) {
+	    	var data = {};
+	    	var data2 = {};
+
+	        var mlat = places[i]['lat'];
+			var mlng = places[i]['lng'];
+
+
+	        // var dLat  = this.rad(mlat - lat);
+	        // var dLong = this.rad(mlng - lng);
+	        // var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+	        //     Math.cos(this.rad(lat)) * Math.cos(this.rad(lat)) * Math.sin(dLong/2) * Math.sin(dLong/2);
+	        // var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	        // var d = R * c;
+	        // //console.log(d);
+	        // distances[i] = d;
+
+			//:::           where: 'M' is statute miles (default)                         :::
+			//:::                  'K' is kilometers                                      :::
+			//:::                  'N' is nautical miles 
+
+			d = this.calc_distance(mlat, mlng, lat, lng, unit_val);
+			distances[i] = d;
+
+	        if (search_radius != 0 && d < (search_radius) ){
+	        	//console.log(d);
+	        	data2.lat = places[i]['lat'];
+	            data2.lng = places[i]['lng'];
+	            data2.id  = places[i]['id'];
+	            data2.aprox  = d;
+	            //console.log(data2);
+	            quotations2.push(places[i]);
+	        } else if ( search_radius == 0 && (closest == -1 || d < distances[closest] )) {
+
+	            closest = i;
+	            data.lat = places[i]['lat'];
+	            data.lng = places[i]['lng'];
+	            data.id  = places[i]['id'];
+	            data.aprox  = d;
+	            data.index  =  places[i]['title'];
+	            //console.log(data);
+	            quotations.push(places[i]);
+
+	        }
+	    }
+
+	    // console.log(quotations);
+	    // console.log(quotations2);
+
+		    if (search_radius != 0) {
+		    	var res =  quotations2;
+		    } else {
+		    	var res =  quotations;
+		    }
+
+	    		if ( quotations2.length > 0)  {
+					this.showLoader(true);
+					setTimeout(function(){					
+						var visible_markers=res;
+						//console.log('new inBounds_location');
+						//console.log(visible_markers);
+						self.inBounds = visible_markers;
+						self.inBounds_location = visible_markers;
+						//console.log(self.inBounds_location);
+						//console.log(self.inBounds);
+						//self.filtered_markers = visible_markers;
+						self.render_map_location(visible_markers);
+						self.map.fitBounds(L.featureGroup(visible_markers).getBounds());
+						self.updateNav();
+						self.showLoader(false);
+					},400); 
+					return true;   			
+	    		} else {
+	    			return false;
+	    		}
+
+	};
+
+
+	this.calc_distance = function(lat1, lon1, lat2, lon2, unit) {
+		if ((lat1 == lat2) && (lon1 == lon2)) {
+			return 0;
+		}
+		else {
+			var radlat1 = Math.PI * lat1/180;
+			var radlat2 = Math.PI * lat2/180;
+			var theta = lon1-lon2;
+			var radtheta = Math.PI * theta/180;
+			var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+			if (dist > 1) {
+				dist = 1;
+			}
+			dist = Math.acos(dist);
+			dist = dist * 180/Math.PI;
+			dist = dist * 60 * 1.1515;
+			if (unit=="km") { dist = dist * 1.609344 }
+			if (unit=="N") { dist = dist * 0.8684 }
+			return dist;
+		}
+	};
+
+
 }
