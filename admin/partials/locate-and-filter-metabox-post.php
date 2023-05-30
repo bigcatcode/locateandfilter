@@ -169,7 +169,7 @@ if ( !isset($post_params['locate-anything-marker-color'])) { $post_params['locat
 		<tr>
 			<td colspan="2">&nbsp;</td></tr>
 		<tr>
-			<td><a href='https://locateandfilter.monothemes.com/locateandfilter-pro-version/' class='proversion2' target='_blank'>available only for PRO version</a></td>
+			<td><a href='https://locateandfilter.com/locateandfilter-pro-version/' class='proversion2' target='_blank'>available only for PRO version</a></td>
 		</tr>
 		<tr>
 			<td id="medialibrary" class="only_pro">

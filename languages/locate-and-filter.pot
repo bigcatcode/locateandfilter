@@ -295,11 +295,11 @@ msgid "How is this map filterable ?"
 msgstr ""
 
 #. URI of the plugin
-msgid "http://locateandfilter.monothemes.com"
+msgid "http://locateandfilter.com"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "http://www.bigcatcode.com"
+msgid "http://www.monothemes.com"
 msgstr ""
 
 #: admin/partials/locate-and-filter-metabox-admin.php:246

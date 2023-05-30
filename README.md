@@ -1,10 +1,10 @@
 # LocateAndFilter WordPress plugin
 
-Website URL: http://locateandfilter.monothemes.com/
+Website URL: http://locateandfilter.com/
 Plugin URL: https://wordpress.org/plugins/locateandfilter/
-Addons URL: https://locateandfilter.monothemes.com/locateandfilter-addon-overlays/
+Pro version URL: https://locateandfilter.com/locateandfilter-pro-version/
 
-Software Version: WordPress 5.9, WordPress 5.x, WordPress 4.5
+Software Version: WordPress 6.x, WordPress 5.x, WordPress 4.5
 
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet
 
@@ -98,27 +98,39 @@ Touch optimized**
 **And many other
 features…**
 
-Additional control layers 
-by Bing satellite 
-and Yandex satellite
+* Detection of user’s location
+* Rounded corners / Squared corners tooltips
+* Map Localization : Choose your map language
+* Optional cache system : ready to handle thousands of markers
+* Addons, Advanced filters, new marker icons, new map layouts
+* Custom tags for map layouts
+* Supports any shortcode in custom tag
+* Availability shortcode for single page
+* Geolocate address from nominatim
+* Reset filters function
+* Customizable select and Pretty checkbox
 
-Detection of user’s
-location
+Online Demo :
+[example for projects](https://locateandfilter.com/demo-map-default-right-down-layout/)
 
-Rounded corners /
-Squared corners tooltips
+Documentation :
+[See our website for more informations on how to configure the plugin](https://locateandfilter.com/docs/locateandfilter-wp-plugin/)
 
-Map Localization :
-Choose your map language
+Pro version:
+[LocateAndFilter PRO version](https://locateandfilter.com/locateandfilter-pro-version/)
 
-Optional cache
-system : ready to handle thousands of markers
-
-Marker Clustering
-setup Max Cluster Radius
-
-
-And much much more!
+* Addon overlays
+* Fullscreen control
+* FitBounds option
+* Zoom to marker option
+* Canvas Markers - faster load more then 10000 markers
+* Custom marker icon from media library   
+* Sorting for filters
+* Additional control layers by Bing satellite and Yandex satellite
+* Marker Clustering, setup Max Cluster Radius
+* Available shortcode attribute for current category
+* Search markers by location
+* Animation of marker bouncing
 
 
 
@@ -386,6 +398,9 @@ add support additional overlays
 = 1.5.03 =
 fix load google js
 
+= 1.5.04 =
+* minor updates 
+
 PRO
 = 1.4.11.1 =
 * added Pro class
@@ -438,5 +453,27 @@ PRO
 = 1.5.18 =
 * replace google layer by GoogleMutant js, added 'hybrid' style
 
+= 1.5.19 =
+* fix load google js
+
+= 1.5.20 =
+* add new map template top, fix php notice
+
+= 1.5.21 =
+* add custom style for mapbox
+
+= 1.5.30 =
+* update leaflet v1.8.0 
+* update select2
+
+= 1.5.40 =
+* add location search options
+* update google autocomplete
+
+= 1.5.41 =
+* add new shortcode for location searchbox
+
+= 1.5.42 =
+* Add new options - animation of marker bouncing
 
 

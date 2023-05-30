@@ -71,7 +71,7 @@ class Locate_And_Filter_Addons_Demo
 	        add_filter("locate_anything_add_option_pane", function ($h) use ( $addon_name ) {    
 				$html = $this->addon_pane_settings_html();
 	            $h.= "<div id='locate-anything-map-settings-page-" . md5($addon_name) . "' class='locate-anything-map-option-pane' style='display:none'>
-	            		<a href='https://locateandfilter.monothemes.com/locateandfilter-pro-version/' class='proversion' target='_blank'>available only for PRO version</a>
+	            		<a href='https://locateandfilter.com/locateandfilter-pro-version/' class='proversion' target='_blank'>available only for PRO version</a>
 	                    <h1>$addon_name Settings</h1>" . $html . " </div>";
 	            return $h;
 	        } , 1000, 1);

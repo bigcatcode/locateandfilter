@@ -317,7 +317,7 @@ Error : Please add write permissions on the following directory : /home1/---/pub
 —-
 After updating, make sure that you created the folder again
 You need to create a folder ‘cache’ and add write permissions
-on the following directory ‘locateandfilter.monothemes.com/wp-content/plugins/locateandfilter/cache’
+on the following directory ‘locateandfilter.com/wp-content/plugins/locateandfilter/cache’
 see doc https://locateandfilter.com/docs/locateandfilter-wp-plugin/install-plugin/update-plugin/
 
 **I am install plugin and setup folder cache, but map does not work**

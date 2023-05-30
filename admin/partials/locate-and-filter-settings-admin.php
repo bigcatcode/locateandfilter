@@ -124,7 +124,7 @@
 </ul>
 
 <h2><?php _e("Max Cluster Radius","locate-anything")?></h2>
-<a href='https://locateandfilter.monothemes.com/locateandfilter-pro-version/' class='proversion' target='_blank'>available only for PRO version</a>
+<a href='https://locateandfilter.com/locateandfilter-pro-version/' class='proversion' target='_blank'>available only for PRO version</a>
 <ul>
 <li>
 <input type="text" name="locate-anything-option-maxclusterradius" value="<?php echo unserialize(get_option("locate-anything-option-maxclusterradius"));?>">
@@ -140,7 +140,7 @@
 </ul>
 
 <h2><?php _e("Enable fullscreen Control","locate-anything")?></h2>
-<a href='https://locateandfilter.monothemes.com/locateandfilter-pro-version/' class='proversion' target='_blank'>available only for PRO version</a>
+<a href='https://locateandfilter.com/locateandfilter-pro-version/' class='proversion' target='_blank'>available only for PRO version</a>
 <ul id="enable_fullscreenControl" class="">
 <li> <input type="radio" name="locate-anything-option-enable_fullscreenControl" value="1" <?php if (unserialize(get_option("locate-anything-option-enable_fullscreenControl"))==1) echo "checked";?> > <?php _e("yes","locate-anything")?> <input type="radio" <?php if (unserialize(get_option("locate-anything-option-enable_fullscreenControl"))==0) echo "checked";?> name="locate-anything-option-enable_fullscreenControl" value="0" > <?php _e("no","locate-anything")?>  </li>
 <label><?php _e("Add button for toggling fullscreen on and off","locate-anything")?></label>
