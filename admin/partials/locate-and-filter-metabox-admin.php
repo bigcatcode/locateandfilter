@@ -28,6 +28,7 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 <tr>
 <td style="width: 100%">
 <table  id="locate-anything-map-settings-page-1" class="locate-anything-map-option-pane locate-anything-map-settings-list-ul">
+<tbody style="position: relative;">
 <tr><td><h2><?php _e("General settings","locate-and-filter")?></h2></td></tr>  
 
   <!-- Map provider -->
@@ -124,6 +125,63 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 			  <input type="radio" name="locate-anything-googleplaces" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-googleplaces', true )=="0" || get_post_meta( $object->ID, 'locate-anything-googleplaces', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
 			</td>
 </tr>
+
+<tr>
+<td><a href='https://locateandfilter.com/locateandfilter-pro-version/' class='proversion2' target='_blank'>available only for PRO version</a>(<a href='https://demo-top.locateandfilter.com/' class='proversion2' target='_blank'>see demo</a>)</td>
+</tr>
+
+
+<tr id="search_box_by_location" class="group_by_location only_pro">
+<td><?php _e("Enable searchbox by address","locate-and-filter")?> &nbsp;<input type="button" data-target="search_box_by_location" class="locate-anything-help"></td>
+<td>
+		  <input type="radio" name="locate-anything-search_box_by_location" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-search_box_by_location', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			  <input type="radio" name="locate-anything-search_box_by_location" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-search_box_by_location', true )=="0" || get_post_meta( $object->ID, 'locate-anything-search_box_by_location', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+</td>
+</tr>
+
+<tr id="search_box_by_location_structured" class="group_by_location only_pro <?php if (get_post_meta( $object->ID, 'locate-anything-search_box_by_location', true )=="0" || get_post_meta( $object->ID, 'locate-anything-search_box_by_location', true )==false) echo "noactive" ;?>">
+<td><?php _e("Searchbox by Structured address","locate-and-filter")?> &nbsp;<input type="button" data-target="search_box_by_location_structured" class="locate-anything-help"></td>
+<td>
+		  <input type="radio" name="locate-anything-search_box_by_location_structured" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-search_box_by_location_structured', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			  <input type="radio" name="locate-anything-search_box_by_location_structured" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-search_box_by_location_structured', true )=="0" || get_post_meta( $object->ID, 'locate-anything-search_box_by_location_structured', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+</td>
+</tr>
+
+<tr id="search_box_by_radius" class="group_by_location only_pro">
+<td><?php _e("Enable searchbox by Radius","locate-and-filter")?> &nbsp;<input type="button" data-target="search_box_by_radius" class="locate-anything-help"></td>
+<td>
+		  <input type="radio" name="locate-anything-search_box_by_radius" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-search_box_by_radius', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			  <input type="radio" name="locate-anything-search_box_by_radius" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-search_box_by_radius', true )=="0" || get_post_meta( $object->ID, 'locate-anything-search_box_by_radius', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+</td>
+</tr>
+
+<tr id="search_box_by_radius_unit" class="group_by_location only_pro <?php if (get_post_meta( $object->ID, 'locate-anything-search_box_by_radius', true )=="0" || get_post_meta( $object->ID, 'locate-anything-search_box_by_radius', true )==false) echo "noactive" ;?>">
+<td><?php _e("Enable Radius by miles","locate-and-filter")?> &nbsp;<input type="button" data-target="search_box_by_radius_unit" class="locate-anything-help"></td>
+<td>
+		  <input type="radio" name="locate-anything-search_box_by_radius_unit" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-search_box_by_radius_unit', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			  <input type="radio" name="locate-anything-search_box_by_radius_unit" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-search_box_by_radius_unit', true )=="0" || get_post_meta( $object->ID, 'locate-anything-search_box_by_radius_unit', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+</td>
+</tr>
+
+<tr id="search_box_by_radius_value" class="group_by_location only_pro <?php if (get_post_meta( $object->ID, 'locate-anything-search_box_by_radius', true )=="0" || get_post_meta( $object->ID, 'locate-anything-search_box_by_radius', true )==false) echo "noactive" ;?>">
+<td><?php _e("Set default Radius value","locate-and-filter")?></td>
+<td>
+							<select id="locate-anything-search_box_by_radius_value" class="locate-anything-search_box_by_radius_value" name="locate-anything-search_box_by_radius_value" >
+								<option <?php if(get_post_meta($object->ID,'locate-anything-search_box_by_radius_value',true)==1) echo 'selected="selected"';?> value="1">1</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-search_box_by_radius_value',true)==5) echo 'selected="selected"';?> value="5">5</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-search_box_by_radius_value',true)==10) echo 'selected="selected"';?> value="10">10</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-search_box_by_radius_value',true)==25) echo 'selected="selected"';?>  value="25">25</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-search_box_by_radius_value',true)==50) echo 'selected="selected"';?> value="50">50</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-search_box_by_radius_value',true)==75) echo 'selected="selected"';?> value="75">75</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-search_box_by_radius_value',true)==100) echo 'selected="selected"';?> value="100">100</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-search_box_by_radius_value',true)==200) echo 'selected="selected"';?> value="200">200</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-search_box_by_radius_value',true)==300) echo 'selected="selected"';?> value="300">300</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-search_box_by_radius_value',true)==500) echo 'selected="selected"';?> value="500">500</option>
+							</select>
+	
+</tr>
+
+
 <tr id="navnumbers">
 <td><?php _e("Max number of results displayed in the list","locate-and-filter")?> &nbsp;<input type="button" data-target="navnumbers" class="locate-anything-help"></td>
 <td><input type="text"  size="5" name="locate-anything-nav-number" value="<?php $v=get_post_meta($object->ID, 'locate-anything-nav-number', true );echo $v?$v:10;?>"></td>
@@ -232,6 +290,7 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 <td><b><?php _e("Make this map filterable by","locate-and-filter");?></b>:&nbsp;<input type="button" data-target="tr-show-filters" class="locate-anything-help"></td>
 <td ><span id='show-filters'></span></td>
 </tr>
+</tbody>
 </table>	 
 			
 <table id="locate-anything-map-settings-page-4" class="locate-anything-map-settings-list-ul locate-anything-map-option-pane" style="display:none" >	

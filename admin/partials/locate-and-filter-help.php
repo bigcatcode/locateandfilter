@@ -119,6 +119,26 @@ var annotations=
   target : '#filter_terms_orderby',
   content: '<?php _e(" No - Orderby=name . Yes - Orderby=description . You can use term description for custom sort.","locate-and-filter")?>'
 }),
+"search_box_by_location": new Anno({ 
+  target : '#search_box_by_location',
+  content: '<?php _e(" Added to filters searchbox by address by <a href=\'https://nominatim.openstreetmap.org/ui/search.html\'>nominatim</a>","locate-and-filter")?>'
+}),
+"search_box_by_location_structured": new Anno({ 
+  target : '#search_box_by_location_structured',
+  content: '<?php _e(" Added to filters searchbox by Structured address: House number/Street, City, County, State, Country, Postal Code","locate-and-filter")?>'
+}),
+"search_box_by_radius": new Anno({ 
+  target : '#search_box_by_radius',
+  content: '<?php _e(" Added Radius options to address searchbox ","locate-and-filter")?>'
+}),
+"search_box_by_radius_unit": new Anno({ 
+  target : '#search_box_by_radius_unit',
+  content: '<?php _e(" Enable search Radius by miles. Default kilometers","locate-and-filter")?>'
+}),
+"enable_markerBouncing": new Anno({ 
+  target : '#enable_markerBouncing',
+  content: '<?php _e("Add animation of marker bouncing by hover or click on navlist. Tooltips will be disabled! You need enable Add marker bouncing js on global map options","locate-and-filter")?>'
+}),
 }
 
 var target=jQuery(e.target).attr("data-target");
