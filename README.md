@@ -401,6 +401,14 @@ fix load google js
 = 1.5.04 =
 * minor updates 
 
+= 1.5.05 =
+* update google autocomplete, add new map layout top template 
+
+
+
+
+
+
 PRO
 = 1.4.11.1 =
 * added Pro class
