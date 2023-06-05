@@ -248,7 +248,8 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 </table>
 			 
 <table id="locate-anything-map-settings-page-6" class="locate-anything-map-settings-list-ul locate-anything-map-option-pane" style="display:none" >	
-<!-- Post Type / Source -->		
+<!-- Post Type / Source -->
+<tbody style="position: relative;">
 <tr><td colspan="2"><h2><?php _e("Choose a post type","locate-and-filter");?></h2></td></tr>
 <tr id="map-source">
 <td>
@@ -294,6 +295,7 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 </table>	 
 			
 <table id="locate-anything-map-settings-page-4" class="locate-anything-map-settings-list-ul locate-anything-map-option-pane" style="display:none" >	
+<tbody style="position: relative;">
 <tr><td colspan="2"><h2><?php _e("Choose the default marker icon","locate-and-filter")?></h2></td></tr>  
 <tr>
 <td><input type="radio" <?php if (get_post_meta($object->ID,"locate-anything-marker-type",true)=="standard" || get_post_meta($object->ID,"locate-anything-marker-type",true)==false) echo 'checked' ?> name="locate-anything-marker-type" value="standard"> <b><?php _e("Choose an icon","locate-and-filter")?></b></td>
@@ -355,7 +357,7 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 			</div>
 		</td>
 	</tr><!-- /medialibrary -->
-
+</tbody>
 </table>
 
 <table id="locate-anything-map-settings-page-5" class="locate-anything-map-settings-list-ul locate-anything-map-option-pane" style='display:none' >	
@@ -403,12 +405,18 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 <?php }?>
 </td>
 </tr>
+</tbody>
 </table>
    <!-- Tooltips -->
 <table id="locate-anything-map-settings-page-2" class="locate-anything-map-settings-list-ul locate-anything-map-option-pane" style='display:none' >
+<tbody style="position: relative;">
 <tr><td><h2><?php _e("Navlist Settings","locate-and-filter")?></h2></td></tr> 
 <tr><td><?php _e("Event","locate-and-filter")?></td><td><input type="radio" <?php if(get_post_meta($object->ID,"locate-anything-navlist-event",true)=="click") echo "checked" ?> name="locate-anything-navlist-event" value="click">Click <input type="radio" <?php if(get_post_meta($object->ID,"locate-anything-navlist-event",true)=="hover" || get_post_meta($object->ID,"locate-anything-navlist-event",true)==false) echo "checked" ?> name="locate-anything-navlist-event" value="hover">Hover</radio></td></tr>
-<tr><td><h2><?php _e("Tooltips Settings","locate-and-filter")?></h2></td></tr>  
+<tr><td><h2><?php _e("Tooltips Settings","locate-and-filter")?></h2></td></tr>
+<tr>
+	<td><a href='https://locateandfilter.com/locateandfilter-pro-version/' class='proversion2' target='_blank'>available only for PRO version</a></td>
+</tr>
+<tr class="only_pro" ><td><?php _e("Open popup by Event:","locate-and-filter")?></td><td><input type="radio" <?php if(get_post_meta($object->ID,"locate-anything-popup-event",true)=="click" || get_post_meta($object->ID,"locate-anything-popup-event",true)==false) echo "checked" ?> name="locate-anything-popup-event" value="click">Click <input type="radio" <?php if(get_post_meta($object->ID,"locate-anything-popup-event",true)=="hover") echo "checked" ?> name="locate-anything-popup-event" value="hover">Hover</radio></td></tr> 
 <tr>
 <td><b><?php _e("Tooltip style","locate-and-filter")?> </b>:</td>
 <td><select name="locate-anything-tooltip-style"><option <?php if(get_post_meta($object->ID,"locate-anything-tooltip-style",true)=="rounded") echo "selected" ?> value="rounded"><?php _e("Rounded corners","locate-and-filter")?></option><option <?php if(get_post_meta($object->ID,"locate-anything-tooltip-style",true)=="squared") echo "selected" ?> value="squared"><?php _e("Squared corners","locate-and-filter")?></option></select></td>
@@ -471,13 +479,14 @@ $navlist_presets=array(
 			  </td>
 
 </tr>
-
+</tbody>
 </table>
 
 
 
  <table id="locate-anything-map-settings-page-3" class="locate-anything-map-settings-list-ul locate-anything-map-option-pane" style='display:none' >
-   <!-- Map Layout -->
+<!-- Map Layout -->
+<tbody style="position: relative;">
 <tr><td colspan="2"><h2><?php _e("Map Layout","locate-and-filter")?>&nbsp;<input type="button" data-target="maplayout" class="locate-anything-help"></h2></td></tr>
 
 <tr id="maplayout">
@@ -487,7 +496,8 @@ $navlist_presets=array(
 			 	 	  		<?php }?></select></td></tr>
 <tr>				 	 	  		
 <td colspan="2" id="layout_editor"></td>
-</tr>		
+</tr>	
+</tbody>	
 </table>	  
 	
 </td></tr></table>

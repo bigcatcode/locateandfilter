@@ -491,8 +491,10 @@ class Locate_And_Filter_Public {
 		/* mousewheel*/
 		$params ["scrollWheelZoom"] = trim($settings['locate-anything-scrollWheelZoom']);
 		/* navlist_event*/
-		$params ["navlist_event"] = trim($settings['locate-anything-navlist-event']);	
-			/* Start position */
+		$params ["navlist_event"] = trim($settings['locate-anything-navlist-event']);
+		/* popup_event*/
+		$params ["popup_event"] = trim($settings['locate-anything-popup-event']);
+		/* Start position */
 		$params ["start_position"] = $settings['locate-anything-start-position'];
 		if (empty ( $params ["start_position"] ))
 			$params ["start_position"] = "51.505, -0.09";
@@ -594,6 +596,7 @@ class Locate_And_Filter_Public {
 						<?php if($params["style-hue"]) echo '"style-hue":"'.$params["style-hue"].'",'?>
 						"scrollWheelZoom" : <?php echo $params["scrollWheelZoom"]?>,
 						"navlist_event" : '<?php echo  $params["navlist_event"]?>',
+						"popup_event" : '<?php echo  $params["popup_event"]?>',
 						"hide-splashscreen" : '<?php echo $params["hide-splashscreen"]?>',
 						"kml_file" :  '<?php echo $settings["locate-anything-kml-file"]?>',
 						"kml_fillColor" :  '<?php echo $settings["locate-anything-kml_fillColor"]?>',
@@ -704,14 +707,17 @@ class Locate_And_Filter_Public {
 					var token=jQuery('#map-filters-'+map_id+' .tokenize').tokenize({maxElements:"9999",onRemoveToken:function(e,f){eval(map_instance).update_markers();},onAddToken:function(e,f){eval(map_instance).update_markers();}});
 						
 					} 
-					<?php if($settings['locate-anything-show-attribution-label']==0)  echo "/* Hide attribution */
-					jQuery('.leaflet-control-attribution').hide();"; ?>
-					<?php $load_chosen = unserialize (get_option ( 'locate-anything-option-load-chosen' ));
-					if($load_chosen) {
+					<?php if ( $settings['locate-anything-show-attribution-label'] == 0 ) {
+						echo "/* Hide attribution */
+						jQuery('.leaflet-control-attribution').hide();
+						";
+					} ?>					
+					<?php $load_chosen = unserialize( get_option('locate-anything-option-load-chosen') );
+					if ( $load_chosen ) {
 						echo "/* Hide attribution */
 						jQuery('.filter-select select').chosen({width:'250px',allow_single_deselect:'true'});
 						";	
-					}?>				
+					} ?>				
 				});
     			//console.log("jQuery is loaded.");
 			})();				
@@ -1727,14 +1733,18 @@ public static function defineDefaultMarker($params){
 					var token=jQuery('#map-filters-'+map_id+' .tokenize').tokenize({maxElements:"9999",onRemoveToken:function(e,f){eval(map_instance).update_markers();},onAddToken:function(e,f){eval(map_instance).update_markers();}});
 						
 					} 
-					<?php if($settings['locate-anything-show-attribution-label']==0)  echo "/* Hide attribution */
-					jQuery('.leaflet-control-attribution').hide();"; ?>
-					<?php $load_chosen = unserialize (get_option ( 'locate-anything-option-load-chosen' ));
-					if($load_chosen) {
-						echo "/* Hide attribution */
+					<?php 
+					if ( $settings['locate-anything-show-attribution-label'] == 0 )  {
+						echo "/* Hide attribution */ 
+						jQuery('.leaflet-control-attribution').hide();
+						";
+					} ?>					
+					<?php $load_chosen = unserialize( get_option('locate-anything-option-load-chosen') );
+					if ( $load_chosen ) {
+						echo "/* load chosen */
 						jQuery('.filter-select select').chosen({width:'250px',allow_single_deselect:'true'});
 						";	
-					}?>				
+					} ?>				
 				});
     			//console.log("jQuery is loaded.");
 			})();				

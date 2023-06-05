@@ -239,7 +239,11 @@ var leaflet_filters_class= function (params){
 		popup.setContent(html);
 		marker.bindPopup(popup);
 
-		
+		/* popup_event only pro */
+		if ( this.params["popup_event"] == "hover" ) {
+
+		}
+
 		/* Sets click event on marker */
 		marker.on("click",function(e){
 			self.scrollNavTo(e.target);	
