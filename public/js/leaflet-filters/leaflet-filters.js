@@ -9,6 +9,7 @@ var leaflet_filters_class= function (params){
 	 this["map-id"]=null;
 	 this.markers=new Array();
 	 this.inBounds=new Array();
+	 this.inBounds_location=new Array();
 	 this.filters=null;
 	 this.markerCluster=null;
 	 this.instance_id=null;
@@ -376,10 +377,18 @@ var leaflet_filters_class= function (params){
 	 * Fills inBounds array
 	 */
 	 this.getInboundMarkers=function(){
+	 	var self=this;
 	 	if(this.params["display_only_inbound"] == false)  {
 	 		this.inBounds = this.filtered_markers;
 	 		return;
 	 	}
+
+	 	if( (this.params["googleplaces"] == 1) && (this.inBounds_location.length > 0) ) {
+	 		this.inBounds = this.inBounds_location;
+	 		//console.log('ok')
+	 		return;
+	 	}
+
 	 	this.inBounds=[];			   
 		var bounds = this.map.getBounds(); 
 		for(var iz in this.filtered_markers){
@@ -508,6 +517,10 @@ var leaflet_filters_class= function (params){
 
 		var tokens = jQuery(".TokensContainer .Close");
 		tokens.each(function () { jQuery(this).trigger("click"); });
+
+		jQuery('.leaflet-gac-control').val('');
+		//jQuery('.LA_search_location_result').html('');
+		self.inBounds_location=new Array();		
 
 		return this.filtered_markers;	
 	};
