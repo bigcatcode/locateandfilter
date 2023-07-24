@@ -756,9 +756,9 @@ class Locate_And_Filter_Public {
 				}
 
 				if ($taxonomy && $selector == "tokenize") {
-					$r .= '<li class="filter-tokenize" data-sort="'.$filter_selector_sort.'"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", true,9999,$allowed, $categoryfilter ) . '</li>';
-				} elseif ( $taxonomy &&  $selector == "select" ) {
-					$r .= '<li class="filter-select" data-sort="'.$filter_selector_sort.'"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", false,9999,$allowed, $categoryfilter ) . '</li>';
+					$r .= '<li class="filter-tokenize" data-sort="'.$filter_selector_sort.'"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", true,9999,$allowed, $categoryfilter, $selector ) . '</li>';
+				} elseif ( $taxonomy &&  ($selector == "select"  || $selector == "selectmultiple") ) {
+					$r .= '<li class="filter-select" data-sort="'.$filter_selector_sort.'"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy ( $filter, $filter."-$map_id", false,9999,$allowed, $categoryfilter, $selector ) . '</li>';
 				} elseif ( $selector == "range" ) {
 					$r .= '<li class="filter-range" data-sort="'.$filter_selector_sort.'"><label>' . $customlabel . '</label>
 					<div id="rangedval-'.$filter.'-'.$map_id.'"><span id="rangeval-'.$filter.'-'.$map_id.'"></span></div>  
@@ -804,9 +804,9 @@ class Locate_And_Filter_Public {
 						}
 
 						if ($taxonomy && $selector == "tokenize") {
-							$r .= '<li class="filter-tokenize"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy( $filter, $filter."-$map_id", true, 9999, $allowed ) . '</li>';
+							$r .= '<li class="filter-tokenize"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy( $filter, $filter."-$map_id", true, 9999, $allowed, $selector ) . '</li>';
 						} elseif ($taxonomy &&  $selector== "select") {
-							$r .= '<li class="filter-select"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy( $filter, $filter."-$map_id", false, 9999, $allowed ) . '</li>';
+							$r .= '<li class="filter-select"><label>' . $customlabel . '</label>' . Locate_And_Filter_Tools::getSelectForTaxonomy( $filter, $filter."-$map_id", false, 9999, $allowed, $selector ) . '</li>';
 						} elseif ($selector == "range") {
 							$r .= '<li class="filter-range"><label>' . $customlabel . '</label>
 							<div id="rangedval-'.$filter.'-'.$map_id.'"><span id="rangeval-'.$filter.'-'.$map_id.'"></span></div>  

@@ -172,4 +172,20 @@ span.ui-slider-handle.ui-state-default.ui-corner-all b {
     border: none;
 }
 
+/*chosen*/
+
+.LA_filters ul.chosen-results,
+.LA_filters ul.chosen-choices,
+.LA_filters ul.TokensContainer {
+    display: inherit; 
+}
+
+/*range*/
+
+.filter-range {
+    min-width: 270px;
+}
+
+
+
 

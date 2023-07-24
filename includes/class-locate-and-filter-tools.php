@@ -170,8 +170,22 @@ class Locate_And_Filter_Tools {
 		}
 	}
 
-	public static function getSelectForTaxonomy($taxonomy,$name,$tokenize=true,$maxElement=99999,$allowed=false, $categoryfilter='') {
-		if($tokenize) if($maxElement>1)	$class="tokenize"; else $class="tokenize-1";else $class="";
+	public static function getSelectForTaxonomy($taxonomy,$name,$tokenize=true,$maxElement=99999,$allowed=false, $categoryfilter='',$selector) {
+		$selectmultiple = '';
+
+		if ( $tokenize ) {
+			if ( $maxElement>1 ) {
+				$class="tokenize"; 
+			} else {
+				$class="tokenize-1";
+			}
+		} else if ( $selector == "selectmultiple" ) {
+			$selectmultiple = 'multiple';
+			$class = "select";
+		} else {
+			$selectmultiple = '';
+			$class = "select";
+		}
 
 		$terms=get_terms($taxonomy , array(
 	 	'orderby'    => 'name',
@@ -180,13 +194,17 @@ class Locate_And_Filter_Tools {
 		
 		if($terms){
 
-			$li=array('<option value=""></option>');
+			if ( !empty($categoryfilter) ) {
+				$li=array('');
+			} else {
+				$li=array('<option value="" label=""></option>');				
+			}
 			foreach($terms as $k=>$term){
 				if ( $categoryfilter == $term->term_id) { $status = 'selected="selected"';} else { $status ='';}
 				$str='<option value="'.$term->term_id.'" '.$status.' >'.$term->name;
 				$li[]=$str;
 			}
-			if(count($li)) return '<select class="'.$class.'" name="'.$name.'" id="'.$name.'">'.implode("",$li).'</select>';
+			if(count($li)) return '<select class="'.$class.' '.$name.'" '.$selectmultiple.' name="'.$name.'" id="'.$name.'">'.implode("",$li).'</select>';
 			else return false;
 		}
 	}

@@ -34,9 +34,16 @@ var leaflet_filters_class= function (params){
 	this.getFilterValue=function(filter_id){	
 		var vals=new Array();
 		var filter_name=jQuery(filter_id).attr('name');
-		if (jQuery(filter_id).is( "select" ) ) {
-			if(jQuery(filter_id).attr("multiple")) jQuery(filter_id+" option ").each(function(i, selected){ if(jQuery(selected).attr("selected"))  vals.push(jQuery(selected).val());});
-			else vals.push(jQuery(filter_id).val());	
+		var filter_name_range=jQuery(filter_id).attr('data-name');	
+		if ( jQuery(filter_id).is( "select" ) ) {
+			if ( jQuery(filter_id).attr("multiple")) {
+				var multiple_val = jQuery(filter_id).val(); console.log(multiple_val);
+				jQuery(multiple_val).each(function(i, selected) { 
+					vals.push(selected);
+				});
+			} else {
+				vals.push(jQuery(filter_id).val());	
+			}			
 		} else if (jQuery(filter_id).is("input:checkbox,input:radio") ) {
 			jQuery("input[name='"+filter_name+"']:checked").each(function() {vals.push(jQuery(this).val());});
 		} else if(jQuery(filter_id).hasClass("rangeslider")) {
