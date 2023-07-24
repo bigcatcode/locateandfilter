@@ -415,7 +415,8 @@ fix load google js
 = 1.6.11 =
 * fix range, bug fix
 
-
+= 1.6.12 =
+* update leaflet 1.9.4
 
 
 
@@ -510,3 +511,10 @@ PRO
 
 = 1.6.1 =
 * move cache dir to uploads
+
+= 1.6.12 =
+* update leaflet 1.9.4
+
+
+
+
