@@ -53,7 +53,7 @@ class Locate_And_Filter_Public {
 		wp_enqueue_style ( $this->plugin_name . "-all", plugin_dir_url ( __FILE__ ) . 'css/locate-and-filter-public.css', array (), $this->version, 'all' );
 		// leaflet css
 		//wp_enqueue_style ( $this->plugin_name . "-leaflet", plugin_dir_url ( __FILE__ ) . 'js/leaflet-0.7.3/leaflet.css', array (), $this->version, 'all' );
-		wp_enqueue_style ( $this->plugin_name . "-leaflet", plugin_dir_url ( __FILE__ ) . 'js/leaflet-1.7.1/leaflet.css', array (), $this->version, 'all' );
+		wp_enqueue_style ( $this->plugin_name . "-leaflet", plugin_dir_url ( __FILE__ ) . 'js/leaflet-1.9.4/leaflet.css', array (), $this->version, 'all' );
 		// Pretty-checkbox
 		wp_enqueue_style ( $this->plugin_name . "-pretty-checkbox", plugin_dir_url ( __FILE__ ) . 'js/pretty-checkbox/pretty-checkbox.min.css', array (), $this->version, 'all' );
 		// leaflet-filters css
@@ -153,7 +153,7 @@ class Locate_And_Filter_Public {
 		// ), $this->version, false );
 
 		// new leaflet JS
-		wp_enqueue_script ( $this->plugin_name . "-leaflet", plugin_dir_url ( __FILE__ ) . 'js/leaflet-1.7.1/leaflet-src.js', array (
+		wp_enqueue_script ( $this->plugin_name . "-leaflet", plugin_dir_url ( __FILE__ ) . 'js/leaflet-1.9.4/leaflet-src.js', array (
 				'jquery' 
 		), $this->version, false );
 
