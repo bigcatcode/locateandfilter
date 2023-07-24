@@ -677,15 +677,15 @@ var leaflet_filters_class= function (params){
 		if( jQuery('.rangeslider')) {
 			jQuery('.rangeslider').each(function(i,slider) {
 					var mini,maxi,the_slider;
-					mini= parseInt(jQuery('#'+jQuery(slider).attr("id")).attr("min"));
-					maxi= parseInt(jQuery('#'+jQuery(slider).attr("id")).attr("max"));
+					mini= parseInt(jQuery('#'+jQuery(slider).attr("id")).attr("data-min"));
+					maxi= parseInt(jQuery('#'+jQuery(slider).attr("id")).attr("data-max"));
 					the_slider=slider;
 
 					jQuery('#'+jQuery(slider).attr("id")).slider({    
 						range: true,
 						min: mini,
 						max:maxi,
-						values: [jQuery('#'+jQuery(the_slider).attr("id")).attr("min"), jQuery('#'+jQuery(the_slider).attr("id")).attr("max") ],
+						values: [jQuery('#'+jQuery(the_slider).attr("id")).attr("data-min"), jQuery('#'+jQuery(the_slider).attr("id")).attr("data-max") ],
 						create   : function( event, ui ) {  
 						    var values=jQuery(this).slider("values");                
 						       jQuery(this).find('.ui-slider-handle').first().html("<b>"+values[0]+"</b>");

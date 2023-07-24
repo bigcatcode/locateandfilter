@@ -632,7 +632,7 @@ class Locate_And_Filter_Public {
 					 	/* Initialize Map  */	
 					eval(map_instance).createMap();
 					/*   Register filters, property_name is the name of the property as shown in the JSON datas  */
-					var custom_filters= [<?php if(is_array($filters)) foreach ($filters as $filter) echo '{"property_name":"'.$filter.'","html_id" : "#'.$filter.'-'.$map_id.'"},';?>];
+					var custom_filters= [<?php if(is_array($filters)) foreach ($filters as $filter) echo '{"property_name":"'.$filter.'","html_id" : ".'.$filter.'-'.$map_id.'"},';?>];
 					eval(map_instance).register_filters(custom_filters);
 					/* Override nav item template */	 	
 					eval(map_instance).template_nav_item = function(marker,LatLng) {	
@@ -762,7 +762,7 @@ class Locate_And_Filter_Public {
 				} elseif ( $selector == "range" ) {
 					$r .= '<li class="filter-range" data-sort="'.$filter_selector_sort.'"><label>' . $customlabel . '</label>
 					<div id="rangedval-'.$filter.'-'.$map_id.'"><span id="rangeval-'.$filter.'-'.$map_id.'"></span></div>  
-  					<div class="rangeslider" min="'.get_post_meta ( $map_id, "locate-anything-min-range-$filter", true ).'" max="'.get_post_meta ( $map_id, "locate-anything-max-range-$filter", true ).'" name="'.$filter.'-'.$map_id.'"  id="'.$filter.'-'.$map_id.'"></div></li>';
+  					<div class="rangeslider '.$filter.'-'.$map_id.'" data-min="'.get_post_meta ( $map_id, "locate-anything-min-range-$filter", true ).'" data-max="'.get_post_meta ( $map_id, "locate-anything-max-range-$filter", true ).'" data-name="'.$filter.'-'.$map_id.'"  id="'.$filter.'-'.$map_id.'"></div></li>';
 				
 				} else {
 					$pretty = get_post_meta( $map_id, 'locate-anything-load-pretty-checkbox', true );

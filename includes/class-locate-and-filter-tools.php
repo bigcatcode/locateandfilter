@@ -121,9 +121,9 @@ class Locate_And_Filter_Tools {
 				}
 				
 				if( $pretty ) {
-					$str = '<div id="la-filter-'.$term->term_id.'" class="LA_filters_'.$selector.' '.$term_image_class.' pretty p-default"><input class="filter_term_'.$selector.'" type="'.$selector.'"  id="'.$name.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<div class="state p-primary"><label for="'.$name.'"></label></div><span class="filter_term_name">'.$term->name.'</span></div>';
+					$str = '<div id="la-filter-'.$term->term_id.'" class="LA_filters_'.$selector.' '.$term_image_class.' pretty p-default"><input class="filter_term_'.$selector.' '.$name.'" type="'.$selector.'"  id="'.$name.'-'.$term->term_id.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<div class="state p-primary"><label for="'.$name.'-'.$term->term_id.'"></label></div><span class="filter_term_name">'.$term->name.'</span></div>';
 				} else {
-					$str = '<div id="la-filter-'.$term->term_id.'" class="LA_filters_'.$selector.' '.$term_image_class.' "><input class="filter_term_'.$selector.'" type="'.$selector.'"  id="'.$name.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<span class="filter_term_name">'.$term->name.'</span></div>';
+					$str = '<div id="la-filter-'.$term->term_id.'" class="LA_filters_'.$selector.' '.$term_image_class.' "><label for="'.$name.'-'.$term->term_id.'"><input class="filter_term_'.$selector.' '.$name.'" type="'.$selector.'"  id="'.$name.'-'.$term->term_id.'" name="'.$name.'[]" value="'.$term->term_id.'" '.$status.'>'.$term_image.'<span class="filter_term_name">'.$term->name.'</span></label></div>';
 				}
 				
 				$li[] = $str;
@@ -157,9 +157,9 @@ class Locate_And_Filter_Tools {
 				$locateanything_checkbox_status = get_term_meta( $term->ID , 'locateanything_checkbox_status', true );
 				if (get_the_ID() != $term->ID) { $status = ''; } else { $status = 'checked'; }
 				if($pretty) {
-					$str='<div id="la-filter-'.$term->ID.'" class="LA_filters_checkbox '.$term_image_class.' pretty p-default"><input class="filter_term_checkbox" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->ID.'" '.$status.'>'.$term_image.'<div class="state p-primary"><label for="'.$name.'"></label></div><span class="filter_term_name">'.$term->post_name.'</span></div>';
+					$str='<div id="la-filter-'.$term->ID.'" class="LA_filters_checkbox '.$term_image_class.' pretty p-default"><input class="filter_term_checkbox '.$name.'" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->ID.'" '.$status.'>'.$term_image.'<div class="state p-primary"><label for="'.$name.'"></label></div><span class="filter_term_name">'.$term->post_name.'</span></div>';
 				}else {
-					$str='<div id="la-filter-'.$term->ID.'" class="LA_filters_checkbox '.$term_image_class.' "><input class="filter_term_checkbox" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->ID.'" '.$status.'>'.$term_image.'<span class="filter_term_name">'.$term->post_name.'</span></div>';
+					$str='<div id="la-filter-'.$term->ID.'" class="LA_filters_checkbox '.$term_image_class.' "><input class="filter_term_checkbox '.$name.'" type="checkbox"  id="'.$name.'" name="'.$name.'[]" value="'.$term->ID.'" '.$status.'>'.$term_image.'<span class="filter_term_name">'.$term->post_name.'</span></div>';
 				}
 				
 				$li[]=$str;
