@@ -3,8 +3,8 @@ Contributors: dgamoni
 Donate link: https://locateandfilter.com/
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory plugin, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
 Requires at least: 4.5.0
-Tested up to: 6.2.2
-Stable tag: 1.5.06
+Tested up to: 6.3
+Stable tag: 1.6.1
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -28,7 +28,7 @@ LocateAndFilter has been built on the great library LeafletJs (https://leafletjs
 * **Ready to use** : Need a map NOW? choose a map Layout, click, you are done! Not exactly what you had in mind? No worries!Just edit the layout CSS directly in the
 admin!
 * **Robust** : LocateAndFilter has been tested with 10 000 markers containing images, videos and audio…and still ran smoothly
-* **Responsive & Touch optimized** 
+
 
 And many other features :
 
@@ -39,13 +39,17 @@ And many other features :
 * Addons, Advanced filters, new marker icons, new map layouts
 * Custom tags for map layouts
 * Supports any shortcode in custom tag
-* Availability shortcode for single page
 * Geolocate address from nominatim
 * Reset filters function
 * Customizable select and Pretty checkbox
+* Search location by google autocoplete
+* full HTML validation for all type filters
 
 Online Demo :
 [example for projects](https://locateandfilter.com/demo-map-default-right-down-layout/)
+[demo map – SEARCH BY LOCATION BY STRUCTURED ADDRESS](https://demo-top.locateandfilter.com/)
+[demo map – ACF FILTERS](https://demo-top.locateandfilter.com/demo-map-acf-filters/)
+[demo map – SEARCH LOCATION BY GOOGLE AUTOCOPLETE AND RADIUS](https://demo-top.locateandfilter.com/demo-map-search-location-by-google-autocoplete-and-radius/)
 
 Documentation :
 [See our website for more informations on how to configure the plugin](https://locateandfilter.com/docs/locateandfilter-wp-plugin/)
@@ -62,9 +66,13 @@ Pro version:
 * Sorting for filters
 * Additional control layers by Bing satellite and Yandex satellite
 * Marker Clustering, setup Max Cluster Radius
+* Availability shortcode for single page
 * Available shortcode attribute for current category
 * Search markers by location
 * Animation of marker bouncing
+* Popup and navlist event
+* ACF field on filters
+* Sortby options for filters and nav list
 
 == Installation ==
 
