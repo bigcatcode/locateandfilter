@@ -139,6 +139,14 @@ var annotations=
   target : '#enable_markerBouncing',
   content: '<?php _e("Add animation of marker bouncing by hover or click on navlist. Tooltips will be disabled! You need enable Add marker bouncing js on global map options","locate-and-filter")?>'
 }),
+"enable_singleshortcode": new Anno({ 
+  target : '#enable_singleshortcode',
+  content: '<?php _e("Activate this option if you need use shortcode for single page - and you get map with current page marker.","locate-and-filter")?>'
+}),
+"enable_acf_for_filters": new Anno({ 
+  target : '#enable_acf_for_filters',
+  content: '<?php _e("Activate this option if you can use Advanced Custom Fields for filters such types as Number, Select, Checkbox, True / False, Radio Button</br>***Available only on extended version. more information on home page.","locate-and-filter")?>'
+}),
 }
 
 var target=jQuery(e.target).attr("data-target");

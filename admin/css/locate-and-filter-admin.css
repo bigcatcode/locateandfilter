@@ -277,4 +277,8 @@ a.proversion, h2.proversion {
     padding: 10px;
 }
 
+a.refresh:hover {
+    cursor: pointer;
+}
+
 

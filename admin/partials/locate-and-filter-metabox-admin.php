@@ -13,6 +13,8 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 <iframe scrolling="no" seamless="seamless" name="map_preview" src="<?php echo plugin_dir_url(__FILE__)?>locate-and-filter-preview.php?id=preview"></iframe>			 	 
 </td></tr></table>
 
+<a class="refresh" onclick="refresh_preview()">Refresh preview</a>
+
 <h2 class="nav-tab-wrapper">
     <a  data-pane="1"  data-animation="50%" class="active nav-tab"><?php _e("Map settings","locate-and-filter");?></a>
     <a class="nav-tab" data-pane="6" data-animation="50%"><?php _e("Filters","locate-and-filter");?></a>
@@ -178,7 +180,7 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 								<option <?php if(get_post_meta($object->ID,'locate-anything-search_box_by_radius_value',true)==300) echo 'selected="selected"';?> value="300">300</option>
 								<option <?php if(get_post_meta($object->ID,'locate-anything-search_box_by_radius_value',true)==500) echo 'selected="selected"';?> value="500">500</option>
 							</select>
-	
+</td>	
 </tr>
 
 
@@ -274,6 +276,23 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 			  <?php	} ?>
 </select></td>
 </tr>
+
+<tr id="enable_singleshortcode" class="only_pro">
+<td><?php _e("Enable Single shortcode","locate-and-filter")?> &nbsp;<input type="button" data-target="enable_singleshortcode" class="locate-anything-help"></td>
+<td>
+		  <input type="radio" name="locate-anything-enable_singleshortcode" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-enable_singleshortcode', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			<input type="radio" name="locate-anything-enable_singleshortcode" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-enable_singleshortcode', true )=="0" || get_post_meta( $object->ID, 'locate-anything-enable_singleshortcode', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+</td>
+</tr>
+
+<tr id="enable_acf_for_filters" class="group_by_location only_pro">
+<td><?php _e("Enable ACF for filters","locate-and-filter")?> &nbsp;<input type="button" data-target="enable_acf_for_filters" class="locate-anything-help"></td>
+<td>
+		  <input type="radio" name="locate-anything-enable_acf_for_filters" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-enable_acf_for_filters', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			<input type="radio" name="locate-anything-enable_acf_for_filters" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-enable_acf_for_filters', true )=="0" || get_post_meta( $object->ID, 'locate-anything-enable_acf_for_filters', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+</td>
+</tr>
+
 <!-- Filters -->
 <tr><td colspan="2"><h2><?php _e("Filter the markers (optional)","locate-and-filter");?></h2></td></tr>
 <tr>
@@ -412,6 +431,33 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 <tbody style="position: relative;">
 <tr><td><h2><?php _e("Navlist Settings","locate-and-filter")?></h2></td></tr> 
 <tr><td><?php _e("Event","locate-and-filter")?></td><td><input type="radio" <?php if(get_post_meta($object->ID,"locate-anything-navlist-event",true)=="click") echo "checked" ?> name="locate-anything-navlist-event" value="click">Click <input type="radio" <?php if(get_post_meta($object->ID,"locate-anything-navlist-event",true)=="hover" || get_post_meta($object->ID,"locate-anything-navlist-event",true)==false) echo "checked" ?> name="locate-anything-navlist-event" value="hover">Hover</radio></td></tr>
+
+<tr>
+	<td><a href='https://locateandfilter.com/locateandfilter-pro-version/' class='proversion2' target='_blank'>available only for PRO version</a></td>
+</tr>
+<tr id="enable_markerBouncing" class="only_pro">
+<td><?php _e("Enable Marker Bouncing","locate-and-filter")?> &nbsp;<input type="button" data-target="enable_markerBouncing" class="locate-anything-help"></td>
+<td>
+		  <input type="radio" name="locate-anything-enable_markerBouncing" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-enable_markerBouncing', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			  <input type="radio" name="locate-anything-enable_markerBouncing" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-enable_markerBouncing', true )=="0" || get_post_meta( $object->ID, 'locate-anything-enable_markerBouncing', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+</td>
+</tr>
+
+<tr id="navlist_orderby" class="navlist_orderby only_pro">
+<td><?php _e("Set orderby for navlist","locate-and-filter")?></td>
+<td>
+							<select id="locate-anything-navlist_orderby" class="locate-anything-navlist_orderby" name="locate-anything-navlist_orderby" >
+								<option <?php if(get_post_meta($object->ID,'locate-anything-navlist_orderby',true)=='none') echo 'selected="selected"';?> value="none">none</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-navlist_orderby',true)=='title') echo 'selected="selected"';?> value="title">title</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-navlist_orderby',true)=='name') echo 'selected="selected"';?> value="name">name</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-navlist_orderby',true)=='date') echo 'selected="selected"';?>  value="date">date</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-navlist_orderby',true)=='modified') echo 'selected="selected"';?> value="modified">modified</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-navlist_orderby',true)=='relevance') echo 'selected="selected"';?> value="relevance">relevance</option>
+								<option <?php if(get_post_meta($object->ID,'locate-anything-navlist_orderby',true)=='menu_order') echo 'selected="selected"';?> value="menu_order">menu_order</option>
+							</select>
+</td>	
+</tr>
+
 <tr><td><h2><?php _e("Tooltips Settings","locate-and-filter")?></h2></td></tr>
 <tr>
 	<td><a href='https://locateandfilter.com/locateandfilter-pro-version/' class='proversion2' target='_blank'>available only for PRO version</a></td>
@@ -542,7 +588,9 @@ function locate_anything_refresh_filters(){
 
 	
 				var posttype = jQuery('#locate-anything-source').val();
-
+				var enable_singleshortcode = <?php if (get_post_meta( $object->ID,"locate-anything-enable_singleshortcode",true)) { echo get_post_meta( $object->ID,"locate-anything-enable_singleshortcode",true); } else { echo '0'; } ?>;
+				var enable_acf_for_filters = <?php if (get_post_meta( $object->ID,"locate-anything-enable_acf_for_filters",true)) { echo get_post_meta( $object->ID,"locate-anything-enable_acf_for_filters",true); } else { echo '0'; } ?>;
+		
 		/* Post filters */
 		      jQuery.ajax({
 			          type: 'POST',
@@ -647,28 +695,7 @@ function locate_anything_refresh_filters(){
 
 			          			
 
-			          			if ( posttype == item ) {
-
-								    jQuery.ajax({
-										type: 'POST',
-										url: AJAX_URL,
-										data: {
-											"action": "LAgetPOST_id",
-											"type": posttype
-						      		},
-										success: function(data){
-											console.log(data);
-							                  jQuery("#locate-anything-allowed-filters-"+posttype).val(data);
-							                  var items=JSON.parse(data);
-							                  for(var i in items){
-							                    if(items[i].selected) var sel="selected";else var sel='selected';
-							                    jQuery("#locate-anything-allowed-filters-value-"+posttype).append("<option "+sel+"  value='"+items[i]+"'>"+items[i]+"</option>");
-							                  }
-							                  /* refreshes preview*/
-							              refresh_preview(); 
-
-										}
-									});
+			          			if ( posttype == item && enable_singleshortcode == 1 ) {
 
 			          			} else {
 			          				locate_anything_refresh_taxonomy_terms(item);

@@ -787,7 +787,7 @@ class Locate_And_Filter_Admin
 	/* get Taxonomies associated with type passed in request */
 	public function LA_getTaxonomies_plus() {
 		$tax = get_object_taxonomies(sanitize_text_field($_REQUEST['type']));
-		array_push($tax, $_REQUEST['type']);
+		//array_push($tax, $_REQUEST['type']);
 		echo json_encode($tax);
 		die();
 	}	

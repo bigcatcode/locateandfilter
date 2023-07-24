@@ -266,7 +266,7 @@ class Locate_And_Filter_Public {
 		add_shortcode ( "LocateAndFilter_navlist", "Locate_And_Filter_Public::outputNavlistMarkup" );
 		add_shortcode ( "LocateAndFilter_filters", "Locate_And_Filter_Public::outputFilters" );
 
-		add_shortcode ( "LocateAndFilter_single", "Locate_And_Filter_Public::createMap_single" );
+		//add_shortcode ( "LocateAndFilter_single", "Locate_And_Filter_Public::createMap_single" );
 		add_shortcode ( "LocateAndFilter_map_single", "Locate_And_Filter_Public::outputMapMarkup_single" );
 		add_shortcode ( "LocateAndFilter_filters_single", "Locate_And_Filter_Public::outputFilters_single" );
 	}
@@ -280,7 +280,7 @@ class Locate_And_Filter_Public {
 		remove_shortcode ( "LocateAndFilter_navlist");
 		remove_shortcode ( "LocateAndFilter_filters" );
 
-		remove_shortcode ( "LocateAndFilter_single" );
+		//remove_shortcode ( "LocateAndFilter_single" );
 		remove_shortcode ( "LocateAndFilter_map_single" );
 		remove_shortcode ( "LocateAndFilter_filters_single" );
 	}
