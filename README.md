@@ -412,6 +412,13 @@ fix load google js
 * fix multiselect (AND logic)
 * move cache dir to uploads
 
+= 1.6.11 =
+* fix range, bug fix
+
+
+
+
+
 
 
 
