@@ -73,7 +73,9 @@ class Locate_And_Filter_Admin
 
 	public static function saveRootPath() {
 
-		$path = plugin_dir_path(dirname(__FILE__)) ."cache";
+		//$path = plugin_dir_path(dirname(__FILE__)) ."cache";
+		$dir = wp_get_upload_dir();
+		$path = $dir['basedir'] ."/locateandfilter-cache";
 
 		if ( !is_writable($path) ) {
 			if ( !@chmod($path, 0777) ) {
@@ -81,7 +83,8 @@ class Locate_And_Filter_Admin
 			} 
 		} else {
 
-			$f = fopen(plugin_dir_path(dirname(__FILE__)).'/cache/path2root',"w");
+			//$f = fopen(plugin_dir_path(dirname(__FILE__)).'/cache/path2root',"w");
+			$f = fopen($path.'/path2root',"w");
 			$fpath = realpath(get_home_path())."/wp"."-load.php";
 			if(is_file($fpath)) fwrite($f, $fpath);
 			else {
@@ -322,7 +325,13 @@ class Locate_And_Filter_Admin
 	 *
 	 */
 	public static function check_cache_permissions() {
-		$path=plugin_dir_path(dirname(__FILE__)) ."cache";
+		//$path=plugin_dir_path(dirname(__FILE__)) ."cache";
+		$dir = wp_get_upload_dir();
+		$path = $dir['basedir'] ."/locateandfilter-cache";
+
+		if (!file_exists($path)) {
+		    mkdir($path, 0777, true);
+		}		
 		if(!is_writable($path)){if(!@chmod($path, 0777)) {
 			echo '<div class="notice notice-error"><p>'.__("<b>Error</b> : Please add write permissions on the following directory : $path","locate-and-filter").'</p></div>';
 			}

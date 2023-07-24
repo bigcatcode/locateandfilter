@@ -978,7 +978,9 @@ class Locate_And_Filter_Public {
 			/* cache enabled */
 			$cache_timeout = unserialize(get_option ( "locate-anything-option-cache-timeout"));			
 			if (! $cache_timeout) $cache_timeout = 15;
-			$cache_file = plugin_dir_path ( __FILE__ ) . "../cache/cache-" . $map_id . ".json";
+			//$cache_file = plugin_dir_path ( __FILE__ ) . "../cache/cache-" . $map_id . ".json";
+			$dir = wp_get_upload_dir();
+			$cache_file = $dir['basedir'] ."/locateandfilter-cache/cache-" . $map_id . ".json";			
 			$cache_life = 60 * $cache_timeout; // cache timeout, in seconds
 			$filemtime = @filemtime ( $cache_file ); // returns FALSE if file does not exist
 			if ($map_id!=="preview" && (! $filemtime || (time () - $filemtime >= $cache_life))) {
@@ -1098,7 +1100,9 @@ public static function defineDefaultMarker($params){
 	 */
 	public static function generateJSON($params, $output = false) {		
 		$map_id=$params['map_id'];
-		$cache_file = plugin_dir_path ( __FILE__ ) . "../cache/cache-" . $map_id . ".json";
+		//$cache_file = plugin_dir_path ( __FILE__ ) . "../cache/cache-" . $map_id . ".json";
+		$dir = wp_get_upload_dir();
+		$cache_file = $dir['basedir'] ."/locateandfilter-cache/cache-" . $map_id . ".json";			
 		/* tries to set memory limit and timeout higher */
 		try {
 		ini_set ( 'memory_limit', '256M' );

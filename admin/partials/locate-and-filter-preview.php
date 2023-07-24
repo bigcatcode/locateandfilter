@@ -1,8 +1,11 @@
 <?php
 
 
-$path = file_get_contents(__DIR__ ."/../../cache/path2root");
-include($path);
+// $path = file_get_contents(__DIR__ ."/../../cache/path2root");
+// include($path);
+
+$pagePath = explode('/wp-content/', dirname(__FILE__));
+include_once($pagePath[0] . '/wp-load.php');
 
 wp_head();
 

@@ -249,7 +249,11 @@ See our website for more informations on how to configure the plugin : https://l
 = 1.5.05 =
 * update google autocomplete, add new map layout top template 
 = 1.5.06 =
-* update navlist by google autocomplete, bug fix 
+* update navlist by google autocomplete, bug fix
+= 1.6.1 =
+* fix HTML validation for all type filters
+* fix multiselect (AND logic)
+* move cache dir to uploads
 
 PRO
 = 1.4.11.1 =
@@ -302,6 +306,17 @@ PRO
 * add new shortcode for location searchbox
 = 1.5.42 =
 * Add new options - animation of marker bouncing
+= 1.5.43 =
+* Add new options - popup event
+= 1.6.02 =
+* Add ACF to filters
+* Add new optins - sortby for nav list
+* fix HTML validation for all type filters
+* fix multiselect (AND logic)
+* fix rangeslider (float type)
+* fix addon json - load localy
+= 1.6.1 =
+* move cache dir to uploads
 
 == Frequently Asked Questions ==
 
