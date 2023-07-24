@@ -41,7 +41,7 @@ class Locate_And_Filter_Public {
 	 */
 	public function __construct($plugin_name, $version) {
         $this->plugin_name = 'locate-and-filter';
-        $this->version = '1.5.002';
+        $this->version = '1.6.1';
 	}
 	
 	/**
@@ -335,7 +335,7 @@ class Locate_And_Filter_Public {
 	public static function outputNavlistMarkup($atts, $content) {
 		return $content .= '<!-- Map Nav -->
 				<div class="map-nav-wrapper" id="map-nav-wrapper-'.$atts["map_id"].'">
-				<div id="map-nav-'.$atts["map_id"].'" class="map-nav-lists"></div>				
+				<div id="map-nav-'.$atts["map_id"].'" class="map-nav-lists map-nav-'.$atts["map_id"].'"></div>				
 				</div>
 				<div class="map-nav-pagination tui-pagination" id="map-nav-pagination-'.$atts["map_id"].'"></div>';
 	}
@@ -714,9 +714,7 @@ class Locate_And_Filter_Public {
 					} ?>					
 					<?php $load_chosen = unserialize( get_option('locate-anything-option-load-chosen') );
 					if ( $load_chosen ) {
-						echo "/* Hide attribution */
-						jQuery('.filter-select select').chosen({width:'250px',allow_single_deselect:'true'});
-						";	
+						echo "jQuery('.filter-select select').chosen({width:'250px',allow_single_deselect:'true'});";	
 					} ?>				
 				});
     			//console.log("jQuery is loaded.");

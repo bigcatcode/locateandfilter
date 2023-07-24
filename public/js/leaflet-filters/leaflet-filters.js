@@ -47,8 +47,8 @@ var leaflet_filters_class= function (params){
 		} else if (jQuery(filter_id).is("input:checkbox,input:radio") ) {
 			jQuery("input[name='"+filter_name+"']:checked").each(function() {vals.push(jQuery(this).val());});
 		} else if(jQuery(filter_id).hasClass("rangeslider")) {
-			vals.push(jQuery("#"+filter_name).slider("values", 0));
-			vals.push(jQuery("#"+filter_name).slider("values", 1));			
+			vals.push(jQuery("#"+filter_name_range).slider("values", 0));
+			vals.push(jQuery("#"+filter_name_range).slider("values", 1));			
 		} 
 		if(vals.length) return vals;else return false;
 	};
