@@ -4,7 +4,7 @@ Donate link: https://locateandfilter.com/
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory plugin, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
 Requires at least: 4.5.0
 Tested up to: 6.3
-Stable tag: 1.6.12
+Stable tag: 1.6.13
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -19,15 +19,16 @@ LocateAndFilter is a versatile and highly customizable WordPress plugin aimed at
 * **Friendly** : 
 LocateAndFilter has been built on the great library LeafletJs (https://leafletjs.com/) and coded with extensibility in mind : addons using LocateAndFilter in conjunction with another WP plugin. You no longer need Google API Key.  
 * **Use just any taxonomy as a filter** : Easily use any taxonomy (custom taxonomies or regular taxonomies) to filter your maps.
-* **Supports Custom Post Types** : Most of the WordPress plugins only support posts and pages. Not this one!Total support for any custom post type and their taxonomies!
+* **Supports Custom Post Types** : Most of the WordPress plugins only support posts and pages. Not this one! Total support for any custom post type and their taxonomies! Post type USERS - available on pro version.
 * **Fully customizable marker icons** : You can define a custom marker icon for each location or choose to use the same marker for the whole map. It’s up to you! Choose between the plugin’s predefined marker icons, create your own markers using Ionicon or just use any image from the media library. Total flexibility!
 * **Customizable Map Overlay** : Choose between 4 different map overlays… Or use any overlay you want with the Custom Overlay Addon
 * **Additional fields** : Need to display a specific info on the map? Create additional fields! Additional fields are custom fields specifically designed to be displayed on the map. Let’s say your map is about coffeshops and you want to show the opening hours and the name of the nearest subway station? Create 2 additional fields : openingHours and nearestSubway. Done! Those informations are ready to be displayed in the marker list and the tooltips.
 * **Fully customizable tooltips** : Customize the tooltips EXACTLY as you want them : HTML, audios, videos, images,post content… Tooltips can display nearly anything. Customize the tooltip template for each marker independently, you have total control on the information that appears…or use a tooltip preset for instant styling!
 * **Fully customizable marker list** : Customize the marker list as you please : HTML, audios, videos, images,post content…
-* **Ready to use** : Need a map NOW? choose a map Layout, click, you are done! Not exactly what you had in mind? No worries!Just edit the layout CSS directly in the
+* **Ready to use** : Need a map NOW? choose a map Layout, click, you are done! Not exactly what you had in mind? No worries! Just edit the layout CSS directly in the
 admin!
-* **Robust** : LocateAndFilter has been tested with 10 000 markers containing images, videos and audio…and still ran smoothly
+* ** Add your Custom tags to tooltip and navlist template: Use any functionality or shortcode
+* **Robust** : LocateAndFilter has been tested with 10 000 markers containing images, videos and audio… and still ran smoothly
 
 
 And many other features :
@@ -42,14 +43,13 @@ And many other features :
 * Geolocate address from nominatim
 * Reset filters function
 * Customizable select and Pretty checkbox
-* Search location by google autocoplete
+* Search location by google or leaflet autocomplete
 * full HTML validation for all type filters
 
 Online Demo :
 [example for projects](https://locateandfilter.com/demo-map-default-right-down-layout/)
-[demo map – SEARCH BY LOCATION BY STRUCTURED ADDRESS](https://demo-top.locateandfilter.com/)
 [demo map – ACF FILTERS](https://demo-top.locateandfilter.com/demo-map-acf-filters/)
-[demo map – SEARCH LOCATION BY GOOGLE AUTOCOPLETE AND RADIUS](https://demo-top.locateandfilter.com/demo-map-search-location-by-google-autocoplete-and-radius/)
+[demo map – SEARCH LOCATION BY AUTOCOPLETE AND RADIUS](https://demo-top.locateandfilter.com/demo-map-search-location-by-google-autocoplete-and-radius/)
 
 Documentation :
 [See our website for more informations on how to configure the plugin](https://locateandfilter.com/docs/locateandfilter-wp-plugin/)
@@ -73,6 +73,8 @@ Pro version:
 * Popup and navlist event
 * ACF field on filters
 * Sortby options for filters and nav list
+* Wordpress Users added to map source
+* use your custom fields for source coordinates
 
 == Installation ==
 
@@ -266,6 +268,8 @@ See our website for more informations on how to configure the plugin : https://l
 * fix range, bug fix
 = 1.6.12 =
 * update leaflet 1.9.4
+= 1.6.13 =
+* update readme, update admin page
 
 PRO
 = 1.4.11.1 =
@@ -331,8 +335,31 @@ PRO
 * move cache dir to uploads
 = 1.6.12 =
 * update leaflet 1.9.4
+= 1.6.14.acf = 
+* added support ACF number - dropdown checkbox
+= 1.6.15.acf =
+* fix single shortcode, add Pages to filters
+= 1.6.15.user =
+* add users
+= 1.7.acf = 
+* add different source for coordinates
+= 1.8.acf = 
+* add leaflet autocomplete geosearch to map
+* add new shortcode searchbylocation by autocomplete geosearch
+= 1.8.1.acf = 
+* add new map template - half Map Layout
+
 
 == Frequently Asked Questions ==
+
+[How Add new Custom tags](https://locateandfilter.com/docs/locateandfilter-wp-plugin/developers-guide/add-new-custom-tags/)
+[How Use ACF field on map filter](https://locateandfilter.com/docs/locateandfilter-wp-plugin/pro-version/acf-field-on-filters/)
+[How Set different source for coordinates](https://locateandfilter.com/docs/locateandfilter-wp-plugin/pro-version/set-different-source-for-coordinates/)
+[How add Post type USERS on map source](https://locateandfilter.com/docs/locateandfilter-wp-plugin/pro-version/users-on-map-source/)
+[How Search markers by location](https://locateandfilter.com/docs/locateandfilter-wp-plugin/pro-version/search-markers-by-location/)
+[How Customize your own Map visual style](https://locateandfilter.com/locateandfilter-addon-overlays/)
+[How Show markers for current category](https://locateandfilter.com/examples/categoryfilter/)
+[How Use any shortcode in markers and list](https://locateandfilter.com/custom_shortcode_filed/)
 
 If you have any question and need help, please create topic on https://wordpress.org/support/plugin/locateandfilter/
 

@@ -70,22 +70,24 @@
 <h2><?php _e("What do you want to localize?","locate-anything")?></h2>
 	<ul>
 		<li>
-<select multiple="multiple"	name="locate-anything-option-sources[]"	id="locate-anything-option-sources">
+			<a href='https://locateandfilter.com/locateandfilter-pro-version/' class='proversion' target='_blank'>USERS - available only for PRO (user version)</a>
+		</li>		
+		<li>
+			<select multiple="multiple"	name="locate-anything-option-sources[]"	id="locate-anything-option-sources">
+				<?php
+							$args = array ('publicly_queryable' => true);
+							$post_types = get_post_types ( $args, 'objects' );
 
-<?php
-			$args = array ('publicly_queryable' => true);
-			$post_types = get_post_types ( $args, 'objects' );
-
-			$selected_items = unserialize (get_option ( 'locate-anything-option-sources' ));
-			if(!is_array($selected_items)) $selected_items = array ();
-			foreach ( $post_types as $post_type ) {	
-				if($post_type->name == "locateandfiltermap")	 continue;		
-				echo '<option value="' . $post_type->name . '"';
-				if (array_search ( $post_type->name, $selected_items ) !== false) echo " selected ";
-				echo '>' . $post_type->labels->name . '</option>';
-			}			
-?>
-</select>
+							$selected_items = unserialize (get_option ( 'locate-anything-option-sources' ));
+							if(!is_array($selected_items)) $selected_items = array ();
+							foreach ( $post_types as $post_type ) {	
+								if($post_type->name == "locateandfiltermap")	 continue;		
+								echo '<option value="' . $post_type->name . '"';
+								if (array_search ( $post_type->name, $selected_items ) !== false) echo " selected ";
+								echo '>' . $post_type->labels->name . '</option>';
+							}			
+				?>
+			</select>
 		</li>
 	</ul>
 

@@ -18,11 +18,11 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 <h2 class="nav-tab-wrapper">
     <a  data-pane="1"  data-animation="50%" class="active nav-tab"><?php _e("Map settings","locate-and-filter");?></a>
     <a class="nav-tab" data-pane="6" data-animation="50%"><?php _e("Filters","locate-and-filter");?></a>
-     <a class="nav-tab" data-pane="4" data-animation="50%"><?php _e("Markers settings","locate-and-filter");?></a>   
+    <a class="nav-tab" data-pane="4" data-animation="50%"><?php _e("Markers settings","locate-and-filter");?></a>   
     <a class="nav-tab" data-pane="2" data-animation="50%"><?php _e("Tooltip & Nav List","locate-and-filter");?></a>
    	<a class="nav-tab" data-pane="3" data-animation="50%"><?php _e("Map Layouts","locate-and-filter");?></a>
-
-<a class="nav-tab" data-pane="5" data-animation="50%"><?php _e("Tools & Shortcodes","locate-and-filter");?></a>
+		<a class="nav-tab" data-pane="5" data-animation="50%"><?php _e("Tools & Shortcodes","locate-and-filter");?></a>
+		<a class="nav-tab" data-pane="7" data-animation="50%"><?php _e("Support","locate-and-filter");?></a>
 </h2>
 
 <div id="locate-anything-wrapper">
@@ -130,6 +130,14 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 
 <tr>
 <td><a href='https://locateandfilter.com/locateandfilter-pro-version/' class='proversion2' target='_blank'>available only for PRO version</a>(<a href='https://demo-top.locateandfilter.com/' class='proversion2' target='_blank'>see demo</a>)</td>
+</tr>
+
+<tr id="geosearch" class="group_by_location only_pro">
+<td><?php _e("Enable Leaflet geosearch searchbox","locate-and-filter")?>  &nbsp;<input type="button" data-target="geosearch" class="locate-anything-help"></td>
+<td>			 
+			  <input type="radio" name="locate-anything-geosearch" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-geosearch', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			  <input type="radio" name="locate-anything-geosearch" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-geosearch', true )=="0" || get_post_meta( $object->ID, 'locate-anything-geosearch', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+			</td>
 </tr>
 
 
@@ -376,6 +384,18 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 			</div>
 		</td>
 	</tr><!-- /medialibrary -->
+
+<!-- different source lat lon -->
+<tr><td colspan="2"><h2><?php _e("Set different source for coordinates","locate-and-filter");?></h2></td></tr>
+<tr id="enable_source_for_coordinates" class="group_by_location">
+<td class="only_pro"><?php _e("Enable different source for coordinates","locate-and-filter")?> &nbsp;<input type="button" data-target="enable_source_for_coordinates" class="locate-anything-help"></td>
+<td>
+		  <input type="radio" name="locate-anything-enable_source_for_coordinates" value="1" <?php if (get_post_meta( $object->ID, 'locate-anything-enable_source_for_coordinates', true )=="1") echo "checked" ;?>> <?php _e("yes","locate-and-filter")?>
+			<input type="radio" name="locate-anything-enable_source_for_coordinates" value="0" <?php if (get_post_meta( $object->ID, 'locate-anything-enable_source_for_coordinates', true )=="0" || get_post_meta( $object->ID, 'locate-anything-enable_source_for_coordinates', true )==false) echo "checked" ;?>> <?php _e("no","locate-and-filter")?>
+</td>
+</tr>
+
+
 </tbody>
 </table>
 
@@ -534,7 +554,18 @@ $navlist_presets=array(
 <!-- Map Layout -->
 <tbody style="position: relative;">
 <tr><td colspan="2"><h2><?php _e("Map Layout","locate-and-filter")?>&nbsp;<input type="button" data-target="maplayout" class="locate-anything-help"></h2></td></tr>
+<tr>
+	<td>
+		Available shortcode: <strong>[map]</strong> <strong>[navlist]</strong> and <strong>[filters]</strong><br>
+		on Pro version available additional new shortcodes <strong>[search]</strong> and <strong>[searchbylocation]</strong><br>
+		<br>
+		<div>for RESET button you need use any tag with id="reset-filters" 
+		<pre class="lang:default decode:true " >&lt;a href="#" id="reset-filters" class="reset"&gt;Reset&lt;/a&gt;</pre> </div>
 
+		<div>for ERROR message you need use any tag with class="LA_search_location_result_error"
+		<pre class="lang:default decode:true " >&lt;div class="LA_search_location_result_error"&gt;&lt;/div&gt;</pre> </div>
+	</td>
+</tr>
 <tr id="maplayout">
 <td><?php _e("Map Layout","locate-and-filter")?> </td>
 <td><select name="locate-anything-map-template" id="locate-anything-map-template"><?php foreach (Locate_And_Filter_Assets::getMapTemplates() as $template){?>
@@ -544,7 +575,54 @@ $navlist_presets=array(
 <td colspan="2" id="layout_editor"></td>
 </tr>	
 </tbody>	
-</table>	  
+</table>
+
+<!-- support tab-->
+<table id="locate-anything-map-settings-page-7" class="locate-anything-map-settings-list-ul locate-anything-map-option-pane" style="display:none" >	
+
+<tbody style="position: relative;">
+
+	<tr>
+		<td>
+			<h2>You need help for setup map?</h2>
+			<div>Free support available on plugin page forum <a href="https://wordpress.org/support/plugin/locateandfilter/" target="_blank">https://wordpress.org/support/plugin/locateandfilter/</a> (response 1-3 days)</div>
+			<div>for PRO version support available by email: <a href="mailto:monothemes@gmail.com" target="_blank">monothemes@gmail.com</a> (response 1-3 hours)</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<h2>if you cannot configure the map or you need a function that is not supported in the plugin?</h2>
+
+			<div>I am available to customize the map template to suit your design</div>
+			<div>I am available to adding any new functionality to the map</div>
+			<div>Please contact me to email <a href="mailto:monothemes@gmail.com" target="_blank">monothemes@gmail.com</a> with the subject 'paid support'</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<h2>Quick links to help you</h2>
+			<div><a href="https://locateandfilter.com/docs/locateandfilter-wp-plugin/" target="_blank">Documentation</a></div>
+			<div><a href="https://wordpress.org/support/plugin/locateandfilter/" target="_blank">Searh by forum</a></div>
+			<div><a href="https://locateandfilter.com/docs/locateandfilter-wp-plugin/developers-guide/add-new-custom-tags/" target="_blank">Add new Custom tags</a></div>
+			<div><a href="https://locateandfilter.com/docs/locateandfilter-wp-plugin/pro-version/acf-field-on-filters/" target="_blank">Use ACF field on map filter</a></div>
+			<div><a href="https://locateandfilter.com/docs/locateandfilter-wp-plugin/pro-version/set-different-source-for-coordinates/" target="_blank">Set different source for coordinates</a></div>
+			<div><a href="https://locateandfilter.com/docs/locateandfilter-wp-plugin/pro-version/users-on-map-source/" target="_blank">Post type USERS on map source</a></div>
+			<div><a href="https://locateandfilter.com/docs/locateandfilter-wp-plugin/pro-version/search-markers-by-location/" target="_blank">Search markers by location</a></div>
+			<div><a href="https://locateandfilter.com/locateandfilter-addon-overlays/" target="_blank">Customize your own Map visual style</a></div>
+			<div><a href="https://locateandfilter.com/examples/categoryfilter/" target="_blank">Show markers for current category</a></div>
+			<div><a href="https://locateandfilter.com/custom_shortcode_filed/" target="_blank">Use any shortcode in markers and list</a></div>
+			<div><a href="" target="_blank"></a></div>
+			<div><a href="" target="_blank"></a></div>
+			<div><a href="" target="_blank"></a></div>
+			
+		</td>		
+	</tr>
+
+</tbody>
+</table>
+<!-- /support tab-->
+
+
 	
 </td></tr></table>
 </div>	
@@ -600,7 +678,7 @@ function locate_anything_refresh_filters(){
 			          	"type":jQuery('#locate-anything-source').val()
 			      },
 			          success: function(data){
-			          	console.log(data);
+			          	//console.log(data);
 			          	var selected='|<?php 
 			          		$the_filters=get_post_meta( $object->ID, 'locate-anything-filters',true);
 			          		if(is_array($the_filters)) echo implode("|",$the_filters)?>|';
@@ -635,7 +713,7 @@ function locate_anything_refresh_filters(){
                            
 			          	
 			          	data=JSON.parse(data);
-			          	console.log(data);
+			          	//console.log(data);
 
 			          		for(var i=0;i<data.length;i++) {
 			          			var item=data[i];

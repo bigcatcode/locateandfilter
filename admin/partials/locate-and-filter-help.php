@@ -147,6 +147,14 @@ var annotations=
   target : '#enable_acf_for_filters',
   content: '<?php _e("Activate this option if you can use Advanced Custom Fields for filters such types as Number, Select, Checkbox, True / False, Radio Button</br>***Available only on extended version. more information on home page.","locate-and-filter")?>'
 }),
+"enable_source_for_coordinates": new Anno({ 
+  target : '#enable_source_for_coordinates',
+  content: '<?php _e("Set different source for coordinates (Latitude,Longitude) from your custom fields<br>by default used plugin custom fields: locate-anything-lat <br> locate-anything-lon","locate-and-filter")?>'
+}),
+"geosearch": new Anno({ 
+  target : '#geosearch',
+  content: '<?php _e("Set this parameter to \"yes\" to add a a Leaflet geosearch searchbox to this map","locate-and-filter")?>'
+}),
 }
 
 var target=jQuery(e.target).attr("data-target");

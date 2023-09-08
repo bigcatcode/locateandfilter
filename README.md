@@ -418,7 +418,8 @@ fix load google js
 = 1.6.12 =
 * update leaflet 1.9.4
 
-
+= 1.6.13 =
+* update readme, update admin page
 
 
 
@@ -515,6 +516,23 @@ PRO
 = 1.6.12 =
 * update leaflet 1.9.4
 
+= 1.6.14.acf = 
+* added support ACF number - dropdown checkbox
 
+= 1.6.15.acf =
+* fix single shortcode, add Pages to filters
+
+= 1.6.15.user =
+* add users
+
+= 1.7.acf = 
+* add different source for coordinates
+
+= 1.8.acf = 
+* add leaflet autocomplete geosearch to map
+* add new shortcode searchbylocation by autocomplete geosearch
+
+= 1.8.1.acf = 
+* add new map template - half Map Layout
 
 
