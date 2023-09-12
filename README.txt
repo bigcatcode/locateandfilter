@@ -47,9 +47,10 @@ And many other features :
 * full HTML validation for all type filters
 
 Online Demo :
-[example for projects](https://locateandfilter.com/demo-map-default-right-down-layout/)
+[demo map - PROJECTS](https://locateandfilter.com/demo-map-default-right-down-layout/)
 [demo map – ACF FILTERS](https://demo-top.locateandfilter.com/demo-map-acf-filters/)
 [demo map – SEARCH LOCATION BY AUTOCOPLETE AND RADIUS](https://demo-top.locateandfilter.com/demo-map-search-location-by-google-autocoplete-and-radius/)
+[demo map – USERS](https://demo-user.locateandfilter.com/)
 
 Documentation :
 [See our website for more informations on how to configure the plugin](https://locateandfilter.com/docs/locateandfilter-wp-plugin/)
