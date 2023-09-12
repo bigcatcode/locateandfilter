@@ -4,7 +4,7 @@ Donate link: https://locateandfilter.com/
 Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory plugin, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
 Requires at least: 4.5.0
 Tested up to: 6.3
-Stable tag: 1.6.13
+Stable tag: 1.6.14
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -270,6 +270,9 @@ See our website for more informations on how to configure the plugin : https://l
 * update leaflet 1.9.4
 = 1.6.13 =
 * update readme, update admin page
+= 1.6.14 = 
+* add loader to navlist
+* add result found to navlist
 
 PRO
 = 1.4.11.1 =

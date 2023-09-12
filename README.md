@@ -421,7 +421,9 @@ fix load google js
 = 1.6.13 =
 * update readme, update admin page
 
-
+= 1.6.14 = 
+* add loader to navlist
+* add result found to navlist
 
 
 PRO

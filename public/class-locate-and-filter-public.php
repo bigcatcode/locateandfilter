@@ -41,7 +41,7 @@ class Locate_And_Filter_Public {
 	 */
 	public function __construct($plugin_name, $version) {
         $this->plugin_name = 'locate-and-filter';
-        $this->version = '1.6.1';
+        $this->version = '1.6.13';
 	}
 	
 	/**
@@ -335,7 +335,8 @@ class Locate_And_Filter_Public {
 	public static function outputNavlistMarkup($atts, $content) {
 		return $content .= '<!-- Map Nav -->
 				<div class="map-nav-wrapper" id="map-nav-wrapper-'.$atts["map_id"].'">
-				<div id="map-nav-'.$atts["map_id"].'" class="map-nav-lists map-nav-'.$atts["map_id"].'"></div>				
+					<div id="results-found-'.$atts["map_id"].'" class="map-nav-results-found"></div>
+					<div id="map-nav-'.$atts["map_id"].'" class="map-nav-lists map-nav-'.$atts["map_id"].'"></div>				
 				</div>
 				<div class="map-nav-pagination tui-pagination" id="map-nav-pagination-'.$atts["map_id"].'"></div>';
 	}

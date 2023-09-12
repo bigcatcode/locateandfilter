@@ -9,13 +9,30 @@
 }
 
 #locate-anything-loader {
-	background: #fff url(../../assets/loaders/loader1.gif) no-repeat;
-	width:100%;
-	height:100%;
-	z-index:100;
-	position: absolute;
-	opacity: 0.65;
-	background-position: center center;
+    background: #fff url(../../assets/loaders/loader1.gif) no-repeat;
+    width:100%;
+    height:100%;
+    z-index:999;
+    position: absolute;
+    opacity: 0.65;
+    background-position: center center;
+}
+.locate-anything-loader-nav {
+    z-index:999;
+    position: absolute;
+    min-height: 300px;
+    width:100%;
+}
+.locate-anything-loader-nav .spinner {
+    position: absolute;
+    left: calc(50% - 28px);
+    top: calc(50% - 28px);
+}
+.map-nav-lists {
+    position: relative;
+}
+.map-nav-lists.loading {
+    opacity: 0.65;
 }
 
 
@@ -186,6 +203,22 @@ span.ui-slider-handle.ui-state-default.ui-corner-all b {
     min-width: 270px;
 }
 
+/*loader*/
 
+.spinner {
+   width: 56px;
+   height: 56px;
+   border-radius: 50%;
+   background: radial-gradient(farthest-side,#dbdbdd 94%,#0000) top/9px 9px no-repeat,
+          conic-gradient(#0000 30%,#dbdbdd);
+   -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+   animation: spinner-c7wet2 1s infinite linear;  
+}
+
+@keyframes spinner-c7wet2 {
+   100% {
+      transform: rotate(1turn);
+   }
+}
 
 

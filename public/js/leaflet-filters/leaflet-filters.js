@@ -100,6 +100,8 @@ var leaflet_filters_class= function (params){
 			// 		if(page) self.updateNav(parseInt(page));			
 			// });
 
+			jQuery('#results-found-'+this.params["map-id"]).html(this.inBounds.length + ' Results Found');
+
 			/* SHORT STYLE Create navigation pagination */
 			if ( this.params["map-id"] != 'preview' && this.inBounds.length > this.max_nav_item_per_page && jQuery('#map-nav-pagination-'+this.params["map-id"]).length > 0 ) {
 			   window['map_nav_pagination-'+this.params["map-id"]] = new tui.Pagination(document.getElementById('map-nav-pagination-'+this.params["map-id"]), {
@@ -629,10 +631,14 @@ var leaflet_filters_class= function (params){
 		if(this.params["hide-splashscreen"] == true ) {jQuery('#progress-wrapper').hide();return;}
 		if(show) {
 			jQuery("#"+this.params["map-container"]).append('<div id="locate-anything-loader"></div>');		
+			jQuery("#map-nav-"+this.params["map-id"]).append('<div class="locate-anything-loader-nav"><div class="spinner"></div></div>');	
+			jQuery("#map-nav-"+this.params["map-id"]).addClass('loading');
 		} else {	
 			// terminate the progressbar	
 			this.updateProgressBar(1,1,1000);
 			jQuery('#locate-anything-loader').remove();
+			jQuery('.locate-anything-loader-nav').remove();
+			jQuery("#map-nav-"+this.params["map-id"]).removeClass('loading');			
 		}
 	}
 
