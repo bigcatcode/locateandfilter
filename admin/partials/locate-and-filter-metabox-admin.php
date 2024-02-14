@@ -428,9 +428,6 @@ function makeInput($type,$fieldname,$object_id,$default='') {?>
 <tr><td>	
 <ul>
 <li><b><?php _e("Display the map with a predefined layout","locate-and-filter")?></b> : [LocateAndFilter map_id=<?php echo $object->ID?>]</li>
-<li><b><?php _e("Display the map separately","locate-and-filter")?></b> : [LocateAndFilter_map map_id=<?php echo $object->ID?>]</li>
-<li><b><?php _e("Display the filters separately","locate-and-filter")?></b> : [LocateAndFilter_filters map_id=<?php echo $object->ID?>]</li>
-<li><b><?php _e("Display the navigation list separately","locate-and-filter")?></b> : [LocateAndFilter_navlist map_id=<?php echo $object->ID?>]</li>
 <a href='https://locateandfilter.com/locateandfilter-pro-version/' class='proversion2' target='_blank'>available only for PRO version</a>
 <li class="only_pro"><b><?php _e("Display the map for single Post type","locate-and-filter")?></b> : [LocateAndFilter_single map_id=<?php echo $object->ID?>]</li>
 <li class="only_pro"><b><?php _e("Display the map for current category","locate-and-filter")?></b> : [LocateAndFilter map_id=<?php echo $object->ID?> categoryfilter="51"]</li>
