@@ -1,5 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
  * The public-facing functionality of the plugin.
  *
@@ -1015,7 +1016,9 @@ public static function getTagsUsedInTemplate($posts,$post_type,$params,$basic_fi
 	foreach ( $posts as $post ) {
 		if(Locate_And_Filter_Tools::getPostType($post_type)!==false) $post_params=Locate_And_Filter_Admin::getPostMetas($post->ID);
 		$post_params=apply_filters("locate_anything_marker_params",$post_params,$post->ID,false);
-		$all_templates.=" ".$post_params["locate-anything-marker-html-template"];
+		if (isset( $post_params["locate-anything-marker-html-template"] )) {
+			$all_templates.=" ".$post_params["locate-anything-marker-html-template"];
+		}
 	}
 	preg_match_all("/(.?)\|(.*?)\|/", $all_templates, $tags_used);
 	$tags_used= array_merge(array_unique($tags_used[2]),$basic_fields);
@@ -1286,7 +1289,7 @@ public static function defineDefaultMarker($params){
 							$add["lon"] = '';
 						}
 						if ( $add["lat"] && $add["lon"]){
-							$add["dms"] =  Locate_And_Filter_Public::tag_addon_DECtoDMS( $add["lat"], $add["lon"] );
+							$add["dms"] =  Locate_And_Filter_Public::tag_addon_DECtoDMS( floatval($add["lat"]), floatval($add["lon"]) );
 						} else {
 							$add["dms"] = '';
 						}

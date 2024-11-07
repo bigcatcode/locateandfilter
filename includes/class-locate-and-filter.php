@@ -260,7 +260,7 @@ class Locate_And_Filter
 
         $this->loader->add_action('admin_notices', $plugin_admin, 'check_cache_permissions', 10, 2);
         /* filters */
-        $this->loader->add_filter('upload_mimes',$plugin_admin, 'add_mime_types', 1, 1);
+        //$this->loader->add_filter('upload_mimes',$plugin_admin, 'add_mime_types', 1, 1);
 
         $this->loader->add_action('admin_menu',$plugin_admin, 'saveRootPath', 1000000, 0);
     }
