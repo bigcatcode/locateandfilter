@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Author URI:        https://www.monothemes.com
  * License:           GPL-2.0+
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       locate-anything
+ * Text Domain:       locateandfilter
  * Domain Path:       /languages
  */
 
@@ -93,7 +93,7 @@ function run_locate_and_filter() {
 
             ?>
                 <div class="error"><p>
-                    <?php printf(__('Please de-activate and remove the PRO version of LocateAndFilter before activating the free version.', 'locate-anything'));
+                    <?php printf(__('Please de-activate and remove the PRO version of LocateAndFilter before activating the free version.', 'locateandfilter'));
                     ?>
                 </p></div>
             <?php

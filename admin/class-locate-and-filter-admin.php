@@ -246,7 +246,7 @@ class Locate_And_Filter_Admin
 		
 		foreach ($selected_post_types as $type) {
 			add_meta_box('locate-and-filter-class', // Unique ID
-			esc_html__('LocateAndFilter', 'locate-and-filter') , // Title
+			esc_html__('LocateAndFilter', 'locateandfilter') , // Title
 			'Locate_And_Filter_Admin::post_class_meta_box', // Callback function
 			$type, // Admin page (or post type)
 			'normal', // Context
@@ -313,7 +313,7 @@ class Locate_And_Filter_Admin
 	 */
 	public function add_admin_meta_boxes() {
 		add_meta_box('locate-and-filter-class', // Unique ID
-		esc_html__('LocateAndFilter - Wordpress Plugin', 'locate-and-filter') , // Title
+		esc_html__('LocateAndFilter - Wordpress Plugin', 'locateandfilter') , // Title
 		'Locate_And_Filter_Admin::admin_class_meta_box', // Callback function
 		'locateandfiltermap', // Admin page (or post type)
 		'normal', // Context
@@ -334,7 +334,11 @@ class Locate_And_Filter_Admin
 		    mkdir($path, 0777, true);
 		}		
 		if(!is_writable($path)){if(!@chmod($path, 0777)) {
-			echo '<div class="notice notice-error"><p>'.__("<b>Error</b> : Please add write permissions on the following directory : $path","locate-and-filter").'</p></div>';
+				echo '<div class="notice notice-error"><p>' . sprintf(
+				    /* translators: %s is the directory path that needs write permissions */
+				    __('<b>Error</b> : Please add write permissions on the following directory: %s', 'locateandfilter'),
+				    esc_html($path)
+				) . '</p></div>';
 			}
 		}
 	}
@@ -464,18 +468,18 @@ class Locate_And_Filter_Admin
 	 */
 	public function createCustomType() {
 		$labels = array(
-			'name' => __('LocateAndFilter', 'locate-and-filter') ,
-			'singular_name' => __('Map', 'locate-and-filter') ,
-			'add_new' => __('Add New', 'locate-and-filter') ,
-			'add_new_item' => __('Add New Map', 'locate-and-filter') ,
-			'edit_item' => __('Edit Map', 'locate-and-filter') ,
-			'new_item' => __('New Map', 'locate-and-filter') ,
-			'all_items' => __('All Map', 'locate-and-filter') ,
-			'view_item' => __('View Map', 'locate-and-filter') ,
-			'search_items' => __('Search Maps', 'locate-and-filter') ,
-			'not_found' => __('No map found', 'locate-and-filter') ,
-			'not_found_in_trash' => __('No map found in Trash', 'locate-and-filter') ,
-			'menu_name' => __('LocateAndFilter', 'locate-and-filter')
+			'name' => __('LocateAndFilter', 'locateandfilter') ,
+			'singular_name' => __('Map', 'locateandfilter') ,
+			'add_new' => __('Add New', 'locateandfilter') ,
+			'add_new_item' => __('Add New Map', 'locateandfilter') ,
+			'edit_item' => __('Edit Map', 'locateandfilter') ,
+			'new_item' => __('New Map', 'locateandfilter') ,
+			'all_items' => __('All Map', 'locateandfilter') ,
+			'view_item' => __('View Map', 'locateandfilter') ,
+			'search_items' => __('Search Maps', 'locateandfilter') ,
+			'not_found' => __('No map found', 'locateandfilter') ,
+			'not_found_in_trash' => __('No map found in Trash', 'locateandfilter') ,
+			'menu_name' => __('LocateAndFilter', 'locateandfilter')
 		);
 		$supports = array(
 			'title'
@@ -502,17 +506,17 @@ class Locate_And_Filter_Admin
 		/* marker custom post type*/
 		
 		$labels = array(
-			'name' => __('Marker Categories', "locate-and-filter") ,
-			'singular_name' => __('Marker Category', "locate-and-filter") ,
-			'search_items' => __('Search Categories', "locate-and-filter") ,
-			'all_items' => __('All Categories', "locate-and-filter") ,
-			'parent_item' => __('Parent Category', "locate-and-filter") ,
-			'parent_item_colon' => __('Parent Category:', "locate-and-filter") ,
-			'edit_item' => __('Edit Category', "locate-and-filter") ,
-			'update_item' => __('Update Category', "locate-and-filter") ,
-			'add_new_item' => __('Add New Category', "locate-and-filter") ,
-			'new_item_name' => __('New Category Name', "locate-and-filter") ,
-			'menu_name' => __('Categories', "locate-and-filter") ,
+			'name' => __('Marker Categories', "locateandfilter") ,
+			'singular_name' => __('Marker Category', "locateandfilter") ,
+			'search_items' => __('Search Categories', "locateandfilter") ,
+			'all_items' => __('All Categories', "locateandfilter") ,
+			'parent_item' => __('Parent Category', "locateandfilter") ,
+			'parent_item_colon' => __('Parent Category:', "locateandfilter") ,
+			'edit_item' => __('Edit Category', "locateandfilter") ,
+			'update_item' => __('Update Category', "locateandfilter") ,
+			'add_new_item' => __('Add New Category', "locateandfilter") ,
+			'new_item_name' => __('New Category Name', "locateandfilter") ,
+			'menu_name' => __('Categories', "locateandfilter") ,
 		);
 		
 		$args = array(
@@ -528,17 +532,17 @@ class Locate_And_Filter_Admin
 		register_taxonomy('locateanythingmarkercategory', 'locateanythingMarker', $args);
 
 		$labels = array(
-			'name' => __('Marker Tags', "locate-and-filter") ,
-			'singular_name' => __('Marker Tag', "locate-and-filter") ,
-			'search_items' => __('Search Tags', "locate-and-filter") ,
-			'all_items' => __('All Tags', "locate-and-filter") ,
-			'parent_item' => __('Parent Tag', "locate-and-filter") ,
-			'parent_item_colon' => __('Parent Tag:', "locate-and-filter") ,
-			'edit_item' => __('Edit Tag', "locate-and-filter") ,
-			'update_item' => __('Update Tag', "locate-and-filter") ,
-			'add_new_item' => __('Add New Tag', "locate-and-filter") ,
-			'new_item_name' => __('New Tag Name', "locate-and-filter") ,
-			'menu_name' => __('Tags', "locate-and-filter") ,
+			'name' => __('Marker Tags', "locateandfilter") ,
+			'singular_name' => __('Marker Tag', "locateandfilter") ,
+			'search_items' => __('Search Tags', "locateandfilter") ,
+			'all_items' => __('All Tags', "locateandfilter") ,
+			'parent_item' => __('Parent Tag', "locateandfilter") ,
+			'parent_item_colon' => __('Parent Tag:', "locateandfilter") ,
+			'edit_item' => __('Edit Tag', "locateandfilter") ,
+			'update_item' => __('Update Tag', "locateandfilter") ,
+			'add_new_item' => __('Add New Tag', "locateandfilter") ,
+			'new_item_name' => __('New Tag Name', "locateandfilter") ,
+			'menu_name' => __('Tags', "locateandfilter") ,
 		);
 		
 		$args = array(
@@ -554,18 +558,18 @@ class Locate_And_Filter_Admin
 		register_taxonomy('locateanythingmarkertag', 'locateanythingMarker', $args);
 
 		$labels = array(
-			'name' => __('Markers', 'locate-and-filter') ,
-			'singular_name' => __('Marker', 'locate-and-filter') ,
-			'add_new' => __('Add New', 'locate-and-filter') ,
-			'add_new_item' => __('Add New Marker', 'locate-and-filter') ,
-			'edit_item' => __('Edit Marker', 'locate-and-filter') ,
-			'new_item' => __('New Marker', 'locate-and-filter') ,
-			'all_items' => __('All Marker', 'locate-and-filter') ,
-			'view_item' => __('View Marker', 'locate-and-filter') ,
-			'search_items' => __('Search Markers', 'locate-and-filter') ,
-			'not_found' => __('No Marker found', 'locate-and-filter') ,
-			'not_found_in_trash' => __('No Marker found in Trash', 'locate-and-filter') ,
-			'menu_name' => __('Markers', 'locate-and-filter')
+			'name' => __('Markers', 'locateandfilter') ,
+			'singular_name' => __('Marker', 'locateandfilter') ,
+			'add_new' => __('Add New', 'locateandfilter') ,
+			'add_new_item' => __('Add New Marker', 'locateandfilter') ,
+			'edit_item' => __('Edit Marker', 'locateandfilter') ,
+			'new_item' => __('New Marker', 'locateandfilter') ,
+			'all_items' => __('All Marker', 'locateandfilter') ,
+			'view_item' => __('View Marker', 'locateandfilter') ,
+			'search_items' => __('Search Markers', 'locateandfilter') ,
+			'not_found' => __('No Marker found', 'locateandfilter') ,
+			'not_found_in_trash' => __('No Marker found in Trash', 'locateandfilter') ,
+			'menu_name' => __('Markers', 'locateandfilter')
 		);
 		$supports = array(
 			'title',

@@ -8,12 +8,12 @@ function cptui_register_my_cpts() {
 	 */
 
 	$labels = array(
-		"name" => __( "Project", "wp-bootstrap-starter" ),
-		"singular_name" => __( "Project", "wp-bootstrap-starter" ),
+		"name" => __( "Project", "locateandfilter" ),
+		"singular_name" => __( "Project", "locateandfilter" ),
 	);
 
 	$args = array(
-		"label" => __( "Project", "wp-bootstrap-starter" ),
+		"label" => __( "Project", "locateandfilter" ),
 		"labels" => $labels,
 		"description" => "",
 		"public" => true,
@@ -49,12 +49,12 @@ function cptui_register_my_cpts_project() {
 	 */
 
 	$labels = array(
-		"name" => __( "Project", "wp-bootstrap-starter" ),
-		"singular_name" => __( "Project", "wp-bootstrap-starter" ),
+		"name" => __( "Project", "locateandfilter" ),
+		"singular_name" => __( "Project", "locateandfilter" ),
 	);
 
 	$args = array(
-		"label" => __( "Project", "wp-bootstrap-starter" ),
+		"label" => __( "Project", "locateandfilter" ),
 		"labels" => $labels,
 		"description" => "",
 		"public" => true,
@@ -89,12 +89,12 @@ function cptui_register_my_taxes() {
 	 */
 
 	$labels = array(
-		"name" => __( "Expertises", "wp-bootstrap-starter" ),
-		"singular_name" => __( "Expertises", "wp-bootstrap-starter" ),
+		"name" => __( "Expertises", "locateandfilter" ),
+		"singular_name" => __( "Expertises", "locateandfilter" ),
 	);
 
 	$args = array(
-		"label" => __( "Expertises", "wp-bootstrap-starter" ),
+		"label" => __( "Expertises", "locateandfilter" ),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
@@ -117,12 +117,12 @@ function cptui_register_my_taxes() {
 	 */
 
 	$labels = array(
-		"name" => __( "Werkvelden", "wp-bootstrap-starter" ),
-		"singular_name" => __( "Werkvelden", "wp-bootstrap-starter" ),
+		"name" => __( "Werkvelden", "locateandfilter" ),
+		"singular_name" => __( "Werkvelden", "locateandfilter" ),
 	);
 
 	$args = array(
-		"label" => __( "Werkvelden", "wp-bootstrap-starter" ),
+		"label" => __( "Werkvelden", "locateandfilter" ),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
@@ -145,12 +145,12 @@ function cptui_register_my_taxes() {
 	 */
 
 	$labels = array(
-		"name" => __( "Project date start", "wp-bootstrap-starter" ),
-		"singular_name" => __( "Project date start", "wp-bootstrap-starter" ),
+		"name" => __( "Project date start", "locateandfilter" ),
+		"singular_name" => __( "Project date start", "locateandfilter" ),
 	);
 
 	$args = array(
-		"label" => __( "Project date start", "wp-bootstrap-starter" ),
+		"label" => __( "Project date start", "locateandfilter" ),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
@@ -173,12 +173,12 @@ function cptui_register_my_taxes() {
 	 */
 
 	$labels = array(
-		"name" => __( "Project date finish", "wp-bootstrap-starter" ),
-		"singular_name" => __( "Project date finish", "wp-bootstrap-starter" ),
+		"name" => __( "Project date finish", "locateandfilter" ),
+		"singular_name" => __( "Project date finish", "locateandfilter" ),
 	);
 
 	$args = array(
-		"label" => __( "Project date finish", "wp-bootstrap-starter" ),
+		"label" => __( "Project date finish", "locateandfilter" ),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
@@ -201,12 +201,12 @@ function cptui_register_my_taxes() {
 	 */
 
 	$labels = array(
-		"name" => __( "Project locatie", "wp-bootstrap-starter" ),
-		"singular_name" => __( "Project locatie", "wp-bootstrap-starter" ),
+		"name" => __( "Project locatie", "locateandfilter" ),
+		"singular_name" => __( "Project locatie", "locateandfilter" ),
 	);
 
 	$args = array(
-		"label" => __( "Project locatie", "wp-bootstrap-starter" ),
+		"label" => __( "Project locatie", "locateandfilter" ),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
@@ -234,12 +234,12 @@ function cptui_register_my_taxes_project_expertises() {
 	 */
 
 	$labels = array(
-		"name" => __( "Expertises", "wp-bootstrap-starter" ),
-		"singular_name" => __( "Expertises", "wp-bootstrap-starter" ),
+		"name" => __( "Expertises", "locateandfilter" ),
+		"singular_name" => __( "Expertises", "locateandfilter" ),
 	);
 
 	$args = array(
-		"label" => __( "Expertises", "wp-bootstrap-starter" ),
+		"label" => __( "Expertises", "locateandfilter" ),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
@@ -267,12 +267,12 @@ function cptui_register_my_taxes_project_areas() {
 	 */
 
 	$labels = array(
-		"name" => __( "Werkvelden", "wp-bootstrap-starter" ),
-		"singular_name" => __( "Werkvelden", "wp-bootstrap-starter" ),
+		"name" => __( "Werkvelden", "locateandfilter" ),
+		"singular_name" => __( "Werkvelden", "locateandfilter" ),
 	);
 
 	$args = array(
-		"label" => __( "Werkvelden", "wp-bootstrap-starter" ),
+		"label" => __( "Werkvelden", "locateandfilter" ),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
@@ -299,12 +299,12 @@ function cptui_register_my_taxes_project_date_start() {
 	 */
 
 	$labels = array(
-		"name" => __( "Project date start", "wp-bootstrap-starter" ),
-		"singular_name" => __( "Project date start", "wp-bootstrap-starter" ),
+		"name" => __( "Project date start", "locateandfilter" ),
+		"singular_name" => __( "Project date start", "locateandfilter" ),
 	);
 
 	$args = array(
-		"label" => __( "Project date start", "wp-bootstrap-starter" ),
+		"label" => __( "Project date start", "locateandfilter" ),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
@@ -332,12 +332,12 @@ function cptui_register_my_taxes_project_date_finish() {
 	 */
 
 	$labels = array(
-		"name" => __( "Project date finish", "wp-bootstrap-starter" ),
-		"singular_name" => __( "Project date finish", "wp-bootstrap-starter" ),
+		"name" => __( "Project date finish", "locateandfilter" ),
+		"singular_name" => __( "Project date finish", "locateandfilter" ),
 	);
 
 	$args = array(
-		"label" => __( "Project date finish", "wp-bootstrap-starter" ),
+		"label" => __( "Project date finish", "locateandfilter" ),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
@@ -364,12 +364,12 @@ function cptui_register_my_taxes_project_locatie() {
 	 */
 
 	$labels = array(
-		"name" => __( "Project locatie", "wp-bootstrap-starter" ),
-		"singular_name" => __( "Project locatie", "wp-bootstrap-starter" ),
+		"name" => __( "Project locatie", "locateandfilter" ),
+		"singular_name" => __( "Project locatie", "locateandfilter" ),
 	);
 
 	$args = array(
-		"label" => __( "Project locatie", "wp-bootstrap-starter" ),
+		"label" => __( "Project locatie", "locateandfilter" ),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
