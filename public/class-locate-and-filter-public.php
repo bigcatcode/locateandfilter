@@ -545,7 +545,13 @@ class Locate_And_Filter_Public {
 		$minZoom = $settings['locate-anything-min-zoom'];
 		if (! $minZoom)
 			$minZoom = $params ["overlay"]->minZoom;
-		$params ["overlay"] = '{url:"' . $params ["overlay"]->url . '",attribution:"' . sanitize_text_field ( $params ["overlay"]->attribution ) . '" ,maxZoom:' . $maxZoom . ' ,minZoom:' . $minZoom . '}';
+		//$params ["overlay"] = '{url:"' . $params ["overlay"]->url . '",attribution:"' . sanitize_text_field ( $params ["overlay"]->attribution ) . '" ,maxZoom:' . $maxZoom . ' ,minZoom:' . $minZoom . '}';
+		$overlayArray = [
+		    'url' => $params["overlay"]->url, 
+		    'attribution' => sanitize_text_field($params["overlay"]->attribution),  
+		    'maxZoom' => (int) $maxZoom,
+		    'minZoom' => (int) $minZoom
+		];
 		$params ["initial-zoom"] = $settings['locate-anything-start-zoom'];
 		$params ["single-zoom"] = $settings['locate-anything-single-zoom'];
 		if (empty ( $params ["initial-zoom"] ))
@@ -574,53 +580,53 @@ class Locate_And_Filter_Public {
 
 				var current_map;
 				jQuery(window).on('load', function () {
-						var map_id='<?php echo $map_id?>';
+						var map_id='<?php echo esc_js($map_id);?>';
 						<?php
 							if (Locate_And_Filter_Public::check_license_key('label')===false) {?>
-								<!-- jQuery("#<?php echo $map_container?>").append("<div style='background:grey;opacity:0.6;width:100%;height:1.5em;z-index:1500;position:absolute;bottom:0;text-align:left;padding-left:10px'><a style='cursor:pointer;text-decoration:none;color:#fff;' href='#' target='_blank'>Powered by LocateAndFilter</div>"); -->
+								<!-- jQuery("#<?php echo esc_js($map_container);?>").append("<div style='background:grey;opacity:0.6;width:100%;height:1.5em;z-index:1500;position:absolute;bottom:0;text-align:left;padding-left:10px'><a style='cursor:pointer;text-decoration:none;color:#fff;' href='#' target='_blank'>Powered by LocateAndFilter</div>"); -->
 						<?php	} ?>
 
 							
 						/* setting up the map */ 
 					var params = {
-						"instance_id":"locate_anything_map_<?php echo $map_id?>",
-						"map-id": "<?php echo $map_id?>",
-						"map-container":'<?php echo $map_container?>',
-						"initial-lat": <?php echo $params["initial-lat"]?>,
-						"initial-lon": <?php echo $params["initial-lon"]?>,
-						"initial-zoom": <?php echo $params["initial-zoom"]?>,
-						"single-zoom": <?php echo $params["single-zoom"]?>,
-						"autogeocode" :'<?php echo $params["autogeocode"]?>',
-						"display_only_inbound" : '<?php echo $params["display_only_inbound"]?>',
-						"overlay" : <?php echo $params["overlay"]?>,
-						"googleplaces" : <?php echo $params["googleplaces"]?>,
-						"max_nav_item_per_page" : <?php echo $params["max_nav_item_per_page"]?>,
-						<?php if($params["style-hue"]) echo '"style-hue":"'.$params["style-hue"].'",'?>
-						"scrollWheelZoom" : <?php echo $params["scrollWheelZoom"]?>,
-						"navlist_event" : '<?php echo  $params["navlist_event"]?>',
-						"popup_event" : '<?php echo  $params["popup_event"]?>',
-						"hide-splashscreen" : '<?php echo $params["hide-splashscreen"]?>',
-						"kml_file" :  '<?php echo $settings["locate-anything-kml-file"]?>',
-						"kml_fillColor" :  '<?php echo $settings["locate-anything-kml_fillColor"]?>',
-						"kml_weight" :  '<?php echo $settings["locate-anything-kml_weight"]?>',
-						"kml_opacity" :  '<?php echo $settings["locate-anything-kml_opacity"]?>',
-						"kml_color" :  '<?php echo $settings["locate-anything-kml_color"]?>',
-						"kml_dashArray" :  '<?php echo $settings["locate-anything-kml_dashArray"]?>',
-						"kml_fillOpacity" :  '<?php echo $settings["locate-anything-kml_fillOpacity"]?>',
-						"bing-key"  :	'<?php echo $params["bing-key"]?>',
-						"load-google"	:	'<?php echo $params["load-google"]?>',
-						"load-bing"	:	'<?php echo $params["load-bing"]?>',
-						"load-yandex"	:	'<?php echo $params["load-yandex"]?>',
-						"overlay-addon"	:	'<?php echo $params ["overlay-addon"]?>',
-						"overlay-addon-accessToken-jawg"	:	'<?php echo $params ["overlay-addon-accessToken-jawg"]?>',
-						"overlay-addon-customstyle-jawg"	:	'<?php echo $params ["overlay-addon-customstyle-jawg"]?>',
-						"overlay-addon-accessToken-thunderforest"	:	'<?php echo $params ["overlay-addon-accessToken-thunderforest"]?>',
-						"overlay-addon-accessToken-mapbox"	:	'<?php echo $params ["overlay-addon-accessToken-mapbox"]?>',
-						"overlay-addon-accessToken-maptiler"	:	'<?php echo $params ["overlay-addon-accessToken-maptiler"]?>',
-						"overlay-addon-accessToken-openweathermap"	:	'<?php echo $params ["overlay-addon-accessToken-openweathermap"]?>',
-						"overlay-addon-accessToken-here"	:	'<?php echo $params ["overlay-addon-accessToken-here"]?>',
-						"enable_fitBounds"	:	'<?php echo $params ["enable_fitBounds"]?>',
-						"enable_zoom_to_marker"	:	'<?php echo $params ["enable_zoom_to_marker"]?>'			
+						"instance_id":"locate_anything_map_<?php echo esc_js($map_id);?>",
+						"map-id": "<?php echo esc_js($map_id);?>",
+						"map-container":'<?php echo esc_js($map_container);?>',
+						"initial-lat": <?php echo esc_js($params["initial-lat"]);?>,
+						"initial-lon": <?php echo esc_js($params["initial-lon"]);?>,
+						"initial-zoom": <?php echo esc_js($params["initial-zoom"]);?>,
+						"single-zoom": <?php echo esc_js($params["single-zoom"]);?>,
+						"autogeocode" :'<?php echo esc_js($params["autogeocode"]);?>',
+						"display_only_inbound" : '<?php echo esc_js($params["display_only_inbound"]);?>',
+						"overlay" : <?php echo wp_json_encode( $overlayArray ); ?>,
+						"googleplaces" : <?php echo esc_js($params["googleplaces"]);?>,
+						"max_nav_item_per_page" : <?php echo esc_js($params["max_nav_item_per_page"]);?>,
+						"style-hue": "<?php if($params["style-hue"]) { echo esc_js($params["style-hue"]); } else { echo ''; } ?>",
+						"scrollWheelZoom" : <?php echo esc_js($params["scrollWheelZoom"]);?>,
+						"navlist_event" : '<?php echo esc_js($params["navlist_event"]);?>',
+						"popup_event" : '<?php echo esc_js($params["popup_event"]);?>',
+						"hide-splashscreen" : '<?php echo esc_js($params["hide-splashscreen"]);?>',
+						"kml_file" :  '<?php echo esc_js($settings["locate-anything-kml-file"]);?>',
+						"kml_fillColor" :  '<?php echo esc_js($settings["locate-anything-kml_fillColor"]);?>',
+						"kml_weight" :  '<?php echo esc_js($settings["locate-anything-kml_weight"]);?>',
+						"kml_opacity" :  '<?php echo esc_js($settings["locate-anything-kml_opacity"]);?>',
+						"kml_color" :  '<?php echo esc_js($settings["locate-anything-kml_color"]);?>',
+						"kml_dashArray" :  '<?php echo esc_js($settings["locate-anything-kml_dashArray"]);?>',
+						"kml_fillOpacity" :  '<?php echo esc_js($settings["locate-anything-kml_fillOpacity"]);?>',
+						"bing-key"  :	'<?php echo esc_js($params["bing-key"]);?>',
+						"load-google"	:	'<?php echo esc_js($params["load-google"]);?>',
+						"load-bing"	:	'<?php echo esc_js($params["load-bing"]);?>',
+						"load-yandex"	:	'<?php echo esc_js($params["load-yandex"]);?>',
+						"overlay-addon"	:	'<?php echo esc_js($params ["overlay-addon"]);?>',
+						"overlay-addon-accessToken-jawg"	:	'<?php echo esc_js($params ["overlay-addon-accessToken-jawg"]);?>',
+						"overlay-addon-customstyle-jawg"	:	'<?php echo esc_js($params ["overlay-addon-customstyle-jawg"]);?>',
+						"overlay-addon-accessToken-thunderforest"	:	'<?php echo esc_js($params ["overlay-addon-accessToken-thunderforest"]);?>',
+						"overlay-addon-accessToken-mapbox"	:	'<?php echo esc_js($params ["overlay-addon-accessToken-mapbox"]);?>',
+						"overlay-addon-accessToken-maptiler"	:	'<?php echo esc_js($params ["overlay-addon-accessToken-maptiler"]);?>',
+						"overlay-addon-accessToken-openweathermap"	:	'<?php echo esc_js($params ["overlay-addon-accessToken-openweathermap"]);?>',
+						"overlay-addon-accessToken-here"	:	'<?php echo esc_js($params ["overlay-addon-accessToken-here"]);?>',
+						"enable_fitBounds"	:	'<?php echo esc_js($params ["enable_fitBounds"]);?>',
+						"enable_zoom_to_marker"	:	'<?php echo esc_js($params ["enable_zoom_to_marker"]);?>'			
 					};
 
 						/* define instance name*/
@@ -634,7 +640,13 @@ class Locate_And_Filter_Public {
 					 	/* Initialize Map  */	
 					eval(map_instance).createMap();
 					/*   Register filters, property_name is the name of the property as shown in the JSON datas  */
-					var custom_filters= [<?php if(is_array($filters)) foreach ($filters as $filter) echo '{"property_name":"'.$filter.'","html_id" : ".'.$filter.'-'.$map_id.'"},';?>];
+					var custom_filters = [<?php 
+					    if (is_array($filters)) {
+					        foreach ($filters as $filter) {
+					            echo '{"property_name":"'.esc_js($filter).'","html_id" : ".'.esc_js($filter).'-'.esc_js($map_id).'"}' . ','; 
+					        }
+					    }
+					?>];
 					eval(map_instance).register_filters(custom_filters);
 					/* Override nav item template */	 	
 					eval(map_instance).template_nav_item = function(marker,LatLng) {	
@@ -642,7 +654,7 @@ class Locate_And_Filter_Public {
 						return template;
 					};
 					/*  define callback function */
-					var createEverything_<?php echo $map_id?> = function(result){	
+					var createEverything_<?php echo esc_js($map_id);?> = function(result){	
 						var cpt=0;	
 									 	
 						for(var i in result["data"]){	
@@ -702,7 +714,7 @@ class Locate_And_Filter_Public {
 					}
 
 					/*   JSON : Retrieve markers data */
-					eval(map_instance).getData("<?php echo admin_url( 'admin-ajax.php'); ?>?action=getMarkers&map_id=<?php echo $map_id?>",createEverything_<?php echo $map_id?>)
+					eval(map_instance).getData("<?php echo admin_url( 'admin-ajax.php'); ?>?action=getMarkers&map_id=<?php echo esc_js($map_id);?>",createEverything_<?php echo esc_js($map_id);?>)
 					/* call Tokenize for nice selects */
 					if(jQuery.tokenize){
 					var token1=jQuery('#map-filters-'+map_id+' .tokenize-1').tokenize({maxElements:"1",onRemoveToken:function(e,f){eval(map_instance).update_markers();},onAddToken:function(e,f){eval(map_instance).update_markers();}});
@@ -1570,7 +1582,13 @@ public static function defineDefaultMarker($params){
 		$minZoom = $settings['locate-anything-min-zoom'];
 		if (! $minZoom)
 			$minZoom = $params ["overlay"]->minZoom;
-		$params ["overlay"] = '{url:"' . $params ["overlay"]->url . '",attribution:"' . sanitize_text_field ( $params ["overlay"]->attribution ) . '" ,maxZoom:' . $maxZoom . ' ,minZoom:' . $minZoom . '}';
+		//$params ["overlay"] = '{url:"' . $params ["overlay"]->url . '",attribution:"' . sanitize_text_field ( $params ["overlay"]->attribution ) . '" ,maxZoom:' . $maxZoom . ' ,minZoom:' . $minZoom . '}';
+		$overlayArray = [
+		    'url' => $params["overlay"]->url, 
+		    'attribution' => sanitize_text_field($params["overlay"]->attribution),  
+		    'maxZoom' => (int) $maxZoom,
+		    'minZoom' => (int) $minZoom
+		];		
 		$params ["initial-zoom"] = $settings['locate-anything-start-zoom'];
 		$params ["single-zoom"] = $settings['locate-anything-single-zoom']; 
 		if (empty ( $params ["initial-zoom"] ))
@@ -1597,50 +1615,50 @@ public static function defineDefaultMarker($params){
 
 				var current_map;
 				jQuery(window).on('load', function () { 
-						var map_id='<?php echo $map_id?>';
+						var map_id='<?php echo esc_js($map_id);?>';
 						<?php
 							if (Locate_And_Filter_Public::check_license_key('label')===false) {?>
-								<!-- jQuery("#<?php echo $map_container?>").append("<div style='background:grey;opacity:0.6;width:100%;height:1.5em;z-index:1500;position:absolute;bottom:0;text-align:left;padding-left:10px'><a style='cursor:pointer;text-decoration:none;color:#fff;' href='#' target='_blank'>Powered by LocateAndFilter</div>"); -->
+								<!-- jQuery("#<?php echo esc_js($map_container);?>").append("<div style='background:grey;opacity:0.6;width:100%;height:1.5em;z-index:1500;position:absolute;bottom:0;text-align:left;padding-left:10px'><a style='cursor:pointer;text-decoration:none;color:#fff;' href='#' target='_blank'>Powered by LocateAndFilter</div>"); -->
 						<?php	} ?>
 
 							
 						/* setting up the map */ 
 					var params = {
-						"instance_id":"locate_anything_map_<?php echo $map_id?>",
-						"map-id": "<?php echo $map_id?>",
-						"map-container":'<?php echo $map_container?>',
-						"initial-lat": <?php echo $params["initial-lat"]?>,
-						"initial-lon": <?php echo $params["initial-lon"]?>,
-						"initial-zoom": <?php echo $params["initial-zoom"]?>,
-						"single-zoom": <?php echo $params["single-zoom"]?>,
-						"autogeocode" :'<?php echo $params["autogeocode"]?>',
-						"display_only_inbound" : '<?php echo $params["display_only_inbound"]?>',
-						"overlay" : <?php echo $params["overlay"]?>,
-						"googleplaces" : <?php echo $params["googleplaces"]?>,
-						"max_nav_item_per_page" : <?php echo $params["max_nav_item_per_page"]?>,
-						<?php if($params["style-hue"]) echo '"style-hue":"'.$params["style-hue"].'",'?>
-						"scrollWheelZoom" : <?php echo $params["scrollWheelZoom"]?>,
-						"navlist_event" : '<?php echo  $params["navlist_event"]?>',
-						"hide-splashscreen" : '<?php echo $params["hide-splashscreen"]?>',
-						"kml_file" :  '<?php echo $settings["locate-anything-kml-file"]?>',
-						"kml_fillColor" :  '<?php echo $settings["locate-anything-kml_fillColor"]?>',
-						"kml_weight" :  '<?php echo $settings["locate-anything-kml_weight"]?>',
-						"kml_opacity" :  '<?php echo $settings["locate-anything-kml_opacity"]?>',
-						"kml_color" :  '<?php echo $settings["locate-anything-kml_color"]?>',
-						"kml_dashArray" :  '<?php echo $settings["locate-anything-kml_dashArray"]?>',
-						"kml_fillOpacity" :  '<?php echo $settings["locate-anything-kml_fillOpacity"]?>',
-						"bing-key"  :	'<?php echo $params["bing-key"]?>',
-						"load-google"	:	'<?php echo $params["load-google"]?>',
-						"load-bing"	:	'<?php echo $params["load-bing"]?>',
-						"load-yandex"	:	'<?php echo $params["load-yandex"]?>',
-						"overlay-addon"	:	'<?php echo $params ["overlay-addon"]?>',
-						"overlay-addon-accessToken-jawg"	:	'<?php echo $params ["overlay-addon-accessToken-jawg"]?>',
-						"overlay-addon-customstyle-jawg"	:	'<?php echo $params ["overlay-addon-customstyle-jawg"]?>',
-						"overlay-addon-accessToken-thunderforest"	:	'<?php echo $params ["overlay-addon-accessToken-thunderforest"]?>',
-						"overlay-addon-accessToken-mapbox"	:	'<?php echo $params ["overlay-addon-accessToken-mapbox"]?>',
-						"overlay-addon-accessToken-maptiler"	:	'<?php echo $params ["overlay-addon-accessToken-maptiler"]?>',
-						"overlay-addon-accessToken-openweathermap"	:	'<?php echo $params ["overlay-addon-accessToken-openweathermap"]?>',
-						"overlay-addon-accessToken-here"	:	'<?php echo $params ["overlay-addon-accessToken-here"]?>'						
+						"instance_id":"locate_anything_map_<?php echo esc_js($map_id);?>",
+						"map-id": "<?php echo esc_js($map_id);?>",
+						"map-container":'<?php echo esc_js($map_container);?>',
+						"initial-lat": <?php echo esc_js($params["initial-lat"]);?>,
+						"initial-lon": <?php echo esc_js($params["initial-lon"]);?>,
+						"initial-zoom": <?php echo esc_js($params["initial-zoom"]);?>,
+						"single-zoom": <?php echo esc_js($params["single-zoom"]);?>,
+						"autogeocode" :'<?php echo esc_js($params["autogeocode"]);?>',
+						"display_only_inbound" : '<?php echo esc_js($params["display_only_inbound"]);?>',
+						"overlay" : <?php echo wp_json_encode( $overlayArray ); ?>,
+						"googleplaces" : <?php echo esc_js($params["googleplaces"]);?>,
+						"max_nav_item_per_page" : <?php echo esc_js($params["max_nav_item_per_page"]);?>,
+						"style-hue": "<?php if($params["style-hue"]) { echo esc_js($params["style-hue"]); } else { echo ''; } ?>",
+						"scrollWheelZoom" : <?php echo esc_js($params["scrollWheelZoom"]);?>,
+						"navlist_event" : '<?php echo esc_js($params["navlist_event"]);?>',
+						"hide-splashscreen" : '<?php echo esc_js($params["hide-splashscreen"]);?>',
+						"kml_file" :  '<?php echo esc_js($settings["locate-anything-kml-file"]);?>',
+						"kml_fillColor" :  '<?php echo esc_js($settings["locate-anything-kml_fillColor"]);?>',
+						"kml_weight" :  '<?php echo esc_js($settings["locate-anything-kml_weight"]);?>',
+						"kml_opacity" :  '<?php echo esc_js($settings["locate-anything-kml_opacity"]);?>',
+						"kml_color" :  '<?php echo esc_js($settings["locate-anything-kml_color"]);?>',
+						"kml_dashArray" :  '<?php echo esc_js($settings["locate-anything-kml_dashArray"]);?>',
+						"kml_fillOpacity" :  '<?php echo esc_js($settings["locate-anything-kml_fillOpacity"]);?>',
+						"bing-key"  :	'<?php echo esc_js($params["bing-key"]);?>',
+						"load-google"	:	'<?php echo esc_js($params["load-google"]);?>',
+						"load-bing"	:	'<?php echo esc_js($params["load-bing"]);?>',
+						"load-yandex"	:	'<?php echo esc_js($params["load-yandex"]);?>',
+						"overlay-addon"	:	'<?php echo esc_js($params ["overlay-addon"]);?>',
+						"overlay-addon-accessToken-jawg"	:	'<?php echo esc_js($params ["overlay-addon-accessToken-jawg"]);?>',
+						"overlay-addon-customstyle-jawg"	:	'<?php echo esc_js($params ["overlay-addon-customstyle-jawg"]);?>',
+						"overlay-addon-accessToken-thunderforest"	:	'<?php echo esc_js($params ["overlay-addon-accessToken-thunderforest"]);?>',
+						"overlay-addon-accessToken-mapbox"	:	'<?php echo esc_js($params ["overlay-addon-accessToken-mapbox"]);?>',
+						"overlay-addon-accessToken-maptiler"	:	'<?php echo esc_js($params ["overlay-addon-accessToken-maptiler"]);?>',
+						"overlay-addon-accessToken-openweathermap"	:	'<?php echo esc_js($params ["overlay-addon-accessToken-openweathermap"]);?>',
+						"overlay-addon-accessToken-here"	:	'<?php echo esc_js($params ["overlay-addon-accessToken-here"]);?>'						
 					};
 
 						/* define instance name*/
@@ -1654,8 +1672,13 @@ public static function defineDefaultMarker($params){
 					 	/* Initialize Map  */	
 					eval(map_instance).createMap();
 					/*   Register filters, property_name is the name of the property as shown in the JSON datas  */
-					var custom_filters= [<?php if(is_array($filters)) foreach ($filters as $filter) echo '{"property_name":"'.$filter.'","html_id" : "#'.$filter.'-'.$map_id.'"},';?>];
-					
+					var custom_filters = [<?php 
+					    if (is_array($filters)) {
+					        foreach ($filters as $filter) {
+					            echo '{"property_name":"'.esc_js($filter).'","html_id" : ".'.esc_js($filter).'-'.esc_js($map_id).'"}' . ','; 
+					        }
+					    }
+					?>];					
 					eval(map_instance).register_filters(custom_filters);
 					/* Override nav item template */	 	
 					eval(map_instance).template_nav_item = function(marker,LatLng) {	
@@ -1663,7 +1686,7 @@ public static function defineDefaultMarker($params){
 						return template;
 					};
 					/*  define callback function */
-					var createEverything_<?php echo $map_id?> = function(result){	
+					var createEverything_<?php echo esc_js($map_id);?> = function(result){	
 						var cpt=0;
 						var current_marker = {};	
 						var current_marker_;
@@ -1731,7 +1754,7 @@ public static function defineDefaultMarker($params){
 					}
 
 					/*   JSON : Retrieve markers data */
-					eval(map_instance).getData("<?php echo admin_url( 'admin-ajax.php'); ?>?action=getMarkers&map_id=<?php echo $map_id?>",createEverything_<?php echo $map_id?>)
+					eval(map_instance).getData("<?php echo admin_url( 'admin-ajax.php'); ?>?action=getMarkers&map_id=<?php echo esc_js($map_id);?>",createEverything_<?php echo esc_js($map_id);?>)
 					//console.log(map_instance);
 					/* call Tokenize for nice selects */
 					if(jQuery.tokenize){
