@@ -336,7 +336,7 @@ class Locate_And_Filter_Admin
 		if(!is_writable($path)){if(!@chmod($path, 0777)) {
 				echo '<div class="notice notice-error"><p>' . sprintf(
 				    /* translators: %s is the directory path that needs write permissions */
-				    __('<b>Error</b> : Please add write permissions on the following directory: %s', 'locateandfilter'),
+				    esc_html__('<b>Error</b> : Please add write permissions on the following directory: %s', 'locateandfilter'),
 				    esc_html($path)
 				) . '</p></div>';
 			}

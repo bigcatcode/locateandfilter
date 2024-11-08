@@ -93,7 +93,7 @@ function run_locate_and_filter() {
 
             ?>
                 <div class="error"><p>
-                    <?php printf(__('Please de-activate and remove the PRO version of LocateAndFilter before activating the free version.', 'locateandfilter'));
+                    <?php printf(esc_html__('Please de-activate and remove the PRO version of LocateAndFilter before activating the free version.', 'locateandfilter'));
                     ?>
                 </p></div>
             <?php
