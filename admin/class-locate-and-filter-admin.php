@@ -624,71 +624,97 @@ class Locate_And_Filter_Admin
 	 * displays additional fields and their tags
 	 *
 	 */
-	public static function displayAdditionalFieldNotice($post_type) {
+	public static function displayAdditionalFieldNotice($post_type) {		
 		$additional_field_list_json = stripslashes(unserialize(get_option('locate-anything-option-additional-field-list', '')));
 		if ($additional_field_list_json) $additional_field_list = json_decode($additional_field_list_json, true); ?>
-				<div id="basic_fields_notice">									
-	<?php	  
-			$post_types = array("basic"=>"basic");
-			$post_types += unserialize (get_option ( 'locate-anything-option-sources' ));
-			$post_types = apply_filters("locate_anything_add_sources",$post_types);	
+		
+		<div id="basic_fields_notice">									
+			<?php	  
+				$post_types = array("basic"=>"basic");
+				$post_types += unserialize (get_option ( 'locate-anything-option-sources' ));
+				$post_types = apply_filters("locate_anything_add_sources",$post_types);	
 
-			$already_displayed_tags =array();
-			  		
-			 foreach ( $post_types as $posttype =>$postTypeName ) {
-			 	if($postTypeName=="Users") $postTypeName = 'user';			 	
-			 	$markups = Locate_And_Filter_Public::getBasicMarkupList($postTypeName);
-			 	foreach ($markups as $tag => $nothing) {	
-			 			if(in_array($tag,$already_displayed_tags))	continue;
-			 			array_push($already_displayed_tags,$tag);
-			 		?>
-					<div class='basic-markup basic-markup-<?php echo $postTypeName?>'><b><?php echo ucfirst(str_replace(array("|","_") , array(""," ") , $tag)) ?></b> : <?php echo $tag ?></div>
-				<?php }
+				$already_displayed_tags =array();
+				  		
+				foreach ( $post_types as $posttype =>$postTypeName ) {
+				 	if($postTypeName=="Users") $postTypeName = 'user';			 	
+				 	$markups = Locate_And_Filter_Public::getBasicMarkupList($postTypeName);
+
+						foreach ($markups as $tag => $nothing) {	
+						    if (in_array($tag, $already_displayed_tags)) continue;
+
+						    // Mark this tag as already displayed
+						    array_push($already_displayed_tags, $tag);
+						    ?>
+						    <div class="basic-markup basic-markup-<?php echo esc_attr($postTypeName); ?>">
+						        <b><?php echo esc_html(ucfirst(str_replace(array("|", "_"), array("", " "), $tag))); ?></b> : 
+						        <?php echo esc_html($tag); ?>
+						    </div>
+					<?php } 
+		
 				} ?>
-				
-				</div>
-				<div id="additional_fields_notice">				
-				<table id="additional_fields_notice">							
+		</div>
+
+		<div id="additional_fields_notice">				
+			<table id="additional_fields_notice">							
+
 				<?php
-		if (is_array($additional_field_list)) foreach ($additional_field_list as $field) {
-			if (is_null(@$field["field_description"]) || is_null(@$field["field_name"]) || @$field['post_type']!==$post_type) continue;
-?>
-					<tr class='basic-markup basic-markup-<?php
-			echo $field['post_type']?>'><td><b><?php
-			echo $field["field_description"] . "(" . $field['post_type'] . ")" ?></b></td><td>|<?php
-			echo $field['post_type'] . "::" . sanitize_key(remove_accents($field["field_description"])) ?>|</td></tr>
-				<?php
-		} ?>
-				
+					if (is_array($additional_field_list)) {
+					    foreach ($additional_field_list as $field) {
+					        // Skip invalid or mismatched fields
+					        if (is_null($field["field_description"]) || is_null($field["field_name"]) || $field['post_type'] !== $post_type) continue;
+					        ?>
+					        <tr class="basic-markup basic-markup-<?php echo esc_attr($field['post_type']); ?>">
+					            <td><b><?php echo esc_html($field["field_description"]) . " (" . esc_html($field['post_type']) . ")"; ?></b></td>
+					            <td>|<?php echo esc_html($field['post_type']) . "::" . esc_attr(sanitize_key(remove_accents($field["field_description"]))); ?>|</td>
+					        </tr>
+					        <?php
+					    }
+					}
+				?>
+
 				<tfoot id="filter_fields_notice"></tfoot>
-				</table>
-				</div>
-				<?php
+			</table>
+		</div>
+		<?php
 	}
+
 	/** 
 	 * Display additional fields form
 	 *
 	 */
 	public static function displayAdditionalFields($post) {
-		if (get_post_type($post) == false) return;
-?>
-		<ul id="additional_fields">
-					 <?php
-		$additional_field_list_json = stripslashes(unserialize(get_option('locate-anything-option-additional-field-list', '')));
-		if ($additional_field_list_json) $additional_field_list = json_decode($additional_field_list_json, true);
-		if ($additional_field_list) {
-			if (is_array($additional_field_list) && $post !== "user") foreach ($additional_field_list as $field) {
-				if ($field["post_type"] == get_post_type($post)) { ?>
-				  	<li><b><?php
-					echo $field["field_description"] ?></b><br/> <textarea name="<?php
-					echo $field["field_name"] ?>"><?php
-					echo get_post_meta($post->ID, $field["field_name"], true); ?></textarea></li>
-				 <?php
-				}
-			}
-		}
-?></ul><?php
+	    // If the post type is not valid, exit the function
+	    if (get_post_type($post) == false) return;
+	    ?>
+	    <ul id="additional_fields">
+	        <?php
+	        // Get the additional field list and decode the JSON
+	        $additional_field_list_json = stripslashes(unserialize(get_option('locate-anything-option-additional-field-list', '')));
+	        if ($additional_field_list_json) $additional_field_list = json_decode($additional_field_list_json, true);
+
+	        // Check if additional fields exist
+	        if ($additional_field_list) {
+	            if (is_array($additional_field_list) && $post !== "user") {
+	                foreach ($additional_field_list as $field) {
+	                    // Check if the post type matches
+	                    if ($field["post_type"] == get_post_type($post)) { ?>
+	                        <li>
+	                            <b><?php echo esc_html($field["field_description"]); ?></b><br/>
+	                            <textarea name="<?php echo esc_attr($field["field_name"]); ?>">
+	                                <?php echo esc_textarea(get_post_meta($post->ID, $field["field_name"], true)); ?>
+	                            </textarea>
+	                        </li>
+	                    <?php
+	                    }
+	                }
+	            }
+	        }
+	        ?>
+	    </ul>
+	    <?php
 	}
+
 	/** 
 	 * returns default templates for new map
 	 *
@@ -817,7 +843,8 @@ class Locate_And_Filter_Admin
 		));
 		echo json_encode( $all_post_ids );
 		die();
-	}	
+	}
+
 	/**
 	 * AJAX function : returns JSON encoded array of taxonomies tied to a post type
 	 */
@@ -837,6 +864,7 @@ class Locate_And_Filter_Admin
 		echo json_encode($terms);
 		die();
 	}
+
 	/**
 	 * AJAX function : returns JSON encoded html code for layout
 	 */
@@ -852,13 +880,15 @@ class Locate_And_Filter_Admin
 			}
 		die();
 	}
+
 	/**
 	 * AJAX function : returns HTML of current filters
 	 */
 	public function getFilters() {
-		echo apply_filters("locate_anything_add_filter_choice", '', sanitize_text_field($_POST["map_id"]), sanitize_text_field($_POST["type"]) );
+		echo esc_html(apply_filters("locate_anything_add_filter_choice", '', sanitize_text_field($_POST["map_id"]), sanitize_text_field($_POST["type"]) ));
 		die();
 	}
+
 	/**
 	 *  function : sanitaze options value
 	 */
