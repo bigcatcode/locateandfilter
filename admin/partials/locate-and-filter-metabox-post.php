@@ -45,27 +45,27 @@ if ( !isset($post_params['locate-anything-marker-color'])) { $post_params['locat
 
 			<tr>
 				<td><?php esc_html_e("Street name","locateandfilter")?></td>
-				<td><input type="text"	name="locate-anything-street" value="<?php echo $post_params['locate-anything-street']; ?>"></td>			
+				<td><input type="text"	name="locate-anything-street" value="<?php echo esc_attr($post_params['locate-anything-street']); ?>"></td>			
 			</tr>
 			<tr>
 				<td><?php esc_html_e("Number","locateandfilter")?></td>
-				<td><input type="text" name="locate-anything-streetnumber" value="<?php echo $post_params['locate-anything-streetnumber']; ?>"></td>
+				<td><input type="text" name="locate-anything-streetnumber" value="<?php echo esc_attr($post_params['locate-anything-streetnumber']); ?>"></td>
 			</tr>
 			<tr>
 				<td><?php esc_html_e("City","locateandfilter")?></td>
-				<td><input type="text" name="locate-anything-city" value="<?php echo $post_params['locate-anything-city']; ?>"></td>
+				<td><input type="text" name="locate-anything-city" value="<?php echo esc_attr($post_params['locate-anything-city']); ?>"></td>
 			</tr>
 			<tr>
 				<td><?php esc_html_e("Zip code","locateandfilter")?></td>
-				<td><input type="text" name="locate-anything-zip" value="<?php echo $post_params['locate-anything-zip']; ?>"></td>
+				<td><input type="text" name="locate-anything-zip" value="<?php echo esc_attr($post_params['locate-anything-zip']); ?>"></td>
 			</tr>
 			<tr>
 				<td><?php esc_html_e("State / Province","locateandfilter")?></td>
-				<td><input type="text" name="locate-anything-state" value="<?php echo $post_params['locate-anything-state']; ?>"></td>
+				<td><input type="text" name="locate-anything-state" value="<?php echo esc_attr($post_params['locate-anything-state']); ?>"></td>
 			</tr>
 			<tr>
 				<td><?php esc_html_e("Country","locateandfilter")?></td>
-				<td><input type="text" name="locate-anything-country" value="<?php echo $post_params['locate-anything-country']; ?>"></td>
+				<td><input type="text" name="locate-anything-country" value="<?php echo esc_attr($post_params['locate-anything-country']); ?>"></td>
 			</tr>
 		</table>
 		<br>
@@ -78,8 +78,8 @@ if ( !isset($post_params['locate-anything-marker-color'])) { $post_params['locat
 		<div id="results"></div>
 		<br><br>
 
-		<?php esc_html_e("Latitude","locateandfilter")?> <input type="text" name="locate-anything-lat" value="<?php echo $post_params['locate-anything-lat']; ?>">
-		<?php esc_html_e("Longitude","locateandfilter")?> <input type="text" name="locate-anything-lon" value="<?php echo $post_params['locate-anything-lon']; ?>">
+		<?php esc_html_e("Latitude","locateandfilter")?> <input type="text" name="locate-anything-lat" value="<?php echo esc_attr($post_params['locate-anything-lat']); ?>">
+		<?php esc_html_e("Longitude","locateandfilter")?> <input type="text" name="locate-anything-lon" value="<?php echo esc_attr($post_params['locate-anything-lon']); ?>">
 
 		<input class="append-markers button-admin" type="button" value="View Latitude,Longitude on map">
 
@@ -101,34 +101,41 @@ if ( !isset($post_params['locate-anything-marker-color'])) { $post_params['locat
         <tr>
            <td><b><?php esc_html_e("Tooltip Preset","locateandfilter")?> </b>:</td>
            <td>
-	           	<select name="locate-anything-tooltip-preset" id="locate-anything-tooltip-preset">
-	           		<?php 
-	           			$u = Locate_And_Filter_Admin::getDefaultTemplates();
-						/* tooltip presets */
-						$tooltip_presets = array((object)array("class"=>'default',"name"=>__('Default',"locateandfilter"),"template"=>''),
-						       (object)array("class"=>'',"name"=>__('none',"locateandfilter"),"template"=>$u["tooltip"]),
-						       (object)array("class"=>'nice-tooltips',"name"=>'Nice Tooltips',"template"=>$u["nice-tooltip"])
-						       );                       
-						 $tooltip_presets = apply_filters("locate_anything_tooltip_presets",$tooltip_presets);
-						 $selectedPreset = $post_params["locate-anything-tooltip-preset"];
-						 foreach ($tooltip_presets as $preset) {
-						 	if ( $selectedPreset === $preset->class ) $say = "selected"; else $say='';
-						 	echo '<option '.$say.' value="'.$preset->class.'" data-template="'.$preset->template.'">'.$preset->name.'</option>';
-						 }
-					?>
+
+				<select name="locate-anything-tooltip-preset" id="locate-anything-tooltip-preset">
+				    <?php 
+				        $u = Locate_And_Filter_Admin::getDefaultTemplates();
+				        /* tooltip presets */
+				        $tooltip_presets = array(
+				            (object)array("class" => 'default', "name" => __('Default', "locateandfilter"), "template" => ''),
+				            (object)array("class" => '', "name" => __('none', "locateandfilter"), "template" => $u["tooltip"]),
+				            (object)array("class" => 'nice-tooltips', "name" => __('Nice Tooltips', "locateandfilter"), "template" => $u["nice-tooltip"])
+				        );                       
+				        $tooltip_presets = apply_filters("locate_anything_tooltip_presets", $tooltip_presets);
+				        $selectedPreset = isset($post_params["locate-anything-tooltip-preset"]) ? $post_params["locate-anything-tooltip-preset"] : 'default';
+
+				        foreach ($tooltip_presets as $preset) {
+				            // Check if the preset is selected
+				            $say = ($selectedPreset === $preset->class) ? "selected" : '';
+
+				            // Use esc_attr to escape attributes for safety
+				            echo '<option ' . esc_attr($say) . ' value="' . esc_attr($preset->class) . '" data-template="' . esc_attr($preset->template) . '">' . esc_html($preset->name) . '</option>';
+				        }
+				    ?>
 				</select>
+
 			</td>
         </tr>
         <tr id="nice-tooltips-settings">
 			<td><?php esc_html_e("Nice Tooltips settings","locateandfilter")?> : &nbsp;<input type="button" data-target="nice-tooltips-settings" class="locate-anything-help"></td>
-			<td><?php esc_html_e("Main image max-height","locateandfilter")?> : <input type="text" value="<?php echo $post_params["locate-anything-nice-tooltips-img-height"]; ?>" name="locate-anything-nice-tooltips-img-height"></td>
+			<td><?php esc_html_e("Main image max-height","locateandfilter")?> : <input type="text" value="<?php echo esc_attr($post_params["locate-anything-nice-tooltips-img-height"]); ?>" name="locate-anything-nice-tooltips-img-height"></td>
 		</tr>
         <tr>
            <td id="customtemplate" width="40%">
 	           	<div id="locate-anything-marker-html-template">
 					<b><?php esc_html_e("Custom HTML template","locateandfilter");?></b>&nbsp;<input type="button" data-target="customtemplate" class="locate-anything-help">
 					<div class="LA_custom_template_editor">
-					<textarea name="locate-anything-marker-html-template" id="marker-html-template" style="width: 70%; height: 20em"><?php echo $post_params['locate-anything-marker-html-template']; ?></textarea>
+					<textarea name="locate-anything-marker-html-template" id="marker-html-template" style="width: 70%; height: 20em"><?php echo esc_attr($post_params['locate-anything-marker-html-template']); ?></textarea>
 					</div>
 				</div>
 			</td>
@@ -152,12 +159,19 @@ if ( !isset($post_params['locate-anything-marker-color'])) { $post_params['locat
                	<input type="radio" name="locate-anything-marker-type" value="standard" <?php if ($post_params["locate-anything-marker-type"]=="standard" || $post_params["locate-anything-marker-type"]==false ) echo 'checked' ?>> <b><?php esc_html_e("Choose an icon","locateandfilter")?></b> :  
 			</td>
 			<td>
+
 				<select style="width: 50% !important" name="locate-anything-custom-marker" id="locate-anything-custom-marker">
-					<option value=""><?php esc_html_e("Use default marker","locateandfilter"); ?></option>
-				    <?php foreach ( Locate_And_Filter_Assets::getMarkers() as $marker ) { ?>
-				 		<option value="<?php echo $marker->id; ?>" <?php if(esc_attr($post_params["locate-anything-custom-marker"]) == $marker->id ) echo "selected;" ?>><?php echo $marker->url; ?></option> 		
-					<?php } ?>  
+				    <option value=""><?php esc_html_e("Use default marker", "locateandfilter"); ?></option>
+				    <?php 
+				    foreach (Locate_And_Filter_Assets::getMarkers() as $marker) { 
+				        $selected = (isset($post_params["locate-anything-custom-marker"]) && esc_attr($post_params["locate-anything-custom-marker"]) == $marker->id) ? "selected" : '';
+				        ?>
+				        <option value="<?php echo esc_attr($marker->id); ?>" <?php echo  esc_attr($selected); ?>>
+				            <?php echo esc_attr($marker->url); ?>
+				        </option> 
+				    <?php } ?>  
 				</select>
+
 			</td>
 	    </tr>
 
@@ -206,15 +220,21 @@ if ( !isset($post_params['locate-anything-marker-color'])) { $post_params['locat
 					</select>
 				<br>
 				<?php esc_html_e("Symbol color","locateandfilter")?> : 
-					<input type="color" value="<?php echo $post_params["locate-anything-marker-symbol-color"]; ?>" name="locate-anything-marker-symbol-color">
+					<input type="color" value="<?php echo  esc_attr($post_params["locate-anything-marker-symbol-color"]); ?>" name="locate-anything-marker-symbol-color">
 				<br>
 				<?php esc_html_e("Marker color","locateandfilter")?> : 
 					<select name="locate-anything-marker-color">
-						<?php foreach( array('red', 'darkred', 'orange', 'green', 'darkgreen', 'blue', 'purple', 'darkpurple', 'cadetblue') as $color ) { ?>
-							<option <?php if ( $color == $post_params["locate-anything-marker-color"] ) echo "selected"; ?> value="<?php echo $color; ?>"><?php echo $color; ?></option>
-						<?php } ?>
+					    <?php 
+					    $colors = array('red', 'darkred', 'orange', 'green', 'darkgreen', 'blue', 'purple', 'darkpurple', 'cadetblue');
+					    
+					    foreach( $colors as $color ) { 
+					        $selected = (isset($post_params["locate-anything-marker-color"]) && esc_attr($post_params["locate-anything-marker-color"]) == $color) ? 'selected' : '';
+					        ?>
+					        <option value="<?php echo esc_attr($color); ?>" <?php echo  esc_attr($selected); ?>>
+					            <?php echo esc_html($color); ?>
+					        </option>
+					    <?php } ?>
 					</select>
-
 			</td>
 		</tr>
 	</table> <!-- / locate-anything-map-settings-page-2	 -->
