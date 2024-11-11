@@ -94,63 +94,65 @@ class Locate_And_Filter_Addons_Demo
 						<ul id="map-provider-addon" class="only_pro">
 							<li>
 								<?php esc_html_e("Addon Map Overlay","locateandfilter");?>
+
 								<select name="locate-anything-option-map-provider-addon" id="locate-anything-option-map-provider-addon">
+								    <?php foreach ($providers as $name => $overlay) { ?>
+								        <?php if ($overlay['load']) { ?>
 
-									<?php foreach ($providers as $name => $overlay ) { ?>
-										
-										<?php if ( $overlay['load'] ) { ?>
+								            <option value="<?php echo esc_attr($name); ?>" data-variants="" <?php if (unserialize(get_option("locate-anything-option-map-provider-addon")) == $name) echo "selected"; ?>>
+								                <?php echo esc_html($name); ?>
+								            </option>
 
-											<option value="<?php echo $name;?>" data-variants="" <?php if( unserialize(get_option("locate-anything-option-map-provider-addon")) == $name) echo "selected"; ?> ><?php echo $name; ?></option>
+								            <?php if (isset($overlay['variants'])) { ?>
+								                <?php foreach ($overlay['variants'] as $variants_name => $variants) { ?>
+								                    <option value="<?php echo esc_attr($name . '.' . $variants_name); ?>" data-variants="<?php echo esc_attr($variants_name); ?>" <?php if (unserialize(get_option("locate-anything-option-map-provider-addon")) == $name . '.' . $variants_name) echo "selected"; ?>>
+								                        <?php echo esc_html($name . ' - ' . $variants_name); ?>
+								                    </option>
+								                <?php } ?>
+								            <?php } ?>
 
-											<?php if ( isset( $overlay[ 'variants' ] ) ) { ?>
-												<?php foreach ($overlay[ 'variants' ] as $variants_name => $variants ) { ?>
-													<option value="<?php echo $name.'.'.$variants_name;?>" data-variants="<?php echo $variants_name; ?>" <?php if(  unserialize(get_option("locate-anything-option-map-provider-addon")) == $name.'.'.$variants_name ) echo "selected"; ?> ><?php echo $name.' - '.$variants_name; ?></option>
-												<?php } ?>
-											<?php } ?>
-
-										<?php } ?>
-
-									<?php }?>
-
+								        <?php } ?>
+								    <?php }?>
 								</select>
+
 							</li>
 
 							<li>
 								<?php esc_html_e("Jawg accessToken","locateandfilter");?>:
-								<input type="text" size="100" name="locate-anything-option-map-provider-addon-accessToken-jawg" value="<?php echo unserialize(get_option("locate-anything-option-map-provider-addon-accessToken-jawg"));?>">
+								<input type="text" size="100" name="locate-anything-option-map-provider-addon-accessToken-jawg" value="<?php echo esc_attr(unserialize(get_option("locate-anything-option-map-provider-addon-accessToken-jawg")));?>">
 								<p>In order to use Jawg Maps, you must <a href="https://www.jawg.io/lab" target="_blank" rel="nofollow">register</a>. Once registered, your access token will be located <a href="https://www.jawg.io/lab/access-tokens" target="_blank">here</a></p>
 								<?php esc_html_e("Jawg custom Style id","locateandfilter");?>:
-								<input type="text" size="100" name="locate-anything-option-map-provider-addon-customstyle-jawg" value="<?php echo unserialize(get_option("locate-anything-option-map-provider-addon-customstyle-jawg"));?>">
+								<input type="text" size="100" name="locate-anything-option-map-provider-addon-customstyle-jawg" value="<?php echo esc_attr(unserialize(get_option("locate-anything-option-map-provider-addon-customstyle-jawg")));?>">
 								<p>eg: a7aff445-ca75-4600-b0bf-e00c81ee84cb</p>					
 							</li>
 
 							<li>
 								<?php esc_html_e("Thunderforest apikey","locateandfilter");?>:
-								<input type="text" size="100" name="locate-anything-option-map-provider-addon-accessToken-thunderforest" value="<?php echo unserialize(get_option("locate-anything-option-map-provider-addon-accessToken-thunderforest"));?>">
+								<input type="text" size="100" name="locate-anything-option-map-provider-addon-accessToken-thunderforest" value="<?php echo esc_attr(unserialize(get_option("locate-anything-option-map-provider-addon-accessToken-thunderforest")));?>">
 								<p>In order to use Thunderforest Maps, you must <a href="https://manage.thunderforest.com/" target="_blank" rel="nofollow">register</a>. Once registered, your access token will be located <a href="https://manage.thunderforest.com/dashboard" target="_blank">here</a></p>
 							</li>
 
 							<li>
 								<?php esc_html_e("Mapbox accessToken","locateandfilter");?>:
-								<input type="text" size="100" name="locate-anything-option-map-provider-addon-accessToken-mapbox" value="<?php echo unserialize(get_option("locate-anything-option-map-provider-addon-accessToken-mapbox"));?>">
+								<input type="text" size="100" name="locate-anything-option-map-provider-addon-accessToken-mapbox" value="<?php echo esc_attr(unserialize(get_option("locate-anything-option-map-provider-addon-accessToken-mapbox")));?>">
 								<p>In order to use Mapbox Maps, you must <a href="https://account.mapbox.com/auth/signup/" target="_blank" rel="nofollow">register</a>. Once registered, your access token will be located <a href="https://account.mapbox.com/" target="_blank">here</a></p>
 							</li>
 
 							<li>
 								<?php esc_html_e("MapTiler key","locateandfilter");?>:
-								<input type="text" size="100" name="locate-anything-option-map-provider-addon-accessToken-maptiler" value="<?php echo unserialize(get_option("locate-anything-option-map-provider-addon-accessToken-maptiler"));?>">
+								<input type="text" size="100" name="locate-anything-option-map-provider-addon-accessToken-maptiler" value="<?php echo esc_attr(unserialize(get_option("locate-anything-option-map-provider-addon-accessToken-maptiler")));?>">
 								<p>In order to use MapTiler Maps, you must <a href="https://cloud.maptiler.com/auth/widget?mode=select&next=https%3A%2F%2Fcloud.maptiler.com%2Fstart" target="_blank" rel="nofollow">register</a>. Once registered, your access token will be located <a href="https://cloud.maptiler.com/account/keys/" target="_blank">here</a></p>
 							</li>
 
 							<li>
 								<?php esc_html_e("OpenWeatherMap apiKey","locateandfilter");?>:
-								<input type="text" size="100" name="locate-anything-option-map-provider-addon-accessToken-openweathermap" value="<?php echo unserialize(get_option("locate-anything-option-map-provider-addon-accessToken-openweathermap"));?>">
+								<input type="text" size="100" name="locate-anything-option-map-provider-addon-accessToken-openweathermap" value="<?php echo esc_attr(unserialize(get_option("locate-anything-option-map-provider-addon-accessToken-openweathermap")));?>">
 								<p>In order to use OpenWeatherMap Maps, you must <a href="https://home.openweathermap.org/users/sign_up" target="_blank" rel="nofollow">register</a>. Once registered, your access token will be located <a href="https://home.openweathermap.org/api_keys" target="_blank">here</a></p>
 							</li>
 
 							<li>
 								<?php esc_html_e("HEREv3 apiKey","locateandfilter");?>:
-								<input type="text" size="100" name="locate-anything-option-map-provider-addon-accessToken-here" value="<?php echo unserialize(get_option("locate-anything-option-map-provider-addon-accessToken-here"));?>">
+								<input type="text" size="100" name="locate-anything-option-map-provider-addon-accessToken-here" value="<?php echo esc_attr(unserialize(get_option("locate-anything-option-map-provider-addon-accessToken-here")));?>">
 								<p>In order to use HEREv3 Maps, you must <a href="https://developer.here.com/login" target="_blank" rel="nofollow">register</a>. Once registered, your access token will be located <a href="https://developer.here.com/projects/" target="_blank">here</a></p>
 							</li>
 
