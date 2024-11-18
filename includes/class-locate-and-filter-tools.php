@@ -18,16 +18,32 @@ class Locate_And_Filter_Tools {
 	 */
 
 	public static function file_get_contents_curl( $url ) {
-	  $ch = curl_init();
-	  curl_setopt( $ch, CURLOPT_AUTOREFERER, TRUE );
-	  curl_setopt( $ch, CURLOPT_HEADER, 0 );
-	  curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-	  curl_setopt( $ch, CURLOPT_URL, $url );
-	  curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, TRUE );
-	  $data = curl_exec( $ch );
-	  curl_close( $ch );
-	  return $data;
+	  // $ch = curl_init();
+	  // curl_setopt( $ch, CURLOPT_AUTOREFERER, TRUE );
+	  // curl_setopt( $ch, CURLOPT_HEADER, 0 );
+	  // curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+	  // curl_setopt( $ch, CURLOPT_URL, $url );
+	  // curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, TRUE );
+	  // $data = curl_exec( $ch );
+	  // curl_close( $ch );
+	  // return $data;
 	}
+
+	public static function file_get_contents_wp( $url ) {
+	    // Perform the GET request
+	    $response = wp_remote_get( $url );
+
+	    // Check for errors
+	    if ( is_wp_error( $response ) ) {
+	        return false; // Or handle the error accordingly
+	    }
+
+	    // Get the response body
+	    $data = wp_remote_retrieve_body( $response );
+
+	    return $data;
+	}
+
 
 	/**
 	 * Helper function : get local file content , alternative file_get_contents()
@@ -185,13 +201,15 @@ class Locate_And_Filter_Tools {
 		} else {
 			$selectmultiple = '';
 			$class = "select";
-		}
+		}	
 
-		$terms=get_terms($taxonomy , array(
-	 	'orderby'    => 'name',
-	 	'hide_empty' => 0,
-	 	'include'=>$allowed) );		
-		
+		$terms = get_terms(array(
+		    'taxonomy'   => $taxonomy, 
+		    'orderby'    => 'name',
+		    'hide_empty' => false, 
+		    'include'    => $allowed,
+		));
+
 		if($terms){
 
 			if ( !empty($categoryfilter) ) {

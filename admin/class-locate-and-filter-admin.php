@@ -824,7 +824,7 @@ class Locate_And_Filter_Admin
 		$gmaps_key = Locate_And_Filter_Admin::getGmapsAPIKey();
 		$url = "https://maps.google.com/maps/api/geocode/json?key=$gmaps_key&sensor=false&address={$address}";
 		// get the json response
-		$resp_json = Locate_And_Filter_Tools::file_get_contents_curl($url);
+		$resp_json = Locate_And_Filter_Tools::file_get_contents_wp($url);
 		// decode the json
 		$resp = json_decode($resp_json, true);		
 		// response status will be 'OK', if able to geocode given address
