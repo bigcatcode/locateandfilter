@@ -60,7 +60,7 @@ class Locate_And_Filter_Admin
 	 */
 	public function __construct($plugin_name, $version) {
 		$this->plugin_name = $plugin_name;
-		$this->version = '1.4.128';		
+		$this->version = '1.4.129';		
 	}
 
 
@@ -202,7 +202,7 @@ class Locate_And_Filter_Admin
 		wp_enqueue_script($this->plugin_name . "-googleautojs", plugin_dir_url(__FILE__) . '../public/js/leaflet-google-autocomplete/js/leaflet-google-autocomplete.js', array(
 			$this->plugin_name . "-googleAPI") , $this->version, false);
 		// Edit Area js
-		wp_enqueue_script($this->plugin_name . "-editArea", plugin_dir_url(__FILE__) . '../admin/js/edit_area/edit_area_full.js' , array('jquery') , $this->version, false);
+		//wp_enqueue_script($this->plugin_name . "-editArea", plugin_dir_url(__FILE__) . '../admin/js/edit_area/edit_area_full.js' , array('jquery') , $this->version, false);
 		// providers
 		wp_enqueue_script ( $this->plugin_name . "-leaflet-providers", plugin_dir_url ( __FILE__ ) . '../public/js/leaflet-providers/leaflet-providers.js', array (
 				'jquery' 

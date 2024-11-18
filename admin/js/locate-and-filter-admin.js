@@ -29,8 +29,8 @@ jQuery(document).ready(function(){
         // start editAreas
         var loadeditArea = jQuery('#locate-and-filter-class').find('#locate-anything-default-tooltip-template');
         if (loadeditArea.length > 0) {
-          initialize_editArea('locate-anything-default-tooltip-template','refresh_textarea','html');
-          initialize_editArea('locate-anything-default-nav-template','','html');
+          //initialize_editArea('locate-anything-default-tooltip-template','refresh_textarea','html');
+          //initialize_editArea('locate-anything-default-nav-template','','html');
         }
        },2000);
 });
@@ -299,7 +299,7 @@ function refresh_layout_code(){
                   ,success:function(data){
                     jQuery("#layout_editor").html('');
               jQuery("#layout_editor").append("<textarea style='margin-top:1em;height:450px;width:100%' id=\"map-layout-editor\" name=\"locate-anything-map-template-html-"+jQuery("#locate-anything-map-template option:selected").val()+"\">"+JSON.parse(data)+"</textarea>");
-              initialize_editArea('map-layout-editor','','css'); 
+              //initialize_editArea('map-layout-editor','','css'); 
                   }
                 });
 };
