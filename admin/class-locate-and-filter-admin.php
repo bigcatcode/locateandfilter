@@ -73,37 +73,49 @@ class Locate_And_Filter_Admin
 	 */
 
 	public static function saveRootPath() {
+	    global $wp_filesystem;
 
-		//$path = plugin_dir_path(dirname(__FILE__)) ."cache";
-		$dir = wp_get_upload_dir();
-		$path = $dir['basedir'] ."/locateandfilter-cache";
+	    // Initialize WP Filesystem
+	    if (empty($wp_filesystem)) {
+	        require_once( ABSPATH . 'wp-admin/includes/file.php' );
+	        WP_Filesystem();
+	    }
 
-		if ( !is_writable($path) ) {
-			if ( !@chmod($path, 0777) ) {
-				return;
-			} 
-		} else {
+	    // Get the upload directory
+	    $dir = wp_get_upload_dir();
+	    $path = $dir['basedir'] . "/locateandfilter-cache";
 
-			//$f = fopen(plugin_dir_path(dirname(__FILE__)).'/cache/path2root',"w");
-			$f = fopen($path.'/path2root',"w");
-			$fpath = realpath(get_home_path())."/wp"."-load.php";
-			if(is_file($fpath)) fwrite($f, $fpath);
-			else {
-				// some plugin change the normal path, tries some prefixes
-				$try_those_prefixes = array("admin","private");
-				foreach ($try_those_prefixes as $prefix) {
-					$fpath = realpath(get_home_path())."/$prefix/wp"."-load.php";
-					if(is_file($fpath)) {
-						fwrite($f, $fpath);
-						break;
-					}	
-				}
-				
-			}
-			fclose($f);
-		}
+	    // Check if the path is writable using WP Filesystem methods
+	    if (!$wp_filesystem->is_writable($path)) {
+	        // Try changing permissions if not writable
+	        if (!$wp_filesystem->chmod($path, 0777)) {
+	            return;
+	        }
+	    }
 
+	    // Construct the path to the file
+	    $file_path = $path . '/path2root';
+
+	    // Get the real path of wp-load.php
+	    $fpath = realpath(get_home_path()) . "/wp-load.php";
+
+	    if (is_file($fpath)) {
+	        // Write the path to the file using WP_Filesystem
+	        $wp_filesystem->put_contents($file_path, $fpath);
+	    } else {
+	        // Try prefixes in case wp-load.php is not in the default location
+	        $try_those_prefixes = array("admin", "private");
+	        foreach ($try_those_prefixes as $prefix) {
+	            $fpath = realpath(get_home_path()) . "/$prefix/wp-load.php";
+	            if (is_file($fpath)) {
+	                $wp_filesystem->put_contents($file_path, $fpath);
+	                break;
+	            }
+	        }
+	    }
 	}
+
+
 
 	/**
 	 * Register new  mime types
@@ -326,22 +338,41 @@ class Locate_And_Filter_Admin
 	 *
 	 */
 	public static function check_cache_permissions() {
-		//$path=plugin_dir_path(dirname(__FILE__)) ."cache";
-		$dir = wp_get_upload_dir();
-		$path = $dir['basedir'] ."/locateandfilter-cache";
+	    global $wp_filesystem;
 
-		if (!file_exists($path)) {
-		    mkdir($path, 0777, true);
-		}		
-		if(!is_writable($path)){if(!@chmod($path, 0777)) {
-				echo '<div class="notice notice-error"><p>' . sprintf(
-				    /* translators: %s is the directory path that needs write permissions */
-				    esc_html__('<b>Error</b> : Please add write permissions on the following directory: %s', 'locateandfilter'),
-				    esc_html($path)
-				) . '</p></div>';
-			}
-		}
+	    // Initialize WP Filesystem
+	    if (empty($wp_filesystem)) {
+	        require_once( ABSPATH . 'wp-admin/includes/file.php' );
+	        WP_Filesystem();
+	    }
+
+	    $dir = wp_get_upload_dir();
+	    $path = $dir['basedir'] . "/locateandfilter-cache";
+
+	    // Check if the directory exists, if not create it using WP_Filesystem
+	    if (!$wp_filesystem->exists($path)) {
+	        if (!$wp_filesystem->mkdir($path, 0777)) {
+	            echo '<div class="notice notice-error"><p>' . sprintf(
+	                /* translators: %s is the directory path that needs write permissions */
+	                esc_html__('<b>Error</b> : Could not create directory. Please add write permissions on the following directory: %s', 'locateandfilter'),
+	                esc_html($path)
+	            ) . '</p></div>';
+	            return;
+	        }
+	    }
+
+	    // Check if the directory is writable
+	    if (!$wp_filesystem->is_writable($path)) {
+	        if (!$wp_filesystem->chmod($path, 0777)) {
+	            echo '<div class="notice notice-error"><p>' . sprintf(
+	                /* translators: %s is the directory path that needs write permissions */
+	                esc_html__('<b>Error</b> : Please add write permissions on the following directory: %s', 'locateandfilter'),
+	                esc_html($path)
+	            ) . '</p></div>';
+	        }
+	    }
 	}
+
 
 	/**
 	 * Displays the settings page
@@ -818,7 +849,7 @@ class Locate_And_Filter_Admin
 	 */
 	/* get Taxonomies associated with type passed in request */
 	public function LA_getTaxonomies() {
-		echo json_encode(get_object_taxonomies(sanitize_text_field($_REQUEST['type'])));
+		echo wp_json_encode(get_object_taxonomies(sanitize_text_field($_REQUEST['type'])));
 		die();
 	}
 	/**
@@ -828,7 +859,7 @@ class Locate_And_Filter_Admin
 	public function LA_getTaxonomies_plus() {
 		$tax = get_object_taxonomies(sanitize_text_field($_REQUEST['type']));
 		//array_push($tax, $_REQUEST['type']);
-		echo json_encode($tax);
+		echo wp_json_encode($tax);
 		die();
 	}	
 	/**
@@ -841,7 +872,7 @@ class Locate_And_Filter_Admin
 		    'posts_per_page'  => -1,
 		    'post_type' => $_REQUEST['type']
 		));
-		echo json_encode( $all_post_ids );
+		echo wp_json_encode( $all_post_ids );
 		die();
 	}
 
@@ -861,7 +892,7 @@ class Locate_And_Filter_Admin
 			else $terms[$in]->selected = 0;
 			if (!$selected) $terms[$in]->selected = 1;
 		}
-		echo json_encode($terms);
+		echo wp_json_encode($terms);
 		die();
 	}
 
@@ -874,9 +905,9 @@ class Locate_And_Filter_Admin
 		$record = get_post_meta( intval($map_id) , "locate-anything-map-template-html-" . $layout_id, true);
 			if ($record == false) {
 				//echo json_encode(file_get_contents(Locate_And_Filter_Assets::getMapTemplates( $layout_id )->url));
-				echo json_encode(Locate_And_Filter_Tools::get_local_file_contents(Locate_And_Filter_Assets::getMapTemplates( $layout_id )->url));
+				echo wp_json_encode(Locate_And_Filter_Tools::get_local_file_contents(Locate_And_Filter_Assets::getMapTemplates( $layout_id )->url));
 			} else {
-				echo json_encode($record);
+				echo wp_json_encode($record);
 			}
 		die();
 	}

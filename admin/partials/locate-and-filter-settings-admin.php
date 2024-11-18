@@ -150,7 +150,7 @@
 				        </div>
 				    <?php } ?>					
 				    <textarea style="display:none" id="locate-anything-option-additional-field-list" name="locate-anything-option-additional-field-list">
-				        <?php echo esc_textarea(json_encode($additional_field_list)); ?>
+				        <?php echo esc_textarea(wp_json_encode($additional_field_list)); ?>
 				    </textarea>
 				</div>
 	
