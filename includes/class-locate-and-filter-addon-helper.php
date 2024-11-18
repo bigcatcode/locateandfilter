@@ -20,7 +20,12 @@ class Locate_And_Filter_Addon_Helper
         } , 1000, 1);
         // adds the actual option page content
         add_filter("locate_anything_add_option_pane", function ($h) use ($addon_name,$fn) {
-            eval("\$html = $fn();");            
+            //eval("\$html = $fn();");
+            if (is_callable($fn)) {
+                $html = call_user_func($fn); // Safely call the function
+            } else {
+                $html = "<p>Error: Function not callable.</p>";
+            }           
             $h.= "<div id='locate-anything-map-settings-page-" . md5($addon_name) . "' class='locate-anything-map-option-pane' style='display:none'>
                     <h1>$addon_name Settings</h1>" . $html . "</div>";
             return $h;
