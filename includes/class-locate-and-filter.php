@@ -457,7 +457,7 @@ class Locate_And_Filter
 
             // очистка
             if( $_key === 'tag_posts_shortcode_links' )
-                $val = sanitize_textarea_field( strip_tags($val) );
+                $val = sanitize_textarea_field(wp_strip_all_tags($val, true));
             else
                 $val = sanitize_text_field( $val );
 

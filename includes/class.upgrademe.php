@@ -116,7 +116,7 @@ class Upgrademe
 			$upgradeInfo['package'] = $upgradeVars['package'];
 			$body['plugins'][$file] = $upgradeInfo;			
 		}
-		$response['body'] = json_encode($body);
+		$response['body'] = wp_json_encode($body);
 		return $response;
 	}
 
