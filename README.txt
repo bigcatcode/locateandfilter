@@ -1,9 +1,9 @@
 === LocateAndFilter ===
 Contributors: dgamoni
 Donate link: https://locateandfilter.com/
-Tags: custom map, filter map, LocateAndFilter, search map, leaflet, directory plugin, wordpress city directory plugin, store locator, filterable map, custom post type filters, custom post type map, map layout
+Tags: LocateAndFilter, search map, leaflet, filterable map, filters by taxonomy
 Requires at least: 4.5.0
-Tested up to: 6.6
+Tested up to: 6.7
 Stable tag: 1.6.15
 Requires PHP: 5.2.4
 License: GPLv2 or later

@@ -180,7 +180,7 @@ class Locate_And_Filter_Admin
 		wp_enqueue_script($this->plugin_name . "-googleAPI", "https://maps.googleapis.com/maps/api/js?key=".$this->getGmapsAPIKey()."&v=3.exp&libraries=places&language=en" . unserialize(get_option("locate-anything-option-map-language")) , array(
 			$this->plugin_name . "-leaflet-filters"
 		) , $this->version, false);
-		wp_enqueue_script($this->plugin_name . "-select2", plugin_dir_url(__FILE__) . 'js/select2_4.0.6-rc.1/js/select2.min.js');
+		wp_enqueue_script($this->plugin_name . "-select2", plugin_dir_url(__FILE__) . 'js/select2_4.0.6-rc.1/js/select2.min.js', array() , $this->version, false);
 		// Awesome markers
 		wp_enqueue_script($this->plugin_name . "-awesomemarkers", plugin_dir_url(__FILE__) . '../public/js/leaflet.awesome-markers-2.0/leaflet.awesome-markers.js', array(
 			$this->plugin_name . "-leaflet"

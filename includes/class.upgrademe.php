@@ -53,15 +53,15 @@ class Upgrademe
 		elseif (stripos($url, 'update-check') !== false)
 		{
 			$showTime = false;
-			$trace = debug_backtrace(false);
-			foreach($trace as $t)
-				# http request made from within wp_update_plugins
-				if (isset($t['function']) && $t['function'] == 'wp_update_plugins')
-				{
-					$showTime = true;
-					break;
-				}
-			unset($trace, $t);
+			// $trace = debug_backtrace(false);
+			// foreach($trace as $t)
+			// 	# http request made from within wp_update_plugins
+			// 	if (isset($t['function']) && $t['function'] == 'wp_update_plugins')
+			// 	{
+			// 		$showTime = true;
+			// 		break;
+			// 	}
+			// unset($trace, $t);
 		}
 		else
 			$showTime = false;
