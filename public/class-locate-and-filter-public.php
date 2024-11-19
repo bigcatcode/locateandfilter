@@ -1112,11 +1112,29 @@ public static function defineDefaultMarker($params){
 	 * 
 	 * @return void
 	 */
-	public static function generateJSON($params, $output = false) {		
+	public static function generateJSON($params, $output = false) {
+		global $wp_filesystem;
+
+	    // Ensure the WP Filesystem API is loaded and initialized.
+	    if (empty($wp_filesystem)) {
+	        require_once ABSPATH . 'wp-admin/includes/file.php';
+	        WP_Filesystem();
+	    }
+
 		$map_id=$params['map_id'];
 		//$cache_file = plugin_dir_path ( __FILE__ ) . "../cache/cache-" . $map_id . ".json";
 		$dir = wp_get_upload_dir();
-		$cache_file = $dir['basedir'] ."/locateandfilter-cache/cache-" . $map_id . ".json";			
+
+	    $cache_dir = trailingslashit($dir['basedir']) . 'locateandfilter-cache/';
+	    
+	    // Ensure the cache directory exists.
+	    if (!is_dir($cache_dir)) {
+	        wp_mkdir_p($cache_dir);
+	    }
+
+		//$cache_file = $dir['basedir'] ."/locateandfilter-cache/cache-" . $map_id . ".json";
+		$cache_file = $cache_dir . 'cache-' . $map_id . '.json';
+
 		/* tries to set memory limit and timeout higher */
 		try {
 		ini_set ( 'memory_limit', '256M' );
@@ -1174,8 +1192,9 @@ public static function defineDefaultMarker($params){
 		$posts =apply_filters("locate_anything_find_markers",$posts ,$params);
 
 		/* Let's output JSON in chunks to avoid memory overload when there's a huge (>30000) numbers of markers */
-		$cf = fopen ( $cache_file, "w" );
-		fwrite ( $cf, '{"data":[' );
+		// $cf = fopen ( $cache_file, "w" );
+		// fwrite ( $cf, '{"data":[' );
+		$json_data = '{"data":[';
 		$loop_counter = 0;
 		/* get Tags actually used in the templates */
 		$basic_fields=array("id","title","tooltip_template","lat","lng","street","streetnum","city","country","state" ,"zip","custom_marker","css_class");
@@ -1199,8 +1218,11 @@ public static function defineDefaultMarker($params){
 				/* no LatLng? No can do */
 				if (! $lon || ! $lat) continue;
 
-				if ($loop_counter > 0)	fwrite ( $cf, "," );
-				
+				//if ($loop_counter > 0)	fwrite ( $cf, "," );
+				if ($loop_counter > 0) {
+		            $json_data .= ",";
+		        }
+
 				$id = ( string ) $post->ID;
 				/* define Marker icon for this element */
 				$markerIcon=Locate_And_Filter_Public::defineMarkerIcon($post_params);	
@@ -1377,29 +1399,40 @@ public static function defineDefaultMarker($params){
 					unset ( $add [$k] );
 					$add [$newkey] = $v;
 				}
-				
+
 				/* writes to cache */
-				fwrite ( $cf, json_encode ( $add ) );
+				//fwrite ( $cf, json_encode ( $add ) );
+				$json_data .= json_encode($add);
+
 				$loop_counter ++;
 			} /* end of loop */
 		
+		// returns (array("data"=>$locations,"index"=>$index,"defaults"=>$defaults));
+		// fwrite ( $cf, '],"index": ' . json_encode ( $index ) );
+		// fwrite ( $cf, ',"defaults":' . json_encode ( $defaults ) );
+		// fwrite ( $cf, '}' );
+		// fclose ( $cf );
+
 		$defaults = array ();
 		$defaults [] = array (
 				"default_marker" => $default_marker_id 
-		);		
+		);
 		$index ["markers"] = $markers;
 		$index ["fieldnames"] = $indexfields;
-		// returns (array("data"=>$locations,"index"=>$index,"defaults"=>$defaults));
-		fwrite ( $cf, '],"index": ' . json_encode ( $index ) );
-		fwrite ( $cf, ',"defaults":' . json_encode ( $defaults ) );
-		fwrite ( $cf, '}' );
-		fclose ( $cf );
+	    $json_data .= '],"index":' . json_encode($index);
+	    $json_data .= ',"defaults":' . json_encode($defaults) . '}';
+
+	    if (!$wp_filesystem->put_contents($cache_file, $json_data, FS_CHMOD_FILE)) {
+	        wp_die(esc_html__("Failed to write JSON to cache file.", "locateandfilter"));
+	    }
+
 		if ($output) {
 			echo Locate_And_Filter_Tools::get_local_file_contents( $cache_file );
 			die ();
 		}
 		
 	}
+
 
 	/**
 	 * tooltip tag addon
