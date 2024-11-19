@@ -1402,7 +1402,7 @@ public static function defineDefaultMarker($params){
 
 				/* writes to cache */
 				//fwrite ( $cf, json_encode ( $add ) );
-				$json_data .= json_encode($add);
+				$json_data .= wp_json_encode($add);
 
 				$loop_counter ++;
 			} /* end of loop */
@@ -1419,8 +1419,8 @@ public static function defineDefaultMarker($params){
 		);
 		$index ["markers"] = $markers;
 		$index ["fieldnames"] = $indexfields;
-	    $json_data .= '],"index":' . json_encode($index);
-	    $json_data .= ',"defaults":' . json_encode($defaults) . '}';
+	    $json_data .= '],"index":' . wp_json_encode($index);
+	    $json_data .= ',"defaults":' . wp_json_encode($defaults) . '}';
 
 	    if (!$wp_filesystem->put_contents($cache_file, $json_data, FS_CHMOD_FILE)) {
 	        wp_die(esc_html__("Failed to write JSON to cache file.", "locateandfilter"));
