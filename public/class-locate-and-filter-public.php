@@ -639,7 +639,7 @@ class Locate_And_Filter_Public {
 					eval("var "+map_instance+"=new leaflet_filters_class(params);");				 
 						/* loading ... */						
 					 eval(map_instance).showLoader(true);
-					 <?php if (has_filter("locate_anything_beforeCreateMap")) echo apply_filters("locate_anything_beforeCreateMap",$map_id);?>
+					 <?php //if (has_filter("locate_anything_beforeCreateMap")) echo apply_filters("locate_anything_beforeCreateMap",$map_id);?>
 					 	/* Initialize Map  */	
 					eval(map_instance).createMap();
 					/*   Register filters, property_name is the name of the property as shown in the JSON datas  */
@@ -709,7 +709,7 @@ class Locate_And_Filter_Public {
 							eval(map_instance).showLoader(false);	
 							/* stores the map in Jquery for easier access*/	
 							current_map=eval(map_instance);
-							<?php if ( has_filter("locate_anything_afterGenerateJS")) echo apply_filters("locate_anything_afterGenerateJS",$map_id); ?>
+							<?php //if ( has_filter("locate_anything_afterGenerateJS")) echo apply_filters("locate_anything_afterGenerateJS",$map_id); ?>
 							<?php if ( isset($atts["categoryfilter"]) ) { ?>
 								eval(map_instance).update_markers();
 							<?php } ?>
@@ -718,7 +718,7 @@ class Locate_And_Filter_Public {
 					}
 
 					/*   JSON : Retrieve markers data */
-					eval(map_instance).getData("<?php echo admin_url( 'admin-ajax.php'); ?>?action=getMarkers&map_id=<?php echo esc_js($map_id);?>",createEverything_<?php echo esc_js($map_id);?>)
+					eval(map_instance).getData("<?php echo esc_url(admin_url( 'admin-ajax.php')); ?>?action=getMarkers&map_id=<?php echo esc_js($map_id);?>",createEverything_<?php echo esc_js($map_id);?>)
 					/* call Tokenize for nice selects */
 					if(jQuery.tokenize){
 					var token1=jQuery('#map-filters-'+map_id+' .tokenize-1').tokenize({maxElements:"1",onRemoveToken:function(e,f){eval(map_instance).update_markers();},onAddToken:function(e,f){eval(map_instance).update_markers();}});
@@ -1007,7 +1007,8 @@ class Locate_And_Filter_Public {
 			if ($map_id!=="preview" && (! $filemtime || (time () - $filemtime >= $cache_life))) {
 				Locate_And_Filter_Public::refresh_cache ($map_id, true );
 			} else {
-				echo Locate_And_Filter_Tools::get_local_file_contents( $cache_file );
+				//echo Locate_And_Filter_Tools::get_local_file_contents( $cache_file );
+				Locate_And_Filter_Public::refresh_cache ($map_id, true );
 			}
 		}
 		//ob_end_flush( 'ob_gzhandler');
@@ -1435,10 +1436,10 @@ public static function defineDefaultMarker($params){
 	        wp_die(esc_html__("Failed to write JSON to cache file.", "locateandfilter"));
 	    }
 
-		if ($output) {
-			echo Locate_And_Filter_Tools::get_local_file_contents( $cache_file );
-			die ();
-		}
+		// if ($output) {
+		// 	echo $json_data;
+		// 	die ();
+		// }
 		
 	}
 
@@ -1710,7 +1711,7 @@ public static function defineDefaultMarker($params){
 					eval("var "+map_instance+"=new leaflet_filters_class(params);");				 
 						/* loading ... */						
 					 eval(map_instance).showLoader(true);
-					 <?php if (has_filter("locate_anything_beforeCreateMap")) echo apply_filters("locate_anything_beforeCreateMap",$map_id);?>
+					 <?php //if (has_filter("locate_anything_beforeCreateMap")) echo apply_filters("locate_anything_beforeCreateMap",$map_id);?>
 					 	/* Initialize Map  */	
 					eval(map_instance).createMap();
 					/*   Register filters, property_name is the name of the property as shown in the JSON datas  */
@@ -1724,7 +1725,7 @@ public static function defineDefaultMarker($params){
 					eval(map_instance).register_filters(custom_filters);
 					/* Override nav item template */	 	
 					eval(map_instance).template_nav_item = function(marker,LatLng) {	
-						var template='<?php echo Locate_And_Filter_Public::getNavTemplate($map_id)?>';
+						var template='<?php echo wp_kses(Locate_And_Filter_Public::getNavTemplate($map_id), $allowed_tags);?>';
 						return template;
 					};
 					/*  define callback function */
@@ -1748,9 +1749,9 @@ public static function defineDefaultMarker($params){
 							setTimeout(function(marker){											
 									/* define Tooltip HTML*/	
 									<?php if($map_id=="preview") {?>
-										var default_tooltip_template='<?php echo Locate_And_Filter_Public::decode_template ($settings['locate-anything-default-tooltip-template'])?>';
+										var default_tooltip_template='<?php echo wp_kses(Locate_And_Filter_Public::decode_template ($settings['locate-anything-default-tooltip-template']), $allowed_tags);?>';
 										<?php } else {?>
-								var default_tooltip_template='<?php echo Locate_And_Filter_Public::getDefaultTooltipTemplate($map_id)?>';					
+								var default_tooltip_template='<?php echo wp_kses(Locate_And_Filter_Public::getDefaultTooltipTemplate($map_id), $allowed_tags);?>';					
 								<?php } ?>
 									// length must be superior to 2 because of the inclusion of 2 single quotes to delimitate the output
 								
@@ -1771,7 +1772,7 @@ public static function defineDefaultMarker($params){
 								eval(map_instance).updateProgressBar(cpt++, result["data"].length, 1000);
 								/* creates the marker */
 								eval(map_instance).createMarker(marker.lat,marker.lng,html,marker,customIcon);
-								if ( marker.id == <?php echo get_the_ID(); ?>) {
+								if ( marker.id == <?php echo esc_js(get_the_ID()); ?>) {
 									current_marker['lat'] = marker.lat;
 									current_marker['lng'] = marker.lng;
 									current_marker_ = marker.lat +','+ marker.lng;
@@ -1791,12 +1792,12 @@ public static function defineDefaultMarker($params){
 							eval(map_instance).showLoader(false);	
 							/* stores the map in Jquery for easier access*/	
 							current_map=eval(map_instance)	;
-							<?php if (has_filter("locate_anything_afterGenerateJS")) echo apply_filters("locate_anything_afterGenerateJS",$map_id)?>
+							<?php //if (has_filter("locate_anything_afterGenerateJS")) echo apply_filters("locate_anything_afterGenerateJS",$map_id)?>
 							},250);
 					}
 
 					/*   JSON : Retrieve markers data */
-					eval(map_instance).getData("<?php echo admin_url( 'admin-ajax.php'); ?>?action=getMarkers&map_id=<?php echo esc_js($map_id);?>",createEverything_<?php echo esc_js($map_id);?>)
+					eval(map_instance).getData("<?php echo esc_url(admin_url( 'admin-ajax.php')); ?>?action=getMarkers&map_id=<?php echo esc_js($map_id);?>",createEverything_<?php echo esc_js($map_id);?>)
 					//console.log(map_instance);
 					/* call Tokenize for nice selects */
 					if(jQuery.tokenize){

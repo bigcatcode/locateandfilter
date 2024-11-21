@@ -25,7 +25,7 @@ remove_filter( 'the_content', 'wpautop');
 remove_filter( 'the_content', 'badgeos_reformat_entries', 9 );
 remove_filter( 'the_content', 'bp_replace_the_content' );
 
-echo apply_filters("the_content",$template);
+//echo apply_filters("the_content",$template);
 	
 ?>
 
