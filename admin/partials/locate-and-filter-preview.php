@@ -9,6 +9,10 @@ include_once($pagePath[0] . '/wp-load.php');
 
 wp_head();
 
+if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'locate_and_filter_preview')) {
+    //wp_die(esc_html__('Nonce verification failed. Please refresh the page and try again.', 'locateandfilter'));
+}
+
 $_POST["map_id"]="preview";
 foreach ($_POST as $key => $value) if(is_string($value)) $_POST[$key]= urldecode($value);	
 $r=Locate_And_Filter_Public::generateJSON($_POST,false);

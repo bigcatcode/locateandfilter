@@ -446,6 +446,10 @@ class Locate_And_Filter_Public {
 	 * @return void
 	 */
 	public static function generateMapJS( $map_id, $map_container, $atts ) {
+		if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'locate_and_filter_preview')) {
+		    //wp_die(esc_html__('Nonce verification failed. Please refresh the page and try again.', 'locateandfilter'));
+		}
+
 		/* in preview mode the parameters are transmitted via $_POST directly*/
 		if ( $map_id == "preview" ) {								
 				$settings = $_POST;	
@@ -983,12 +987,15 @@ class Locate_And_Filter_Public {
 		header ( 'Content-type: application/json; charset=UTF-8' );
 		//header ( 'Content-Encoding: gzip' );
 		//ob_start ( 'ob_gzhandler' );
-		
+
+		if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'locate_and_filter_preview')) {
+		    //wp_die(esc_html__('Nonce verification failed. Please refresh the page and try again.', 'locateandfilter'));
+		}		
 		/* cache mechanism */
 		if (! isset ( $_REQUEST ["map_id"] ))
 			return;
 		else
-			$map_id = sanitize_text_field($_REQUEST ["map_id"]);
+			$map_id = sanitize_text_field(wp_unslash($_REQUEST ["map_id"]));
 		
 		/* When in preview mode always disable cache */
 		$isCacheEnabled = unserialize(get_option ( "locate-anything-option-enable-cache"));
@@ -1129,7 +1136,13 @@ public static function defineDefaultMarker($params){
  */
 
 	public function refresh_cache($map_id, $output = false) {
-			if (! $map_id)	$map_id = sanitize_text_field( $_POST["map_id"] );
+			if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'locate_and_filter_preview')) {
+			    //wp_die(esc_html__('Nonce verification failed. Please refresh the page and try again.', 'locateandfilter'));
+			}
+			//if (! $map_id)	$map_id = sanitize_text_field( $_POST["map_id"] );
+			if (!$map_id) {
+			    $map_id = isset($_POST["map_id"]) ? sanitize_text_field(wp_unslash($_POST["map_id"])) : '';
+			}
 			Locate_And_Filter_Public::generateJSON(Locate_And_Filter_Public::getMapParameters( intval($map_id) ), $output);
 	}
 
@@ -1162,10 +1175,10 @@ public static function defineDefaultMarker($params){
 		$cache_file = $cache_dir . 'cache-' . $map_id . '.json';
 
 		/* tries to set memory limit and timeout higher */
-		try {
-		ini_set ( 'memory_limit', '256M' );
-		set_time_limit ( 900 );
-		} catch(Exception $e) {}
+		// try {
+		// ini_set ( 'memory_limit', '256M' );
+		// set_time_limit ( 900 );
+		// } catch(Exception $e) {}
 		/* set up some variables */
 		$locations = array ();
 		$index = array ();
@@ -1560,6 +1573,9 @@ public static function defineDefaultMarker($params){
 	 * @return void
 	 */
 	public static function generateMapJS_single($map_id, $map_container) {
+		if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'locate_and_filter_preview')) {
+		    //wp_die(esc_html__('Nonce verification failed. Please refresh the page and try again.', 'locateandfilter'));
+		}
 		/* in preview mode the parameters are transmitted via $_POST directly*/
 		if($map_id=="preview"){											
 				$settings = $_POST;	
