@@ -738,7 +738,7 @@ var leaflet_filters_class= function (params){
 	 * @return {string}          string or comma separated string of term names, '' on error
 	 */
 	this.translateTaxonomy=function(taxonomy,terms){	
-		if(!terms || !taxonomy) return "none";	
+		if(!terms || !taxonomy) return "";	
 		term_id=terms.split(",");
 		if(jQuery.isArray(term_id) && term_id.length>1){		
 			var t=new Array();

@@ -42,7 +42,7 @@ class Locate_And_Filter_Public {
 	 */
 	public function __construct($plugin_name, $version) {
         $this->plugin_name = 'locate-and-filter';
-        $this->version = '1.6.13';
+        $this->version = '1.6.131';
 	}
 	
 	/**
@@ -568,6 +568,9 @@ class Locate_And_Filter_Public {
 		/* enable_fitBounds */
 		$params ["enable_fitBounds"]=$settings['locate-anything-enable_fitBounds'];
 		$params ["enable_zoom_to_marker"]=$settings['locate-anything-enable_zoom_to_marker'];
+
+		$allowed_tags = Locate_And_Filter_Tools::generate_allowed_html_tags();
+
 		?>
 
 		<script type="text/javascript">
@@ -650,7 +653,8 @@ class Locate_And_Filter_Public {
 					eval(map_instance).register_filters(custom_filters);
 					/* Override nav item template */	 	
 					eval(map_instance).template_nav_item = function(marker,LatLng) {	
-						var template='<?php echo Locate_And_Filter_Public::getNavTemplate($map_id)?>';
+						var template='<?php echo wp_kses(Locate_And_Filter_Public::getNavTemplate($map_id), $allowed_tags);?>';
+						//console.log(template);
 						return template;
 					};
 					/*  define callback function */
@@ -922,7 +926,12 @@ class Locate_And_Filter_Public {
 		
 		foreach ($basic_markup as $k=>$markup) {
 			$markup=esc_attr($markup);
-			$b["|".$markup."|"]="(marker.$markup?marker.$markup:'')" ;
+			//$b["|".$markup."|"]="(marker.$markup?marker.$markup:'')" ;
+			if ( $markup == 'post_link') {
+				$b["|".$markup."|"]="(marker.$markup)";
+			} else {
+				$b["|".$markup."|"]="(marker.$markup?marker.$markup:'')";
+			}			
 		}
 		return $b;
 	}

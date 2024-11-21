@@ -464,6 +464,53 @@ class Locate_And_Filter_Tools {
 		return $filters_;
 	}
 
+	public static function generate_allowed_html_tags() {
+	    // Define the HTML tags and their allowed attributes
+	    $tags = [
+	        'a' => ['class', 'href', 'rel', 'rev', 'name', 'target', 'id', 'data-anything', 'style'],
+	        'address' => ['class', 'id', 'data-anything', 'style'],
+	        'article' => ['class', 'id', 'data-anything', 'style'],
+	        'audio' => ['autoplay', 'controls', 'loop', 'muted', 'preload', 'src'],
+	        'b' => ['class', 'id', 'data-anything', 'style'],
+	        'blockquote' => ['cite', 'class', 'id', 'data-anything', 'style'],
+	        'br' => ['class', 'id', 'data-anything', 'style'],
+	        'dd' => ['class', 'id', 'data-anything', 'style'],
+	        'div' => ['id', 'class', 'data-latlng', 'data-marker-id', 'style', 'data-anything'],
+	        'dl' => ['class', 'id', 'data-anything', 'style'],
+	        'dt' => ['class', 'id', 'data-anything', 'style'],
+	        'em' => ['class', 'id', 'data-anything', 'style'],
+	        'footer' => ['class', 'id', 'data-anything', 'style'],
+	        'h1' => ['class', 'id', 'data-anything', 'style'],
+	        'h2' => ['class', 'id', 'data-anything', 'style'],
+	        'h3' => ['class', 'id', 'data-anything', 'style'],
+	        'h4' => ['class', 'id', 'data-anything', 'style'],
+	        'h5' => ['class', 'id', 'data-anything', 'style'],
+	        'h6' => ['class', 'id', 'data-anything', 'style'],
+	        'header' => ['class', 'id', 'data-anything', 'style'],
+	        'hr' => ['class', 'id', 'data-anything', 'style'],
+	        'i' => ['class', 'id', 'data-anything', 'style'],
+	        'img' => [
+	            'src', 'width', 'height', 'class', 'alt', 'decoding', 'loading', 
+	            'srcset', 'sizes', 'id', 'data-anything'
+	        ],
+	        'li' => ['value', 'class', 'id', 'data-anything', 'style'],
+	        'ol' => ['reversed', 'start', 'type'],
+	        'p' => ['class', 'id', 'data-anything', 'style'],
+	        'small' => ['class', 'id', 'data-anything', 'style'],
+	        'span' => ['class', 'id', 'data-anything', 'style'],
+	        'strong' => ['class', 'id', 'data-anything', 'style'],
+	        'style' => [],
+	        'ul' => ['class', 'id', 'data-anything', 'style'],
+	    ];
+
+	    // Construct the array for wp_kses
+	    $allowed_tags = [];
+	    foreach ($tags as $tag => $attributes) {
+	        $allowed_tags[$tag] = array_fill_keys($attributes, array());
+	    }
+
+	    return $allowed_tags;
+	}
 
 
 }
