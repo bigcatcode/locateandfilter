@@ -1008,7 +1008,23 @@ class Locate_And_Filter_Public {
 				Locate_And_Filter_Public::refresh_cache ($map_id, true );
 			} else {
 				//echo Locate_And_Filter_Tools::get_local_file_contents( $cache_file );
-				Locate_And_Filter_Public::refresh_cache ($map_id, true );
+			    $file_contents = Locate_And_Filter_Tools::get_local_file_contents($cache_file);
+
+			    // Ensure the file contents are JSON-encoded correctly
+			    if (!empty($file_contents)) {
+			        // Decode and re-encode the JSON to ensure its validity
+			        $json_data = json_decode($file_contents, true);
+			        if (json_last_error() === JSON_ERROR_NONE) {
+			            // Use WordPress function to send JSON response
+			            wp_send_json($json_data);
+			        } else {
+			            // If invalid JSON, handle the error
+			            wp_send_json_error(esc_html__('Invalid JSON data in file.', 'locateandfilter'), 500);
+			        }
+			    } else {
+			        wp_send_json_error(esc_html__('No data found in the file.', 'locateandfilter'), 404);
+			    }				
+
 			}
 		}
 		//ob_end_flush( 'ob_gzhandler');
@@ -1436,10 +1452,26 @@ public static function defineDefaultMarker($params){
 	        wp_die(esc_html__("Failed to write JSON to cache file.", "locateandfilter"));
 	    }
 
-		// if ($output) {
-		// 	echo $json_data;
-		// 	die ();
-		// }
+		if ($output) {
+		    $file_contents = Locate_And_Filter_Tools::get_local_file_contents($cache_file);
+
+		    // Ensure the file contents are JSON-encoded correctly
+		    if (!empty($file_contents)) {
+		        // Decode and re-encode the JSON to ensure its validity
+		        $json_data = json_decode($file_contents, true);
+		        if (json_last_error() === JSON_ERROR_NONE) {
+		            // Use WordPress function to send JSON response
+		            wp_send_json($json_data);
+		        } else {
+		            // If invalid JSON, handle the error
+		            wp_send_json_error(esc_html__('Invalid JSON data in file.', 'locateandfilter'), 500);
+		        }
+		    } else {
+		        wp_send_json_error(esc_html__('No data found in the file.', 'locateandfilter'), 404);
+		    }
+
+		    die();
+		}
 		
 	}
 
