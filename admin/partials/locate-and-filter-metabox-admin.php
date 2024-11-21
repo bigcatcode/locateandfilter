@@ -934,17 +934,41 @@ function locate_anything_refresh_filters(){
 }
 
 
-function locate_anything_select_navpreset(e){
+function locate_anything_select_navpreset_old(e){
   if(confirm("<?php esc_html_e('Do you want to overwrite the current navlist template?','locateandfilter')?>")) {
   	editAreaLoader.setValue('locate-anything-default-nav-template',jQuery('#locate-anything-navlist-preset :selected').attr("data-template") );
 	refresh_textarea('locate-anything-default-nav-template');
   }
 }
+function locate_anything_select_navpreset(e) {
+  if (confirm("<?php esc_html_e('Do you want to overwrite the current navlist template?', 'locateandfilter'); ?>")) {
+    // Get the selected template value
+    const newValue = jQuery('#locate-anything-navlist-preset :selected').attr("data-template");
 
-function locate_anything_select_preset(e){
+    // Update the textarea directly
+    jQuery('#locate-anything-default-nav-template').val(newValue);
+
+    // Optionally trigger a change event if needed
+    //jQuery('#locate-anything-default-nav-template').trigger('change');
+  }
+}
+
+function locate_anything_select_preset_old(e){
   if(confirm("<?php esc_html_e('Do you want to overwrite the current tooltip template?','locateandfilter')?>")) {
 	editAreaLoader.setValue('locate-anything-default-tooltip-template',jQuery('#locate-anything-tooltip-preset :selected').attr("data-template") );
 	refresh_textarea('locate-anything-default-tooltip-template');
+  }
+}
+function locate_anything_select_preset(e) {
+  if (confirm("<?php esc_html_e('Do you want to overwrite the current tooltip template?', 'locateandfilter'); ?>")) {
+    // Get the selected template value
+    const newValue = jQuery('#locate-anything-tooltip-preset :selected').attr("data-template");
+
+    // Update the textarea directly
+    jQuery('#locate-anything-default-tooltip-template').val(newValue);
+
+    // Optionally trigger a change event if needed
+    //jQuery('#locate-anything-default-tooltip-template').trigger('change');
   }
 }
 </script>

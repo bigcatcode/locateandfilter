@@ -674,9 +674,9 @@ class Locate_And_Filter_Public {
 							setTimeout(function(marker){											
 									/* define Tooltip HTML*/	
 									<?php if($map_id=="preview") {?>
-										var default_tooltip_template='<?php echo Locate_And_Filter_Public::decode_template ($settings['locate-anything-default-tooltip-template'])?>';
+										var default_tooltip_template='<?php echo wp_kses(Locate_And_Filter_Public::decode_template($settings['locate-anything-default-tooltip-template']), $allowed_tags);?>';
 										<?php } else {?>
-								var default_tooltip_template='<?php echo Locate_And_Filter_Public::getDefaultTooltipTemplate($map_id)?>';					
+								var default_tooltip_template='<?php echo wp_kses(Locate_And_Filter_Public::getDefaultTooltipTemplate($map_id), $allowed_tags);?>';					
 								<?php } ?>
 									// length must be superior to 2 because of the inclusion of 2 single quotes to delimitate the output
 								

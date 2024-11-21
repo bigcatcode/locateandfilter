@@ -746,32 +746,33 @@ class Locate_And_Filter_Admin
 	    <?php
 	}
 
-	/** 
-	 * returns default templates for new map
+	/**
+	 * Returns default templates for a new map
 	 *
 	 */
 	public static function getDefaultTemplates() {
-		return array(
-			"tooltip" => "<div class='tooltip-wrap'>
-     <div class='tooltip-thumb'>|small_thumbnail|</div>
-     <div class='tooltip-content'>|content_stripped|</div>
-</div>
-<a class='tooltip-link' href='|post_link|'>read more</a>",
-			"nice-tooltip" => "<div class='tooltip-wrap'>
-     <div class='tooltip-thumb'>|medium_thumbnail|</div>
-     <div class='tooltip-content'>|content_stripped|</div>
-</div>
-<a class='tooltip-link' href='|post_link|'>read more</a>",
-			"navlist" => "<div class='navlist-title'><b>|title|</b></div>
-<div class='navlist-content'>
-    <div class='navlist-thumbnail'>|small_thumbnail|</div>
-    <div class='navlist-stripp-content'>
-       |content_stripped|
-       <a class='navlist-link' href='|post_link|'>read more</a>
-   </div>
-</div>"
-		);
+	    return array(
+	        "tooltip" => "<div class=\"tooltip-wrap\">
+	    <div class=\"tooltip-thumb\">|small_thumbnail|</div>
+	    <div class=\"tooltip-content\">|content_stripped|</div>
+	</div>
+	<a class=\"tooltip-link\" href=\"|post_link|\">read more</a>",
+	        "nice-tooltip" => "<div class=\"tooltip-wrap\">
+	    <div class=\"tooltip-thumb\">|medium_thumbnail|</div>
+	    <div class=\"tooltip-content\">|content_stripped|</div>
+	</div>
+	<a class=\"tooltip-link\" href=\"|post_link|\">read more</a>",
+	        "navlist" => "<div class=\"navlist-title\"><b>|title|</b></div>
+	<div class=\"navlist-content\">
+	    <div class=\"navlist-thumbnail\">|small_thumbnail|</div>
+	    <div class=\"navlist-stripp-content\">
+	       |content_stripped|
+	       <a class=\"navlist-link\" href=\"|post_link|\">read more</a>
+	   </div>
+	</div>"
+	    );
 	}
+
 	/**
 	 * Returns all the metas for this post
 	 * @param  [int] $id [post ID]
