@@ -862,7 +862,9 @@ class Locate_And_Filter_Admin
 		if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'locate_and_filter_preview')) {
 		    //wp_die(esc_html__('Nonce verification failed. Please refresh the page and try again.', 'locateandfilter'));
 		}
-		echo wp_json_encode(get_object_taxonomies(sanitize_text_field($_REQUEST['type'])));
+		//echo wp_json_encode(get_object_taxonomies(sanitize_text_field($_REQUEST['type'])));
+		$type = isset($_REQUEST['type']) ? sanitize_text_field(wp_unslash($_REQUEST['type'])) : '';
+		echo wp_json_encode(get_object_taxonomies($type));
 		die();
 	}
 	/**
