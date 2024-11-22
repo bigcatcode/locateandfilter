@@ -15,14 +15,28 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 
 <?php 
+
 /* Outputs layout */
-	$template = str_replace( array("[map]","[navlist]","[filters]"), array("[LocateAndFilter_map map_id=".$map_id."]", "[LocateAndFilter_navlist map_id=".$map_id."]", "[LocateAndFilter_filters map_id=".$map_id."]"), $template );
-remove_filter( 'the_content', 'wpautop'); 
+$template = str_replace(
+    array("[map]", "[navlist]", "[filters]"),
+    array(
+        "[LocateAndFilter_map map_id=" . esc_attr($map_id) . "]",
+        "[LocateAndFilter_navlist map_id=" . esc_attr($map_id) . "]",
+        "[LocateAndFilter_filters map_id=" . esc_attr($map_id) . "]"
+    ),
+    $template
+);
 
-/*** COMPATIBILITY WITH OTHER PLUGINS */
-remove_filter( 'the_content', 'badgeos_reformat_entries', 9 );
-remove_filter( 'the_content', 'bp_replace_the_content' );
+// Remove filters for compatibility with other plugins
+remove_filter('the_content', 'wpautop');
+remove_filter('the_content', 'badgeos_reformat_entries', 9);
+remove_filter('the_content', 'bp_replace_the_content');
 
-echo apply_filters("the_content",$template);
-	
+// Apply 'the_content' filter
+$filtered_content = apply_filters("the_content", $template);
+
+// Escape the output
+//echo wp_kses_post($filtered_content);
+echo $filtered_content;
+
 ?>
