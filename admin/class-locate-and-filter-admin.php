@@ -424,10 +424,13 @@ class Locate_And_Filter_Admin
 		if (!current_user_can($post_type->cap->edit_post, $post_id)) return $post_id;
 		foreach ($_POST as $meta_key => $new_meta_value) {
 			if (strpos($meta_key, "locate-anything") !== false) Locate_And_Filter_Admin::add_update_metas($post_id, $meta_key, $new_meta_value);
+			if ( $meta_key == 'locate-anything-filters' ) {
+				$locate_anything_filters = $new_meta_value;
+			}
 		}
 
-		if (isset($_POST['locate-anything-filters'])){
-			$locate_anything_filters = $_POST['locate-anything-filters'];
+		if (isset($locate_anything_filters)){
+			//$locate_anything_filters = $_POST['locate-anything-filters'];
 			$locateanything_custom_field_for_tax_elment = array();
 			$locateanything_custom_field_for_tax = get_option('locateanything_custom_field_for_tax');
 			
@@ -875,7 +878,8 @@ class Locate_And_Filter_Admin
 		if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'locate_and_filter_preview')) {
 		    //wp_die(esc_html__('Nonce verification failed. Please refresh the page and try again.', 'locateandfilter'));
 		}
-		$tax = get_object_taxonomies(sanitize_text_field($_REQUEST['type']));
+		//$tax = get_object_taxonomies(sanitize_text_field($_REQUEST['type']));
+		$tax = isset($_REQUEST['type']) ?  get_object_taxonomies(sanitize_text_field(wp_unslash($_REQUEST['type']))) : '';
 		//array_push($tax, $_REQUEST['type']);
 		echo wp_json_encode($tax);
 		die();
@@ -888,10 +892,11 @@ class Locate_And_Filter_Admin
 		if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'locate_and_filter_preview')) {
 		    //wp_die(esc_html__('Nonce verification failed. Please refresh the page and try again.', 'locateandfilter'));
 		}
+		$type = isset($_REQUEST['type']) ? sanitize_text_field(wp_unslash($_REQUEST['type'])) : '';
 		$all_post_ids = get_posts(array(
 		    'fields'          => 'ids',
 		    'posts_per_page'  => -1,
-		    'post_type' => $_REQUEST['type']
+		    'post_type' => $type
 		));
 		echo wp_json_encode( $all_post_ids );
 		die();
@@ -905,10 +910,13 @@ class Locate_And_Filter_Admin
 		if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'locate_and_filter_preview')) {
 		    //wp_die(esc_html__('Nonce verification failed. Please refresh the page and try again.', 'locateandfilter'));
 		}
-		$selected = get_post_meta( sanitize_text_field($_REQUEST['map_id']), "locate-anything-allowed-filters-value-" . sanitize_text_field($_REQUEST['type']), true);
+		$map_id = isset($_REQUEST['map_id']) ? sanitize_text_field(wp_unslash($_REQUEST['map_id'])) : '';
+		$type   = isset($_REQUEST['type']) ? sanitize_text_field(wp_unslash($_REQUEST['type'])) : '';
+
+		$selected = get_post_meta( $map_id, "locate-anything-allowed-filters-value-" . $type, true);
 		//$terms = get_terms(sanitize_text_field($_REQUEST['type']));
 		$terms = get_terms([
-			'taxonomy' => sanitize_text_field($_REQUEST['type']),
+			'taxonomy' => $type,
 			'hide_empty' => false,
 		]);
 		if ($terms) foreach ($terms as $in => $term) {
@@ -927,8 +935,11 @@ class Locate_And_Filter_Admin
 		if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'locate_and_filter_preview')) {
 		    //wp_die(esc_html__('Nonce verification failed. Please refresh the page and try again.', 'locateandfilter'));
 		}
-		$map_id = sanitize_text_field($_POST["map_id"]);
-		$layout_id = sanitize_text_field($_POST["layout_id"]);
+		//$map_id = sanitize_text_field($_POST["map_id"]);
+		$map_id = isset($_POST['map_id']) ? sanitize_text_field(wp_unslash($_POST['map_id'])) : '';
+		//$layout_id = sanitize_text_field($_POST["layout_id"]);
+		$layout_id = isset($_POST['layout_id']) ? sanitize_text_field(wp_unslash($_POST['layout_id'])) : '';
+
 		$record = get_post_meta( intval($map_id) , "locate-anything-map-template-html-" . $layout_id, true);
 			if ($record == false) {
 				//echo json_encode(file_get_contents(Locate_And_Filter_Assets::getMapTemplates( $layout_id )->url));
@@ -946,7 +957,9 @@ class Locate_And_Filter_Admin
 		if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), 'locate_and_filter_preview')) {
 		    //wp_die(esc_html__('Nonce verification failed. Please refresh the page and try again.', 'locateandfilter'));
 		}
-		echo esc_html(apply_filters("locate_anything_add_filter_choice", '', sanitize_text_field($_POST["map_id"]), sanitize_text_field($_POST["type"]) ));
+		$map_id = isset($_POST['map_id']) ? sanitize_text_field(wp_unslash($_POST['map_id'])) : '';
+		$type   = isset($_POST['type']) ? sanitize_text_field(wp_unslash($_POST['type'])) : '';
+		echo esc_html(apply_filters("locate_anything_add_filter_choice", '', $map_id, $type ));
 		die();
 	}
 
