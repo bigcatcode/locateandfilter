@@ -4,7 +4,7 @@ Donate link: https://locateandfilter.com/
 Tags: LocateAndFilter, search map, leaflet, filterable map, filters by taxonomy
 Requires at least: 4.5.0
 Tested up to: 6.7
-Stable tag: 1.6.15
+Stable tag: 1.6.16
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -276,6 +276,8 @@ See our website for more informations on how to configure the plugin : https://l
 * add result found to navlist
 = 1.6.15 = 
 * disable svg mime_types
+= 1.6.16 = 
+* update code by WordPress.Security standarts
 
 PRO
 = 1.4.11.1 =
@@ -341,19 +343,67 @@ PRO
 * move cache dir to uploads
 = 1.6.12 =
 * update leaflet 1.9.4
+
+ACF version
 = 1.6.14.acf = 
 * added support ACF number - dropdown checkbox
 = 1.6.15.acf =
 * fix single shortcode, add Pages to filters
-= 1.6.15.user =
-* add users
 = 1.7.acf = 
 * add different source for coordinates
 = 1.8.acf = 
 * add leaflet autocomplete geosearch to map
 * add new shortcode searchbylocation by autocomplete geosearch
 = 1.8.1.acf = 
-* add new map template - half Map Layout
+* add new control user geolocations and result found
+* add new map template - half
+= 1.8.2.acf = 
+* fix map loader
+* add loader to navlist
+= 1.8.3.acf =
+* rangeslider fix - not save val on admin, use float val, reset
+= 1.8.4.acf =
+* add acf date to filter - dropdown
+= 1.8.5.acf =
+* fix single shortcode, add support tab to admin
+= 1.8.6.acf =
+* acf - add repeater support to date field
+= 1.8.7.acf =
+* categoryfilter - multi value for tax and ACF, new option - jQuery ready or load
+= 1.8.8.acf =
+* add license
+= 1.8.9.acf =
+* fullscreen control - disable for iphone
+= 1.9.0.acf =
+* add new param countrycodes to geosearch-autocomplete
+= 1.9.0.acf.lifetime_version =
+* removed check license
+= 1.9.1.acf =
+* acf repeater - add support taxonomy
+= 1.9.2.acf =
+* addon - fix load json for localhost, project template - new css, enable show in rest for map, new tooltip template and add display filters to post_meta, geo seach - if one result, select automatically
+= 1.9.3.acf =
+* add new option - combine nav item by tax
+= 1.9.4.acf =
+* disable license
+= 1.9.5.acf =
+* add new option - google json style, markercluster-color
+= 1.9.6.acf =
+* add new option - single popup event, reset for single shortcode
+= 1.9.7.acf =
+* add new option - scrollNavTo
+= 1.9.8.acf =
+* fix multi map - nav resetbutton rangeslider
+= 1.9.81.acf =
+* fix save json
+= 1.9.91.acf =
+* fix filtering if geoseach active
+= 1.9.92.acf =
+* fix load google json
+= 1.9.93.acf =
+* reset - search locations, acf radio - value and label
+= 1.9.94.acf =
+* acf add support array value for checkbox
 
 
 == Frequently Asked Questions ==
