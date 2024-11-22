@@ -78,7 +78,7 @@ class Locate_And_Filter
         $this->define_public_hooks();
         $this->load_default_assets();
 
-        $this->load_custom_term_field();
+        //$this->load_custom_term_field();
     }
 
     /**
@@ -440,35 +440,37 @@ class Locate_And_Filter
      * @return extra[]
      */
     public function save_custom_taxonomy_meta( $term_id ) {
-        if ( ! isset($_POST['extra']) ) return;
-        if ( ! current_user_can('edit_term', $term_id) ) return;
-        if (
-            ! wp_verify_nonce( $_POST['_wpnonce'], "update-tag_$term_id" ) && // wp_nonce_field( 'update-tag_' . $tag_ID );
-            ! wp_verify_nonce( $_POST['_wpnonce_add-tag'], "add-tag" ) // wp_nonce_field('add-tag', '_wpnonce_add-tag');
-        ) return;
+        // if ( ! isset($_POST['extra']) ) return;
+        // if ( ! current_user_can('edit_term', $term_id) ) return;
+        // if (
+        //     ! wp_verify_nonce( $_POST['_wpnonce'], "update-tag_$term_id" ) && // wp_nonce_field( 'update-tag_' . $tag_ID );
+        //     ! wp_verify_nonce( $_POST['_wpnonce_add-tag'], "add-tag" ) // wp_nonce_field('add-tag', '_wpnonce_add-tag');
+        // ) return;
 
-        // Все ОК! Теперь, нужно сохранить/удалить данные
-        $extra = wp_unslash($_POST['extra']);
+        // // Все ОК! Теперь, нужно сохранить/удалить данные
+        // $extra = wp_unslash($_POST['extra']);
 
-        foreach( $extra as $key => $val ){
-            // проверка ключа
-            $_key = sanitize_key( $key );
-            if( $_key !== $key ) wp_die( 'bad key'. esc_html($key) );
+        // foreach( $extra as $key => $val ){
+        //     // проверка ключа
+        //     $_key = sanitize_key( $key );
+        //     if( $_key !== $key ) wp_die( 'bad key'. esc_html($key) );
 
-            // очистка
-            if( $_key === 'tag_posts_shortcode_links' )
-                $val = sanitize_textarea_field(wp_strip_all_tags($val, true));
-            else
-                $val = sanitize_text_field( $val );
+        //     // очистка
+        //     if( $_key === 'tag_posts_shortcode_links' )
+        //         $val = sanitize_textarea_field(wp_strip_all_tags($val, true));
+        //     else
+        //         $val = sanitize_text_field( $val );
 
-            // сохранение
-            if( ! $val )
-                delete_term_meta( $term_id, $_key );
-            else
-                update_term_meta( $term_id, $_key, $val );
-        }
+        //     // сохранение
+        //     if( ! $val )
+        //         delete_term_meta( $term_id, $_key );
+        //     else
+        //         update_term_meta( $term_id, $_key, $val );
+        // }
 
         return $term_id;
     } 
+
+
 
 }
