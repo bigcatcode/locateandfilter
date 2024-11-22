@@ -42,7 +42,7 @@ class Locate_And_Filter_Public {
 	 */
 	public function __construct($plugin_name, $version) {
         $this->plugin_name = 'locate-and-filter';
-        $this->version = '1.6.131';
+        $this->version = '1.6.132';
 	}
 	
 	/**
