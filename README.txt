@@ -3,8 +3,8 @@ Contributors: dgamoni
 Donate link: https://locateandfilter.com/
 Tags: LocateAndFilter, search map, leaflet, filterable map, filters by taxonomy
 Requires at least: 4.5.0
-Tested up to: 6.7
-Stable tag: 1.6.16
+Tested up to: 6.8
+Stable tag: 1.6.17
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -278,6 +278,8 @@ See our website for more informations on how to configure the plugin : https://l
 * disable svg mime_types
 = 1.6.16 = 
 * update code by WordPress.Security standarts
+= 1.6.17 = 
+* fix vulnerable to Broken Access Control
 
 PRO
 = 1.4.11.1 =
@@ -404,7 +406,20 @@ ACF version
 * reset - search locations, acf radio - value and label
 = 1.9.94.acf =
 * acf add support array value for checkbox
-
+= 2.0.0.acf =
+* acf add support Users
+= 2.0.1.acf_cf_user =
+* add support all Custom field
+= 2.0.2.acf_cf_user =
+* add new option - placeholder to select
+= 2.0.3.acf_cf_user =
+* localize_script for Translation
+= 2.0.4.acf_cf_user =
+* multiple_markers
+= 2.0.5.acf_cf_user =
+* add searchbox _by_tytle
+= 2.0.6.acf_cf_user
+* localize search html
 
 == Frequently Asked Questions ==
 
