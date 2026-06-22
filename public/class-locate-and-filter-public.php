@@ -677,11 +677,11 @@ class Locate_And_Filter_Public {
 								/* Marker creation : set timeout is used to allow the progressbar to update */
 							setTimeout(function(marker){											
 									/* define Tooltip HTML*/	
-									<?php if($map_id=="preview") {?>
-										var default_tooltip_template='<?php echo wp_kses(Locate_And_Filter_Public::decode_template($settings['locate-anything-default-tooltip-template']), $allowed_tags);?>';
-										<?php } else {?>
-								var default_tooltip_template='<?php echo wp_kses(Locate_And_Filter_Public::getDefaultTooltipTemplate($map_id), $allowed_tags);?>';					
-								<?php } ?>
+									<?php if ( $map_id == "preview" ) { ?>
+										var default_tooltip_template='<?php echo Locate_And_Filter_Public::decode_template ($settings['locate-anything-default-tooltip-template'])?>';
+									<?php } else { ?>
+										var default_tooltip_template='<?php echo Locate_And_Filter_Public::getDefaultTooltipTemplate($map_id)?>';					
+									<?php } ?>
 									// length must be superior to 2 because of the inclusion of 2 single quotes to delimitate the output
 								
 								if(marker.tooltip_template.length>2) {									
@@ -866,6 +866,8 @@ class Locate_And_Filter_Public {
 		$div_tag .= "<div class=\"map-nav-item-wrapper\">";
 		$div_end = "</div></div>";
 		$nav_template = get_post_meta ( $map_id, "locate-anything-default-nav-template", true );
+		$allowed_tags = Locate_And_Filter_Tools::generate_allowed_html_tags();
+		$nav_template = wp_kses( $nav_template, $allowed_tags );
 		$nav_template = Locate_And_Filter_Public::decode_template ( $nav_template );
 		return $div_tag . $nav_template . $div_end;
 	}
@@ -892,6 +894,8 @@ class Locate_And_Filter_Public {
 	 */
 	public static function getDefaultTooltipTemplate($map_id) {
 		$nav_template = get_post_meta ( $map_id, "locate-anything-default-tooltip-template", true );
+		$allowed_tags = Locate_And_Filter_Tools::generate_allowed_html_tags();
+    	$nav_template = wp_kses( $nav_template, $allowed_tags );
 		$nav_template = Locate_And_Filter_Public::decode_template ( $nav_template );
 		return $nav_template;
 	}
@@ -1803,11 +1807,11 @@ public static function defineDefaultMarker($params){
 								/* Marker creation : set timeout is used to allow the progressbar to update */
 							setTimeout(function(marker){											
 									/* define Tooltip HTML*/	
-									<?php if($map_id=="preview") {?>
-										var default_tooltip_template='<?php echo wp_kses(Locate_And_Filter_Public::decode_template ($settings['locate-anything-default-tooltip-template']), $allowed_tags);?>';
-										<?php } else {?>
-								var default_tooltip_template='<?php echo wp_kses(Locate_And_Filter_Public::getDefaultTooltipTemplate($map_id), $allowed_tags);?>';					
-								<?php } ?>
+									<?php if ( $map_id == "preview" ) { ?>
+										var default_tooltip_template='<?php echo Locate_And_Filter_Public::decode_template ($settings['locate-anything-default-tooltip-template'])?>';
+									<?php } else { ?>
+										var default_tooltip_template='<?php echo Locate_And_Filter_Public::getDefaultTooltipTemplate($map_id)?>';					
+									<?php } ?>
 									// length must be superior to 2 because of the inclusion of 2 single quotes to delimitate the output
 								
 								if(marker.tooltip_template.length>2) {									
