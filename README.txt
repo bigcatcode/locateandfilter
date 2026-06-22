@@ -3,8 +3,8 @@ Contributors: dgamoni
 Donate link: https://locateandfilter.com/
 Tags: LocateAndFilter, search map, leaflet, filterable map, filters by taxonomy
 Requires at least: 4.5.0
-Tested up to: 6.8
-Stable tag: 1.6.17
+Tested up to: 7.0
+Stable tag: 1.7
 Requires PHP: 5.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -345,6 +345,10 @@ PRO
 * move cache dir to uploads
 = 1.6.12 =
 * update leaflet 1.9.4
+=> 1.6.17 =
+* fix vulnerable 
+= 1.7 =
+* fix post_link tag 
 
 ACF version
 = 1.6.14.acf = 
@@ -420,6 +424,14 @@ ACF version
 * add searchbox _by_tytle
 = 2.0.6.acf_cf_user
 * localize search html
+= 2.0.7.acf_cf_user
+* locate-anything-search_box_by_location - add countrycodes
+= 2.0.8.acf_cf_user
+* fix paginations group
+= 2.1.0.acf_cf_user
+* fix categoryfilter plus searchbytitle
+= 2.1.2.acf_cf_user
+* searchbyTitle multiple words in any order and by partial match
 
 == Frequently Asked Questions ==
 
