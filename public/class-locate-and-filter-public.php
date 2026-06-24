@@ -657,7 +657,7 @@ class Locate_And_Filter_Public {
 					eval(map_instance).register_filters(custom_filters);
 					/* Override nav item template */	 	
 					eval(map_instance).template_nav_item = function(marker,LatLng) {	
-						var template='<?php echo wp_kses(Locate_And_Filter_Public::getNavTemplate($map_id), $allowed_tags);?>';
+						var template='<?php echo Locate_And_Filter_Public::getNavTemplate($map_id);?>';
 						//console.log(template);
 						return template;
 					};
