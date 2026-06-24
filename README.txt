@@ -280,6 +280,13 @@ See our website for more informations on how to configure the plugin : https://l
 * update code by WordPress.Security standarts
 = 1.6.17 = 
 * fix vulnerable to Broken Access Control
+* update leaflet 1.9.4
+=> 1.6.17 =
+* fix vulnerable 
+= 1.7 =
+* fix post_link tag 
+= 1.7.1 =
+* fix post_link tag 
 
 PRO
 = 1.4.11.1 =
